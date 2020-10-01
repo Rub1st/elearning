@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: elearning_development
+  pool: 5
+  username: postgres
+  password: 'd1231'
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: elearning_test
+  pool: 5
+  username: postgres
+  password: 'd1231'
