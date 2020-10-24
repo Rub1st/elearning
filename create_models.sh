@@ -14,3 +14,5 @@
 # rails g model Certificate course:references user:references --force
 # rails g model UserCourse user:references course:references is_favorite:boolean progress:float mark:float course_status:integer --force
 # rails g model UserAnswer question:references user_course:references is_correct:boolean answer:string --force
+
+rails g model Organization name:string description:string approve_status:integer -force
