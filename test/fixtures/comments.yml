@@ -2,8 +2,8 @@
 
 one:
   course: one
-  content: MyText
+  content: MyString
 
 two:
   course: two
-  content: MyText
+  content: MyString
