@@ -2,12 +2,12 @@
 
 one:
   question: one
-  user_course: one
-  is_correct: false
   answer: MyString
+  user: one
+  is_correct: false
 
 two:
   question: two
-  user_course: two
-  is_correct: false
   answer: MyString
+  user: two
+  is_correct: false
