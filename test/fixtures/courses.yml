@@ -1,15 +1,23 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
+  label: MyString
+  mark: 1.5
+  why_content: MyString
+  will_content: MyString
+  uses_count: 1
+  success_rate: 1.5
   access_type: 1
-  course_status: 1
-  image: MyString
+  approve_status: 1
+  organization: one
 
 two:
-  name: MyString
-  description: MyText
+  label: MyString
+  mark: 1.5
+  why_content: MyString
+  will_content: MyString
+  uses_count: 1
+  success_rate: 1.5
   access_type: 1
-  course_status: 1
-  image: MyString
+  approve_status: 1
+  organization: two
