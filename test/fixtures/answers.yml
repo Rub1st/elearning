@@ -2,8 +2,10 @@
 
 one:
   question: one
-  content: MyString
+  value: MyString
+  order: 1
 
 two:
   question: two
-  content: MyString
+  value: MyString
+  order: 1
