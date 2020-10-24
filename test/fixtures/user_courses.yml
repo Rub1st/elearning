@@ -3,15 +3,17 @@
 one:
   user: one
   course: one
+  current_page: 1
   is_favorite: false
   progress: 1.5
+  correct: 1.5
   mark: 1.5
-  course_status: 1
 
 two:
   user: two
   course: two
+  current_page: 1
   is_favorite: false
   progress: 1.5
+  correct: 1.5
   mark: 1.5
-  course_status: 1
