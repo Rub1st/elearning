@@ -2,8 +2,10 @@
 
 one:
   course: one
-  content: MyText
+  order: 1
+  title: MyString
 
 two:
   course: two
-  content: MyText
+  order: 1
+  title: MyString
