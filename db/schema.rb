@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_24_173256) do
+ActiveRecord::Schema.define(version: 2020_10_24_174602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,16 @@ ActiveRecord::Schema.define(version: 2020_10_24_173256) do
     t.index ["user_id"], name: "index_registered_members_on_user_id"
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.bigint "comment_id", null: false
+    t.string "content", default: "", null: false
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_replies_on_author_id"
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -173,6 +183,8 @@ ActiveRecord::Schema.define(version: 2020_10_24_173256) do
   add_foreign_key "questions", "pages"
   add_foreign_key "registered_members", "organizations"
   add_foreign_key "registered_members", "users"
+  add_foreign_key "replies", "comments"
+  add_foreign_key "replies", "users", column: "author_id"
   add_foreign_key "unregistered_members", "organizations"
   add_foreign_key "variants", "questions"
 end

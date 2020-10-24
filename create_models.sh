@@ -10,4 +10,5 @@
 # rails generate model Question page:references question_type:integer title:string description:string question_text:string difficult:integer --force
 # rails generate model Variant order:integer question:references value:string --force
 # rails generate model Answer question:references value:string order:integer --force
-rails generate model Comment course:references content:string --force
+# rails generate model Comment course:references content:string --force
+rails generate model Reply comment:references content:string --force
