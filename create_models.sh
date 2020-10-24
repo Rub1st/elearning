@@ -12,4 +12,5 @@
 # rails generate model Answer question:references value:string order:integer --force
 # rails generate model Comment course:references content:string --force
 # rails generate model Reply comment:references content:string --force
-rails generate model CourseTag course:references tag:references --force
+# rails generate model CourseTag course:references tag:references --force
+rails generate model Certificate course:references user:references --force
