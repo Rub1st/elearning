@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_24_162919) do
+ActiveRecord::Schema.define(version: 2020_10_24_163828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,18 @@ ActiveRecord::Schema.define(version: 2020_10_24_162919) do
     t.index ["course_id"], name: "index_pages_on_course_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.bigint "page_id", null: false
+    t.integer "question_type", default: 0, null: false
+    t.string "title", default: "", null: false
+    t.string "description", default: ""
+    t.string "question_text", default: "", null: false
+    t.integer "difficult", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_id"], name: "index_questions_on_page_id"
+  end
+
   create_table "registered_members", force: :cascade do |t|
     t.integer "member_role", default: 0, null: false
     t.bigint "organization_id", null: false
@@ -127,6 +139,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_162919) do
   add_foreign_key "impersonations", "users", column: "common_id"
   add_foreign_key "impersonations", "users", column: "manager_id"
   add_foreign_key "pages", "courses"
+  add_foreign_key "questions", "pages"
   add_foreign_key "registered_members", "organizations"
   add_foreign_key "registered_members", "users"
   add_foreign_key "unregistered_members", "organizations"
