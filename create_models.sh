@@ -18,4 +18,6 @@
 # rails generate model UserAnswer question:references answer:string user:references is_correct:boolean --force
 # rails generate model Report course:references percent_try:float count_try:integer count_failed:integer count_complete:integer average_mark:float --force
 
-rails generate controller UsersController
+# rails generate controller UsersController
+# rails generate controller OrganizationsController
+rails generate controller RegisteredMembersController
