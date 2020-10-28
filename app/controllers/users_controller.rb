@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(permit_params)
-    user.avatar.attach(io: File.open(permit_params[:avatar]), filename: 'file.jp')
+    user.avatar.attach(io: File.open(permit_params[:avatar]), filename: 'file.jpg')
     if user.save
       u = User.find(user.id)
       render json: u, status: 201
