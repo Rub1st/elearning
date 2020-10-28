@@ -15,4 +15,5 @@ class CourseSerializer < ActiveModel::Serializer
   has_many :pages
   belongs_to :author
   has_many :comments
+  has_many :course_tags
 end
