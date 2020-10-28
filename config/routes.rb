@@ -66,6 +66,12 @@ Rails.application.routes.draw do
   get 'answers/index'
   get 'answers/show'
 
+  post 'comments/create'
+  put 'comments/update'
+  delete 'comments/destroy'
+  get 'comments/index'
+  get 'comments/show'
+
   resources :users,
             :organizations,
             :registered_members,
@@ -76,7 +82,8 @@ Rails.application.routes.draw do
             :pages,
             :questions,
             :variants,
-            :answers
+            :answers,
+            :comments
 
   devise_for :users
   # devise_for :users, path: 'auth',
