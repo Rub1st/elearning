@@ -30,11 +30,18 @@ Rails.application.routes.draw do
   get 'tags/index'
   get 'tags/show'
 
+  post 'impersonations/create'
+  put 'impersonations/update'
+  delete 'impersonations/destroy'
+  get 'impersonations/index'
+  get 'impersonations/show'
+
   resources :users,
             :organizations,
             :registered_members,
             :unregistered_members,
-            :tags
+            :tags,
+            :impersonations
 
   devise_for :users
   # devise_for :users, path: 'auth',

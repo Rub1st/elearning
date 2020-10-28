@@ -22,4 +22,6 @@
 # rails generate controller OrganizationsController
 # rails generate controller RegisteredMembersController
 # rails generate controller UnregisteredMembersController
-rails generate controller TagsController
+# rails generate controller TagsController
+# rails generate controller ImpersonationsController
+rails generate controller CoursesController
