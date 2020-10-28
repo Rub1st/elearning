@@ -16,4 +16,6 @@
 # rails generate model Certificate course:references user:references --force
 # rails generate model UserCourse user:references course:references current_page:integer is_favorite:boolean progress:float correct:float mark:float --force
 # rails generate model UserAnswer question:references answer:string user:references is_correct:boolean --force
-rails generate model Report course:references percent_try:float count_try:integer count_failed:integer count_complete:integer average_mark:float --force
+# rails generate model Report course:references percent_try:float count_try:integer count_failed:integer count_complete:integer average_mark:float --force
+
+rails generate controller UsersController

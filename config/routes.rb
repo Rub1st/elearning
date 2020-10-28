@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
+
+  post 'users/create'
+  put 'users/update'
+  delete 'users/destroy'
+  get 'users/index'
+  get 'users/show'
+
+  resources :users
+
   devise_for :users
-  root to: 'home#index'
   # devise_for :users, path: 'auth',
   #                    path_names: { sign_in: 'login',
   #                                  sign_out: 'logout',

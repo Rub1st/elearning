@@ -9,7 +9,7 @@ class Course < ApplicationRecord
   has_many :user_courses, dependent: :destroy
 
   enum approve_status: %i[pending rejected approved]
-  enum access_type: %i[public private individual]
+  enum access_type: %i[opened closed individual]
 
   has_one_attached :image
 end
