@@ -30,4 +30,5 @@
 # rails generate controller VariantsController
 # rails generate controller AnswersController
 # rails generate controller CommentsController
-rails generate controller RepliesController
+# rails generate controller RepliesController
+rails generate controller CourseTagsController

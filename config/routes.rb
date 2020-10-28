@@ -78,6 +78,12 @@ Rails.application.routes.draw do
   get 'replies/index'
   get 'replies/show'
 
+  post 'course_tags/create'
+  put 'course_tags/update'
+  delete 'course_tags/destroy'
+  get 'course_tags/index'
+  get 'course_tags/show'
+
   resources :users,
             :organizations,
             :registered_members,
@@ -90,7 +96,8 @@ Rails.application.routes.draw do
             :variants,
             :answers,
             :comments,
-            :replies
+            :replies,
+            :course_tags
 
   devise_for :users
   # devise_for :users, path: 'auth',
