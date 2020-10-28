@@ -11,4 +11,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :comments
   has_many :certificates
   has_many :user_courses
+  has_many :user_answers
 end
