@@ -18,7 +18,16 @@ Rails.application.routes.draw do
   get 'registered_members/index'
   get 'registered_members/show'
 
-  resources :users, :organizations, :registered_members
+  post 'unregistered_members/create'
+  put 'unregistered_members/update'
+  delete 'unregistered_members/destroy'
+  get 'unregistered_members/index'
+  get 'unregistered_members/show'
+
+  resources :users,
+            :organizations,
+            :registered_members,
+            :unregistered_members
 
   devise_for :users
   # devise_for :users, path: 'auth',

@@ -20,4 +20,5 @@
 
 # rails generate controller UsersController
 # rails generate controller OrganizationsController
-rails generate controller RegisteredMembersController
+# rails generate controller RegisteredMembersController
+rails generate controller UnregisteredMembersController
