@@ -24,10 +24,17 @@ Rails.application.routes.draw do
   get 'unregistered_members/index'
   get 'unregistered_members/show'
 
+  post 'tags/create'
+  put 'tags/update'
+  delete 'tags/destroy'
+  get 'tags/index'
+  get 'tags/show'
+
   resources :users,
             :organizations,
             :registered_members,
-            :unregistered_members
+            :unregistered_members,
+            :tags
 
   devise_for :users
   # devise_for :users, path: 'auth',
