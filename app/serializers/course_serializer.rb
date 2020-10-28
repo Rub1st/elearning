@@ -11,4 +11,7 @@ class CourseSerializer < ActiveModel::Serializer
              :organization,
              :author,
              :image
+
+  has_many :pages
+  has_one :author
 end
