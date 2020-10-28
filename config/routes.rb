@@ -6,7 +6,13 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
 
-  resources :users
+  post 'organizations/create'
+  put 'organizations/update'
+  delete 'organizations/destroy'
+  get 'organizations/index'
+  get 'organizations/show'
+
+  resources :users, :organizations
 
   devise_for :users
   # devise_for :users, path: 'auth',
