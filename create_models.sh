@@ -28,3 +28,4 @@
 # rails generate controller PagesController
 # rails generate controller QuestionsController
 # rails generate controller VariantsController
+rails generate controller AnswersController

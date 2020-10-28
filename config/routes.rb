@@ -60,6 +60,12 @@ Rails.application.routes.draw do
   get 'variants/index'
   get 'variants/show'
 
+  post 'answers/create'
+  put 'answers/update'
+  delete 'answers/destroy'
+  get 'answers/index'
+  get 'answers/show'
+
   resources :users,
             :organizations,
             :registered_members,
@@ -69,7 +75,8 @@ Rails.application.routes.draw do
             :courses,
             :pages,
             :questions,
-            :variants
+            :variants,
+            :answers
 
   devise_for :users
   # devise_for :users, path: 'auth',
