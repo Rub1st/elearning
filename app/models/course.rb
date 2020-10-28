@@ -1,7 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :organization, optional: true
   belongs_to :author, class_name: 'User'
-  belongs_to :report
+  has_many :reports
   has_many :certificates, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :course_tags, dependent: :destroy

@@ -36,12 +36,19 @@ Rails.application.routes.draw do
   get 'impersonations/index'
   get 'impersonations/show'
 
+  post 'courses/create'
+  put 'courses/update'
+  delete 'courses/destroy'
+  get 'courses/index'
+  get 'courses/show'
+
   resources :users,
             :organizations,
             :registered_members,
             :unregistered_members,
             :tags,
-            :impersonations
+            :impersonations,
+            :courses
 
   devise_for :users
   # devise_for :users, path: 'auth',
