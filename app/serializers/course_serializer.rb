@@ -16,4 +16,5 @@ class CourseSerializer < ActiveModel::Serializer
   belongs_to :author
   has_many :comments
   has_many :course_tags
+  has_many :certificates
 end
