@@ -84,6 +84,12 @@ Rails.application.routes.draw do
   get 'course_tags/index'
   get 'course_tags/show'
 
+  post 'certificates/create'
+  put 'certificates/update'
+  delete 'certificates/destroy'
+  get 'certificates/index'
+  get 'certificates/show'
+
   resources :users,
             :organizations,
             :registered_members,
@@ -97,7 +103,8 @@ Rails.application.routes.draw do
             :answers,
             :comments,
             :replies,
-            :course_tags
+            :course_tags,
+            :certificates
 
   devise_for :users
   # devise_for :users, path: 'auth',
