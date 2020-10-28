@@ -48,6 +48,12 @@ Rails.application.routes.draw do
   get 'pages/index'
   get 'pages/show'
 
+  post 'questions/create'
+  put 'questions/update'
+  delete 'questions/destroy'
+  get 'questions/index'
+  get 'questions/show'
+
   resources :users,
             :organizations,
             :registered_members,
@@ -55,7 +61,8 @@ Rails.application.routes.draw do
             :tags,
             :impersonations,
             :courses,
-            :pages
+            :pages,
+            :questions
 
   devise_for :users
   # devise_for :users, path: 'auth',
