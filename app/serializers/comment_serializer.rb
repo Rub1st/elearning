@@ -6,4 +6,5 @@ class CommentSerializer < ActiveModel::Serializer
 
   belongs_to :course
   belongs_to :author
+  has_many :replies
 end
