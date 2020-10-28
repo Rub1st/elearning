@@ -9,4 +9,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :courses
   has_many :comments
+  has_many :certificates
 end
