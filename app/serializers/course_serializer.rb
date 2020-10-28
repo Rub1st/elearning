@@ -13,5 +13,6 @@ class CourseSerializer < ActiveModel::Serializer
              :image
 
   has_many :pages
-  has_one :author
+  belongs_to :author
+  has_many :comments
 end
