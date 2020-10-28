@@ -54,6 +54,12 @@ Rails.application.routes.draw do
   get 'questions/index'
   get 'questions/show'
 
+  post 'variants/create'
+  put 'variants/update'
+  delete 'variants/destroy'
+  get 'variants/index'
+  get 'variants/show'
+
   resources :users,
             :organizations,
             :registered_members,
@@ -62,7 +68,8 @@ Rails.application.routes.draw do
             :impersonations,
             :courses,
             :pages,
-            :questions
+            :questions,
+            :variants
 
   devise_for :users
   # devise_for :users, path: 'auth',

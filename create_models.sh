@@ -26,4 +26,5 @@
 # rails generate controller ImpersonationsController
 # rails generate controller CoursesController
 # rails generate controller PagesController
-rails generate controller QuestionsController
+# rails generate controller QuestionsController
+# rails generate controller VariantsController
