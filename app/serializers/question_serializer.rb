@@ -8,4 +8,5 @@ class QuestionSerializer < ActiveModel::Serializer
              :difficult
 
   belongs_to :page
+  has_many :variants
 end
