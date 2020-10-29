@@ -3,6 +3,7 @@ class CreateCertificates < ActiveRecord::Migration[6.0]
     create_table :certificates do |t|
       t.references :course, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
+      t.string :certificate_pdf, null: true
 
       t.timestamps
     end
