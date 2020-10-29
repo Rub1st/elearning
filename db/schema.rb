@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_24_181655) do
+ActiveRecord::Schema.define(version: 2020_10_29_092417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
   create_table "answers", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "value", default: "", null: false
-    t.integer "order", default: 0, null: false
+    t.integer "order", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
   create_table "certificates", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "user_id", null: false
+    t.string "certificate_pdf"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_certificates_on_course_id"
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
     t.integer "approve_status", default: 0, null: false
     t.bigint "organization_id"
     t.bigint "author_id"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_courses_on_author_id"
@@ -105,13 +107,14 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
     t.string "name", default: "", null: false
     t.string "description", default: "", null: false
     t.integer "approve_status", default: 0, null: false
+    t.string "certificate_template"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "pages", force: :cascade do |t|
     t.bigint "course_id", null: false
-    t.integer "order", default: 0, null: false
+    t.integer "order", default: 1, null: false
     t.string "title", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -131,7 +134,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
   end
 
   create_table "registered_members", force: :cascade do |t|
-    t.integer "member_role", default: 0, null: false
+    t.integer "member_role", default: 1, null: false
     t.bigint "organization_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -168,8 +171,18 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "theories", force: :cascade do |t|
+    t.string "title", default: ""
+    t.text "content", default: ""
+    t.bigint "page_id", null: false
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_id"], name: "index_theories_on_page_id"
+  end
+
   create_table "unregistered_members", force: :cascade do |t|
-    t.integer "member_role", default: 0, null: false
+    t.integer "member_role", default: 1, null: false
     t.bigint "organization_id", null: false
     t.string "code", default: "", null: false
     t.string "email", default: "", null: false
@@ -207,8 +220,10 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
     t.string "login", default: "", null: false
     t.string "email", default: "", null: false
     t.string "full_name", default: "", null: false
+    t.string "certificate_template"
+    t.string "avatar"
     t.datetime "birthday", null: false
-    t.integer "user_role", default: 0, null: false
+    t.integer "user_role", default: 1, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -218,7 +233,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
   end
 
   create_table "variants", force: :cascade do |t|
-    t.integer "order", default: 0, null: false
+    t.integer "order", default: 1, null: false
     t.bigint "question_id", null: false
     t.string "value", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -245,6 +260,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_181655) do
   add_foreign_key "replies", "comments"
   add_foreign_key "replies", "users", column: "author_id"
   add_foreign_key "reports", "courses"
+  add_foreign_key "theories", "pages"
   add_foreign_key "unregistered_members", "organizations"
   add_foreign_key "user_answers", "questions"
   add_foreign_key "user_answers", "users"
