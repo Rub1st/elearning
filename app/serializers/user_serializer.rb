@@ -12,4 +12,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :certificates
   has_many :user_courses
   has_many :user_answers
+  has_one :avatar
 end
