@@ -108,6 +108,12 @@ Rails.application.routes.draw do
   get 'reports/index'
   get 'reports/show'
 
+  post 'theories/create'
+  put 'theories/update'
+  delete 'theories/destroy'
+  get 'theories/index'
+  get 'theories/show'
+
   resources :users,
             :organizations,
             :registered_members,
@@ -125,7 +131,8 @@ Rails.application.routes.draw do
             :certificates,
             :user_courses,
             :user_answers,
-            :reports
+            :reports,
+            :theories
 
   devise_for :users
   # devise_for :users, path: 'auth',
