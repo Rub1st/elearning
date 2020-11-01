@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
 
   def create
     organization = Organization.new(permit_params)
+    organization.certificate_template.attach(io: File.open(permit_params[:certificate_template]), filename: 'file.pdf')
     if organization.save
       o = Organization.find(organization.id)
       render json: o, status: 201
@@ -39,7 +40,8 @@ class OrganizationsController < ApplicationController
     params.require(Organization.name.underscore.to_sym).permit(
       :name,
       :description,
-      :approve_status
+      :approve_status,
+      :certificate_template
     )
   end
 end

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(permit_params)
     user.avatar.attach(io: File.open(permit_params[:avatar]), filename: 'file.jpg')
+    user.certificate_template.attach(io: File.open(permit_params[:certificate_template]), filename: 'file.pdf')
     if user.save
       u = User.find(user.id)
       render json: u, status: 201
@@ -44,7 +45,8 @@ class UsersController < ApplicationController
       :birthday,
       :user_role,
       :password,
-      :avatar
+      :avatar,
+      :certificate_template
     )
   end
 end

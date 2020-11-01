@@ -1,4 +1,6 @@
 class CourseSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+
   attributes :id,
              :label,
              :mark,
@@ -10,7 +12,8 @@ class CourseSerializer < ActiveModel::Serializer
              :approve_status,
              :organization,
              :author,
-             :image
+             :image_url,
+             :certificates
 
   has_many :pages
   belongs_to :author
@@ -18,4 +21,13 @@ class CourseSerializer < ActiveModel::Serializer
   has_many :course_tags
   has_many :certificates
   has_many :user_courses
+
+  def certificates
+    Certificate.with_attached_certificate_pdf.where(course_id: object.id)
+  end
+
+  def image_url
+    variant = object.image.variant(resize: '100x100')
+    rails_representation_url(variant, only_path: true)
+  end
 end
