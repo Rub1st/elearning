@@ -4,8 +4,7 @@ class CommentsController < ApplicationController
   def create
     comment = Comment.new(permit_params)
     if comment.save
-      comment = Comment.find(comment.id)
-      render json: comment, status: 201
+      render json: comment
     else
       render json: { errors: comment.errors }, status: :unprocessable_entity
     end
@@ -13,9 +12,8 @@ class CommentsController < ApplicationController
 
   def update
     comment = Comment.find(params[:id])
-
     if comment.update_attributes(permit_params)
-      render json: comment, status: 201
+      render json: comment
     else
       render json: { errors: comment.errors }, status: :unprocessable_entity
     end
@@ -26,11 +24,11 @@ class CommentsController < ApplicationController
   end
 
   def index
-    render json: Comment.all, status: :ok
+    render json: Comment.all
   end
 
   def show
-    render json: Comment.find(params[:id]), status: :ok
+    render json: Comment.find(params[:id])
   end
 
   private

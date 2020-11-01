@@ -4,8 +4,7 @@ class ImpersonationsController < ApplicationController
   def create
     imperson = Impersonation.new(permit_params)
     if imperson.save
-      imperson = Impersonation.find(imperson.id)
-      render json: imperson, status: 201
+      render json: imperson
     else
       render json: { errors: imperson.errors }, status: :unprocessable_entity
     end
@@ -13,9 +12,8 @@ class ImpersonationsController < ApplicationController
 
   def update
     imperson = Impersonation.find(params[:id])
-
     if imperson.update_attributes(permit_params)
-      render json: imperson, status: 201
+      render json: imperson
     else
       render json: { errors: imperson.errors }, status: :unprocessable_entity
     end
@@ -26,11 +24,11 @@ class ImpersonationsController < ApplicationController
   end
 
   def index
-    render json: Impersonation.all, status: :ok
+    render json: Impersonation.all
   end
 
   def show
-    render json: Impersonation.find(params[:id]), status: :ok
+    render json: Impersonation.find(params[:id])
   end
 
   private

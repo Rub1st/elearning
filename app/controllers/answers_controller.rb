@@ -4,8 +4,7 @@ class AnswersController < ApplicationController
   def create
     answer = Answer.new(permit_params)
     if answer.save
-      answer = Answer.find(answer.id)
-      render json: answer, status: 201
+      render json: answer
     else
       render json: { errors: answer.errors }, status: :unprocessable_entity
     end
@@ -13,9 +12,8 @@ class AnswersController < ApplicationController
 
   def update
     answer = Answer.find(params[:id])
-
     if answer.update_attributes(permit_params)
-      render json: answer, status: 201
+      render json: answer
     else
       render json: { errors: answer.errors }, status: :unprocessable_entity
     end
@@ -26,11 +24,11 @@ class AnswersController < ApplicationController
   end
 
   def index
-    render json: Answer.all, status: :ok
+    render json: Answer.all
   end
 
   def show
-    render json: Answer.find(params[:id]), status: :ok
+    render json: Answer.find(params[:id])
   end
 
   private

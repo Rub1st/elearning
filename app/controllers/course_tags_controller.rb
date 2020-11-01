@@ -2,22 +2,20 @@ class CourseTagsController < ApplicationController
   protect_from_forgery with: :null_session
 
   def create
-    ct = CourseTag.new(permit_params)
-    if ct.save
-      ct = CourseTag.find(ct.id)
-      render json: ct, status: 201
+    course_tag = CourseTag.new(permit_params)
+    if course_tag.save
+      render json: course_tag
     else
-      render json: { errors: ct.errors }, status: :unprocessable_entity
+      render json: { errors: course_tag.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    ct = CourseTag.find(params[:id])
-
+    course_tag = CourseTag.find(params[:id])
     if ct.update_attributes(permit_params)
-      render json: ct, status: 201
+      render json: course_tag
     else
-      render json: { errors: ct.errors }, status: :unprocessable_entity
+      render json: { errors: course_tag.errors }, status: :unprocessable_entity
     end
   end
 
@@ -26,11 +24,11 @@ class CourseTagsController < ApplicationController
   end
 
   def index
-    render json: CourseTag.all, status: :ok
+    render json: CourseTag.all
   end
 
   def show
-    render json: CourseTag.find(params[:id]), status: :ok
+    render json: CourseTag.find(params[:id])
   end
 
   private

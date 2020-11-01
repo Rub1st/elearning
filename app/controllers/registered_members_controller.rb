@@ -2,20 +2,18 @@ class RegisteredMembersController < ApplicationController
   protect_from_forgery with: :null_session
 
   def create
-    rm = RegisteredMember.new(permit_params)
-    if rm.save
-      rm = RegisteredMember.find(rm.id)
-      render json: rm, status: 201
+    registered_member = RegisteredMember.new(permit_params)
+    if registered_member.save
+      render json: registered_member
     else
-      render json: { errors: rm.errors }, status: :unprocessable_entity
+      render json: { errors: registered_member.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    rm = RegisteredMember.find(params[:id])
-
-    if rm.update_attributes(permit_params)
-      render json: rm, status: 201
+    registered_member = RegisteredMember.find(params[:id])
+    if registered_member.update_attributes(permit_params)
+      render json: registered_member
     else
       render json: { errors: rm.errors }, status: :unprocessable_entity
     end
@@ -26,11 +24,11 @@ class RegisteredMembersController < ApplicationController
   end
 
   def index
-    render json: RegisteredMember.all, status: :ok
+    render json: RegisteredMember.all
   end
 
   def show
-    render json: RegisteredMember.find(params[:id]), status: :ok
+    render json: RegisteredMember.find(params[:id])
   end
 
   private

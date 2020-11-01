@@ -5,8 +5,7 @@ class CertificatesController < ApplicationController
     certificate = Certificate.new(permit_params)
     certificate.certificate_pdf.attach(io: File.open(permit_params[:certificate_pdf]), filename: 'file.pdf')
     if certificate.save
-      certificate = Certificate.find(certificate.id)
-      render json: certificate, status: 201
+      render json: certificate
     else
       render json: { errors: certificate.errors }, status: :unprocessable_entity
     end
@@ -14,9 +13,8 @@ class CertificatesController < ApplicationController
 
   def update
     certificate = Certificate.find(params[:id])
-
     if certificate.update_attributes(permit_params)
-      render json: certificate, status: 201
+      render json: certificate
     else
       render json: { errors: certificate.errors }, status: :unprocessable_entity
     end
@@ -27,11 +25,11 @@ class CertificatesController < ApplicationController
   end
 
   def index
-    render json: Certificate.all, status: :ok
+    render json: Certificate.all
   end
 
   def show
-    render json: Certificate.find(params[:id]), status: :ok
+    render json: Certificate.find(params[:id])
   end
 
   private

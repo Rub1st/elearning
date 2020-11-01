@@ -5,8 +5,7 @@ class OrganizationsController < ApplicationController
     organization = Organization.new(permit_params)
     organization.certificate_template.attach(io: File.open(permit_params[:certificate_template]), filename: 'file.pdf')
     if organization.save
-      o = Organization.find(organization.id)
-      render json: o, status: 201
+      render json: organization
     else
       render json: { errors: organization.errors }, status: :unprocessable_entity
     end
@@ -14,9 +13,8 @@ class OrganizationsController < ApplicationController
 
   def update
     organization = Organization.find(params[:id])
-
     if organization.update_attributes(permit_params)
-      render json: organization, status: 201
+      render json: organization
     else
       render json: { errors: organization.errors }, status: :unprocessable_entity
     end
@@ -27,11 +25,11 @@ class OrganizationsController < ApplicationController
   end
 
   def index
-    render json: Organization.all, status: :ok
+    render json: Organization.all
   end
 
   def show
-    render json: Organization.find(params[:id]), status: :ok
+    render json: Organization.find(params[:id])
   end
 
   private

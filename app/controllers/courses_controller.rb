@@ -5,8 +5,7 @@ class CoursesController < ApplicationController
     course = Course.new(permit_params)
     course.image.attach(io: File.open(permit_params[:image]), filename: 'file.jpg')
     if course.save
-      course = Course.find(course.id)
-      render json: course, status: 201
+      render json: course
     else
       render json: { errors: course.errors }, status: :unprocessable_entity
     end
@@ -14,9 +13,8 @@ class CoursesController < ApplicationController
 
   def update
     course = Course.find(params[:id])
-
     if course.update_attributes(permit_params)
-      render json: course, status: 201
+      render json: course
     else
       render json: { errors: course.errors }, status: :unprocessable_entity
     end
@@ -27,11 +25,11 @@ class CoursesController < ApplicationController
   end
 
   def index
-    render json: Course.all, status: :ok
+    render json: Course.all
   end
 
   def show
-    render json: Course.find(params[:id]), status: :ok
+    render json: Course.find(params[:id])
   end
 
   private

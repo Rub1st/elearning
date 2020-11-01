@@ -4,8 +4,7 @@ class TagsController < ApplicationController
   def create
     tag = Tag.new(permit_params)
     if tag.save
-      tag = Tag.find(tag.id)
-      render json: tag, status: 201
+      render json: tag
     else
       render json: { errors: tag.errors }, status: :unprocessable_entity
     end
@@ -15,7 +14,7 @@ class TagsController < ApplicationController
     tag = Tag.find(params[:id])
 
     if tag.update_attributes(permit_params)
-      render json: tag, status: 201
+      render json: tag
     else
       render json: { errors: tag.errors }, status: :unprocessable_entity
     end
@@ -26,11 +25,11 @@ class TagsController < ApplicationController
   end
 
   def index
-    render json: Tag.all, status: :ok
+    render json: Tag.all
   end
 
   def show
-    render json: Tag.find(params[:id]), status: :ok
+    render json: Tag.find(params[:id])
   end
 
   private

@@ -9,20 +9,18 @@ class UserAnswersController < ApplicationController
     p temp
     ua.is_correct = temp.count.positive?
     if ua.save
-      ua = UserAnswer.find(ua.id)
-      render json: ua, status: 201
+      render json: ua
     else
       render json: { errors: ua.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    ua = UserAnswer.find(params[:id])
-
-    if ua.update_attributes(permit_params)
-      render json: ua, status: 201
+    user_answer = UserAnswer.find(params[:id])
+    if user_answer.update_attributes(permit_params)
+      render json: user_answer
     else
-      render json: { errors: ua.errors }, status: :unprocessable_entity
+      render json: { errors: user_answer.errors }, status: :unprocessable_entity
     end
   end
 
@@ -31,11 +29,11 @@ class UserAnswersController < ApplicationController
   end
 
   def index
-    render json: UserAnswer.all, status: :ok
+    render json: UserAnswer.all
   end
 
   def show
-    render json: UserAnswer.find(params[:id]), status: :ok
+    render json: UserAnswer.find(params[:id])
   end
 
   private

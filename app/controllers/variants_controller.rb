@@ -4,8 +4,7 @@ class VariantsController < ApplicationController
   def create
     variant = Variant.new(permit_params)
     if variant.save
-      variant = Variant.find(variant.id)
-      render json: variant, status: 201
+      render json: variant
     else
       render json: { errors: variant.errors }, status: :unprocessable_entity
     end
@@ -13,9 +12,8 @@ class VariantsController < ApplicationController
 
   def update
     variant = Variant.find(params[:id])
-
     if variant.update_attributes(permit_params)
-      render json: variant, status: 201
+      render json: variant
     else
       render json: { errors: variant.errors }, status: :unprocessable_entity
     end
@@ -26,11 +24,11 @@ class VariantsController < ApplicationController
   end
 
   def index
-    render json: Variant.all, status: :ok
+    render json: Variant.all
   end
 
   def show
-    render json: Variant.find(params[:id]), status: :ok
+    render json: Variant.find(params[:id])
   end
 
   private

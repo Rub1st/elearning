@@ -4,8 +4,7 @@ class ReportsController < ApplicationController
   def create
     report = Report.new(permit_params)
     if report.save
-      report = Report.find(report.id)
-      render json: report, status: 201
+      render json: report
     else
       render json: { errors: report.errors }, status: :unprocessable_entity
     end
@@ -13,9 +12,8 @@ class ReportsController < ApplicationController
 
   def update
     report = Report.find(params[:id])
-
     if report.update_attributes(permit_params)
-      render json: report, status: 201
+      render json: report
     else
       render json: { errors: report.errors }, status: :unprocessable_entity
     end
@@ -26,11 +24,11 @@ class ReportsController < ApplicationController
   end
 
   def index
-    render json: Report.all, status: :ok
+    render json: Report.all
   end
 
   def show
-    render json: Report.find(params[:id]), status: :ok
+    render json: Report.find(params[:id])
   end
 
   private

@@ -5,8 +5,7 @@ class TheoriesController < ApplicationController
     theory = Theory.new(permit_params)
     theory.image.attach(io: File.open(permit_params[:image]), filename: 'file.jpg')
     if theory.save
-      theory = Theory.find(theory.id)
-      render json: theory, status: 201
+      render json: theory
     else
       render json: { errors: theory.errors }, status: :unprocessable_entity
     end
@@ -14,9 +13,8 @@ class TheoriesController < ApplicationController
 
   def update
     theory = Theory.find(params[:id])
-
     if theory.update_attributes(permit_params)
-      render json: theory, status: 201
+      render json: theory
     else
       render json: { errors: theory.errors }, status: :unprocessable_entity
     end
@@ -27,11 +25,11 @@ class TheoriesController < ApplicationController
   end
 
   def index
-    render json: Theory.all, status: :ok
+    render json: Theory.all
   end
 
   def show
-    render json: Theory.find(params[:id]), status: :ok
+    render json: Theory.find(params[:id])
   end
 
   private

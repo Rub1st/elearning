@@ -2,22 +2,20 @@ class UserCoursesController < ApplicationController
   protect_from_forgery with: :null_session
 
   def create
-    uc = UserCourse.new(permit_params)
-    if uc.save
-      uc = UserCourse.find(uc.id)
-      render json: uc, status: 201
+    user_course = UserCourse.new(permit_params)
+    if user_course.save
+      render json: user_course
     else
-      render json: { errors: uc.errors }, status: :unprocessable_entity
+      render json: { errors: user_course.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    uc = UserCourse.find(params[:id])
-
-    if uc.update_attributes(permit_params)
-      render json: uc, status: 201
+    user_course = UserCourse.find(params[:id])
+    if user_course.update_attributes(permit_params)
+      render json: user_course
     else
-      render json: { errors: uc.errors }, status: :unprocessable_entity
+      render json: { errors: user_course.errors }, status: :unprocessable_entity
     end
   end
 
@@ -26,11 +24,11 @@ class UserCoursesController < ApplicationController
   end
 
   def index
-    render json: UserCourse.all, status: :ok
+    render json: UserCourse.all
   end
 
   def show
-    render json: UserCourse.find(params[:id]), status: :ok
+    render json: UserCourse.find(params[:id])
   end
 
   private

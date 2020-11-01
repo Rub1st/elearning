@@ -4,8 +4,7 @@ class PagesController < ApplicationController
   def create
     page = Page.new(permit_params)
     if page.save
-      page = Page.find(page.id)
-      render json: page, status: 201
+      render json: page
     else
       render json: { errors: page.errors }, status: :unprocessable_entity
     end
@@ -13,9 +12,8 @@ class PagesController < ApplicationController
 
   def update
     page = Page.find(params[:id])
-
     if page.update_attributes(permit_params)
-      render json: page, status: 201
+      render json: page
     else
       render json: { errors: page.errors }, status: :unprocessable_entity
     end
@@ -26,11 +24,11 @@ class PagesController < ApplicationController
   end
 
   def index
-    render json: Page.all, status: :ok
+    render json: Page.all
   end
 
   def show
-    render json: Page.find(params[:id]), status: :ok
+    render json: Page.find(params[:id])
   end
 
   private
