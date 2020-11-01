@@ -11,7 +11,6 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.integer :approve_status, null: false, default: 0
       t.references :organization, null: true, foreign_key: true
       t.references :author, foreign_key: { to_table: 'users' }
-      t.string :image, null: true
 
       t.timestamps
     end

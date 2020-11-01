@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
   create_table "certificates", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "user_id", null: false
-    t.string "certificate_pdf"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_certificates_on_course_id"
@@ -85,7 +84,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.integer "approve_status", default: 0, null: false
     t.bigint "organization_id"
     t.bigint "author_id"
-    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_courses_on_author_id"
@@ -107,7 +105,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.string "name", default: "", null: false
     t.string "description", default: "", null: false
     t.integer "approve_status", default: 0, null: false
-    t.string "certificate_template"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -175,7 +172,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.string "title", default: ""
     t.text "content", default: ""
     t.bigint "page_id", null: false
-    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["page_id"], name: "index_theories_on_page_id"
@@ -220,8 +216,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.string "login", default: "", null: false
     t.string "email", default: "", null: false
     t.string "full_name", default: "", null: false
-    t.string "certificate_template"
-    t.string "avatar"
     t.datetime "birthday", null: false
     t.integer "user_role", default: 1, null: false
     t.string "encrypted_password", default: "", null: false
