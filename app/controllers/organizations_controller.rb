@@ -1,5 +1,4 @@
 class OrganizationsController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     organization = Organization.new(permit_params)

@@ -1,5 +1,4 @@
 class RepliesController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     reply = Reply.new(permit_params)

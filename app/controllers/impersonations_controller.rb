@@ -1,5 +1,4 @@
 class ImpersonationsController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     imperson = Impersonation.new(permit_params)

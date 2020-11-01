@@ -1,5 +1,4 @@
 class VariantsController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     variant = Variant.new(permit_params)

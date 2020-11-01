@@ -1,5 +1,4 @@
 class CertificatesController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     certificate = Certificate.new(permit_params)

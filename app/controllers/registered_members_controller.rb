@@ -1,5 +1,4 @@
 class RegisteredMembersController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     registered_member = RegisteredMember.new(permit_params)

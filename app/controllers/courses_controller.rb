@@ -1,5 +1,4 @@
 class CoursesController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     course = Course.new(permit_params)

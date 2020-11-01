@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def create
     page = Page.new(permit_params)
