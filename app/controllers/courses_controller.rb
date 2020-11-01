@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
 
   def update
     course = Course.find(params[:id])
-    if course.update_attributes(permit_params)
+    if course.update(permit_params)
       render json: course
     else
       render json: { errors: course.errors }, status: :unprocessable_entity

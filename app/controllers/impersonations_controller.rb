@@ -12,7 +12,7 @@ class ImpersonationsController < ApplicationController
 
   def update
     imperson = Impersonation.find(params[:id])
-    if imperson.update_attributes(permit_params)
+    if imperson.update(permit_params)
       render json: imperson
     else
       render json: { errors: imperson.errors }, status: :unprocessable_entity

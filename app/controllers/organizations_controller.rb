@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
 
   def update
     organization = Organization.find(params[:id])
-    if organization.update_attributes(permit_params)
+    if organization.update(permit_params)
       render json: organization
     else
       render json: { errors: organization.errors }, status: :unprocessable_entity

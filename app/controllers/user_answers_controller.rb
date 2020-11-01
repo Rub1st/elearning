@@ -17,7 +17,7 @@ class UserAnswersController < ApplicationController
 
   def update
     user_answer = UserAnswer.find(params[:id])
-    if user_answer.update_attributes(permit_params)
+    if user_answer.update(permit_params)
       render json: user_answer
     else
       render json: { errors: user_answer.errors }, status: :unprocessable_entity

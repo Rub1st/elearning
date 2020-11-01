@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
 
   def update
     question = Question.find(params[:id])
-    if question.update_attributes(permit_params)
+    if question.update(permit_params)
       render json: question
     else
       render json: { errors: question.errors }, status: :unprocessable_entity

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    if user.update_attributes(permit_params)
+    if user.update(permit_params)
       render json: user
     else
       render json: { errors: user.errors }, status: :unprocessable_entity

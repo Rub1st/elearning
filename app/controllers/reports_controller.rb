@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
 
   def update
     report = Report.find(params[:id])
-    if report.update_attributes(permit_params)
+    if report.update(permit_params)
       render json: report
     else
       render json: { errors: report.errors }, status: :unprocessable_entity

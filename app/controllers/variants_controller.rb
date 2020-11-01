@@ -12,7 +12,7 @@ class VariantsController < ApplicationController
 
   def update
     variant = Variant.find(params[:id])
-    if variant.update_attributes(permit_params)
+    if variant.update(permit_params)
       render json: variant
     else
       render json: { errors: variant.errors }, status: :unprocessable_entity

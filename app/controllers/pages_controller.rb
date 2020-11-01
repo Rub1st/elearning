@@ -12,7 +12,7 @@ class PagesController < ApplicationController
 
   def update
     page = Page.find(params[:id])
-    if page.update_attributes(permit_params)
+    if page.update(permit_params)
       render json: page
     else
       render json: { errors: page.errors }, status: :unprocessable_entity

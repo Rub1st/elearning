@@ -13,7 +13,7 @@ class TheoriesController < ApplicationController
 
   def update
     theory = Theory.find(params[:id])
-    if theory.update_attributes(permit_params)
+    if theory.update(permit_params)
       render json: theory
     else
       render json: { errors: theory.errors }, status: :unprocessable_entity

@@ -12,7 +12,7 @@ class UserCoursesController < ApplicationController
 
   def update
     user_course = UserCourse.find(params[:id])
-    if user_course.update_attributes(permit_params)
+    if user_course.update(permit_params)
       render json: user_course
     else
       render json: { errors: user_course.errors }, status: :unprocessable_entity

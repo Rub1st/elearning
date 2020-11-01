@@ -13,7 +13,7 @@ class TagsController < ApplicationController
   def update
     tag = Tag.find(params[:id])
 
-    if tag.update_attributes(permit_params)
+    if tag.update(permit_params)
       render json: tag
     else
       render json: { errors: tag.errors }, status: :unprocessable_entity

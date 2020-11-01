@@ -12,7 +12,7 @@ class RepliesController < ApplicationController
 
   def update
     reply = Reply.find(params[:id])
-    if reply.update_attributes(permit_params)
+    if reply.update(permit_params)
       render json: reply
     else
       render json: { errors: reply.errors }, status: :unprocessable_entity

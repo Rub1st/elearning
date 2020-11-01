@@ -12,7 +12,7 @@ class RegisteredMembersController < ApplicationController
 
   def update
     registered_member = RegisteredMember.find(params[:id])
-    if registered_member.update_attributes(permit_params)
+    if registered_member.update(permit_params)
       render json: registered_member
     else
       render json: { errors: rm.errors }, status: :unprocessable_entity

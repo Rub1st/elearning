@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
 
   def update
     comment = Comment.find(params[:id])
-    if comment.update_attributes(permit_params)
+    if comment.update(permit_params)
       render json: comment
     else
       render json: { errors: comment.errors }, status: :unprocessable_entity

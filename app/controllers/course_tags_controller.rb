@@ -12,7 +12,7 @@ class CourseTagsController < ApplicationController
 
   def update
     course_tag = CourseTag.find(params[:id])
-    if ct.update_attributes(permit_params)
+    if ct.update(permit_params)
       render json: course_tag
     else
       render json: { errors: course_tag.errors }, status: :unprocessable_entity

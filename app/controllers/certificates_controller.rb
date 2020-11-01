@@ -13,7 +13,7 @@ class CertificatesController < ApplicationController
 
   def update
     certificate = Certificate.find(params[:id])
-    if certificate.update_attributes(permit_params)
+    if certificate.update(permit_params)
       render json: certificate
     else
       render json: { errors: certificate.errors }, status: :unprocessable_entity
