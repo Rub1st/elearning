@@ -9,19 +9,6 @@ class ImpersonationsController < ApplicationController
     end
   end
 
-  def update
-    imperson = Impersonation.find(params[:id])
-    if imperson.update(permit_params)
-      render json: imperson
-    else
-      render json: { errors: imperson.errors }, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    Impersonation.find(params[:id]).destroy
-  end
-
   def index
     render json: Impersonation.all
   end

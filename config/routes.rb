@@ -25,14 +25,10 @@ Rails.application.routes.draw do
   get 'unregistered_members/show'
 
   post 'tags/create'
-  put 'tags/update'
-  delete 'tags/destroy'
   get 'tags/index'
   get 'tags/show'
 
   post 'impersonations/create'
-  put 'impersonations/update'
-  delete 'impersonations/destroy'
   get 'impersonations/index'
   get 'impersonations/show'
 
@@ -49,13 +45,11 @@ Rails.application.routes.draw do
   get 'pages/show'
 
   post 'questions/create'
-  put 'questions/update'
   delete 'questions/destroy'
   get 'questions/index'
   get 'questions/show'
 
   post 'variants/create'
-  put 'variants/update'
   delete 'variants/destroy'
   get 'variants/index'
   get 'variants/show'
@@ -67,49 +61,37 @@ Rails.application.routes.draw do
   get 'answers/show'
 
   post 'comments/create'
-  put 'comments/update'
   delete 'comments/destroy'
   get 'comments/index'
-  get 'comments/show'
 
   post 'replies/create'
-  put 'replies/update'
   delete 'replies/destroy'
   get 'replies/index'
   get 'replies/show'
 
   post 'course_tags/create'
-  put 'course_tags/update'
   delete 'course_tags/destroy'
   get 'course_tags/index'
-  get 'course_tags/show'
 
   post 'certificates/create'
-  put 'certificates/update'
-  delete 'certificates/destroy'
   get 'certificates/index'
   get 'certificates/show'
 
   post 'user_courses/create'
   put 'user_courses/update'
-  delete 'user_courses/destroy'
   get 'user_courses/index'
   get 'user_courses/show'
 
   post 'user_answers/create'
   put 'user_answers/update'
-  delete 'user_answers/destroy'
   get 'user_answers/index'
   get 'user_answers/show'
 
   post 'reports/create'
-  put 'reports/update'
-  delete 'reports/destroy'
   get 'reports/index'
   get 'reports/show'
 
   post 'theories/create'
-  put 'theories/update'
   delete 'theories/destroy'
   get 'theories/index'
   get 'theories/show'

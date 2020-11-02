@@ -9,25 +9,12 @@ class CommentsController < ApplicationController
     end
   end
 
-  def update
-    comment = Comment.find(params[:id])
-    if comment.update(permit_params)
-      render json: comment
-    else
-      render json: { errors: comment.errors }, status: :unprocessable_entity
-    end
-  end
-
   def destroy
     Comment.find(params[:id]).destroy
   end
 
   def index
     render json: Comment.all
-  end
-
-  def show
-    render json: Comment.find(params[:id])
   end
 
   private

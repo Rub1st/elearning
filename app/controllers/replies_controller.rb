@@ -9,15 +9,6 @@ class RepliesController < ApplicationController
     end
   end
 
-  def update
-    reply = Reply.find(params[:id])
-    if reply.update(permit_params)
-      render json: reply
-    else
-      render json: { errors: reply.errors }, status: :unprocessable_entity
-    end
-  end
-
   def destroy
     Reply.find(params[:id]).destroy
   end

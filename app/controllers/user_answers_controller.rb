@@ -23,10 +23,6 @@ class UserAnswersController < ApplicationController
     end
   end
 
-  def destroy
-    UserAnswer.find(params[:id]).destroy
-  end
-
   def index
     render json: UserAnswer.all
   end

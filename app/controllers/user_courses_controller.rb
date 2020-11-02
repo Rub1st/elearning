@@ -18,10 +18,6 @@ class UserCoursesController < ApplicationController
     end
   end
 
-  def destroy
-    UserCourse.find(params[:id]).destroy
-  end
-
   def index
     render json: UserCourse.all
   end

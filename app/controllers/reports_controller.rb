@@ -9,19 +9,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  def update
-    report = Report.find(params[:id])
-    if report.update(permit_params)
-      render json: report
-    else
-      render json: { errors: report.errors }, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    Report.find(params[:id]).destroy
-  end
-
   def index
     render json: Report.all
   end

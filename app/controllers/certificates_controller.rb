@@ -10,19 +10,6 @@ class CertificatesController < ApplicationController
     end
   end
 
-  def update
-    certificate = Certificate.find(params[:id])
-    if certificate.update(permit_params)
-      render json: certificate
-    else
-      render json: { errors: certificate.errors }, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    Certificate.find(params[:id]).destroy
-  end
-
   def index
     render json: Certificate.all
   end

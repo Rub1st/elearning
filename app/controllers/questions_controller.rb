@@ -9,15 +9,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def update
-    question = Question.find(params[:id])
-    if question.update(permit_params)
-      render json: question
-    else
-      render json: { errors: question.errors }, status: :unprocessable_entity
-    end
-  end
-
   def destroy
     Question.find(params[:id]).destroy
   end
