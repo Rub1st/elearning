@@ -9,10 +9,6 @@ class RepliesController < ApplicationController
     end
   end
 
-  def destroy
-    Reply.find(params[:id]).destroy
-  end
-
   def index
     render json: Reply.all
   end
