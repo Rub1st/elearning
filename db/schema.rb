@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id", "user_id"], name: "index_certificates_on_course_id_and_user_id", unique: true
     t.index ["course_id"], name: "index_certificates_on_course_id"
     t.index ["user_id"], name: "index_certificates_on_user_id"
   end
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.bigint "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id", "tag_id"], name: "index_course_tags_on_course_id_and_tag_id", unique: true
     t.index ["course_id"], name: "index_course_tags_on_course_id"
     t.index ["tag_id"], name: "index_course_tags_on_tag_id"
   end
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id", "label"], name: "index_courses_on_author_id_and_label", unique: true
     t.index ["author_id"], name: "index_courses_on_author_id"
     t.index ["organization_id"], name: "index_courses_on_organization_id"
   end
@@ -115,6 +118,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.string "title", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id", "order"], name: "index_pages_on_course_id_and_order", unique: true
     t.index ["course_id"], name: "index_pages_on_course_id"
   end
 
@@ -127,6 +131,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.integer "difficult", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_id", "title"], name: "index_questions_on_page_id_and_title", unique: true
     t.index ["page_id"], name: "index_questions_on_page_id"
   end
 
@@ -137,6 +142,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_registered_members_on_organization_id"
+    t.index ["user_id", "organization_id"], name: "index_registered_members_on_user_id_and_organization_id", unique: true
     t.index ["user_id"], name: "index_registered_members_on_user_id"
   end
 
@@ -174,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.bigint "page_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_id", "title"], name: "index_theories_on_page_id_and_title", unique: true
     t.index ["page_id"], name: "index_theories_on_page_id"
   end
 
@@ -184,6 +191,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.string "email", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email", "organization_id"], name: "index_unregistered_members_on_email_and_organization_id", unique: true
     t.index ["organization_id"], name: "index_unregistered_members_on_organization_id"
   end
 
@@ -209,6 +217,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_user_courses_on_course_id"
+    t.index ["user_id", "course_id"], name: "index_user_courses_on_user_id_and_course_id", unique: true
     t.index ["user_id"], name: "index_user_courses_on_user_id"
   end
 
@@ -232,6 +241,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.string "value", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id", "order"], name: "index_variants_on_question_id_and_order", unique: true
     t.index ["question_id"], name: "index_variants_on_question_id"
   end
 

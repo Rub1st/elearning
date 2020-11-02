@@ -38,7 +38,7 @@ def generate_pharagraph(count)
   Faker::Lorem.paragraph(sentence_count: count)
 end
 
-10.times do
+100.times do
   user = User.create(login: Faker::Internet.username,
                      password: Faker::Internet.password(min_length: 10, max_length: 20),
                      email: Faker::Internet.email,
@@ -49,7 +49,7 @@ end
   user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "certificate_user_#{user.id}.jpg")
 end
 
-10.times do
+100.times do
   organization = Organization.create(name: Faker::Company.name,
                                      description: generate_pharagraph(5),
                                      approve_status: generate_digit(0, 2))
@@ -69,7 +69,7 @@ end
                             member_role: generate_digit(0, 1))
 end
 
-10.times do
+100.times do
   Tag.create(name: Faker::Lorem.word)
 end
 
@@ -80,7 +80,7 @@ end
                        common: generate_id(User))
 end
 
-10.times do
+100.times do
   course = Course.create(label: Faker::Company.name,
                          mark: generate_digit(-10, 10),
                          why_content: generate_pharagraph(5),

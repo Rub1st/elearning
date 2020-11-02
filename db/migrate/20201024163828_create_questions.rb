@@ -7,6 +7,7 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
       t.string :description, default: ''
       t.string :question_text, null: false, default: ''
       t.integer :difficult, null: false, default: 0
+      t.index %i[page_id title], unique: true
 
       t.timestamps
     end
