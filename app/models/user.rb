@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint      not null, primary key
+#  login                  :string      not null
+#  email                  :string      not null
+#  full_name              :string      not null
+#  birthday               :datetime    not null
+#  user_role              :integer     not null
+#  password               :string      not null
+#
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -18,4 +30,8 @@ class User < ApplicationRecord
   has_many :user_answers, dependent: :destroy
   has_many :manager_impersonations, class_name: 'Impersonation', foreign_key: :manager_id, dependent: :destroy
   has_many :common_impersonations, class_name: 'Impersonation', foreign_key: :common_id, dependent: :destroy
+
+  validates :login, :full_name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
 end
