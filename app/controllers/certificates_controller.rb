@@ -21,7 +21,7 @@ class CertificatesController < ApplicationController
   private
 
   def permit_params
-    params.require(Certificate.name.underscore.to_sym).permit(
+    params.require(:certificate).permit(
       :course_id,
       :user_id,
       :certificate_pdf

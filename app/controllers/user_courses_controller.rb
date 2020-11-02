@@ -29,7 +29,7 @@ class UserCoursesController < ApplicationController
   private
 
   def permit_params
-    params.require(UserCourse.name.underscore.to_sym).permit(
+    params.require(:user_course).permit(
       :user_id,
       :course_id,
       :current_page,

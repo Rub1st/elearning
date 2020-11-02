@@ -20,7 +20,7 @@ class ImpersonationsController < ApplicationController
   private
 
   def permit_params
-    params.require(Impersonation.name.underscore.to_sym).permit(
+    params.require(:impersonation).permit(
       :start,
       :end,
       :manager_id,

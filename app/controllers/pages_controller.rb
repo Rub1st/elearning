@@ -33,7 +33,7 @@ class PagesController < ApplicationController
   private
 
   def permit_params
-    params.require(Page.name.underscore.to_sym).permit(
+    params.require(:page).permit(
       :course_id,
       :order,
       :title

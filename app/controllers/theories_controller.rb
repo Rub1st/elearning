@@ -25,7 +25,7 @@ class TheoriesController < ApplicationController
   private
 
   def permit_params
-    params.require(Theory.name.underscore.to_sym).permit(
+    params.require(:theory).permit(
       :title,
       :content,
       :page_id,

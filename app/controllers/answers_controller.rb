@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
   private
 
   def permit_params
-    params.require(Answer.name.underscore.to_sym).permit(
+    params.require(:answer).permit(
       :question_id,
       :value,
       :order

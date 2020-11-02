@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
   private
 
   def permit_params
-    params.require(Question.name.underscore.to_sym).permit(
+    params.require(:question).permit(
       :page_id,
       :question_type,
       :title,

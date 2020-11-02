@@ -34,7 +34,7 @@ class OrganizationsController < ApplicationController
   private
 
   def permit_params
-    params.require(Organization.name.underscore.to_sym).permit(
+    params.require(:organization).permit(
       :name,
       :description,
       :approve_status,

@@ -20,7 +20,7 @@ class ReportsController < ApplicationController
   private
 
   def permit_params
-    params.require(Report.name.underscore.to_sym).permit(
+    params.require(:report).permit(
       :course_id,
       :percent_try,
       :count_try,

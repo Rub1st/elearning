@@ -24,7 +24,7 @@ class VariantsController < ApplicationController
   private
 
   def permit_params
-    params.require(Variant.name.underscore.to_sym).permit(
+    params.require(:variant).permit(
       :order,
       :question_id,
       :value

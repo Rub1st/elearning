@@ -34,7 +34,7 @@ class UserAnswersController < ApplicationController
   private
 
   def permit_params
-    params.require(UserAnswer.name.underscore.to_sym).permit(
+    params.require(:user_answer).permit(
       :question_id,
       :answer,
       :user_id,

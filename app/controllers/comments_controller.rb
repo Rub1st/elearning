@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   private
 
   def permit_params
-    params.require(Comment.name.underscore.to_sym).permit(
+    params.require(:comment).permit(
       :course_id,
       :content,
       :author_id

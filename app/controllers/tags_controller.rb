@@ -20,7 +20,7 @@ class TagsController < ApplicationController
   private
 
   def permit_params
-    params.require(Tag.name.underscore.to_sym).permit(
+    params.require(:tag).permit(
       :name
     )
   end

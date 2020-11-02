@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
   private
 
   def permit_params
-    params.require(Course.name.underscore.to_sym).permit(
+    params.require(:course).permit(
       :label,
       :mark,
       :why_content,

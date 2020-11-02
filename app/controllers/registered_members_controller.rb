@@ -33,7 +33,7 @@ class RegisteredMembersController < ApplicationController
   private
 
   def permit_params
-    params.require(RegisteredMember.name.underscore.to_sym).permit(
+    params.require(:registered_member).permit(
       :member_role,
       :organization_id,
       :user_id

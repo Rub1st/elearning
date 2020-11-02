@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   private
 
   def permit_params
-    params.require(User.name.underscore.to_sym).permit(
+    params.require(:user).permit(
       :login,
       :email,
       :full_name,

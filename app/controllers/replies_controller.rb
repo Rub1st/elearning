@@ -20,7 +20,7 @@ class RepliesController < ApplicationController
   private
 
   def permit_params
-    params.require(Reply.name.underscore.to_sym).permit(
+    params.require(:reply).permit(
       :comment_id,
       :content,
       :author_id

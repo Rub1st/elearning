@@ -20,7 +20,7 @@ class CourseTagsController < ApplicationController
   private
 
   def permit_params
-    params.require(CourseTag.name.underscore.to_sym).permit(
+    params.require(:course_tag).permit(
       :course_id,
       :tag_id
     )
