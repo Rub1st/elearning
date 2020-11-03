@@ -6,15 +6,15 @@ Rails.application.routes.draw do
   resources :unregistered_members, only: %i[create update destroy index show] #+
   resources :tags, only: %i[create index show]                                #+
   resources :impersonations, only: %i[create index show]                      #+
-  resources :courses, only: %i[create update destroy index show]              #+
+  resources :courses, only: %i[create update destroy index show]
   resources :pages, only: %i[create update destroy index show]                #+
   resources :questions, only: %i[create destroy index show]                   #+
   resources :variants, only: %i[create destroy index show]                    #+
   resources :answers, only: %i[create update destroy index show]              #+
-  resources :comments, only: %i[create index destroy]                         #+
-  resources :replies, only: %i[create index show]                             #+
+  resources :comments, only: %i[create index]
+  resources :replies, only: %i[create index]
   resources :course_tags, only: %i[create index destroy]                      #+
-  resources :certificates, only: %i[create index show]                        #+
+  resources :certificates, only: %i[create index show]
   resources :user_courses, only: %i[create update index show]                 #+
   resources :user_answers, only: %i[create update index show]                 #+
   resources :reports, only: %i[create index show]                             #+

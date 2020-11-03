@@ -43,6 +43,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'active_model_serializers', '~> 0.10.4'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'rack-cors', :require => 'rack/cors'
 end
 
 group :test do

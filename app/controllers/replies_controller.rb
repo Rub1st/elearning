@@ -13,10 +13,6 @@ class RepliesController < ApplicationController
     render json: Reply.all
   end
 
-  def show
-    render json: Reply.find(params[:id])
-  end
-
   private
 
   def permit_params
