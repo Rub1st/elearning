@@ -225,7 +225,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.string "login", default: "", null: false
     t.string "email", default: "", null: false
     t.string "full_name", default: "", null: false
-    t.datetime "birthday", null: false
+    t.date "birthday", null: false
     t.integer "user_role", default: 1, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
