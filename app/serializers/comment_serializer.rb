@@ -2,7 +2,8 @@ class CommentSerializer < ActiveModel::Serializer
   attributes :id,
              :course,
              :author,
-             :content
+             :content,
+             :created_at
 
   belongs_to :course
   belongs_to :author
