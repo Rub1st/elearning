@@ -36,15 +36,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "answers", force: :cascade do |t|
-    t.bigint "question_id", null: false
-    t.string "value", default: "", null: false
-    t.integer "order", default: 1, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["question_id"], name: "index_answers_on_question_id"
-  end
-
   create_table "certificates", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "user_id", null: false
@@ -202,6 +193,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.boolean "is_correct", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id", "answer"], name: "index_user_answers_on_question_id_and_answer", unique: true
     t.index ["question_id"], name: "index_user_answers_on_question_id"
     t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
@@ -239,6 +231,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
     t.integer "order", default: 1, null: false
     t.bigint "question_id", null: false
     t.string "value", default: "", null: false
+    t.boolean "is_correct", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id", "order"], name: "index_variants_on_question_id_and_order", unique: true
@@ -246,7 +239,6 @@ ActiveRecord::Schema.define(version: 2020_10_29_092417) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "answers", "questions"
   add_foreign_key "certificates", "courses"
   add_foreign_key "certificates", "users"
   add_foreign_key "comments", "courses"
