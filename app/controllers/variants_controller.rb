@@ -27,7 +27,8 @@ class VariantsController < ApplicationController
     params.require(:variant).permit(
       :order,
       :question_id,
-      :value
+      :value,
+      :is_correct
     )
   end
 end
