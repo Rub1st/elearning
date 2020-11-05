@@ -3,7 +3,7 @@ class RepliesController < ApplicationController
   def create
     reply = Reply.new(permit_params)
     if reply.save
-      render json: reply
+      render json: Comment.find(reply.comment.id)
     else
       render json: { errors: reply.errors }, status: :unprocessable_entity
     end
