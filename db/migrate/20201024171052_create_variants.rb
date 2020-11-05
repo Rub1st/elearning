@@ -5,6 +5,7 @@ class CreateVariants < ActiveRecord::Migration[6.0]
       t.references :question, null: false, foreign_key: true
       t.string :value, null: false, default: ''
       t.index %i[question_id order], unique: true
+      t.boolean :is_correct, null: false, default: false
 
       t.timestamps
     end
