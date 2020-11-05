@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many :user_answers, dependent: :destroy
   has_many :manager_impersonations, class_name: 'Impersonation', foreign_key: :manager_id, dependent: :destroy
   has_many :common_impersonations, class_name: 'Impersonation', foreign_key: :common_id, dependent: :destroy
+  has_many :course_members, dependent: :destroy
 
   validates :login, :full_name, presence: true
   validates :email, presence: true

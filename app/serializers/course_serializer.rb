@@ -21,6 +21,7 @@ class CourseSerializer < ActiveModel::Serializer
   has_many :course_tags
   has_many :certificates
   has_many :user_courses
+  has_many :course_members
 
   def certificates
     Certificate.with_attached_certificate_pdf.where(course_id: object.id)
