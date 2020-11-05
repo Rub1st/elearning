@@ -2,11 +2,11 @@ class UserAnswersController < ApplicationController
 
   def create
     ua = UserAnswer.new(permit_params)
-    temp = Answer.all.select do |element|
-      element.question[:id] == permit_params[:question_id] && element.value == ua.answer
-    end
-    p temp
-    ua.is_correct = temp.count.positive?
+    # temp = Answer.all.select do |element|
+    #   element.question[:id] == permit_params[:question_id] && element.value == ua.answer
+    # end
+    # p temp
+    # ua.is_correct = temp.count.positive?
     if ua.save
       render json: ua
     else
