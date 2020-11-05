@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :user_answers, only: %i[create update index show]                 #+
   resources :reports, only: %i[create index show]                             #+
   resources :theories, only: %i[create destroy index show]                    #+
+  resources :course_members, only: %i[create index]
 
   # devise_for :users, controllers: { create: 'create',
   #                                   update: 'update',
