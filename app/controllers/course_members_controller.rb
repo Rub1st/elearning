@@ -1,4 +1,4 @@
-class CourseMemberController < ApplicationController
+class CourseMembersController < ApplicationController
   def create
     course_member = CourseMember.new(permit_params)
     if course_member.save

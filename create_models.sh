@@ -39,4 +39,4 @@
 # rails generate controller UserAnswersController
 # rails generate controller ReportsController
 # rails generate controller TheoriesController
-rails generate controller CourseMemberController
+rails generate controller CourseMembersController
