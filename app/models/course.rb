@@ -25,6 +25,7 @@ class Course < ApplicationRecord
   has_many :pages, dependent: :destroy
   has_many :user_courses, dependent: :destroy
   has_many :course_members, dependent: :destroy
+  enum course_status: %i[draft ready]
   enum approve_status: %i[pending rejected approved]
   enum access_type: %i[opened closed individual]
 

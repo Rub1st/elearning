@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_171120) do
     t.integer "access_type", default: 0, null: false
     t.integer "approve_status", default: 0, null: false
     t.bigint "organization_id"
+    t.integer "course_status", default: 0, null: false
     t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

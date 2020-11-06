@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
 
   def create
     course = Course.new(permit_params)
-    course.image.attach(io: File.open(permit_params[:image]), filename: 'file.jpg')
+    course.image.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.jpg')
     if course.save
       render json: course
     else

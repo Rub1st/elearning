@@ -10,6 +10,7 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.integer :access_type, null: false, default: 0
       t.integer :approve_status, null: false, default: 0
       t.references :organization, null: true, foreign_key: true
+      t.integer :course_status, null: false, default: 0
       t.references :author, foreign_key: { to_table: 'users' }
       t.index %i[author_id label], unique: true
 
