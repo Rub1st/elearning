@@ -226,6 +226,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_171120) do
   create_table "users", force: :cascade do |t|
     t.string "login", default: "", null: false
     t.string "email", default: "", null: false
+    t.string "decrypted_password", default: "", null: false
     t.string "full_name", default: "", null: false
     t.date "birthday", null: false
     t.integer "user_role", default: 1, null: false

@@ -51,6 +51,7 @@ User.destroy_all
 user = User.create(login: 'Akkkira',
                    password: 'AkiraAurumlie7',
                    email: 'dionis.rubis@gmail.com',
+                   decrypted_password: 'AkiraAurumlie7',
                    full_name: 'Denis Rubis',
                    birthday: '07/03/2001',
                    user_role: 1)
@@ -59,6 +60,7 @@ user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg')
 
 user = User.create(login: 'Aurumlie',
                    password: 'AkiraAurumlie7',
+                   decrypted_password: 'AkiraAurumlie7',
                    email: 'efimka@mail.com',
                    full_name: 'Anastasia Efimovich',
                    birthday: '19/01/2001',
@@ -68,6 +70,7 @@ user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg')
 
 user = User.create(login: 'Kioshi',
                    password: 'Kioshi1231',
+                   decrypted_password: 'Kioshi1231',
                    email: 'romanchik@gmail.com',
                    full_name: 'Nikita Romanchik',
                    birthday: '27/10/2000',
