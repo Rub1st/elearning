@@ -6,4 +6,5 @@ class ReplySerializer < ActiveModel::Serializer
              :created_at
 
   belongs_to :comment
+  belongs_to :author
 end

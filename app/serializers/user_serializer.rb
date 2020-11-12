@@ -10,10 +10,13 @@ class UserSerializer < ActiveModel::Serializer
              :avatar_url,
              :courses,
              :certificate_template_url,
-             :certificates
+             :certificates,
+             :encrypted_password,
+             :decrypted_password
 
   has_many :courses
   has_many :comments
+  has_many :replies
   has_many :certificates
   has_many :user_courses
   has_many :user_answers
