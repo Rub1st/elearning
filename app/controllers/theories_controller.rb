@@ -2,7 +2,7 @@ class TheoriesController < ApplicationController
 
   def create
     theory = Theory.new(permit_params)
-    theory.image.attach(io: File.open(permit_params[:image]), filename: 'file.jpg')
+    theory.image.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.jpg')
     if theory.save
       render json: theory
     else
@@ -12,6 +12,7 @@ class TheoriesController < ApplicationController
 
   def destroy
     Theory.find(params[:id]).destroy
+    render json: Theory.all
   end
 
   def index

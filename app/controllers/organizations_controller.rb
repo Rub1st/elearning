@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
 
   def create
     organization = Organization.new(permit_params)
-    organization.certificate_template.attach(io: File.open(permit_params[:certificate_template]), filename: 'file.pdf')
+    organization.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.pdf')
     if organization.save
       render json: organization
     else

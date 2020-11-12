@@ -3,7 +3,7 @@ class RegisteredMembersController < ApplicationController
   def create
     registered_member = RegisteredMember.new(permit_params)
     if registered_member.save
-      render json: registered_member
+      render json: RegisteredMember.all
     else
       render json: { errors: registered_member.errors }, status: :unprocessable_entity
     end
@@ -20,6 +20,7 @@ class RegisteredMembersController < ApplicationController
 
   def destroy
     RegisteredMember.find(params[:id]).destroy
+    render json: RegisteredMember.all
   end
 
   def index

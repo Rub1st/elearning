@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     Question.find(params[:id]).destroy
+    render json: Question.all
   end
 
   def index

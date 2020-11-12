@@ -2,10 +2,10 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(permit_params)
-    user.avatar.attach(io: File.open(permit_params[:avatar]), filename: 'file.jpg')
-    user.certificate_template.attach(io: File.open(permit_params[:certificate_template]), filename: 'file.pdf')
+    user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.jpg')
+    user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.pdf')
     if user.save
-      render json: user
+      render json: User.all
     else
       render json: { errors: user.errors }, status: :unprocessable_entity
     end
@@ -43,7 +43,8 @@ class UsersController < ApplicationController
       :user_role,
       :password,
       :avatar,
-      :certificate_template
+      :certificate_template,
+      :decrypted_password
     )
   end
 end
