@@ -5,7 +5,8 @@ class OrganizationSerializer < ActiveModel::Serializer
              :name,
              :description,
              :approve_status,
-             :certificate_template_url
+             :certificate_template_url,
+             :created_at
 
   has_many :registered_members
   has_many :unregistered_members

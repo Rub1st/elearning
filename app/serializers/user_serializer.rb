@@ -12,7 +12,8 @@ class UserSerializer < ActiveModel::Serializer
              :certificate_template_url,
              :certificates,
              :encrypted_password,
-             :decrypted_password
+             :decrypted_password,
+             :created_at
 
   has_many :courses
   has_many :comments

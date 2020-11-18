@@ -14,7 +14,8 @@ class CourseSerializer < ActiveModel::Serializer
              :author,
              :image_url,
              :certificates,
-             :course_status
+             :course_status,
+             :created_at
 
   has_many :pages
   belongs_to :author
