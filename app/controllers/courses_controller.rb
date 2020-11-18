@@ -21,6 +21,7 @@ class CoursesController < ApplicationController
 
   def destroy
     Course.find(params[:id]).destroy
+    render json: Course.all
   end
 
   def index
@@ -44,6 +45,7 @@ class CoursesController < ApplicationController
       :access_type,
       :approve_status,
       :organization_id,
+      :course_status,
       :author_id,
       :image
     )

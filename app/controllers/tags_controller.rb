@@ -3,7 +3,16 @@ class TagsController < ApplicationController
   def create
     tag = Tag.new(permit_params)
     if tag.save
-      render json: tag
+      render json: Tag.all
+    else
+      render json: { errors: tag.errors }, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    tag = Tag.find(params[:id])
+    if tag.update(permit_params)
+      render json: Tag.all
     else
       render json: { errors: tag.errors }, status: :unprocessable_entity
     end
