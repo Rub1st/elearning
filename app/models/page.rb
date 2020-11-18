@@ -11,6 +11,7 @@
 class Page < ApplicationRecord
   belongs_to :course
   has_many :questions, dependent: :destroy
+  has_many :theories, dependent: :destroy
 
   validates :title, presence: true
 end

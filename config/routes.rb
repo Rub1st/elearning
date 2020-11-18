@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :organizations, only: %i[create update destroy index show]        #+
   resources :registered_members, only: %i[create update destroy index show]   #+
   resources :unregistered_members, only: %i[create update destroy index show] #+
-  resources :tags, only: %i[create index show]                                #+
+  resources :tags, only: %i[create update index show]                                #+
   resources :impersonations, only: %i[create index show]                      #+
   resources :courses, only: %i[create update destroy index show]
   resources :pages, only: %i[create update destroy index show]                #+
