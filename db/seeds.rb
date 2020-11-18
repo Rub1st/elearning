@@ -74,7 +74,7 @@ user = User.create(login: 'Kioshi',
                    email: 'romanchik@gmail.com',
                    full_name: 'Nikita Romanchik',
                    birthday: '27/10/2000',
-                   user_role: 1)
+                   user_role: 0)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
 user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "cer_user_#{user.id}.jpg")
 
