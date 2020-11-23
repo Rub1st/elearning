@@ -21,6 +21,7 @@ class OrganizationsController < ApplicationController
 
   def destroy
     Organization.find(params[:id]).destroy
+    render json: Organization.all
   end
 
   def index
