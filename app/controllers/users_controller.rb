@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
+
     if user.update(permit_params)
       render json: user
     else
@@ -45,7 +46,8 @@ class UsersController < ApplicationController
       :password,
       :avatar,
       :certificate_template,
-      :decrypted_password
+      :decrypted_password,
+      :user_status
     )
   end
 end

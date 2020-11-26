@@ -17,6 +17,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum user_role: %i[admin common]
+  enum user_status: %i[pending blocked approved]
 
   has_one_attached :avatar
   has_one_attached :certificate_template

@@ -13,7 +13,8 @@ class UserSerializer < ActiveModel::Serializer
              :certificates,
              :encrypted_password,
              :decrypted_password,
-             :created_at
+             :created_at,
+             :user_status
 
   has_many :courses
   has_many :comments
