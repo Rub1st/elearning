@@ -3,7 +3,7 @@ class VariantsController < ApplicationController
   def create
     variant = Variant.new(permit_params)
     if variant.save
-      render json: variant
+      render json: Question.find(variant.question.id)
     else
       render json: { errors: variant.errors }, status: :unprocessable_entity
     end

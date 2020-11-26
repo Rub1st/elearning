@@ -5,7 +5,7 @@ class CreateUserAnswers < ActiveRecord::Migration[6.0]
       t.string :answer, null: false, default: ''
       t.references :user, null: false, foreign_key: true
       t.boolean :is_correct, null: false, default: false
-      t.index %i[question_id answer], unique: true
+      t.index %i[user_id question_id answer], unique: true
 
       t.timestamps
     end

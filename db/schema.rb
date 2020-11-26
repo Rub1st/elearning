@@ -97,12 +97,14 @@ ActiveRecord::Schema.define(version: 2020_11_05_171120) do
   create_table "impersonations", force: :cascade do |t|
     t.datetime "start", null: false
     t.datetime "end", null: false
+    t.bigint "organization_id", null: false
     t.bigint "manager_id"
     t.bigint "common_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["common_id"], name: "index_impersonations_on_common_id"
     t.index ["manager_id"], name: "index_impersonations_on_manager_id"
+    t.index ["organization_id"], name: "index_impersonations_on_organization_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -203,8 +205,8 @@ ActiveRecord::Schema.define(version: 2020_11_05_171120) do
     t.boolean "is_correct", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["question_id", "answer"], name: "index_user_answers_on_question_id_and_answer", unique: true
     t.index ["question_id"], name: "index_user_answers_on_question_id"
+    t.index ["user_id", "question_id", "answer"], name: "index_user_answers_on_user_id_and_question_id_and_answer", unique: true
     t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
@@ -231,6 +233,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_171120) do
     t.date "birthday", null: false
     t.integer "user_role", default: 1, null: false
     t.string "encrypted_password", default: "", null: false
+    t.integer "user_status", default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -260,6 +263,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_171120) do
   add_foreign_key "course_tags", "tags"
   add_foreign_key "courses", "organizations"
   add_foreign_key "courses", "users", column: "author_id"
+  add_foreign_key "impersonations", "organizations"
   add_foreign_key "impersonations", "users", column: "common_id"
   add_foreign_key "impersonations", "users", column: "manager_id"
   add_foreign_key "pages", "courses"
