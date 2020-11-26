@@ -9,6 +9,11 @@ class RepliesController < ApplicationController
     end
   end
 
+  def destroy
+    Reply.find(params[:id]).destroy
+    render json: Comment.all
+  end
+
   def index
     render json: Reply.all
   end

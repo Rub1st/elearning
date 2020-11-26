@@ -9,6 +9,11 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    Comment.find(params[:id]).destroy
+    render json: Comment.all
+  end
+
   def index
     render json: Comment.all
   end
