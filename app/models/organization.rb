@@ -15,6 +15,7 @@ class Organization < ApplicationRecord
   has_many :courses, dependent: :destroy
   has_many :registered_members, dependent: :destroy
   has_many :unregistered_members, dependent: :destroy
+  has_many :impersonations, dependent: :destroy
 
   validates :name, :description, presence: true
 end
