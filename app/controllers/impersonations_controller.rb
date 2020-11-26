@@ -9,6 +9,15 @@ class ImpersonationsController < ApplicationController
     end
   end
 
+  def update
+    imperson = Impersonation.find(params[:id])
+    if imperson.update(permit_params)
+      render json: Impersonation.all
+    else
+      render json: { errors: imperson.errors }, status: :unprocessable_entity
+    end
+  end
+
   def index
     render json: Impersonation.all
   end
@@ -24,7 +33,8 @@ class ImpersonationsController < ApplicationController
       :start,
       :end,
       :manager_id,
-      :common_id
+      :common_id,
+      :organization_id
     )
   end
 end
