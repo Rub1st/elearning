@@ -1,0 +1,18 @@
+.field{
+  margin: 50px 20px;
+  display: flex;
+}
+
+.admin-user-list{
+  display: flex;
+  width: 1550px;
+  height: 650px;
+  overflow-y: auto;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.admin-user-list-position{
+  margin-right: 30px;
+  margin-bottom: 30px;
+}

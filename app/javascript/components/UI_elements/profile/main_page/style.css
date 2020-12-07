@@ -1,0 +1,53 @@
+.home__position{
+  display: flex;
+  flex-direction: column;
+  padding: 65px 450px 50px 300px;
+  border-left: 1px solid rgb(240, 240, 240);
+  margin-left: 20px;
+  width: 1530px;
+}
+
+.home__top-line{
+  display: flex;
+  margin-bottom: 20px;
+  padding-left: 70px;
+}
+
+.home__avatar{
+  height: 300px;
+  width: 300px;
+}
+
+.home__main-user-info{
+  padding: 30px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home__main-info-item{
+  font-size: 20px;
+  color: rgb(150, 145, 145);
+}
+
+.home__login{
+  font-size: 30px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  color: rgb(119, 116, 116);
+}
+
+.home__second-line{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 70px;
+}
+
+.home__secondary-user-info{
+  width: auto;
+  padding: 20px 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 15px;
+  margin: 30px 20px 0 0;
+}

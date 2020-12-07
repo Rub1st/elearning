@@ -1,0 +1,12 @@
+.paper-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.variants-list{
+  width: 420px;
+  height: 140px;
+  overflow-y: auto;
+}

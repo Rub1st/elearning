@@ -1,0 +1,5 @@
+.course-page__course-info{
+  margin-right:45px;
+  flex-direction: column;
+  justify-content: center;
+}

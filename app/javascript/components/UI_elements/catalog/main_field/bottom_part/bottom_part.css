@@ -1,0 +1,12 @@
+.course__bottom-part{
+  display: flex;
+  margin-top: 20px;
+  color: rgb(121, 115, 107);
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course__info_and_start_panel{
+  display: flex;
+  width: 100%;
+}

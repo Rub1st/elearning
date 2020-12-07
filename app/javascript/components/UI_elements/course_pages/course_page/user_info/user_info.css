@@ -1,0 +1,6 @@
+.course-page__user-info{
+  margin-left:45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

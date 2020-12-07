@@ -1,0 +1,18 @@
+.comment__reply-input-position{
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid gainsboro;
+}
+
+.comment__reply-input{
+  border: 1px solid rgb(209, 207, 205);
+  color: rgb(121, 115, 107);
+  padding-left: 7px;
+  width: 40%;
+  margin-right: 15px;
+}
+
+.comment__reply-input-button{
+  color: rgb(102, 96, 89);
+}

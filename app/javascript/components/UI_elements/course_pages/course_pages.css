@@ -1,0 +1,15 @@
+.page-footer{
+  display: flex;
+  justify-content: space-around;
+}
+
+.page-stepper{
+  width: 90%;
+}
+
+.page-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+}

@@ -1,0 +1,8 @@
+.course__information-page{
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+  border-bottom: 2px solid rgb(228, 221, 221);
+  padding-bottom: 20px;
+  height: 115%;
+}

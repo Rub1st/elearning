@@ -1,0 +1,19 @@
+.profile__course-field{
+  margin-top: 20px;
+  padding: 30px 50px;
+  width: 1530px;
+  border-left: 1px solid rgb(240, 240, 240);
+  height: 800px;
+  overflow-y: auto;
+}
+
+.profile__course-list{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.profile__course-item{
+  margin-right: 50px;
+  margin-bottom: 50px;
+}

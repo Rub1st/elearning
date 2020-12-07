@@ -1,0 +1,8 @@
+.course__top-part{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px solid rgb(228, 221, 221);
+  height: 531px;
+  margin-right: 100px;
+}

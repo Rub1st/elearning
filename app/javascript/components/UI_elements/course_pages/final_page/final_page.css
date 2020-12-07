@@ -1,0 +1,42 @@
+.final-window{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 100px;
+}
+
+.final-message{
+  text-align: center;
+  font-size: 22px;
+  color: rgb(97, 93, 93);
+}
+
+.final-certificate{
+  margin-top: 30px;
+  width: 800px;
+  height: 480px;
+}
+
+.final-mark-field{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.final-mark-title{
+  text-align: center;
+  font-size: 18px;
+  color: rgb(97, 93, 93);
+}
+
+.final-mark-list{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.final-mark-item{
+  color: yellow;
+}

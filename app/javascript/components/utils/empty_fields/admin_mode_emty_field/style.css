@@ -1,0 +1,13 @@
+.admin_empty_field{
+  width: 1500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(156, 156, 156);
+}
+
+.admin_empty_content{
+  margin-bottom: 50px;
+}

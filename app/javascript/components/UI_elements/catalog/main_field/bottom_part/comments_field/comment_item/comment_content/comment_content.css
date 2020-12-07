@@ -1,0 +1,22 @@
+.comment__auhtor{
+  padding-left: 8px;
+  font-weight: 500;
+}
+
+.comment__content{
+  margin: 15px;
+  word-wrap: normal;
+}
+
+.comment__datetime{
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15px;
+}
+
+.comment__top-field{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5px;
+}

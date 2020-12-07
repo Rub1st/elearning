@@ -1,0 +1,29 @@
+.sidebar-item{
+  height: 70px;
+  width: 97%;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  font-size: 25px;
+  padding-left: 40px;
+  color: rgb(41, 37, 37);
+}
+
+.sidebar-item:hover{
+  font-size: 25.5px;
+  background-color: rgba(241, 235, 235, 0.199);
+  box-shadow: 6px 6px 6px -5px rgb(168, 158, 158);
+}
+
+.sidebar-item:focus {
+  background-color: rgba(241, 235, 235, 0.349);
+}
+
+.sidebar{
+  overflow-x: hidden;
+  overflow-y: visible;
+  border-right-color: 1px solid black;
+  width: 280px;
+  height: 700px;
+  padding: 15px 0;
+}

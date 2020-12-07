@@ -1,0 +1,12 @@
+.comment-list{
+  display: flex;
+  width: 1550px;
+  list-style: none;
+  flex-wrap: wrap;
+  margin: 50px 20px;
+}
+
+.comment-list-item{
+  margin-right: 30px;
+  margin-bottom: 30px;
+}

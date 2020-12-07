@@ -1,0 +1,13 @@
+.course__image{
+  margin-right: 30px;
+  width: 550px;
+  padding-bottom: 30px;
+  margin-left: 30px;
+  margin-top: 10px;
+  height: 95%;
+}
+
+.image-size{
+  height: 100%;
+  width: 100%;
+}

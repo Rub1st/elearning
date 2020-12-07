@@ -1,0 +1,13 @@
+.left_bar_position{
+  display: flex;
+  flex-wrap: nowrap;
+  margin-right: 15px;
+}
+
+.link_position{
+  margin-right: 50px;
+}
+
+.link_position:last-of-type{
+  margin-right: 0;
+}

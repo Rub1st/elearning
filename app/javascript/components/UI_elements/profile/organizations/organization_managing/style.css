@@ -1,0 +1,40 @@
+.man_org-window{
+  padding: 50px 100px;
+  width: 1500px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.man_org-label{
+  font-size: 25px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.man_row-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  width: 30%;
+  padding: 10px;
+}
+
+.man_org-field{
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-between;
+}
+
+.man_row-title{
+  padding-top: 0;
+  font-size: 20px;
+}
+
+.reg-create-form{
+  margin: 0 0px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}

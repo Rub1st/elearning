@@ -1,0 +1,15 @@
+.description-label{
+  margin-top: 30px;
+  margin-left: 15px;
+}
+
+.description-content{
+  padding-left: 8px;
+}
+
+.course__description{
+  height: 70%;
+  margin-top: -25px;
+  overflow-x: hidden;
+  overflow-y: visible;
+}

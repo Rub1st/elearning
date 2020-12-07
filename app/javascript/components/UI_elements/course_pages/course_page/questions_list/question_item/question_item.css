@@ -1,0 +1,36 @@
+.question__position{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid rgb(189, 179, 179);
+  width: 100%;
+  padding: 5px 10px 10px;
+}
+
+.question__item-position{
+  display: flex;
+  flex-direction: column;
+}
+
+.question__top-part-position{
+  width: 99%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+.question__title{
+  font-size: 23px;
+  text-decoration: underline;
+}
+
+.question__difficult{
+  font-size: 17px;
+}
+
+.question__description{
+  margin: 10px 0;
+}
+
+.question__text{
+  margin: 0 0 10px;
+}

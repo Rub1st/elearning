@@ -1,0 +1,63 @@
+.draft-page-create-field{
+  display: flex;
+  padding: 30px 20px 30px 60px;
+  width: 1400px;
+  justify-content: space-between;
+  border-left: 1px solid rgb(238, 238, 238);
+}
+.draft-page-edit-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 15px 30px 0;
+  width: 65%;
+}
+
+.create-course-middle-column{
+  padding: 25px;
+  width: 42%;
+}
+
+.create-course-first-column{
+  width: 45%;
+}
+
+.create-course-last-column{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 8%;
+}
+
+.create-course-page-info{
+  color: rgb(163, 157, 157);
+}
+
+.create-course-created-theory-list{
+  margin-top: 7px;
+  padding: 2px;
+  list-style: none;
+  height: 218px;
+  overflow-y: auto;
+  margin-bottom: 50px;
+}
+
+.create-course-created-practice-list{
+  margin-top: 7px;
+  padding: 2px;
+  list-style: none;
+  height: 218px;
+  overflow-y: auto;
+}
+
+.paper-create-theory{
+  height: 240px;
+  padding: 25px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgb(231, 227, 227);
+}
+
+.paper-create-question{
+  padding: 25px;
+  border-bottom: 1px solid rgb(231, 227, 227);
+}

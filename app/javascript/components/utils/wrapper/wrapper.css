@@ -1,0 +1,18 @@
+.top-border{
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 7%;
+  margin-bottom: 30px;
+  color: white;
+  font-size: 20px;
+  background-color: rgba(39, 35, 35, 0.974);
+  box-shadow: 0 3px 15px black;
+  flex-wrap: nowrap;
+}
+
+.top-bar-position{
+  display: flex;
+  flex-direction: column;
+}

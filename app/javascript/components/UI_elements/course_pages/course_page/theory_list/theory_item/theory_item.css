@@ -1,0 +1,38 @@
+.theory__position{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px 40px 30px;
+}
+
+.theory__item-position{
+  width: 99%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+.theory__subtitle{
+  font-size: 23px;
+  text-decoration: underline;
+}
+
+.theory__paragraph{
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.theory__picture{
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  height: 360px
+}
+
+.theory__picture-position{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 360px
+}
