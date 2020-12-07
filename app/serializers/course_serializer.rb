@@ -30,7 +30,6 @@ class CourseSerializer < ActiveModel::Serializer
   end
 
   def image_url
-    variant = object.image.variant(resize: '100x100')
-    rails_representation_url(variant, only_path: true)
+    url_for(object.image)
   end
 end

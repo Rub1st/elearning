@@ -2,12 +2,17 @@ class CoursesController < ApplicationController
 
   def create
     course = Course.new(permit_params)
+    # course.image.attach(params[:image])
     course.image.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.jpg')
     if course.save
       render json: course
     else
       render json: { errors: course.errors }, status: :unprocessable_entity
     end
+  end
+
+  def search
+    Course.all
   end
 
   def update
