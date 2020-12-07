@@ -14,7 +14,20 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[google_oauth2]
+         #,:confirmable
+
+  def self.create_from_provider_data(provider_data)
+    p provider_data
+    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
+      user.full_name = provider_data.info.name
+      user.login = provider_data.info.first_name
+      user.birthday = Date.new
+      user.email = provider_data.info.email
+      user.password = Devise.friendly_token[0, 20]
+    end
+  end
 
   enum user_role: %i[admin common]
   enum user_status: %i[pending blocked approved]

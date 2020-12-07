@@ -54,7 +54,7 @@ user = User.create(login: 'Akkkira',
                    decrypted_password: 'AkiraAurumlie7',
                    full_name: 'Denis Rubis',
                    birthday: '07/03/2001',
-                   user_status: 1,
+                   user_status: 2,
                    user_role: 1)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
 user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "cer_user_#{user.id}.jpg")
@@ -65,7 +65,7 @@ user = User.create(login: 'Aurumlie',
                    email: 'efimka@mail.com',
                    full_name: 'Anastasia Efimovich',
                    birthday: '19/01/2001',
-                   user_status: 1,
+                   user_status: 2,
                    user_role: 1)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
 user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "cer_user_#{user.id}.jpg")
@@ -76,7 +76,7 @@ user = User.create(login: 'Kioshi',
                    email: 'romanchik@gmail.com',
                    full_name: 'Nikita Romanchik',
                    birthday: '27/10/2000',
-                   user_status: 1,
+                   user_status: 2,
                    user_role: 0)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
 user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "cer_user_#{user.id}.jpg")
