@@ -7,9 +7,17 @@ class ApplicationController < ActionController::Base
     Rails.env.development? && ENV['SKIP_VERIFY_AUTHENTICITY_TOKEN']
   }
 
+  def render_jsonapi_response(resource)
+    if resource.errors.empty?
+      render json: resource
+    else
+      render json: resource.errors, status: 400
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[full_name login password email birthday])
   end
 end
