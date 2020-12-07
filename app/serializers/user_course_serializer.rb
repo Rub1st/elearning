@@ -6,7 +6,9 @@ class UserCourseSerializer < ActiveModel::Serializer
              :is_favorite,
              :progress,
              :correct,
-             :mark
+             :mark,
+             :created_at,
+             :updated_at
 
   belongs_to :user
   belongs_to :course

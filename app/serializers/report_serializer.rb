@@ -4,7 +4,8 @@ class ReportSerializer < ActiveModel::Serializer
              :count_try,
              :count_failed,
              :count_complete,
-             :average_mark
+             :average_mark,
+             :created_at
 
   has_one :course
 end
