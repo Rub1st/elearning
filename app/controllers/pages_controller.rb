@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
-
   def create
-    page = Page.new(permit_params)
-    #page[:order] = new_order
+    page = Pages::Create.call(permit_params)
     if page.save
       render json: page
     else
@@ -40,9 +38,5 @@ class PagesController < ApplicationController
       :order,
       :title
     )
-  end
-
-  def new_order
-    Page.all.select { |el| el.course.id == params[:course_id]}[-1].order + 1
   end
 end

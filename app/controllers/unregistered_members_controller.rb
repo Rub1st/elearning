@@ -1,7 +1,6 @@
 class UnregisteredMembersController < ApplicationController
-
   def create
-    unregistered_member = UnregisteredMember.new(permit_params)
+    unregistered_member = UnregisteredMembers::Create.call(permit_params)
     if unregistered_member.save
       render json: UnregisteredMember.all
     else
