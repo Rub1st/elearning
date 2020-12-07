@@ -2,9 +2,9 @@
 /vendor/bundle/
 /Gemfile.lock
 
-
 # minimal Rails specific artifacts
 db/*.sqlite3
 /log/*
 /tmp/*
 
+node_modules/
