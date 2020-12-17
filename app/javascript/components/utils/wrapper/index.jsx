@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LeftBar from './left_bar'
 import ProfileBar from './profile_bar'
 import { makeStyles, fade } from '@material-ui/core/styles';
@@ -10,13 +10,19 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import './wrapper.css'
 import { connect } from 'react-redux';
-import { updateInput } from '../../../main_redux/actions/courses';
+import { getCourses, updateInput } from '../../../main_redux/actions/courses';
 import '../style/utils.css'
-import { getData, logout } from '../../../main_redux/actions/server_connections';
+import { getData, logout, searchData } from '../../../main_redux/actions/server_connections';
 import { setImpersonationUser } from '../../../main_redux/actions/users';
 import { BackspaceOutlined, DirectionsRunOutlined } from '@material-ui/icons';
 import UpdateImpersonationButton from './impersonation_button'
 import { IconButton } from '@material-ui/core';
+import { withRouter } from "react-router";
+import { getUserCourses } from '../../../main_redux/actions/user_courses';
+import { getOrganizations } from '../../../main_redux/actions/organizations';
+import { getCertificates } from '../../../main_redux/actions/certificates';
+import LanguageIcon from '@material-ui/icons/Language';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -73,29 +78,68 @@ const useStyles = makeStyles((theme) => ({
 const Wrapper = (props) => {
   const classes = useStyles();
 
+  const [search, setSearch] = useState('')
+
+  const { t, i18n } = useTranslation();
+
+  let path = window.location.pathname
+
+  let user_id = props.currentUser.id
+
+
+  let {request_path, setter} = path === '/' ||
+                               path === `/user_id=${user_id}/my_courses` ||
+                               path === `/user_id=${user_id}/recomended_courses` ?
+                               { request_path: 'courses', setter: getCourses} :
+                               path ===  `/user_id=${user_id}/organizations` ?
+                               { request_path: 'organizations', setter: getOrganizations} :
+                               path === `/user_id=${user_id}/certificates` ?
+                               { request_path: 'certificates', setter: getCertificates} :
+                               path === `/user_id=${user_id}/home` ||
+                               path === `/user_id=${user_id}/settings` ?
+                               { request_path: 'none', setter: null} :
+                               { request_path: 'user_courses', setter: getUserCourses }
+
+  const enter_listener = event => {
+    if (event.key === 'Enter') {
+      props.search(search , request_path, setter)
+    }
+  }
+
+  const changeLang = () =>  i18n.language === 'en' ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
+
   return(
     <div className={classes.root}>
-    <AppBar position="static">
+    <AppBar style={{backgroundColor: 'rgb(61, 61, 202)'}} position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
           E-learning
+          <IconButton onClick={changeLang}>
+            <LanguageIcon/>
+          </IconButton>
         </Typography>
         <LeftBar/>
-        <div className={classes.search}>
+        {
+          request_path !== 'none' ?
+          (
+            <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon/>
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder={t("Search.1")}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              onChange={(e) => props.updateInput(e.target.value)}
-              value={props.searchInput}
+              onKeyPress={enter_listener}
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          ) : null
+        }
           <div>
               <AccountCircle />
           </div>
@@ -128,5 +172,6 @@ export default connect(
     set: (path, setter) => dispatch(getData(path, setter)),
     setImpersonationUser: (user) => dispatch(setImpersonationUser(user)),
     logout: () => dispatch(logout()),
+    search: (obj, path, setter) => dispatch(searchData(obj, path, setter)),
   })
-)(Wrapper)
+)(withRouter(Wrapper))

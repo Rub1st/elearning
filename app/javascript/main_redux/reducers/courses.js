@@ -7,19 +7,19 @@ import { GET_COURSE,
          UPDATE_COURSE_APPROVE_STATUS,
          DROP_COURSE } from "../constants/courses";
 
-import Courses from '../../components/plugs/courses_plug'
-
 let initialState = {
   courses: [],
   searchInput: '',
-  currentCourse: Courses[0],
+  currentCourse: {},
   currentDraftCourse: {},
+  connect_status: false,
 };
 
 const CourseReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COURSES: {
-      return { ...state, courses: action.value, currentCourse: action.value[0] }
+      console.log(action.value)
+      return { ...state, courses: action.value, connect_status: true }
     }
     case DROP_COURSE: {
       return { ...state, courses: action.value }

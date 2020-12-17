@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import PropTypes from "prop-types"
 import ReactDOM from 'react-dom'
 import * as serviceWorker from '../serviceWorker';
@@ -8,21 +8,23 @@ import {Provider} from 'react-redux';
 import reducer from '../main_redux'
 import thunk from 'redux-thunk'
 import App from '../App'
+import './i18n';
 
 let store = createStore(reducer, applyMiddleware(thunk))
 
 
 class Root extends React.Component {
   render () {
-    console.log(this.props)
     return (
-      <React.Fragment>
-        <Provider store ={store}>
-          <BrowserRouter>
-            <App current_user={this.props.currentUser}/>
-          </BrowserRouter>
-        </Provider>
-      </React.Fragment>
+      <Suspense fallback={(<div>Loading ~~~</div>)}>
+        <React.Fragment>
+          <Provider store ={store}>
+            <BrowserRouter>
+              <App current_user={this.props.currentUser}/>
+            </BrowserRouter>
+          </Provider>
+        </React.Fragment>
+      </Suspense>
     );
   }
 }

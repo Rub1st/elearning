@@ -18,21 +18,25 @@ import { getRegisteredMembers } from '../../../../main_redux/actions/registered_
 import { getUnregisteredMembers } from '../../../../main_redux/actions/unregistered_members'
 import { getImpersonations } from '../../../../main_redux/actions/impersonations'
 import { createReport } from '../../../../main_redux/actions/reports'
+import { useTranslation } from 'react-i18next'
 
-const items = [
-  {id:0, label:'Catalog', link:'/'},
-  {id:1, label:'Create Course', link:'/create_course'},
-  {id:2, label:'Create Organization', link:'/create_organization'}
-]
 
 const LeftBar = (props) => {
+
+  const { t, i18n } = useTranslation();
+
+  const items = [
+    {id:0, label: 'Catalog.1', link:'/'},
+    {id:1, label: 'Course.1', link:'/create_course'},
+    {id:2, label: 'Organization.1', link:'/create_organization'}
+  ]
 
   return(
     <div className='left_bar_position'>
       {
         items.map(el =>
         <Link to={el.link} className='link_position link' key={el.id}>
-          {el.label}
+          {t(el.label)}
         </Link>)
       }
     </div>

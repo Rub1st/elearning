@@ -20,7 +20,7 @@ const UserReducer = (state = initialState, action) => {
       return { ...state, users: action.value, common_users: action.value.filter(el => el.user_role === 'common' && el.user_status === 'approved' ) }
     }
     case DROP_USER: {
-      return { ...state, common_users: action.value }
+      return { ...state, users: action.value }
     }
     case SET_CURRENT_USER: {
       return { ...state, currentUser: action.value, impersonationUser: action.value }
@@ -32,8 +32,7 @@ const UserReducer = (state = initialState, action) => {
       return { ...state, common_users: [...state.users.filter(el => el.id !== state.currentUser.id), action.value], currentUser: {...action.value} }
     }
     case UPDATE_USER_STATUS: {
-      let users = [...state.users.filter(el => el.id !== action.value.id), action.value]
-      return { ...state, common_users: users, users: users }
+      return { ...state, users: action.value }
     }
     case SET_IMPERSONATION_USER: {
       state = { ...state, impersonation: !state.impersonation, currentUser: action.value }

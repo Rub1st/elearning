@@ -1,5 +1,4 @@
 import React, { useEffect } from "react"
-import PropTypes from "prop-types"
 import Wrapper from './components/utils/wrapper';
 import CreateCourse from './components/UI_elements/create_course'
 import Profile from './components/UI_elements/profile'
@@ -9,8 +8,6 @@ import CreateOrganization from './components/UI_elements/create_organization';
 import CoursePages from './components/UI_elements/course_pages';
 import CreateCourseTreePages from './components/UI_elements/create_course/create_course_tree_pages'
 import { connect } from 'react-redux';
-import Enter from './components/UI_elements/auntification/enter';
-import Registration from './components/UI_elements/auntification/registration';
 import AdminAccount from './components/UI_elements/admin_account';
 import Courses from './components/UI_elements/admin_account/courses';
 import Users from './components/UI_elements/admin_account/users';
@@ -18,10 +15,10 @@ import Organizations from './components/UI_elements/admin_account/organizations'
 import Tags from './components/UI_elements/admin_account/tags';
 import Comments from './components/UI_elements/admin_account/comments';
 import Impersonations from './components/UI_elements/admin_account/impersonations';
+import CurrentCourse from './components/UI_elements/current_course'
 import { setCurrentUser } from "./main_redux/actions/users";
 
 function App(props){
-  console.log(props.current_user)
 
   useEffect(() => {
     props.setCurrentUser(props.current_user);
@@ -38,6 +35,7 @@ function App(props){
                     <Route path='/create_course' component={CreateCourse}/>
                     <Route path='/create_organization' component={CreateOrganization}/>
                     <Route path={`/user_id=${props.currentUser.id}`} component={Profile}/>
+                    <Route path={`/main_page/course_id=${props.currentCourse.id}`} component={CurrentCourse}/>
                     <Route path={`/course_id=${props.currentCourse.id}`} component={CoursePages}/>
                     <Route path={`/draft_course_id=${props.currentDraftCourse.id}`} component={CreateCourseTreePages}/>
                   </Switch>
