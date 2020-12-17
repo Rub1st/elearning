@@ -4,6 +4,7 @@ import { choose } from '../../../../main_redux/actions/courses'
 import RecCourse from './rec_course'
 
 const RecommendedCourses = (props) => {
+  console.log(props.currentCourse)
   return(
     <div className='profile__course-field'>
         <ul className='profile__course-list'>
@@ -28,6 +29,7 @@ export default connect(
     currentUser: state.users.currentUser,
     courses: state.courses.courses,
     userCourses: state.userCourses.userCourses,
+    currentCourse: state.courses.currentCourse,
     registered_members: state.registered_members.registered_members,
   }),
   dispatch => ({

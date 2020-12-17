@@ -8,7 +8,7 @@ const FavoriteButtonShow = (props) => {
   let {el} = props
   return(
     <>
-    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={'/'} onClick={() => props.setCurrentCourse(el.course.id)}>
+    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={`/main_page/course_id=${el.id}`} onClick={() => props.setCurrentCourse(el.course.id)}>
       {props.children}
     </Link>
     </>

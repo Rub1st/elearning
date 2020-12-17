@@ -7,9 +7,11 @@ import { destroyDataElement } from '../../../../../main_redux/actions/server_con
 
 const MyCourseButtonShow = (props) => {
   let {el} = props
+
+  console.log(el)
   return(
     <>
-    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={'/'} onClick={() => props.setCurrentCourse(el.id)}>
+    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={`/main_page/course_id=${el.id}`} onClick={() => props.setCurrentCourse(el.id)}>
       {props.children}
     </Link>
     </>

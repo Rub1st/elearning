@@ -4,6 +4,7 @@ import { choose } from '../../../../main_redux/actions/courses'
 import CurrentCourse from './current_course'
 
 const CurrentCourses = (props) => {
+  console.log(props.userCourses)
   return(
     <div className='profile__course-field'>
         <ul className='profile__course-list'>

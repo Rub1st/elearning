@@ -71,7 +71,7 @@ const DoneCourse = (props) => {
       />
       <CardMedia
         className={classes.media}
-        image={image}
+        image={course.image_url}
         title="Paella dish"
       />
       <CardContent>
@@ -102,7 +102,9 @@ const DoneCourse = (props) => {
       </CardContent>
         <CardActions disableSpacing>
             <DoneButtonShow el={el}>
-              <SearchOutlinedIcon/>
+              <IconButton>
+                <SearchOutlinedIcon/>
+              </IconButton>
               </DoneButtonShow>
         <IconButton
           className={clsx(classes.expand, {

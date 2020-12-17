@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { DeleteForeverOutlined } from '@material-ui/icons';
 import { IconButton } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
 const CreateCourseTreeSideBar = (props) => {
   const classes = useStyles();
 
+  const { t, i18n } = useTranslation();
+
   let certainPages = props.pages.filter(el => el.course.id === props.currentDraftCourse.id).sort((a,b) => a.order - b.order);
   return(
     <div className={classes.root}>
-      <div>Страницы курса:</div>
+      <div>{t('Course.24')}</div>
     <ul style={{listStyle: 'none'}}>
       {
         certainPages.map(el =>

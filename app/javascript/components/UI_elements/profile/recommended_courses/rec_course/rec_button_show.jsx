@@ -8,7 +8,7 @@ const RecButtonShow = (props) => {
   let {el} = props
   return(
     <>
-    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={'/'} onClick={() => props.setCurrentCourse(el.id)}>
+    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={`/main_page/course_id=${el.id}`} onClick={() => props.setCurrentCourse(el.id)}>
       {props.children}
     </Link>
     </>
@@ -20,7 +20,6 @@ export default connect(
     pages: state.pages.pages,
   }),
   dispatch => ({
-    drop: (id, path, setter) => dispatch(destroyDataElement(id, path, setter)),
     setCurrentCourse: (id) => dispatch(choose(id)),
   })
   )(RecButtonShow)

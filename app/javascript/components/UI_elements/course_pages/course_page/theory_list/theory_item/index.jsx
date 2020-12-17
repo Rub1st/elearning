@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const TheoryItem = ({props}) => {
   const classes = useStyles();
 
-  const {title, content} = props
+  const {title, content, image_url} = props
   return(
     <Accordion className='theory__item-position'>
         <AccordionSummary
@@ -34,7 +34,7 @@ const TheoryItem = ({props}) => {
         <div className='theory__position'>
         <Typography variant="body2" color="textSecondary" component="p">{content}</Typography>
           <div className='theory__picture-position'>
-            <img className='theory-picture' src={image} alt=''/>
+            <img className='theory-picture' src={image_url} alt=''/>
           </div>
         </div>
       </Accordion>

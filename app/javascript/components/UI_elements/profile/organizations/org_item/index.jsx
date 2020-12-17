@@ -54,15 +54,14 @@ const OrgItem = (props) => {
   const [currentCourseId, setCurrentCourseId] = useState(1);
   const [showReport, setShowReport] = useState(false);
 
-  console.log(props.reports)
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  let existed = props.registered_members.filter(e => e.organization.id === el.id && e.member_role === 'manager' && e.user.id === props.currentUser.id)
+  // let existed = props.registered_members.filter(e => e.organization.id === el.id && e.member_role === 'manager' && e.user.id === props.currentUser.id)
+  let existed = el.registered_members.map(e => e.member_role === 'manager' && e.user.id === props.currentUser.id)
+
   let currentReport = props.reports.find(el => el.course.id === currentCourseId)
-  console.log(currentReport)
 
   return(
     <Card className={classes.root}>
@@ -73,7 +72,9 @@ const OrgItem = (props) => {
       {
         !showReport ?
         <>
-          <CardMedia className={classes.media} image={image} title="Paella dish"/>
+          <CardMedia className={classes.media}
+                     image={el.certificate_template_url}
+                     title="Paella dish"/>
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
               name: {el.name}
@@ -126,7 +127,9 @@ const OrgItem = (props) => {
             {
               existed.length ?
               <ManagingButton el={el}>
-                <SportsEsportsIcon/>
+                <IconButton>
+                  <SportsEsportsIcon/>
+                </IconButton>
               </ManagingButton> : null
             }
             {
@@ -153,8 +156,12 @@ const OrgItem = (props) => {
                   <CourseListItem showReport={showReport} setShowReport={setShowReport} el={e}
                                   manager={existed.length} newEl={{id: e.id, course:{ approve_status: 1}}}
                                   setCurrentCourseId={setCurrentCourseId} currentCourseId={currentCourseId}>
-                    <SearchOutlinedIcon/>
-                    <CreateOutlinedIcon/>
+                    <IconButton>
+                      <SearchOutlinedIcon/>
+                    </IconButton>
+                    <IconButton>
+                      <CreateOutlinedIcon/>
+                    </IconButton>
                     </CourseListItem>
                 </li>)
               }

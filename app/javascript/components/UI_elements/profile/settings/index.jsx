@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,12 +45,12 @@ const Settings = (props) => {
   const [password, setPassword] = useState('')
   const [newPassword, setNewPassword] = useState('');
 
+  const { t, i18n } = useTranslation();
+
   let newUpdatedUser = { id: props.currentUser.id,
                          user: {
                           login: login,
-                          email: email,
-                          full_name: fullName,
-                          password: props.currentUser.decrypted_password,
+                          full_name: fullName
                         }
   }
 
@@ -64,16 +65,16 @@ const Settings = (props) => {
       </label>
     <Avatar className={classes.large} alt={props.currentUser.login} src={image} />
       <div style={{marginLeft: '-40px'}} className='home__main-user-info'>
-        <TextField className='home__login' label={'edit login'} value={login} variant="outlined" onChange={(e) => setLogin(e.target.value)}/>
-        <TextField style={{marginTop: '20px'}} className='home__main-info-item' label={'edit full name'} value={fullName} variant="outlined" onChange={(e) => setFullName(e.target.value)}/>
-        <TextField style={{marginTop: '20px'}} className='home__main-info-item' label={'edit email'} value={email} variant="outlined" onChange={(e) => setEmail(e.target.value)}/>
+        <TextField className='home__login' label={t('Profile.16')} value={login} variant="outlined" onChange={(e) => setLogin(e.target.value)}/>
+        <TextField style={{marginTop: '20px'}} className='home__main-info-item' label={t('Profile.17')} value={fullName} variant="outlined" onChange={(e) => setFullName(e.target.value)}/>
+        <TextField style={{marginTop: '20px'}} className='home__main-info-item' label={t('Profile.18')} value={email} variant="outlined" onChange={(e) => setEmail(e.target.value)}/>
       </div>
     </div>
-    <div style={{marginBottom: '15px', color: 'gray', marginLeft: '80px'}}>password changing</div>
+    <div style={{marginBottom: '15px', color: 'gray', marginLeft: '80px'}}>{t('Profile.19')}</div>
     <div className='home__second-line'>
       <div>
         <div style={{marginTop: '20px'}} className='d-flex'>
-          <TextField label={'old password'} type={passwordType} value={password} variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
+          <TextField label={t('Profile.20')} type={passwordType} value={password} variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
           <IconButton onClick={() => setPasswordType(passwordType === 'password' ? 'text' : 'password')}>
             {
               passwordType === 'password' ?
@@ -82,7 +83,7 @@ const Settings = (props) => {
           </IconButton>
         </div>
         <div style={{marginTop: '20px'}} className='d-flex'>
-          <TextField label={'new password'} type={newPasswordType} value={newPassword} variant="outlined" onChange={(e) => setNewPassword(e.target.value)}/>
+          <TextField label={t('Profile.21')} type={newPasswordType} value={newPassword} variant="outlined" onChange={(e) => setNewPassword(e.target.value)}/>
           <IconButton onClick={() => setNewPasswordType(newPasswordType === 'password' ? 'text' : 'password')}>
             {
               newPasswordType === 'password' ?

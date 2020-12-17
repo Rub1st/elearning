@@ -76,7 +76,7 @@ const MyCourse = (props) => {
       />
       <CardMedia
         className={classes.media}
-        image={image}
+        image={el.image_url}
         title="Paella dish"
       />
       <CardContent>
@@ -104,11 +104,15 @@ const MyCourse = (props) => {
               <DeleteIcon/>
             </IconButton>
             <MyCourseButtonShow el={el}>
-              <SearchOutlinedIcon/>
-              </MyCourseButtonShow>
+              <IconButton>
+                <SearchOutlinedIcon/>
+              </IconButton>
+            </MyCourseButtonShow>
             <MyCourseButtonEdit el={el}>
-              <CreateOutlinedIcon/>
-              </MyCourseButtonEdit>
+              <IconButton>
+                <CreateOutlinedIcon/>
+              </IconButton>
+            </MyCourseButtonEdit>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

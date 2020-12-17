@@ -71,7 +71,7 @@ const RecCourse = (props) => {
       />
       <CardMedia
         className={classes.media}
-        image={image}
+        image={el.image_url}
         title="Paella dish"
       />
       <CardContent>
@@ -90,7 +90,9 @@ const RecCourse = (props) => {
       </CardContent>
         <CardActions disableSpacing>
             <RecButtonShow el={el}>
-              <SearchOutlinedIcon/>
+              <IconButton>
+                <SearchOutlinedIcon/>
+              </IconButton>
               </RecButtonShow>
         <IconButton
           className={clsx(classes.expand, {

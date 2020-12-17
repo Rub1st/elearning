@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CourseInfo from './course_info'
 import UserInfo from './user_info'
 import './course_page.scss'
@@ -6,7 +6,7 @@ import QuestionsList from './questions_list'
 import TheoryList from './theory_list'
 import { connect } from 'react-redux'
 
-const CoursePage = ({props}) => {
+const CoursePage = (props) => {
   return(
     <div className='course-page__position'>
       <div className='course-page__top-panel-position'>
@@ -17,8 +17,8 @@ const CoursePage = ({props}) => {
        <CourseInfo/>
       </div>
       <div className='course-page__middle-panel-position'>
-        <TheoryList theoryList={props.theories}/>
-        <QuestionsList practiceList={props.questions}/>
+        <TheoryList theoryList={props.el.theories}/>
+        <QuestionsList practiceList={props.el.questions}/>
       </div>
     </div>
   )
@@ -27,5 +27,6 @@ const CoursePage = ({props}) => {
 export default connect(
   state => ({
     currentUserCourse: state.userCourses.currentUserCourse,
-})
+    currentCourse: state.courses.currentCourse,
+  })
 )(CoursePage);

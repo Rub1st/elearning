@@ -1,0 +1,21 @@
+.catalog__position{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 60px 50px 60px;
+}
+
+.catalog__list{
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  padding-bottom: 20px;
+}
+
+.catalog__filter-bar{
+  border: 1px solid;
+  height: 200px;
+  width: 70%;
+  margin-bottom: 15px;
+}

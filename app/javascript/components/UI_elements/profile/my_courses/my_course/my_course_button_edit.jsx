@@ -7,6 +7,7 @@ import { destroyDataElement } from '../../../../../main_redux/actions/server_con
 
 const MyCourseButtonEdit = (props) => {
   let {el} = props
+  console.log(el)
   return(
     <>
             <Link style={{color: 'gray', marginLeft: '20px'}} className='profile__sidebar-item' to={`/draft_course_id=${el.id}`}

@@ -59,7 +59,7 @@ const CoursePages = (props) => {
         slider > pageCount ?
         <FinalPage/> :
         (<>
-          <CoursePage props={currentPage}/>
+          <CoursePage el={currentPage}/>
           <div className={classes.root}>
       <div className='d-flex page-footer'>
 

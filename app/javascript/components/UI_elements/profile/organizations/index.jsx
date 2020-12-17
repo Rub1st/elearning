@@ -4,6 +4,8 @@ import { setCurrentOrganization } from '../../../../main_redux/actions/organizat
 import OrgItem from './org_item'
 
 const Organization = (props) => {
+  console.log(props.organizations)
+
   return(
     <div className='profile__course-field'>
         <ul className='profile__course-list'>

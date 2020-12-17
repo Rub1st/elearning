@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { createOrganization } from '../../../main_redux/actions/organizations';
-import { postDataElement } from '../../../main_redux/actions/server_connections';
+import { postDataElement, searchData } from '../../../main_redux/actions/server_connections';
 import { plug } from '../../../main_redux/actions/tags';
 import TextField from '@material-ui/core/TextField';
 import InputBase from '@material-ui/core/InputBase';
@@ -13,6 +13,10 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
+import { getUsers } from '../../../main_redux/actions/users';
+import { PhotoCamera } from '@material-ui/icons';
+import { serialize } from 'object-to-formdata';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,10 +26,16 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     display: 'none',
+    marginLeft: -30,
   },
   approve: {
     width: theme.spacing(5),
     height: theme.spacing(5),
+  },
+  picture: {
+    width: theme.spacing(12, 24),
+    height: theme.spacing(12),
+    marginTop: '-50px',
   },
   search: {
     position: 'relative',
@@ -75,30 +85,65 @@ const CreateOrganization = (props) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [managers, setManagers] = useState([])
+  const [image, setImage] = useState(null)
+
   const [approve, setApprove] = useState(false)
   const [filter, setFilter] = useState('')
+
+  const { t, i18n } = useTranslation();
+
+  const enter_listener = event => {
+    if (event.key === 'Enter') {
+      props.search(filter , 'users', getUsers)
+    }
+  }
+
+  let newOrganization = {
+    name: name,
+    description: description,
+    certificate_template: image,
+  }
+
+  let formData = serialize({
+    organization: newOrganization
+  })
+
   return(
     <div className='create-organization-window'>
       <div className='create-organization-label'>
-        Создание организации
+        {t('Organization.1')}
       </div>
       <div className='create-organization-field'>
         <Paper className='create-organization-description'>
-          <h4>Зачем нужны организации?</h4>
-          <p>Организации помогают пользователям объединяться в сообщества по интересам, что в свою очередь делает процесс поиска курсов и обучения по ним в разы легче и интереснее.</p>
-          <h4>Как создать свою организацию?</h4>
-          <p>Создать свою собственную организацию очень просто! Для этого вам нужно просто напросто ввести ее название и описание, далее, подтвердив введенные данные, у вас также есть возможность выбрать из остальных пользователей еще менеджеров помимо вас для своей организации. Это необязательно. Как только все выше перечисленное выполнено смело нажимайте на кружочек с галочкой (тот, что снизу). Органиция попадет в список администраторов для одобрения, как только ее одобрят вы сможете создавать от ее лица курсы.</p>
-          <h4>Управление организациями</h4>
-          <p>В профиле в разделе "организации" вам будут доступны все организациями, в которых вы состоите, те, менеджером которых являетесь, имеют кнопку в виде джойстика. Нажав на нее вам откроется область, в которой вы можете добавлять и удалять пользователей, а также изменять название и описание организации</p>
-          <h5>Удачи! И помните: учение - свет!</h5>
+          <h4>{t('Organization.2')}</h4>
+          <p>{t('Organization.3')}</p>
+          <h4>{t('Organization.4')}</h4>
+          <p>{t('Organization.5')}</p>
+          <h4>{t('Organization.6')}</h4>
+          <p>{t('Organization.7')}</p>
+          <h5>{t('General.1')}</h5>
         </Paper>
         <div className='create-organization-form'>
-          <TextField disabled={approve} variant="outlined" label='Название' value={name} onChange={(e) => setName(e.target.value)}/>
+          <div className="first-row-organization-form">
+          <TextField disabled={approve} variant="outlined" label={t('Organization.Placeholders.1')} value={name} onChange={(e) => setName(e.target.value)}/>
+          <div className='d-flex'>
+                <input accept="image/*" className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
+                <label htmlFor="icon-button-file">
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <PhotoCamera/>
+                  </IconButton>
+                </label>
+                {
+                  image !== null ?
+                  <p>{t('Organization.8')}</p> : null
+                }
+              </div>
+          </div>
           <div>
             <TextField
               disabled={approve}
               style={{marginTop: '20px', width: '80%'}}
-              label='Описание'
+              label={t('Organization.Placeholders.2')}
               multiline
               rows={4}
               value={description}
@@ -109,10 +154,7 @@ const CreateOrganization = (props) => {
               disabled={approve || !name.length || !description.length}
               style={{marginTop: '60px', marginLeft: '15px'}}
               onClick={() => {
-              props.post({
-                name: name,
-                description: description,
-              }, 'organizations', createOrganization);
+              props.post(formData, 'organizations', createOrganization);
               setApprove(!approve);
             }}>
               <CheckCircleOutlineIcon className={classes.approve}/>
@@ -121,18 +163,19 @@ const CreateOrganization = (props) => {
           <hr/>
           <div className='d-flex'>
             <div style={{marginRight: '30px', marginLeft: '15px', marginTop: '13px', color: 'gray'}}>
-              Выберите менеджеров для организации
+              {t('Organization.9')}
             </div>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder={t('Search.1')}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
+                onKeyPress={enter_listener}
                 onChange={(e) => setFilter(e.target.value)}
                 value={filter}
                 inputProps={{ 'aria-label': 'search' }}
@@ -142,7 +185,7 @@ const CreateOrganization = (props) => {
           <div className='d-flex'>
           <ul className='choose-managers-list'>
           {
-            props.users.filter(el => el.id !== props.currentUser.id && (el.login.toLowerCase().includes(filter.toLowerCase()) || !filter.length)).map(el =>
+            props.users.map(el =>
               <ListItem key={el.id} button >
                   <Checkbox
                     color="primary"
@@ -193,6 +236,7 @@ export default connect(
     currentDraftOrganization: state.organizations.currentDraftOrganization,
   }),
   dispatch => ({
-    post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter))
+    post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),
+    search: (obj, path, setter) => dispatch(searchData(obj, path, setter)),
   })
 )(CreateOrganization);

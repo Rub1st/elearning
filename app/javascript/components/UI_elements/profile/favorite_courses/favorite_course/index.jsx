@@ -75,7 +75,7 @@ const FavoriteCourse = (props) => {
       />
       <CardMedia
         className={classes.media}
-        image={image}
+        image={course.image_url}
         title="Paella dish"
       />
       <CardContent>
@@ -103,8 +103,10 @@ const FavoriteCourse = (props) => {
               <DeleteIcon/>
             </IconButton>
             <FavoriteButtonShow el={el}>
-              <SearchOutlinedIcon/>
-              </FavoriteButtonShow>
+              <IconButton>
+                <SearchOutlinedIcon/>
+              </IconButton>
+            </FavoriteButtonShow>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

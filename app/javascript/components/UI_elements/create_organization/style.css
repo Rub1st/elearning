@@ -12,6 +12,12 @@
   justify-content: space-evenly;
 }
 
+.first-row-organization-form{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 50px;
+}
+
 .create-organization-window{
   display: flex;
   flex-direction: column;

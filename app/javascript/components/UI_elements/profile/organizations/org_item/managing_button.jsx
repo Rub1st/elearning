@@ -7,6 +7,7 @@ import { destroyDataElement } from '../../../../../main_redux/actions/server_con
 
 const ManagingButton = (props) => {
   let {el} = props
+  console.log(el)
   return(
     <>
     <Link style={{color: 'gray', marginLeft: '10px'}} to={`/user_id=${props.currentUser.id}/manage_organization_id=${el.id}`}

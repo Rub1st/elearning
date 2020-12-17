@@ -132,7 +132,7 @@ const FinalPage = (props) => {
                         current_page: props.currentUserCourse.current_page,
                       }
                     }, 'user_courses', updateUserCourse);
-                    props.post({ user_id: props.currentUser.id, course_id: props.currentUserCourse.id }, 'certificates', plug)
+                    props.post({ user_id: props.currentUser.id, course_id: props.currentUserCourse.course.id }, 'certificates', plug)
                     //props.createCertificate(props.currentUserCourse);
                   }}
                   control={<Checkbox icon={<StarBorderIcon/>} checkedIcon={<StarIcon/>} name="add to favorite" />}

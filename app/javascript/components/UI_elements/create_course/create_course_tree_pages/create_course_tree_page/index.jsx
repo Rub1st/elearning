@@ -20,6 +20,7 @@ import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import Checkbox from '@material-ui/core/Checkbox';
 import { IconButton, Paper, TextField } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,6 +44,9 @@ const CreateCourseTreePage = (props) => {
   const classes = useStyles();
 
   const [title, setTitle] = useState('Introduction')
+
+  const { t, i18n } = useTranslation();
+
   let filtredPages = props.pages.filter(e => e.course.id === props.currentDraftCourse.id);
 
   let certainTheories = props.theories.filter(e => e.page.id === props.currentDraftPage.id)
@@ -52,17 +56,17 @@ const CreateCourseTreePage = (props) => {
     <div className='draft-page-create-field'>
       <div className='create-course-first-column'>
         <div className='paper-create-theory'>
-          <div>Создать параграф</div>
+          <div>{t('Course.14')}</div>
           <CreateTheoryElement/>
         </div>
         <div className='paper-create-question'>
-          <div>Создать вопрос</div>
+          <div>{t('Course.15')}</div>
         <CreatePracticeElement/>
         </div>
       </div>
       <Paper className='create-course-middle-column'>
       <div className='create-course-page-info'>
-        {`page order: ${props.currentDraftPage.order}, course: ${props.currentDraftCourse.label}`}
+        {`${t('Course.16')} ${props.currentDraftPage.order}, ${t('Course.16')} ${props.currentDraftCourse.label}`}
         </div>
         <div className='draft-page-edit-title'>
           <TextField variant='outlined' value={title} onChange={(e) => setTitle(e.target.value)} label='title'/>
@@ -76,7 +80,7 @@ const CreateCourseTreePage = (props) => {
           </IconButton>
         </div>
         <div className='create-course-created-theory'>
-          <div style={{color: 'rgb(163, 157, 157)'}}>Созданные параграфы</div>
+          <div style={{color: 'rgb(163, 157, 157)'}}>{t('Course.18')}</div>
           <div className={classes.root}>
             <ul className='create-course-created-theory-list'>
               {
@@ -97,7 +101,7 @@ const CreateCourseTreePage = (props) => {
                     <div className='theory__position'>
                       <Typography variant="body2" color="textSecondary" component="p">{el.content}</Typography>
                       <div className='theory__picture-position'>
-                        <img className='theory-picture' src={image} alt=''/>
+                        <img className='theory-picture' src={el.image_url} alt=''/>
                       </div>
                     </div>
                   </Accordion>
@@ -107,7 +111,7 @@ const CreateCourseTreePage = (props) => {
           </div>
         </div>
         <div className='create-course-created-practice'>
-          <div style={{color: 'rgb(163, 157, 157)'}}>Созданные вопросы</div>
+          <div style={{color: 'rgb(163, 157, 157)'}}>{t('Course.19')}</div>
           <ul className='create-course-created-practice-list'>
             {
               certainQuestions.map(el =>

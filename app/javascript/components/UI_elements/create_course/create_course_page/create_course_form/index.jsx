@@ -6,16 +6,18 @@ import { makeStyles, fade } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
 import { createCourse, updateCourseStatus } from '../../../../../main_redux/actions/courses'
 import { createPage } from '../../../../../main_redux/actions/pages'
-import { postDataElement, updateDataElement } from '../../../../../main_redux/actions/server_connections'
-import { plug } from '../../../../../main_redux/actions/tags'
+import { postDataElement, searchData, updateDataElement } from '../../../../../main_redux/actions/server_connections'
+import { getTags, plug } from '../../../../../main_redux/actions/tags'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import SearchIcon from '@material-ui/icons/Search';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { serialize } from 'object-to-formdata';
 import './style.css'
+import { useTranslation } from 'react-i18next';
 import UserModeEmptyField from '../../../../utils/empty_fields/user_mode_empty_field';
 import NoSearchProfileField from '../../../../utils/empty_fields/noSearchProfileField';
+import { getUsers } from '../../../../../main_redux/actions/users';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,6 +104,8 @@ const CreateCourseForm = (props) => {
   const [userSearch, setUserSearch] = useState('');
   const [tagSearch, setTagSearch] = useState('');
 
+  const { t, i18n } = useTranslation();
+
   let selectedOrganization = organization !== 'myself' ? managedOrganizations
   .find(el => el.name === organization) : {}
 
@@ -131,6 +135,20 @@ const CreateCourseForm = (props) => {
     title: 'Introduction',
   }
 
+  const user_enter_listener = event => {
+    if (event.key === 'Enter') {
+      props.search(userSearch , 'users', getUsers)
+    }
+  }
+
+  const tag_enter_listener = event => {
+    if (event.key === 'Enter') {
+      props.search(tagSearch , 'tags', getTags)
+    }
+  }
+
+  console.log(props.users)
+
   return(
     <div className='create-course-window'>
       {
@@ -138,7 +156,7 @@ const CreateCourseForm = (props) => {
         (
           <div className='create-course-item'>
             <div className='create-course-item-top-row'>
-              <TextField style={{width: '60%'}} variant='outlined' value={label} onChange={(e) => setLabel(e.target.value)} label='name of your course'/>
+              <TextField style={{width: '60%'}} variant='outlined' value={label} onChange={(e) => setLabel(e.target.value)} label={t('Course.Placeholders.1')}/>
               <div className='d-flex'>
                 <input accept="image/*" className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
                 <label htmlFor="icon-button-file">
@@ -150,10 +168,10 @@ const CreateCourseForm = (props) => {
               </div>
             </div>
             <div className='create-course-item-text-row'>
-              <TextField style={{width: '100%'}} variant='outlined' rows={6} multiline value={whyContent} onChange={(e) => setWhyContent(e.target.value)} label='why people should learn it?'/>
+              <TextField style={{width: '100%'}} variant='outlined' rows={6} multiline value={whyContent} onChange={(e) => setWhyContent(e.target.value)} label={t('Course.Placeholders.2')}/>
             </div>
             <div className='create-course-item-text-row'>
-              <TextField style={{width: '100%'}} variant='outlined' rows={6} multiline value={willContent} onChange={(e) => setWillContent(e.target.value)} label='what people will learn?'/>
+              <TextField style={{width: '100%'}} variant='outlined' rows={6} multiline value={willContent} onChange={(e) => setWillContent(e.target.value)} label={t('Course.Placeholders.3')}/>
             </div>
             <div className='create-course-item-bottom-row'>
               <div className='create-course-slider-info'>{slider + '/3'}</div>
@@ -171,7 +189,7 @@ const CreateCourseForm = (props) => {
                 (managedOrganizations.length ?
                 <div className='create-course-item-top-row'>
                   <div className='create-course-select-list'>
-                    <div>Вы можете выбрать организацию:</div>
+                    <div>{t('Course.8')}</div>
                     <Select
                       variant='outlined'
                       labelId="demo-simple-select-label"
@@ -191,7 +209,7 @@ const CreateCourseForm = (props) => {
                 </div> : null)
               }
               <div className='create-course-select-list'>
-                    <div>Выберите тип доступа для курса</div>
+                    <div>{t('Course.9')}</div>
                     <Select
                       variant='outlined'
                       labelId="demo-simple-select-label"
@@ -213,13 +231,13 @@ const CreateCourseForm = (props) => {
                           accessType === 'individual' && organization !== 'myself' ?
                           <>
                             <div className='d-flex'>
-                              <div>Выберите пользователей, которым будет доступен этот курс</div>
+                              <div>{t('Course.10')}</div>
                               <div className={classes.search}>
                                 <div className={classes.searchIcon}>
                                   <SearchIcon/>
                                 </div>
                                 <InputBase
-                                  placeholder="Search…"
+                                  placeholder={t('Search.1')}
                                   classes={{
                                     root: classes.inputRoot,
                                     input: classes.inputInput,
@@ -244,17 +262,18 @@ const CreateCourseForm = (props) => {
                           </> : accessType === 'individual' ?
                           <>
                           <div className='d-flex'>
-                            <div>Выберите пользователей, которым будет доступен этот курс</div>
+                            <div>{t('Course.10')}</div>
                             <div className={classes.search}>
                               <div className={classes.searchIcon}>
                                 <SearchIcon/>
                               </div>
                               <InputBase
-                                placeholder="Search…"
+                                placeholder="Search… 1"
                                 classes={{
                                   root: classes.inputRoot,
                                   input: classes.inputInput,
                                 }}
+                                onKeyPress={user_enter_listener}
                                 onChange={(e) => setUserSearch(e.target.value)}
                                 value={userSearch}
                                 inputProps={{ 'aria-label': 'search' }}
@@ -263,7 +282,7 @@ const CreateCourseForm = (props) => {
                           </div>
                             <ul className='create-course-user-list'>
                             {
-                              props.users.filter(e => e.login.toLowerCase().includes(userSearch.toLowerCase()) || !userSearch.length).map(el =>
+                              props.users.map(el =>
                                 <ListItem key={el.id} button >
                                  <Checkbox color='primary' onChange={() => setPersons( persons.includes(el) ? persons.filter(e => e.id !== el.id) : [...persons, el])}/>
                                  <ListItemText>
@@ -272,7 +291,7 @@ const CreateCourseForm = (props) => {
                                  </ListItem>)
                             }
                             </ul>
-                          </> : <div>about access types</div>
+                          </> : <div>{t('Course.11')}</div>
                         }
                       </>
                   }
@@ -290,17 +309,18 @@ const CreateCourseForm = (props) => {
               </div> :
               <div className='create-course-item'>
                 <div className='create-course-item-top-row'>
-                  <div className='create-course-tags-title'>Выберите аттрибуты, описывающие ваш курс</div>
+                  <div className='create-course-tags-title'>{t('Course.12')}</div>
                   <div className={classes.search}>
                                 <div className={classes.searchIcon}>
                                   <SearchIcon/>
                                 </div>
                                 <InputBase
-                                  placeholder="Search…"
+                                  placeholder={t('Search.1')}
                                   classes={{
                                     root: classes.inputRoot,
                                     input: classes.inputInput,
                                   }}
+                                  onKeyPress={tag_enter_listener}
                                   onChange={(e) => setTagSearch(e.target.value)}
                                   value={tagSearch}
                                   inputProps={{ 'aria-label': 'search' }}
@@ -315,10 +335,10 @@ const CreateCourseForm = (props) => {
                   />
                   </div>
                   {
-                    props.tags.filter(el => (el.name.toLowerCase().includes(tagSearch.toLowerCase()) || !tagSearch.length) && (showTakenTags ? tags.includes(el) : true)).length ?
+                    props.tags.filter(el => (showTakenTags ? tags.includes(el) : true)).length ?
                     <ul className='create-course-tags-list'>
                   {
-                    props.tags.filter(el => (el.name.toLowerCase().includes(tagSearch.toLowerCase()) || !tagSearch.length) && (showTakenTags ? tags.includes(el) : true)).map(el =>
+                    props.tags.filter(el => (showTakenTags ? tags.includes(el) : true)).map(el =>
                                 <div key={el.id} className='create-course-tags-item'>
                                     <Chip
                                     className={classes.large}
@@ -340,7 +360,7 @@ const CreateCourseForm = (props) => {
                 tags.map(el => props.post({ course_id: props.currentDraftCourse.id, tag_id: el.id}, 'course_tags', plug))
                 persons.map(el => props.post({ course_id: props.currentDraftCourse.id, user_id: el.id}, 'course_members', plug))
               }}>
-               create course
+               {t('Course.13')}
               </Link>
              </div>
            </div>
@@ -360,6 +380,7 @@ export default connect(
   dispatch => ({
     post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),
     put: (obj, path, setter) => dispatch(updateDataElement(obj, path, setter)),
+    search: (obj, path, setter) => dispatch(searchData(obj, path, setter)),
   })
 )(CreateCourseForm)
 
