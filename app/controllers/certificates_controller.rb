@@ -1,8 +1,7 @@
 class CertificatesController < ApplicationController
-
   def create
     certificate = Certificate.new(permit_params)
-    certificate.certificate_pdf.attach(io: File.open(permit_params[:certificate_pdf]), filename: 'file.pdf')
+    certificate.certificate_pdf.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.jpg')
     if certificate.save
       render json: certificate
     else
@@ -11,14 +10,23 @@ class CertificatesController < ApplicationController
   end
 
   def index
-    render json: Certificate.all
+    render json: certificates
   end
 
-  def show
-    render json: Certificate.find(params[:id])
+  def search
+    search = params[:term] != '' ? params[:term] : nil
+    if search
+      render json: certificates.search(search)
+    else
+      render json: certificates
+    end
   end
 
   private
+
+  def certificates
+    Certificate.where(user_id: current_user[:id])
+  end
 
   def permit_params
     params.require(:certificate).permit(

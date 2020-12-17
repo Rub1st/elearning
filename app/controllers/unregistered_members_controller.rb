@@ -2,16 +2,7 @@ class UnregisteredMembersController < ApplicationController
   def create
     unregistered_member = UnregisteredMembers::Create.call(permit_params)
     if unregistered_member.save
-      render json: UnregisteredMember.all
-    else
-      render json: { errors: unregistered_member.errors }, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    unregistered_member = UnregisteredMember.find(params[:id])
-    if unregistered_member.update(permit_params)
-      render json: unregistered_member
+      render json: unregistered_members
     else
       render json: { errors: unregistered_member.errors }, status: :unprocessable_entity
     end
@@ -19,24 +10,32 @@ class UnregisteredMembersController < ApplicationController
 
   def destroy
     UnregisteredMember.find(params[:id]).destroy
-    render json: UnregisteredMember.all
+    render json: unregistered_members
   end
 
   def index
-    render json: UnregisteredMember.all
+    render json: unregistered_members
   end
 
-  def show
-    render json: UnregisteredMember.find(params[:id])
+  def search
+    search = params[:term] != '' ? params[:term] : nil
+    if search
+      render json: unregistered_members.search(search)
+    else
+      render json: unregistered_members
+    end
   end
 
   private
+
+  def unregistered_members
+    UnregisteredMember.where(organization_id: params[:parent_id])
+  end
 
   def permit_params
     params.require(:unregistered_member).permit(
       :member_role,
       :organization_id,
-      :code,
       :email
     )
   end

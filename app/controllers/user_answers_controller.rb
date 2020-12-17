@@ -11,27 +11,10 @@ class UserAnswersController < ApplicationController
     end
   end
 
-  def update
-    user_answer = UserAnswer.find(params[:id])
-    if user_answer.update(permit_params)
-      render json: user_answer
-    else
-      render json: { errors: user_answer.errors }, status: :unprocessable_entity
-    end
-  end
-
-  def index
-    render json: UserAnswer.all
-  end
-
-  def show
-    render json: UserAnswer.find(params[:id])
-  end
-
   private
 
   def old_answers_killer
-    UserAnswer.select { |item| item.user.id == permit_params[:user_id] && item.question.id == permit_params[:question_id] }.each(&:destroy)
+    UserAnswer.where(user_id: permit_params[:user_id], question_id: permit_params[:question_id]).destroy_all
   end
 
   def permit_params

@@ -13,10 +13,6 @@ class ReportsController < ApplicationController
     render json: Report.all
   end
 
-  def show
-    render json: Report.find(params[:id])
-  end
-
   private
 
   def permit_params

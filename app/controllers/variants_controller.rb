@@ -1,5 +1,4 @@
 class VariantsController < ApplicationController
-
   def create
     variant = Variant.new(permit_params)
     if variant.save
@@ -11,14 +10,6 @@ class VariantsController < ApplicationController
 
   def destroy
     Variant.find(params[:id]).destroy
-  end
-
-  def index
-    render json: Variant.all
-  end
-
-  def show
-    render json: Variant.find(params[:id])
   end
 
   private

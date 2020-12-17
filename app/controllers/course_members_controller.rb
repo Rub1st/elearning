@@ -8,10 +8,6 @@ class CourseMembersController < ApplicationController
     end
   end
 
-  def index
-    render json: CourseMember.all
-  end
-
   private
 
   def permit_params

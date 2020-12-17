@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-
   def create
     question = Question.new(permit_params)
     if question.save
@@ -11,18 +10,18 @@ class QuestionsController < ApplicationController
 
   def destroy
     Question.find(params[:id]).destroy
-    render json: Question.all
+    render json: questions
   end
 
   def index
-    render json: Question.all
-  end
-
-  def show
-    render json: Question.find(params[:id])
+    render json: questions
   end
 
   private
+
+  def questions
+    Question.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
+  end
 
   def permit_params
     params.require(:question).permit(

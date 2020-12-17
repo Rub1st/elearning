@@ -19,23 +19,22 @@ class PagesController < ApplicationController
 
   def destroy
     Page.find(params[:id]).destroy
-    render json: Page.all
+    render json: pages
   end
 
   def index
-    render json: Page.all
-  end
-
-  def show
-    render json: Page.find(params[:id])
+    render json: pages
   end
 
   private
 
+  def pages
+    Page.where(course_id: params[:parent_id])
+  end
+
   def permit_params
     params.require(:page).permit(
       :course_id,
-      :order,
       :title
     )
   end

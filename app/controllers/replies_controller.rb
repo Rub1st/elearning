@@ -1,9 +1,8 @@
 class RepliesController < ApplicationController
-
   def create
     reply = Reply.new(permit_params)
     if reply.save
-      render json: Comment.all
+      render json: comments
     else
       render json: { errors: reply.errors }, status: :unprocessable_entity
     end
@@ -11,14 +10,14 @@ class RepliesController < ApplicationController
 
   def destroy
     Reply.find(params[:id]).destroy
-    render json: Comment.all
-  end
-
-  def index
-    render json: Reply.all
+    render json: comments
   end
 
   private
+
+  def comments
+    Comment.where(course_id: params[:parent_id])
+  end
 
   def permit_params
     params.require(:reply).permit(

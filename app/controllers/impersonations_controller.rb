@@ -1,5 +1,4 @@
 class ImpersonationsController < ApplicationController
-
   def create
     imperson = Impersonation.new(permit_params)
     if imperson.save
@@ -16,14 +15,6 @@ class ImpersonationsController < ApplicationController
     else
       render json: { errors: imperson.errors }, status: :unprocessable_entity
     end
-  end
-
-  def index
-    render json: Impersonation.all
-  end
-
-  def show
-    render json: Impersonation.find(params[:id])
   end
 
   private

@@ -1,5 +1,4 @@
 class CourseTagsController < ApplicationController
-
   def create
     course_tag = CourseTag.new(permit_params)
     if course_tag.save
@@ -7,14 +6,6 @@ class CourseTagsController < ApplicationController
     else
       render json: { errors: course_tag.errors }, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    CourseTag.find(params[:id]).destroy
-  end
-
-  def index
-    render json: CourseTag.all
   end
 
   private
@@ -25,5 +16,4 @@ class CourseTagsController < ApplicationController
       :tag_id
     )
   end
-
 end
