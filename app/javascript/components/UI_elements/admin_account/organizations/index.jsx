@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { updateDataElement } from '../../../../main_redux/actions/server_connections'
+import { getData, updateDataElement } from '../../../../main_redux/actions/server_connections'
 import EntitiesList from '../entities_list'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,6 +10,7 @@ import OrganizationItem from './organizationItem'
 import './style.css'
 import AdminModeEmptyField from '../../../utils/empty_fields/admin_mode_emty_field';
 import NoSearchResultsField from '../../../utils/empty_fields/no_search_results_field';
+import { getOrganizations } from '../../../../main_redux/actions/organizations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,8 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let orgFilter = (orgs, status, searchQuery) => orgs.filter(el => el.approve_status === status)
-.filter(e => e.name.toLowerCase().includes(searchQuery.toLowerCase()) || !searchQuery.length)
+let orgFilter = (orgs, status) => orgs.filter(el => el.approve_status === status)
 
 const Organizations = (props) => {
 
@@ -27,9 +27,17 @@ const Organizations = (props) => {
   const [value, setValue] = useState(0)
   const [searchQuery, setSearchQuery] = useState('')
 
+  useEffect(() => {
+    props.set('admin/organizations', getOrganizations);
+  }, []);
+
   return(
     <div>
-      <EntitiesList label={'Organizations'} searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
+      <EntitiesList label={'Organizations'}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    path={'admin/organizations'}
+                    setter={getOrganizations}>
       <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
@@ -50,10 +58,10 @@ const Organizations = (props) => {
         value === 0 ?
         <div>
           {
-            orgFilter(props.organizations, 'pending', searchQuery).length ?
+            orgFilter(props.organizations, 'pending').length ?
             <ul className='admin-org-list'>
             {
-              orgFilter(props.organizations, 'pending', searchQuery).map(el =>
+              orgFilter(props.organizations, 'pending').map(el =>
               <li key={el.id} className='admin-course-list-position'>
                 <OrganizationItem choice={value} el={el} newEl2={{ id: el.id, organization: {approve_status: 2}}} newEl={{ id: el.id, organization: {approve_status: 1}}}/>
               </li>)
@@ -66,10 +74,10 @@ const Organizations = (props) => {
       value === 1 ?
       <div>
         {
-          orgFilter(props.organizations, 'approved', searchQuery).length ?
+          orgFilter(props.organizations, 'approved').length ?
           <ul className='admin-org-list'>
           {
-            orgFilter(props.organizations, 'approved', searchQuery).map(el =>
+            orgFilter(props.organizations, 'approved').map(el =>
             <li key={el.id} className='admin-course-list-position'>
               <OrganizationItem choice={value} el={el} newEl={{ id: el.id, organization: {approve_status: 1}}}/>
             </li>)
@@ -81,10 +89,10 @@ const Organizations = (props) => {
       </div> :
       <div>
       {
-        orgFilter(props.organizations, 'rejected', searchQuery).length ?
+        orgFilter(props.organizations, 'rejected').length ?
         <ul className='admin-org-list'>
         {
-          orgFilter(props.organizations, 'rejected', searchQuery).map(el =>
+          orgFilter(props.organizations, 'rejected').map(el =>
           <li key={el.id} className='admin-course-list-position'>
             <OrganizationItem choice={value} el={el} newEl={{ id: el.id, organization: {approve_status: 2}}}/>
           </li>)
@@ -108,5 +116,6 @@ export default connect(
   }),
   dispatch => ({
     put: (obj, path, setter) => dispatch(updateDataElement(obj, path, setter)),
+    set: (path, setter) => dispatch(getData(path, setter)),
   })
 )(Organizations)

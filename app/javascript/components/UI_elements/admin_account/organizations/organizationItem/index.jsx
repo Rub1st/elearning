@@ -63,23 +63,23 @@ const OrganizationItem = (props) => {
       />
       <CardMedia
         className={classes.media}
-        image={image}
+        image={el.certificate_template_url}
         title="Paella dish"
       />
         <CardActions disableSpacing>
           {
             (props.choice === 0 || props.choice === 1) &&
-            <IconButton onClick={() => props.put(props.newEl, 'organizations', updateOrganization)}>
+            <IconButton onClick={() => props.put(props.newEl, 'admin/organizations', updateOrganization)}>
               <DeleteIcon/>
             </IconButton>
           }
           {
             (props.choice === 0 || props.choice === 2) &&
-            <IconButton onClick={() => props.put(props.choice === 2 ? props.newEl : props.newEl2, 'organizations', updateOrganization)}>
+            <IconButton onClick={() => props.put(props.choice === 2 ? props.newEl : props.newEl2, 'admin/organizations', updateOrganization)}>
               <FavoriteBorderOutlinedIcon/>
             </IconButton>
           }
-           <IconButton onClick={() => props.drop(el.id, 'organizations', getOrganizations)}>
+           <IconButton onClick={() => props.drop(el.id, 'admin/organizations', getOrganizations)}>
               <DeleteForeverOutlinedIcon/>
             </IconButton>
         <IconButton

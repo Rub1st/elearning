@@ -75,7 +75,7 @@ const CommentItem = (props) => {
         </Typography>
       </CardContent>
         <CardActions disableSpacing>
-            <IconButton onClick={() => props.drop(el.id, 'comments', dropComment)}>
+            <IconButton onClick={() => props.drop(el.id, 'admin/comments', dropComment)}>
               <DeleteForeverOutlinedIcon/>
             </IconButton>
         {
@@ -118,7 +118,7 @@ const CommentItem = (props) => {
                     </Typography>
                   </CardContent>
                   <CardActions disableSpacing>
-                    <IconButton onClick={() => props.drop(e.id, 'replies', dropReply)}>
+                    <IconButton onClick={() => props.drop(e.id, 'admin/replies', dropReply)}>
                       <DeleteForeverOutlinedIcon/>
                     </IconButton>
                   </CardActions>

@@ -68,9 +68,6 @@ const UserItem = (props) => {
       <Typography variant="body2" color="textSecondary" component="p">
           email: {el.email}
         </Typography>
-      <Typography variant="body2" color="textSecondary" component="p">
-          birthday: {DateFormat(el.birthday).split(' ')[1]}
-        </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           registration data: {DateFormat(el.created_at)}
         </Typography>
@@ -78,17 +75,17 @@ const UserItem = (props) => {
         <CardActions disableSpacing>
         {
             (props.choice === 0 || props.choice === 1) &&
-            <IconButton onClick={() => props.put(props.newEl, 'users', updateUserStatus)}>
+            <IconButton onClick={() => props.put(props.newEl, `admin/users`, updateUserStatus)}>
               <BlockIcon/>
             </IconButton>
           }
           {
             (props.choice === 0 || props.choice === 2) &&
-            <IconButton onClick={() => props.put(props.choice === 2 ? props.newEl : props.newEl2, 'users', updateUserStatus)}>
+            <IconButton onClick={() => props.put(props.choice === 2 ? props.newEl : props.newEl2, 'admin/users', updateUserStatus)}>
               <FavoriteBorderOutlined/>
             </IconButton>
           }
-            <IconButton onClick={() => props.drop(el.id, 'users', dropUser)}>
+            <IconButton onClick={() => props.drop(el.id, 'admin/users', dropUser)}>
               <DeleteForeverOutlinedIcon/>
             </IconButton>
       </CardActions>

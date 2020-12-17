@@ -12,10 +12,10 @@ import AdminModeEmptyField from '../../../utils/empty_fields/admin_mode_emty_fie
 import NoSearchResultsField from '../../../utils/empty_fields/no_search_results_field';
 import {getCourses} from '../../../../main_redux/actions/courses'
 import {getComments} from '../../../../main_redux/actions/comments'
-import {getPages} from '../../../../main_redux/actions/pages'
 import {getTags} from '../../../../main_redux/actions/tags'
 import { getImpersonations } from '../../../../main_redux/actions/impersonations';
 import { getUsers } from '../../../../main_redux/actions/users';
+import { getOrganizations } from '../../../../main_redux/actions/organizations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,20 +24,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let coursesFilter = (courses, status, searchQuery) => courses.filter(el => el.approve_status === status)
-.filter(e => e.label.toLowerCase().includes(searchQuery.toLowerCase()) || !searchQuery.length)
+let coursesFilter = (courses, status) => courses.filter(el => el.approve_status === status)
 
 const Courses = (props) => {
 
   const classes = useStyles();
 
   useEffect(() => {
-    props.set('courses', getCourses);
-    props.set('comments', getComments);
-    props.set('pages', getPages);
-    props.set('tags', getTags);
-    props.set('impersonations', getImpersonations);
-    props.set('users', getUsers);
+    props.set('admin/users', getUsers);
+    props.set('admin/organizations', getOrganizations);
+    props.set('admin/courses', getCourses);
   }, []);
 
   const [value, setValue] = useState(0)
@@ -45,7 +41,11 @@ const Courses = (props) => {
 
   return(
     <div>
-      <EntitiesList label={'Courses'} searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
+      <EntitiesList label={'Courses'}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    path={'admin/courses'}
+                    setter={getCourses}>
       <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
@@ -66,10 +66,10 @@ const Courses = (props) => {
       value === 0 ?
       <div>
         {
-          coursesFilter(props.courses, 'pending', searchQuery).length ?
+          coursesFilter(props.courses, 'pending').length ?
           <ul className='admin-course-list'>
             {
-              coursesFilter(props.courses, 'pending', searchQuery).map(el =>
+              coursesFilter(props.courses, 'pending').map(el =>
               <li key={el.key} className='admin-course-list-position'>
                 <CourseItem el={el} choice={value} newEl2={{ id: el.id, course: {approve_status: 2}}} newEl={{ id: el.id, course: {approve_status: 1}}}/>
               </li>)
@@ -82,10 +82,10 @@ const Courses = (props) => {
       value === 1 ?
       <div>
         {
-          coursesFilter(props.courses, 'approved', searchQuery).length ?
+          coursesFilter(props.courses, 'approved').length ?
           <ul className='admin-course-list'>
             {
-              coursesFilter(props.courses, 'approved', searchQuery).map(el =>
+              coursesFilter(props.courses, 'approved').map(el =>
               <li key={el.key} className='admin-course-list-position'>
                 <CourseItem el={el} choice={value} newEl={{ id: el.id, course: {approve_status: 1}}}/>
               </li>)
@@ -97,10 +97,10 @@ const Courses = (props) => {
       </div> :
       <div>
         {
-          coursesFilter(props.courses, 'rejected', searchQuery).length ?
+          coursesFilter(props.courses, 'rejected').length ?
           <ul className='admin-course-list'>
             {
-              coursesFilter(props.courses, 'rejected', searchQuery).map(el =>
+              coursesFilter(props.courses, 'rejected').map(el =>
               <li key={el.key} className='admin-course-list-position'>
                 <CourseItem el={el} choice={value} newEl={{ id: el.id, course: {approve_status: 2}}}/>
               </li>)

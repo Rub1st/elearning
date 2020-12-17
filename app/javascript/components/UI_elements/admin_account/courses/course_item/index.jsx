@@ -73,7 +73,7 @@ const CourseItem = (props) => {
       />
       <CardMedia
         className={classes.media}
-        image={image}
+        image={el.image_url}
         title="Paella dish"
       />
       <CardContent>
@@ -96,17 +96,17 @@ const CourseItem = (props) => {
         <CardActions disableSpacing>
           {
             (props.choice === 0 || props.choice === 1) &&
-            <IconButton onClick={() => props.put(props.newEl, 'courses', updateCourseApproveStatus)}>
+            <IconButton onClick={() => props.put(props.newEl, 'admin/courses', updateCourseApproveStatus)}>
               <DeleteIcon/>
             </IconButton>
           }
           {
             (props.choice === 0 || props.choice === 2) &&
-            <IconButton onClick={() => props.put(props.choice === 2 ? props.newEl : props.newEl2, 'courses', updateCourseApproveStatus)}>
+            <IconButton onClick={() => props.put(props.choice === 2 ? props.newEl : props.newEl2, 'admin/courses', updateCourseApproveStatus)}>
               <FavoriteBorderOutlinedIcon/>
             </IconButton>
           }
-           <IconButton onClick={() => props.drop(el.id, 'courses', dropCourse)}>
+           <IconButton onClick={() => props.drop(el.id, 'admin/courses', dropCourse)}>
               <DeleteForeverOutlinedIcon/>
             </IconButton>
         <IconButton

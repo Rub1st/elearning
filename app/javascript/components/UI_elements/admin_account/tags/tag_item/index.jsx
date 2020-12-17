@@ -46,7 +46,7 @@ const TagItem = (props) => {
         <TextField label={'edit tag'} value={tag} variant="outlined" onChange={(e) => setTag(e.target.value)}/>
           {
             (el.name !== tag) &&
-            <IconButton onClick={() => props.put({ id: el.id, tag:{ name: tag}}, 'tags', editTag)}>
+            <IconButton onClick={() => props.put({ id: el.id, tag:{ name: tag}}, 'admin/tags', editTag)}>
               <CheckCircleOutlineIcon/>
             </IconButton>
           }

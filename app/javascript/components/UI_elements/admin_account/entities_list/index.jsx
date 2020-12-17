@@ -13,7 +13,7 @@ import DirectionsRunOutlinedIcon from '@material-ui/icons/DirectionsRunOutlined'
 import './style.css'
 import { Search } from '@material-ui/icons';
 import { Badge, IconButton, InputBase } from '@material-ui/core';
-import { logout } from '../../../../main_redux/actions/server_connections';
+import { logout, searchData } from '../../../../main_redux/actions/server_connections';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
+    height: 30,
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
@@ -81,6 +82,14 @@ const EntitiesList = (props) => {
     { id: 4, name: 'Comments', to: '/comments', badgeContent: 0 },
     { id: 5, name: 'Impersonations', to: '/impersonations', badgeContent: 0 },
   ]
+
+  let {searchQuery, path, setter} = props
+
+  const enter_listener = event => {
+    if (event.key === 'Enter') {
+      props.search(searchQuery , path, setter)
+    }
+  }
 
   return(
     <div>
@@ -104,14 +113,17 @@ const EntitiesList = (props) => {
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
+                onKeyPress={enter_listener}
                 onChange={(e) => props.setSearchQuery(e.target.value)}
-                value={props.searchQuery}
+                value={searchQuery}
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
-            <IconButton onClick={() => props.logout()}>
-              <DirectionsRunOutlinedIcon/>
-            </IconButton>
+            <Link>
+              <IconButton  onClick={() => props.logout()}>
+                <DirectionsRunOutlinedIcon/>
+              </IconButton>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
@@ -134,11 +146,11 @@ const EntitiesList = (props) => {
   </Tabs>
         </div>
         <div className='field-position'>
-          {
-              !props.courses.length ?
-              <CircularProgress/> :
-              props.children
-          }
+          {/* {
+              !props.connect_status ?
+              <CircularProgress/> : */}
+              {props.children}
+          {/* } */}
         </div>
       </div>
     </div>
@@ -153,8 +165,10 @@ export default connect(
     users: state.users.users,
     impersonations: state.impersonations.impersonations,
     comments: state.comments.comments,
+    connect_status: state.courses.connect_status,
   }),
   dispatch => ({
     logout: () => dispatch(logout()),
+    search: (obj, path, setter) => dispatch(searchData(obj, path, setter)),
   })
 )(EntitiesList)

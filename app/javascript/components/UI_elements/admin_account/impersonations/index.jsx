@@ -1,25 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { getImpersonations } from '../../../../main_redux/actions/impersonations'
+import { getData } from '../../../../main_redux/actions/server_connections'
 import AdminModeEmptyField from '../../../utils/empty_fields/admin_mode_emty_field'
 import NoSearchResultsField from '../../../utils/empty_fields/no_search_results_field'
 import EntitiesList from '../entities_list'
 import ImpersonationItem from './impersonationItem'
 
-let impersonationFilter = (impersons, searchQuery) => impersons
-.filter(e => e.organization.name.toLowerCase().includes(searchQuery.toLowerCase()) || !searchQuery.length)
-
-
 const Impersonations = (props) => {
   const [searchQuery, setSearchQuery] = useState('')
+
+  useEffect(() => {
+    props.set('admin/impersonations', getImpersonations);
+  }, []);
+
   return(
     <div>
-      <EntitiesList label={'Impersonations'} searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
+      <EntitiesList label={'Impersonations'}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    path={'admin/impersonations'}
+                    setter={getImpersonations}>
         <div className='field'>
         {
-          impersonationFilter(props.impersonations, searchQuery).length ?
+          props.impersonations.length ?
           <ul className='admin-user-list'>
           {
-            impersonationFilter(props.impersonations, searchQuery).map(el =>
+            props.impersonations.map(el =>
             <li key={el.id} className='admin-user-list-position'>
               <ImpersonationItem el={el}/>
             </li>)
@@ -38,5 +45,8 @@ const Impersonations = (props) => {
 export default connect(
   state => ({
     impersonations: state.impersonations.impersonations
+  }),
+  dispatch => ({
+    set: (path, setter) => dispatch(getData(path, setter)),
   })
 )(Impersonations)

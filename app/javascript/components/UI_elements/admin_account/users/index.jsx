@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { destroyDataElement } from '../../../../main_redux/actions/server_connections'
+import { destroyDataElement, getData } from '../../../../main_redux/actions/server_connections'
 import EntitiesList from '../entities_list'
 import UserItem from './userItem'
 import './style.css'
@@ -10,6 +10,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import AdminModeEmptyField from '../../../utils/empty_fields/admin_mode_emty_field'
 import NoSearchResultsField from '../../../utils/empty_fields/no_search_results_field'
+import { getUsers } from '../../../../main_redux/actions/users'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,8 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let userFilter = (users, status, searchQuery) => users.filter(el => el.user_status === status)
-.filter(e => e.login.toLowerCase().includes(searchQuery.toLowerCase()) || !searchQuery.length)
+let userFilter = (users, status) => users.filter(el => el.user_status === status)
 
 const Users = (props) => {
 
@@ -27,9 +27,17 @@ const Users = (props) => {
   const [value, setValue] = useState(0)
   const [searchQuery, setSearchQuery] = useState('')
 
+  useEffect(() => {
+    props.set('admin/users', getUsers);
+  }, []);
+
   return(
     <div>
-      <EntitiesList label={'Users'} searchQuery={searchQuery} setSearchQuery={setSearchQuery}>
+      <EntitiesList label={'Users'}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    path={'admin/users'}
+                    setter={getUsers}>
         <div className={classes.root}>
           <AppBar position="static" color="default">
             <Tabs value={value} indicatorColor="primary" textColor="primary"
@@ -45,14 +53,14 @@ const Users = (props) => {
           value === 0 ?
           <div>
           {
-            userFilter(props.users, 'pending', searchQuery).length ?
+            userFilter(props.users, 'pending').length ?
             <ul className='admin-user-list'>
             {
-              userFilter(props.users, 'pending', searchQuery).map(el =>
+              userFilter(props.users, 'pending').map(el =>
               <li key={el.id} className='admin-user-list-position'>
                 <UserItem choice={value}
-                          el={el} newEl2={{ id: el.id, user: {user_status: 2, password: el.decrypted_password}}}
-                          newEl={{ id: el.id, user: {user_status: 1, password: el.decrypted_password}}}/>
+                          el={el} newEl2={{ id: el.id, user: {user_status: 2 }}}
+                          newEl={{ id: el.id, user: {user_status: 1 }}}/>
               </li>)
             }
             </ul> : !props.users.filter(e => e.user_status === 'pending').length ?
@@ -63,12 +71,12 @@ const Users = (props) => {
           value === 1 ?
           <div>
           {
-            userFilter(props.users, 'approved', searchQuery).length ?
+            userFilter(props.users, 'approved').length ?
             <ul className='admin-user-list'>
             {
-              userFilter(props.users, 'approved', searchQuery).map(el =>
+              userFilter(props.users, 'approved').map(el =>
                 <li key={el.id} className='admin-user-list-position'>
-                  <UserItem choice={value} el={el} newEl={{ id: el.id, user: {user_status: 1, password: el.decrypted_password}}}/>
+                  <UserItem choice={value} el={el} newEl={{ id: el.id, user: {user_status: 1 }}}/>
                 </li>)
             }
             </ul> : !props.users.filter(e => e.user_status === 'approved').length ?
@@ -78,12 +86,12 @@ const Users = (props) => {
         </div> :
          <div>
          {
-           userFilter(props.users, 'blocked', searchQuery).length ?
+           userFilter(props.users, 'blocked').length ?
            <ul className='admin-user-list'>
            {
-             userFilter(props.users, 'blocked', searchQuery).map(el =>
+             userFilter(props.users, 'blocked').map(el =>
                <li key={el.id} className='admin-user-list-position'>
-                 <UserItem choice={value} el={el} newEl={{ id: el.id, user: {user_status: 2, password: el.decrypted_password}}}/>
+                 <UserItem choice={value} el={el} newEl={{ id: el.id, user: {user_status: 2 }}}/>
                </li>)
            }
            </ul> : !props.users.filter(e => e.user_status === 'blocked').length ?
@@ -105,5 +113,6 @@ export default connect(
   }),
   dispatch => ({
     drop: (id, path, setter) => dispatch(destroyDataElement(id, path, setter)),
+    set: (path, setter) => dispatch(getData(path, setter)),
   })
 )(Users)
