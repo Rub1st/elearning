@@ -27,5 +27,11 @@ module ElearningBackend
     #     )
     #   end
     # end
+
+    config.i18n.available_locales = %i[en ru]
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = true
+
+    config.middleware.use I18n::JS::Middleware
   end
 end

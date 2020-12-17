@@ -15,4 +15,15 @@
 class UserCourse < ApplicationRecord
   belongs_to :user
   belongs_to :course
+
+  searchkick
+
+  def search_data
+    {
+      course_label: course.label,
+      course_why_content: course.why_content,
+      course_will_content: course.will_content,
+      course_author_login: course.author.login
+    }
+  end
 end

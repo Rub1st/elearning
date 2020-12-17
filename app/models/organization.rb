@@ -17,5 +17,14 @@ class Organization < ApplicationRecord
   has_many :unregistered_members, dependent: :destroy
   has_many :impersonations, dependent: :destroy
 
+  searchkick word_middle: %i[name description]
+
+  def search_data
+    {
+      name: name,
+      description: description
+    }
+  end
+
   validates :name, :description, presence: true
 end

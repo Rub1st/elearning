@@ -16,18 +16,31 @@
 #  author_id_and_label   :index
 #
 class Course < ApplicationRecord
+  searchkick word_middle: %i[label why_conent will_content]
+
   belongs_to :organization, optional: true
   belongs_to :author, class_name: 'User'
   has_many :reports
   has_many :certificates, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :course_tags, dependent: :destroy
+  has_many :tags, through: :course_tags
   has_many :pages, dependent: :destroy
   has_many :user_courses, dependent: :destroy
   has_many :course_members, dependent: :destroy
   enum course_status: %i[draft ready]
   enum approve_status: %i[pending rejected approved]
   enum access_type: %i[opened closed individual]
+
+  def search_data
+    {
+      label: label,
+      will_content: will_content,
+      why_content: why_content,
+      author_login: author.login,
+      tags_name: tags.map(&:name)
+    }
+  end
 
   has_one_attached :image
 

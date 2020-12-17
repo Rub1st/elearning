@@ -12,5 +12,17 @@ class Comment < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_many :replies, dependent: :destroy
 
+  scope :search_import, -> { includes(:author, :course) }
+
+  searchkick word_middle: %i[content]
+
+  def search_data
+    {
+      content: content,
+      course_label: course.label,
+      author_login: author.login
+    }
+  end
+
   validates :content, presence: true
 end

@@ -14,5 +14,13 @@ class UnregisteredMember < ApplicationRecord
 
   enum member_role: %i[manager common]
 
+  searchkick word_middle: %i[email]
+
+  def search_data
+    {
+      email: email
+    }
+  end
+
   validates :email, :code, presence: true
 end

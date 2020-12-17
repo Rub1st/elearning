@@ -11,5 +11,15 @@ class Certificate < ApplicationRecord
   belongs_to :course
   belongs_to :user
 
+  searchkick
+
+  def search_data
+    {
+      course_label: course.label,
+      course_why_content: course.why_content,
+      course_will_content: course.will_content
+    }
+  end
+
   has_one_attached :certificate_pdf
 end
