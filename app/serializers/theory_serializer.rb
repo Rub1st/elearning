@@ -10,7 +10,6 @@ class TheorySerializer < ActiveModel::Serializer
   belongs_to :page
 
   def image_url
-    variant = object.image.variant(resize: '200x200')
-    rails_representation_url(variant, only_path: true)
+    url_for(object.image)
   end
 end

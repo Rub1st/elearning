@@ -9,11 +9,10 @@ class OrganizationSerializer < ActiveModel::Serializer
              :created_at
 
   has_many :registered_members
-  has_many :impersonations
-  has_many :unregistered_members
+  # has_many :impersonations
+  # has_many :unregistered_members
 
   def certificate_template_url
-    variant = object.certificate_template.variant(resize: '200x300')
-    rails_representation_url(variant, only_path: true)
+    url_for(object.certificate_template)
   end
 end

@@ -9,5 +9,5 @@ class QuestionSerializer < ActiveModel::Serializer
 
   belongs_to :page
   has_many :variants
-  has_many :user_answers
+  # has_many :user_answers
 end

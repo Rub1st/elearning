@@ -1,7 +1,7 @@
 class CourseTagSerializer < ActiveModel::Serializer
   attributes :id,
-             :course,
+             #  :course,
              :tag
 
-  belongs_to :course
+  # belongs_to :course
 end

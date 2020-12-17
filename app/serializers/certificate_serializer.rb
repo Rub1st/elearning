@@ -4,13 +4,13 @@ class CertificateSerializer < ActiveModel::Serializer
   attributes :id,
              :user,
              :course,
-             :certificate_pdf_url
+             :certificate_pdf_url,
+             :created_at
 
   belongs_to :course
   belongs_to :user
 
   def certificate_pdf_url
-    variant = object.certificate_pdf.variant(resize: '200x300')
-    rails_representation_url(variant, only_path: true)
+    url_for(object.certificate_pdf)
   end
 end
