@@ -30,4 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  Log in: 'Sign in'
+  email: 'email'
+  password: 'password'
+  remember me: 'remember me'
+  Sign in with: 'Sign in with Google'
+  Sign up: 'Sign up'
+  Forgot your password: 'Forgot your password?'
+  full_name: 'full name'
+  password_confirmation: 'password_confirmation'
+  characters minimum: 'characters minimum'
+  login: 'login'

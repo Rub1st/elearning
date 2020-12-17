@@ -1,0 +1,12 @@
+ru:
+  Log in: 'Войти'
+  email: 'Почта'
+  password: 'Пароль'
+  remember me: 'Запомнить меня'
+  Sign in with: "Войти через Google"
+  Sign up: 'Зарегистрироваться'
+  Forgot your password: 'Забыли пароль?'
+  full_name: 'Полное имя'
+  password_confirmation: 'Подтверждение пароля'
+  characters minimum: 'символов минимум'
+  login: 'Логин'
