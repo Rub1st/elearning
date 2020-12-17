@@ -1,9 +1,3 @@
-# module Service
-#   def self.call(...)
-#     new(...).call
-#   end
-# end
-
 module Service
   extend ActiveSupport::Concern
 

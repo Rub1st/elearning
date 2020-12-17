@@ -13,7 +13,7 @@ module UnregisteredMembers
     private
 
     def generate_code
-      prng.rand(10_000_000..99_999_999)
+      rand(10_000_000..99_999_999)
     end
 
     def create_new_member

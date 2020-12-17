@@ -42,9 +42,12 @@ module UserCourses
       )
     end
 
-    # ?
     def done_course_questions
-      Question.select { |item| item.page.order < @params[:current_page] && item.page.course_id == @params[:course_id] }
+      Question.joins(:page).where(
+        'pages.order < :current_page and pages.course_id = :course_id',
+        current_page: @params[:current_page],
+        course_id: @params[:course_id]
+      )
     end
 
     def question_variants(question_id)
