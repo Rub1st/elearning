@@ -1,0 +1,101 @@
+{
+  "Catalog": {
+    "1": "Catalog"
+  },
+  "CurrentCourse":{
+    "1": "Why would you be interested in this course?",
+    "2": "What will you learn from this course?",
+    "3": "Feedback",
+    "4": "Try again",
+    "5": "Let's do it",
+    "6": "Continue",
+    "7": "author:",
+    "8": "mark:",
+    "9": "points",
+    "10": "success:",
+    "11": "percents",
+    "12": "usages:",
+    "13": "users"
+  },
+  "Course": {
+    "1": "Create Course",
+    "2": "Why we need courses?",
+    "3": "Courses help users develop in areas that they are interested in, as well as expand the horizons of those who are not interested in something specific.",
+    "4": "How do you create your own course?",
+    "5": "Creating your own course is very simple and interesting! This happens in 4 stages: first, you specify the name, description, and avatar of the course; then choose whether you are creating a course on your own or from an organization (if any) and the type of access to the course; then, from the list of tags, select the ones that best describe your course and finally create pages with theory and questions. after completing the creation, the course will be reviewed by the admins, and then, if approved, shared.",
+    "6": "Managing courses",
+    "7": "In your profile in the 'my courses'section you will be able to view, delete, and edit your courses. Courses created on behalf of an organization can be managed in the 'organizations' section by clicking the 'down' arrow on the organization.",
+    "8": "You may choose organization:",
+    "9": "Please, choose access type for your course:",
+    "10": "Choose members of this course:",
+    "11": "More about access types:",
+    "12": "Choose tags, which describe your course: ",
+    "13": "Create Course",
+    "14": "Create paragraph",
+    "15": "Create practice",
+    "16": "page №:",
+    "17": "course:",
+    "18": "Created parapraphs:",
+    "19": "Created practices:",
+    "20": "image attached",
+    "21": "List of answer's variants:",
+    "22": "valid",
+    "23": "invalid",
+    "24": "Course pages:",
+    "Placeholders": {
+      "1": "Type name of your course...",
+      "2": "Drescribe, why users should learn your course...",
+      "3": "Describe, what users could learn in your course...",
+      "4": "Enter paragraph's title...",
+      "5": "Enter parapgraph's content...",
+      "6": "Enter practice's title...",
+      "7": "Enter practice's description...",
+      "8": "Enter practice's question...",
+      "9": "Enter variant of answer..."
+    }
+  },
+  "Organization": {
+    "1": "Create Organization",
+    "2": "Why we need organizations?",
+    "3": "Organizations help users join communities of interest, which in turn makes the process of searching for courses and learning from them much easier and more interesting.",
+    "4": "How do you can create your own organization?",
+    "5": "Creating your own organization is very easy! To do this, you simply need to enter its name and description, then, after confirming the entered data, you also have the opportunity to choose from other users other managers besides you for your organization. This is optional. As soon as all of the above is done, feel free to click on the circle with a check mark (the one at the bottom). The organization will be added to the list of administrators for approval, as soon as it is approved, you can create courses on its behalf.",
+    "6": "Managing organization",
+    "7": "In your profile in the 'organizations'section you will have access to all organizations that you belong to, and those that you are a Manager of have a button in the form of a joystick. Clicking on it will open an area where you can add and remove users, as well as change the name and description of the organization",
+    "8": "certificate template is attached",
+    "9": "Please, choose managers for your organization:",
+    "Placeholders": {
+      "1": "Enter the name of the organization...",
+      "2": "Describe your organization..."
+    }
+  },
+  "Search": {
+    "1": "Search..."
+  },
+  "Profile": {
+    "1": "Home",
+    "2": "My courses",
+    "3": "Done courses",
+    "4": "Current courses",
+    "5": "Favorite courses",
+    "6": "Recommended courses",
+    "7": "Organizations",
+    "8": "Certificates",
+    "9": "Settings",
+    "10": "Count of courses:",
+    "11": "Count of favorite courses:",
+    "12": "Count of certificates:",
+    "13": "Count of organizations:",
+    "14": "Count of comments:",
+    "15": "Count of replies:",
+    "16": "Edit login...",
+    "17": "Edit name...",
+    "18": "Edit email...",
+    "19": "Password changing:",
+    "20": "Old password",
+    "21": "New password"
+  },
+  "General": {
+    "1": "Good luck! And remember: teaching is light!"
+  }
+}
