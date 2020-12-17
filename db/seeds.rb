@@ -53,7 +53,6 @@ user = User.create(login: 'Akkkira',
                    email: 'dionis.rubis@gmail.com',
                    decrypted_password: 'AkiraAurumlie7',
                    full_name: 'Denis Rubis',
-                   birthday: '07/03/2001',
                    user_status: 2,
                    user_role: 1)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
@@ -64,7 +63,6 @@ user = User.create(login: 'Aurumlie',
                    decrypted_password: 'AkiraAurumlie7',
                    email: 'efimka@mail.com',
                    full_name: 'Anastasia Efimovich',
-                   birthday: '19/01/2001',
                    user_status: 2,
                    user_role: 1)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
@@ -75,7 +73,6 @@ user = User.create(login: 'Kioshi',
                    decrypted_password: 'Kioshi1231',
                    email: 'romanchik@gmail.com',
                    full_name: 'Nikita Romanchik',
-                   birthday: '27/10/2000',
                    user_status: 2,
                    user_role: 0)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")

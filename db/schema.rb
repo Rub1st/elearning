@@ -239,12 +239,12 @@ ActiveRecord::Schema.define(version: 2020_12_04_000437) do
     t.string "email", default: "", null: false
     t.string "decrypted_password", default: "", null: false
     t.string "full_name", default: "", null: false
-    t.date "birthday", null: false
     t.integer "user_role", default: 1, null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "user_status", default: 0, null: false
     t.string "provider", limit: 50, default: "", null: false
     t.string "uid", limit: 500, default: "", null: false
+    t.string "language", default: "en"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
