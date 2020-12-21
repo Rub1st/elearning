@@ -8,7 +8,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def update?
-    user.id == record.author_id
+    !user.nil?
   end
 
   def destroy?

@@ -8,6 +8,6 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.id == record.author_id
+    !user.nil?
   end
 end

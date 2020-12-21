@@ -4,11 +4,11 @@ class PagePolicy < ApplicationPolicy
   end
 
   def create?
-    user.id == record.course.author.id
+    !user.nil?
   end
 
   def update?
-    user.id == record.course.author.id
+    !user.nil?
   end
 
   def destroy?

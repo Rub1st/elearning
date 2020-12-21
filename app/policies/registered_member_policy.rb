@@ -4,16 +4,10 @@ class RegisteredMemberPolicy < ApplicationPolicy
   end
 
   def create?
-    manager?
+    !user.nil?
   end
 
   def destroy?
-    manager?
-  end
-
-  private
-
-  def manager?
-    RegisteredMember.where(organization_id: record.id, member_role: 0, user_id: user.id).count.is_positive?
+    !user.nil?
   end
 end

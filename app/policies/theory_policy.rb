@@ -4,11 +4,7 @@ class TheoryPolicy < ApplicationPolicy
   end
 
   def create?
-    user.id == record.page.course.author.id
-  end
-
-  def update?
-    user.id == record.page.course.author.id
+    !user.nil?
   end
 
   def destroy?

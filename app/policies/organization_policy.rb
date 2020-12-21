@@ -8,7 +8,7 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def update?
-    RegisteredMember.where(organization_id: record_id, user_id: user.id).count.is_positive?
+    !user.nil?
   end
 
   def destroy?

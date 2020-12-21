@@ -1,6 +1,6 @@
 class TagPolicy < ApplicationPolicy
   def create?
-    user.admin?
+    user&.admin?
   end
 
   def update?

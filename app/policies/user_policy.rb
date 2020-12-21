@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
   # ?
   def update?
-    user.id == record.id || user.admin?
+    !user.nil?
   end
 
   def index?

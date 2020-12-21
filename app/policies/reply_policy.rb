@@ -4,6 +4,6 @@ class ReplyPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.id == record.author.id
+    !user.nil?
   end
 end

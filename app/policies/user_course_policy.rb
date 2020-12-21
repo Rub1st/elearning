@@ -1,11 +1,11 @@
-class UserAnswerPolicy < ApplicationPolicy
+class UserCoursePolicy < ApplicationPolicy
   # ?
   def create?
     !user.nil?
   end
 
   def update?
-    user.id == record.user.id
+    user&.common?
   end
 
   def index?
