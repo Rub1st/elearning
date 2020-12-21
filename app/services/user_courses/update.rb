@@ -2,17 +2,42 @@ module UserCourses
   class Update
     include Service
 
-    def initialize(params)
+    def initialize(params, permit_params)
       @params = params
+      @permit_params = permit_params
     end
 
     def call
-      course_mark_update unless @params[:mark].nil?
+      p @permit_params
+      course_mark_update unless @permit_params[:mark].nil?
+
+      cerificate_generation
+
       course_success_update
       update_user_course
     end
 
     private
+
+    def cerificate_generation
+      drop_previous_certificate_if_exists if @permit_params[:progress] == 100
+      generate_new_certificate if @permit_params[:progress] == 100
+    end
+
+    def drop_previous_certificate_if_exists
+      certificate = Certificate.find_by(course_id: @params[:course_id], user_id: @params[:user_id])
+      if certificate
+        certificate.destroy
+      end
+    end
+
+    def generate_new_certificate
+      if calculate_result > 90
+        certificate = Certificate.create(course_id: @params[:course_id], user_id: @params[:user_id])
+        certificate.certificate_pdf.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.jpg')
+      end
+      nil
+    end
 
     def course_success_update
       Course.find(@params[:course_id]).update(
@@ -45,7 +70,7 @@ module UserCourses
     def done_course_questions
       Question.joins(:page).where(
         'pages.order < :current_page and pages.course_id = :course_id',
-        current_page: @params[:current_page],
+        current_page: @permit_params[:current_page],
         course_id: @params[:course_id]
       )
     end
@@ -71,10 +96,10 @@ module UserCourses
 
     def update_user_course
       current_user_course.update(
-        current_page: @params[:current_page],
-        mark: @params[:mark],
+        current_page: @permit_params[:current_page],
+        mark: @permit_params[:mark],
         is_favorite: @params[:is_favorite],
-        progress: @params[:progress],
+        progress: @permit_params[:progress],
         correct: calculate_result
       )
     end

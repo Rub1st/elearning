@@ -9,7 +9,7 @@ const AuthorField = (props) => {
   const { t, i18n } = useTranslation();
   return(
       <CourseInformationTemplate label={props.author.login} header={t("CurrentCourse.7")}>
-        <img className='course__author-avatar' src={avatar} alt='Akira'/>
+        <img className='course__author-avatar' src={props.author.avatar_url} alt='Akira'/>
       </CourseInformationTemplate>
   )
 }

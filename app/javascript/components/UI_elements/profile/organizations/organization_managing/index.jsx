@@ -113,6 +113,7 @@ const OrganizationManaging = (props) => {
   let updatedOrganization = {
       name: name,
       description: description,
+      approve_status: 0,
       certificate_template: image,
   }
 
@@ -148,7 +149,11 @@ const OrganizationManaging = (props) => {
       <div className='man_org-field'>
         <Paper className='man_row-item'>
           <div className='man_row-title'>изменение информации</div>
-            <TextField  style={{marginTop: '20px', width: '80%'}} variant="outlined" label='Название' value={name} onChange={(e) => setName(e.target.value)}/>
+            <TextField  style={{marginTop: '20px', width: '80%'}}
+                        variant="outlined" label='Название' value={name}
+                        error={props.errors.name != undefined}
+                        helperText={props.errors.name != undefined ? props.errors.name[0] : null}
+                        onChange={(e) => setName(e.target.value)}/>
             <div className='d-flex'>
                 <input accept="image/*" className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
                 <label htmlFor="icon-button-file">
@@ -166,6 +171,8 @@ const OrganizationManaging = (props) => {
               label='Описание'
               multiline
               rows={10}
+              error={props.errors.description != undefined}
+              helperText={props.errors.description != undefined ? props.errors.description[0] : null}
               value={description} onChange={(e) => setDescription(e.target.value)}
               variant="outlined"
             />
@@ -298,7 +305,10 @@ const OrganizationManaging = (props) => {
                   менеджер
                 </span>
               </div>
-            <TextField label={'email'} variant='outlined' onChange={(e) => setEmail(e.target.value)} value={email}/>
+            <TextField label={'email'} variant='outlined'
+                       error={props.errors.email != undefined}
+                       helperText={props.errors.email != undefined ? props.errors.email[0] : null}
+                       onChange={(e) => setEmail(e.target.value)} value={email}/>
             <IconButton
               style={{marginLeft: '5px'}}
               onClick={() => props.post(newUnregistered, props.currentOrganization.id, 'unregistered_members', createUnregisteredMember)}>
@@ -319,6 +329,7 @@ export default connect(
     registered_members: state.registered_members.registered_members,
     unregistered_members: state.unregistered_members.unregistered_members,
     users: state.users.common_users,
+    errors: state.errors.errors,
   }),
   dispatch => ({
     post: (obj, patternId, path, setter) => dispatch(postDataElementWithQuery(obj, patternId, path, setter)),

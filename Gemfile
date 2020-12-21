@@ -10,6 +10,7 @@ gem 'devise'
 gem 'i18n-js'
 gem 'jbuilder', '~> 2.7'
 gem 'omniauth'
+gem 'pdf-forms'
 gem 'omniauth-google-oauth2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
@@ -27,6 +28,7 @@ end
 
 group :development do
   gem 'active_model_serializers', '~> 0.10.4'
+  gem 'bullet', group: 'development'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'listen', '~> 3.2'
   gem 'spring'

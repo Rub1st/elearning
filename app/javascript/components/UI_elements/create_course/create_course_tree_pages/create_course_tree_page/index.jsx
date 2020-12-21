@@ -69,7 +69,11 @@ const CreateCourseTreePage = (props) => {
         {`${t('Course.16')} ${props.currentDraftPage.order}, ${t('Course.16')} ${props.currentDraftCourse.label}`}
         </div>
         <div className='draft-page-edit-title'>
-          <TextField variant='outlined' value={title} onChange={(e) => setTitle(e.target.value)} label='title'/>
+          <TextField variant='outlined' value={title}
+                     onChange={(e) => setTitle(e.target.value)}
+                     error={props.errors.title != undefined}
+                     helperText={props.errors.title != undefined ? props.errors.title[0] : null}
+                     label='title'/>
           <IconButton onClick={() => props.put({
             id: props.currentDraftPage.id,
             page: {
@@ -197,6 +201,7 @@ export default connect(
     theories: state.theories.theories,
     questions: state.questions.questions,
     pages: state.pages.pages,
+    errors: state.errors.errors,
   }),
   dispatch => ({
     post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),

@@ -156,7 +156,11 @@ const CreateCourseForm = (props) => {
         (
           <div className='create-course-item'>
             <div className='create-course-item-top-row'>
-              <TextField style={{width: '60%'}} variant='outlined' value={label} onChange={(e) => setLabel(e.target.value)} label={t('Course.Placeholders.1')}/>
+              <TextField style={{width: '60%'}} variant='outlined'
+                         value={label} onChange={(e) => setLabel(e.target.value)}
+                         error={props.errors.label != undefined}
+                         helperText={props.errors.label != undefined ? props.errors.label[0] : null}
+                         label={t('Course.Placeholders.1')}/>
               <div className='d-flex'>
                 <input accept="image/*" className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
                 <label htmlFor="icon-button-file">
@@ -168,16 +172,24 @@ const CreateCourseForm = (props) => {
               </div>
             </div>
             <div className='create-course-item-text-row'>
-              <TextField style={{width: '100%'}} variant='outlined' rows={6} multiline value={whyContent} onChange={(e) => setWhyContent(e.target.value)} label={t('Course.Placeholders.2')}/>
+              <TextField style={{width: '100%'}} variant='outlined'
+                         rows={5} multiline value={whyContent} onChange={(e) => setWhyContent(e.target.value)}
+                         error={props.errors.why_content != undefined}
+                         helperText={props.errors.why_content != undefined ? props.errors.why_content[0] : null}
+                         label={t('Course.Placeholders.2')}/>
             </div>
             <div className='create-course-item-text-row'>
-              <TextField style={{width: '100%'}} variant='outlined' rows={6} multiline value={willContent} onChange={(e) => setWillContent(e.target.value)} label={t('Course.Placeholders.3')}/>
+              <TextField style={{width: '100%'}} variant='outlined'
+                         rows={5} multiline value={willContent} onChange={(e) => setWillContent(e.target.value)}
+                         error={props.errors.will_content != undefined}
+                         helperText={props.errors.will_content != undefined ? props.errors.will_content[0] : null}
+                         label={t('Course.Placeholders.3')}/>
             </div>
             <div className='create-course-item-bottom-row'>
               <div className='create-course-slider-info'>{slider + '/3'}</div>
-              <IconButton disabled={!label.length || !whyContent.length || !willContent.length} onClick={() => {
+              <IconButton onClick={() => {
                 props.post(formData, 'courses', createCourse);
-                setSlider(slider + 1);
+                label.length && whyContent.length && willContent.length && setSlider(slider + 1);
               }}>
                 <ArrowForwardIcon/>
               </IconButton>
@@ -375,7 +387,8 @@ export default connect(
     currentDraftCourse: state.courses.currentDraftCourse,
     users: state.users.common_users,
     tags: state.tags.tags,
-    organizations: state.organizations.organizations
+    organizations: state.organizations.organizations,
+    errors: state.errors.errors,
   }),
   dispatch => ({
     post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),

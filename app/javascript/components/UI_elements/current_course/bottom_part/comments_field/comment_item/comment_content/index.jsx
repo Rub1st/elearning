@@ -37,7 +37,7 @@ const CommentContent = ({props}) => {
     <>
         <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="recipe" src={props.author.avatar_url} className={classes.avatar}>
             {
               props.author.login[0]
             }

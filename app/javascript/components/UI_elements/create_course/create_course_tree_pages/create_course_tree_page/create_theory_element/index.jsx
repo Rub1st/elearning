@@ -52,7 +52,9 @@ const CreateTheoryElement = (props) => {
   return(
       <div style={{marginTop: '15px'}}>
         <div>
-          <TextField style={{width: '250px', marginRight: '20px'}} value={subtitle} variant='outlined' onChange={(e) => setSubtitle(e.target.value)} placeholder={t('Course.Placeholders.4')}/>
+          <TextField style={{width: '250px', marginRight: '20px'}}
+                     value={subtitle}
+                     variant='outlined' onChange={(e) => setSubtitle(e.target.value)} placeholder={t('Course.Placeholders.4')}/>
             <input accept="image/*" className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
             <label style={{marginRight: '10px'}} htmlFor="icon-button-file">
               <IconButton color="primary" aria-label="upload picture" component="span">
@@ -65,7 +67,9 @@ const CreateTheoryElement = (props) => {
             }
         </div>
         <div style={{marginTop: '15px'}} className='d-flex'>
-            <TextField style={{width: '350px', marginRight: '30px'}} value={content} multiline rows={2} variant='outlined' onChange={(e) => setContent(e.target.value)} placeholder={t('Course.Placeholders.5')}/>
+            <TextField style={{width: '350px', marginRight: '30px'}}
+                       value={content} multiline rows={2}
+                       variant='outlined' onChange={(e) => setContent(e.target.value)} placeholder={t('Course.Placeholders.5')}/>
             <IconButton disabled={!subtitle.length && !content.length && image === null} onClick={() => {
               props.post(formData, 'theories', createTheory);
               setSubtitle('');
@@ -81,7 +85,7 @@ const CreateTheoryElement = (props) => {
 
 export default connect(
   state => ({
-    currentDraftPage: state.pages.currentDraftPage
+    currentDraftPage: state.pages.currentDraftPage,
   }),
   dispatch => ({
     post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),

@@ -92,6 +92,8 @@ const CreateOrganization = (props) => {
 
   const { t, i18n } = useTranslation();
 
+  console.log(props.errors)
+
   const enter_listener = event => {
     if (event.key === 'Enter') {
       props.search(filter , 'users', getUsers)
@@ -125,7 +127,11 @@ const CreateOrganization = (props) => {
         </Paper>
         <div className='create-organization-form'>
           <div className="first-row-organization-form">
-          <TextField disabled={approve} variant="outlined" label={t('Organization.Placeholders.1')} value={name} onChange={(e) => setName(e.target.value)}/>
+          <TextField variant="outlined"
+                     label={t('Organization.Placeholders.1')}
+                     error={props.errors.name != undefined}
+                     helperText={props.errors.name != undefined ? props.errors.name[0] : null}
+                     value={name} onChange={(e) => setName(e.target.value)}/>
           <div className='d-flex'>
                 <input accept="image/*" className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
                 <label htmlFor="icon-button-file">
@@ -141,21 +147,21 @@ const CreateOrganization = (props) => {
           </div>
           <div>
             <TextField
-              disabled={approve}
               style={{marginTop: '20px', width: '80%'}}
               label={t('Organization.Placeholders.2')}
               multiline
               rows={4}
               value={description}
+              error={props.errors.description != undefined}
+              helperText={props.errors.description != undefined ? props.errors.description[0] : null}
               onChange={(e) => setDescription(e.target.value)}
               variant="outlined"
             />
             <IconButton
-              disabled={approve || !name.length || !description.length}
               style={{marginTop: '60px', marginLeft: '15px'}}
               onClick={() => {
               props.post(formData, 'organizations', createOrganization);
-              setApprove(!approve);
+              setApprove(!approve)
             }}>
               <CheckCircleOutlineIcon className={classes.approve}/>
             </IconButton>
@@ -201,7 +207,7 @@ const CreateOrganization = (props) => {
           {
             name.length && description.length && approve ?
             <Link
-              style={{marginTop: '200px', marginLeft: '15px'}}
+              style={{marginTop: '180px', marginLeft: '15px'}}
                 to={`/user_id=${props.currentUser.id}/organizations`}
                 onClick={() => {
                   managers.map(el => props.post({
@@ -217,7 +223,7 @@ const CreateOrganization = (props) => {
                                               }}>
               <CheckCircleOutlineIcon className={classes.approve}/>
             </Link> :
-            <IconButton disabled={true} style={{marginTop: '200px', marginLeft: '15px'}}>
+            <IconButton disabled={true} style={{marginTop: '180px', marginLeft: '15px'}}>
               <CheckCircleOutlineIcon className={classes.approve}/>
             </IconButton>
           }
@@ -234,6 +240,7 @@ export default connect(
     currentUser: state.users.currentUser,
     users: state.users.common_users,
     currentDraftOrganization: state.organizations.currentDraftOrganization,
+    errors: state.errors.errors,
   }),
   dispatch => ({
     post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),

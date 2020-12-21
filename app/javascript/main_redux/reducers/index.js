@@ -13,6 +13,7 @@ import RegisteredMemberReducer from './registered_members'
 import UnregisteredMemberReducer from './unregistered_members'
 import ImpersonationReducer from './impersonations'
 import ReportReducer from './reports'
+import ErrorReducer from './errors'
 
 export { CourseReducer,
          CommentReducer,
@@ -28,4 +29,5 @@ export { CourseReducer,
          RegisteredMemberReducer,
          UnregisteredMemberReducer,
          ImpersonationReducer,
-         ReportReducer }
+         ReportReducer,
+         ErrorReducer }

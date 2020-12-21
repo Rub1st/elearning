@@ -20,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CourseList = (props) => {
   const classes = useStyles();
-  console.log(props.courses)
-  console.log(props.currentCourse)
   let filtered_courses = props.courses.filter((el) => el.course_status === 'ready' && el.approve_status === 'approved')
   return(
     <div className={classes.root}>
@@ -35,8 +33,7 @@ const CourseList = (props) => {
             </li>
               )
         }
-      </ul> : !filtered_courses.length ?
-      <SideBarEmptyField/> : <NoSearchResultSideBar/>
+      </ul> : <NoSearchResultSideBar/>
       }
 
     </div>

@@ -59,7 +59,11 @@ const CreatePracticeElement = (props) => {
   return(
     <div>
       <div className='paper-item'>
-        <TextField value={title} variant='outlined' onChange={(e) => setTitle(e.target.value)} label={t('Course.Placeholders.6')}/>
+        <TextField value={title} variant='outlined'
+                   onChange={(e) => setTitle(e.target.value)}
+                   error={props.errors.question != undefined}
+                   helperText={props.errors.question != undefined ? props.errors.question[0] : null}
+                   label={t('Course.Placeholders.6')}/>
         <Select labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={questionType}
@@ -87,7 +91,13 @@ const CreatePracticeElement = (props) => {
       </div>
       <div className='paper-item'>
         <TextField multiline rows={1} variant='outlined' value={description} onChange={(e) => setDescription(e.target.value)} label={t('Course.Placeholders.7')}/>
-        <TextField multiline rows={1} variant='outlined' value={question} onChange={(e) => setQuestion(e.target.value)} label={t('Course.Placeholders.8')}/>
+        <TextField multiline rows={1}
+                   variant='outlined'
+                   value={question}
+                   onChange={(e) => setQuestion(e.target.value)}
+                   error={props.errors.question_text != undefined}
+                   helperText={props.errors.question_text != undefined ? props.errors.question_text[0] : null}
+                   label={t('Course.Placeholders.8')}/>
         <IconButton disabled={!title.length || !question.length} onClick={() => props.post({ question: newQuestion }, 'questions', createQuestion)}>
             <CheckCircleOutlineIcon/>
           </IconButton>
@@ -148,6 +158,7 @@ export default connect(
   state => ({
     currentQuestion: state.questions.currentQuestion,
     currentDraftPage: state.pages.currentDraftPage,
+    errors: state.errors.errors,
   }),
   dispatch => ({
     post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),

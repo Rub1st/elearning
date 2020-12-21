@@ -1,4 +1,4 @@
-import { SearchOutlined } from '@material-ui/icons'
+import { SentimentDissatisfied } from '@material-ui/icons'
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
 
@@ -9,8 +9,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   large: {
-    width: theme.spacing(6),
-    height: theme.spacing(6),
+    width: theme.spacing(14),
+    height: theme.spacing(14),
     borderRadius: '30px',
   },
 }));
@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
 const NoSearchResultSideBar = () => {
   const classes = useStyles();
   return(
-    <div>
-      <h6>По вашему запросу доступных вам курсов не найдено</h6>
-      <SearchOutlined className={classes.large}/>
+    <div className='admin_empty_field'>
+      <h3 className='admin_empty_content'>Мы не нашли для вас курсов</h3>
+      <SentimentDissatisfied className={classes.large}/>
     </div>
   )
 }

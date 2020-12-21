@@ -43,7 +43,7 @@ const MainPage = (props) => {
   return(
     <div className='home__position'>
       <div className='home__top-line'>
-      <Avatar className={classes.large} alt={props.currentUser.login} src={avatar} />
+      <Avatar className={classes.large} alt={props.currentUser.login} src={props.users.find(e => e.id === props.currentUser.id).avatar_url} />
         <div className='home__main-user-info'>
           <div className='home__login'>{props.currentUser.login}</div>
           <div className='home__main-info-item'>{props.currentUser.full_name}</div>

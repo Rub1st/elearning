@@ -13,7 +13,8 @@ import { CourseReducer,
          RegisteredMemberReducer,
          UnregisteredMemberReducer,
          ImpersonationReducer,
-         ReportReducer } from './reducers'
+         ReportReducer,
+         ErrorReducer} from './reducers'
 
 
 const Reducer = combineReducers({
@@ -32,6 +33,7 @@ const Reducer = combineReducers({
   unregistered_members: UnregisteredMemberReducer,
   impersonations: ImpersonationReducer,
   reports: ReportReducer,
+  errors: ErrorReducer,
 });
 
 export default Reducer;

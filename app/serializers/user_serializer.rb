@@ -6,9 +6,9 @@ class UserSerializer < ActiveModel::Serializer
              :login,
              :email,
              :user_role,
-            # ! #  :avatar_url,
+             :avatar_url,
             # :courses,
-            # ! #  :certificate_template_url,
+             :certificate_template_url,
             # :certificates,
              :encrypted_password,
              :decrypted_password,
@@ -42,4 +42,12 @@ class UserSerializer < ActiveModel::Serializer
   #   variant = object.certificate_template.variant(resize: '200x300')
   #   rails_representation_url(variant, only_path: true)
   # end
+
+  def avatar_url
+    url_for(object.avatar)
+  end
+
+  def certificate_template_url
+    url_for(object.certificate_template)
+  end
 end

@@ -23,6 +23,8 @@ import { getOrganizations } from '../../../main_redux/actions/organizations';
 import { getCertificates } from '../../../main_redux/actions/certificates';
 import LanguageIcon from '@material-ui/icons/Language';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -155,6 +157,16 @@ const Wrapper = (props) => {
          }
       </Toolbar>
     </AppBar>
+    <ToastContainer
+      position="top-left"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover/>
     {props.children}
   </div>
   )

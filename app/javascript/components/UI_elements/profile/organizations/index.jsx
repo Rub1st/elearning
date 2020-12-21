@@ -12,7 +12,7 @@ const Organization = (props) => {
           {
             props.organizations.filter(el => el.registered_members.filter(el => el.user.id === props.currentUser.id).length).map(el =>
               <li key={el.id} className='profile__course-item'>
-              <OrgItem el={el} newEl={{ id: el.id, organization: {approve_status: 1}}}/>
+              <OrgItem el={el} newEl={{ id: el.id, organization: {approve_status: 1, name: el.name, description: el.description}}}/>
             </li>
             )
           }

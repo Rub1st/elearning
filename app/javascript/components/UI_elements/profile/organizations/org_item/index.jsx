@@ -22,6 +22,7 @@ import CourseListItem from './course_list_item'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import { DateFormat } from '../../../../utils/helpful_functions';
+import { Tooltip } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,7 +59,6 @@ const OrgItem = (props) => {
     setExpanded(!expanded);
   };
 
-  // let existed = props.registered_members.filter(e => e.organization.id === el.id && e.member_role === 'manager' && e.user.id === props.currentUser.id)
   let existed = el.registered_members.map(e => e.member_role === 'manager' && e.user.id === props.currentUser.id)
 
   let currentReport = props.reports.find(el => el.course.id === currentCourseId)
@@ -76,12 +76,11 @@ const OrgItem = (props) => {
                      image={el.certificate_template_url}
                      title="Paella dish"/>
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              name: {el.name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              description: {el.description}
-            </Typography>
+            <Tooltip title={el.description}>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {el.description.length > 38 ? el.description.slice(0, 48) + '...' : el.description}
+              </Typography>
+            </Tooltip>
             <Typography variant="body2" color="textSecondary" component="p">
               approve status: {el.approve_status}
             </Typography>
@@ -90,7 +89,7 @@ const OrgItem = (props) => {
         <>
           <hr/>
           <Typography variant="body2" color="textSecondary" component="p">
-              report generated: {DateFormat(currentReport.created_at)}
+              {DateFormat(currentReport.created_at)}
             </Typography>
           <CardContent>
             <hr/>

@@ -1,6 +1,7 @@
 import { IconButton } from '@material-ui/core'
 import { SendOutlined } from '@material-ui/icons'
 import React, {useState} from 'react'
+import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux'
 import { createReply } from '../../../../../../../main_redux/actions/comments'
 import { getData, getDataWithQuery, postDataElement, postDataElementWithQuery } from '../../../../../../../main_redux/actions/server_connections'
@@ -15,11 +16,15 @@ const ReplyInput = (props) => {
     content: replyInput
   }
 
+  console.log(props.errors)
+
   return(
     <div className='comment__reply-input-position d-flex'>
-      <input onChange={(e) => setReplyInput(e.target.value)}
-             value={replyInput}
-             className='comment__reply-input'/>
+      <TextField onChange={(e) => setReplyInput(e.target.value)}
+                 error={props.errors.content != undefined}
+                 helperText={props.errors.content != undefined ? props.errors.content[0] : null}
+                 value={replyInput}
+                 className='comment__reply-input'/>
 
       <IconButton className='comment__reply-input-button btn btn-light'
               onClick={() => {
@@ -38,6 +43,7 @@ export default connect(
   state => ({
     currentUser: state.users.currentUser,
     currentCourse: state.courses.currentCourse,
+    errors: state.errors.errors
 }),
 dispatch => ({
   post: (obj, parrentId, path, setter) => dispatch(postDataElementWithQuery(obj, parrentId, path, setter)),
