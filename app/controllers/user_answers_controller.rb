@@ -1,5 +1,7 @@
 class UserAnswersController < ApplicationController
   def create
+    authorize!
+
     ua = UserAnswer.new(permit_params)
 
     old_answers_killer

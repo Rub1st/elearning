@@ -1,21 +1,13 @@
 class OrganizationsController < ApplicationController
   def create
-    organization = Organization.new(permit_params)
+    authorize!
 
-    if permit_params[:certificate_template].present?
-      organization.certificate_template.attach(permit_params[:certificate_template])
-    else
-      organization.certificate_template.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noiamge.jpg')
-    end
-
-    if organization.save
-      render json: organization
-    else
-      render json: { errors: organization.errors }, status: :unprocessable_entity
-    end
+    render Organizations::Create.call(permit_params, current_user)
   end
 
   def update
+    authorize!
+
     organization = Organization.find(params[:id])
 
     if permit_params[:certificate_template].present?
@@ -23,7 +15,9 @@ class OrganizationsController < ApplicationController
       organization.certificate_template.attach(permit_params[:certificate_template])
     end
 
-    if organization.update(permit_params)
+    if organization.update(name: permit_params[:name],
+                           description: permit_params[:description],
+                           approve_status: permit_params[:approve_status].to_i)
       render json: organization
     else
       render json: { errors: organization.errors }, status: :unprocessable_entity
@@ -31,6 +25,8 @@ class OrganizationsController < ApplicationController
   end
 
   def index
+    authorize!
+
     render json: organizations
   end
 

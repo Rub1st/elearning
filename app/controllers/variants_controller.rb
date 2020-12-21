@@ -1,5 +1,7 @@
 class VariantsController < ApplicationController
   def create
+    authorize!
+
     variant = Variant.new(permit_params)
     if variant.save
       render json: Question.find(variant.question.id)
@@ -9,6 +11,8 @@ class VariantsController < ApplicationController
   end
 
   def destroy
+    authorize!
+
     Variant.find(params[:id]).destroy
   end
 

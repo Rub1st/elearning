@@ -1,5 +1,7 @@
 class ReportsController < ApplicationController
   def create
+    authorize!
+
     report = Reports::Create.call(permit_params)
 
     if report.save
@@ -10,6 +12,8 @@ class ReportsController < ApplicationController
   end
 
   def index
+    authorize!
+
     render json: Report.all
   end
 

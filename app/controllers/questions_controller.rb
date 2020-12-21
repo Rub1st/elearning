@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
   def create
+    authorize!
+
     question = Question.new(permit_params)
     if question.save
       render json: question
@@ -9,11 +11,15 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    authorize!
+
     Question.find(params[:id]).destroy
     render json: questions
   end
 
   def index
+    authorize!
+
     render json: questions
   end
 

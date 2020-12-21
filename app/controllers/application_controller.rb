@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # authorize :user, through: :current_user, allow_nil: true
+
   protect_from_forgery with: :exception
 
   skip_before_action :verify_authenticity_token, if: lambda {
@@ -21,13 +23,9 @@ class ApplicationController < ActionController::Base
     request.env.fetch('HTTP_ACCEPT_LANGUAGE', '').scan(/[a-z]{2}/).first
   end
 
-  # def render_jsonapi_response(resource)
-  #   if resource.errors.empty?
-  #     render json: resource
-  #   else
-  #     render json: resource.errors, status: 400
-  #   end
-  # end
+  rescue_from ActionPolicy::Unauthorized do
+    render plain: '401 unauthorized', status: :unauthorized
+  end
 
   protected
 

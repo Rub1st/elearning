@@ -1,6 +1,7 @@
 module Admin
   class TagsController < ApplicationController
     def create
+      authorize!
       tag = Tag.new(permit_params)
       if tag.save
         render json: Tag.all
@@ -10,6 +11,7 @@ module Admin
     end
 
     def update
+      authorize!
       tag = Tag.find(params[:id])
       if tag.update(permit_params)
         render json: Tag.all

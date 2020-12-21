@@ -1,6 +1,7 @@
 module Admin
   class OrganizationsController < ApplicationController
     def update
+      authorize!
       organization = Organization.find(params[:id])
 
       if permit_params[:certificate_template].present?
@@ -16,11 +17,13 @@ module Admin
     end
 
     def destroy
+      authorize!
       Organization.find(params[:id]).destroy
       render json: Organization.all
     end
 
     def index
+      authorize!
       render json: Organization.all
     end
 

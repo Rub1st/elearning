@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   def create
+    authorize!
     course = Course.new(permit_params)
     if permit_params[:image].present?
       course.image.attach(permit_params[:image])
@@ -14,6 +15,7 @@ class CoursesController < ApplicationController
   end
 
   def update
+    authorize!
     course = Course.find(params[:id])
     if course.update(permit_params)
       render json: course
@@ -23,6 +25,7 @@ class CoursesController < ApplicationController
   end
 
   def index
+    authorize!
     render json: courses
   end
 

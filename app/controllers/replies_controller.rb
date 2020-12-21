@@ -1,5 +1,6 @@
 class RepliesController < ApplicationController
   def create
+    authorize!
     reply = Reply.new(permit_params)
     if reply.save
       render json: comments
@@ -9,6 +10,7 @@ class RepliesController < ApplicationController
   end
 
   def destroy
+    authorize!
     Reply.find(params[:id]).destroy
     render json: comments
   end

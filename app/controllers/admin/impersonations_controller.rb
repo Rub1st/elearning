@@ -1,6 +1,7 @@
 module Admin
   class ImpersonationsController < ApplicationController
     def index
+      authorize!
       render json: Impersonation.all
     end
 

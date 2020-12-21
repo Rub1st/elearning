@@ -1,6 +1,7 @@
 module Admin
   class CoursesController < ApplicationController
     def update
+      authorize!
       course = Course.find(params[:id])
       if course.update(permit_params)
         render json: course
@@ -10,11 +11,13 @@ module Admin
     end
 
     def destroy
+      authorize!
       Course.find(params[:id]).destroy
       render json: Course.all
     end
 
     def index
+      authorize!
       render json: Course.all
     end
 

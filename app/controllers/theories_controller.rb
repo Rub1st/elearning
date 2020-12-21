@@ -1,5 +1,7 @@
 class TheoriesController < ApplicationController
   def create
+    authorize!
+
     theory = Theory.new(permit_params)
 
     if permit_params[:image].present?
@@ -16,11 +18,15 @@ class TheoriesController < ApplicationController
   end
 
   def destroy
+    authorize!
+
     Theory.find(params[:id]).destroy
     render json: theories
   end
 
   def index
+    authorize!
+
     render json: theories
   end
 

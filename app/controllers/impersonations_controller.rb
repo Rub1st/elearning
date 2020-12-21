@@ -1,5 +1,6 @@
 class ImpersonationsController < ApplicationController
   def create
+    authorize!
     imperson = Impersonation.new(permit_params)
     if imperson.save
       render json: imperson
@@ -9,6 +10,7 @@ class ImpersonationsController < ApplicationController
   end
 
   def update
+    authorize!
     imperson = Impersonation.find(params[:id])
     if imperson.update(permit_params)
       render json: Impersonation.all

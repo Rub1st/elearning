@@ -1,5 +1,7 @@
 class UserCoursesController < ApplicationController
   def create
+    authorize!
+
     user_course = UserCourses::Create.call(permit_params)
 
     if user_course.save
@@ -10,9 +12,11 @@ class UserCoursesController < ApplicationController
   end
 
   def update
+    authorize!
+
     user_course = UserCourse.find(params[:id])
 
-    UserCourses::Update.call(user_course)
+    UserCourses::Update.call(user_course, permit_params)
 
     user_course = UserCourse.find(params[:id])
 
@@ -25,6 +29,8 @@ class UserCoursesController < ApplicationController
   end
 
   def index
+    authorize!
+
     render json: user_courses
   end
 

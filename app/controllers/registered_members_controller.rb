@@ -1,5 +1,7 @@
 class RegisteredMembersController < ApplicationController
   def create
+    authorize!
+
     registered_member = RegisteredMember.new(permit_params)
     if registered_member.save
       render json: RegisteredMember.all
@@ -9,11 +11,15 @@ class RegisteredMembersController < ApplicationController
   end
 
   def destroy
+    authorize!
+
     RegisteredMember.find(params[:id]).destroy
     render json: registered_members
   end
 
   def index
+    authorize!
+
     render json: registered_members
   end
 

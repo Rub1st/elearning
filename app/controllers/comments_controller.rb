@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   def create
+    authorize!
     comment = Comment.new(permit_params)
     if comment.save
       render json: comments
@@ -9,11 +10,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    authorize!
     Comment.find(params[:id]).destroy
     render json: comments
   end
 
   def index
+    authorize!
     render json: comments
   end
 

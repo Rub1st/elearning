@@ -1,5 +1,6 @@
 class UnregisteredMembersController < ApplicationController
   def create
+    authorize!
     unregistered_member = UnregisteredMembers::Create.call(permit_params)
     if unregistered_member.save
       render json: unregistered_members
@@ -9,11 +10,13 @@ class UnregisteredMembersController < ApplicationController
   end
 
   def destroy
+    authorize!
     UnregisteredMember.find(params[:id]).destroy
     render json: unregistered_members
   end
 
   def index
+    authorize!
     render json: unregistered_members
   end
 
