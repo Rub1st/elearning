@@ -109,6 +109,9 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
+
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
   end
 
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
