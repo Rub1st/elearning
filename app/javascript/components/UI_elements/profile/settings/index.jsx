@@ -49,11 +49,6 @@ const Settings = (props) => {
                          certificate_template: certificate,
                         }
 
-
-
-  console.log(image)
-  console.log(certificate)
-
   let formData = serialize({
     user: newUpdatedUser,
   })

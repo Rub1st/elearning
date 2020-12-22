@@ -1,27 +1,22 @@
+import { IconButton } from '@material-ui/core'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { updateImpersonation } from '../../../main_redux/actions/impersonations'
-import { updateDataElement } from '../../../main_redux/actions/server_connections'
+import { stopImpersonating, updateDataElement } from '../../../main_redux/actions/server_connections'
 import { setImpersonationUser } from '../../../main_redux/actions/users'
 
 const UpdateImpersonationButton = (props) => {
-  let {el} = props
-  let updatedImpersonation = {
-    id: props.currentImpersonation.id,
-    impersonation: {
-      end: new Date(),
-    }
-  }
   return(
     <>
-    <Link style={{color: 'gray', marginLeft: '10px'}}
+    <IconButton style={{color: 'gray', marginLeft: '10px'}}
       onClick={() => {
-        props.setImpersonationUser(el);
-        props.put(updatedImpersonation, 'impersonations', updateImpersonation);
-      }}  to={`/user_id=${el.id}/home`}>
+        // props.setImpersonationUser(el);
+        // props.put(updatedImpersonation, 'impersonations', updateImpersonation);
+        props.stopImpersonation();
+      }}>
         {props.children}
-    </Link>
+    </IconButton>
     </>
   )
 }
@@ -35,5 +30,6 @@ export default connect(
   dispatch => ({
     setImpersonationUser: (user) => dispatch(setImpersonationUser(user)),
     put: (obj, path, setter) => dispatch(updateDataElement(obj, path, setter)),
+    stopImpersonation: () => dispatch(stopImpersonating()),
   })
   )(UpdateImpersonationButton)

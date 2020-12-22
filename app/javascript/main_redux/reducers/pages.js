@@ -3,6 +3,8 @@ import { CREATE_PAGE,
          UPDATE_PAGE,
          SET_CURRENT_DRAFT_PAGE,
          GET_PAGES } from '../constants/pages'
+import { toast } from 'react-toastify';
+import { notify } from '../../components/utils/helpful_functions';
 
 let initialState = {
   pages: [],
@@ -15,12 +17,18 @@ const PageReducer = (state = initialState, action) => {
       return { ...state, pages: action.value }
     }
     case CREATE_PAGE: {
+      notify(`Страница '${action.value.title}' успешно создана!`, toast.info)
+
       return { ...state, pages: [...state.pages, action.value], currentDraftPage: action.value }
     }
     case UPDATE_PAGE: {
+      notify(`Страница '${action.value.title}' успешно обновлена!`, toast.info)
+
       return { ...state, pages: [action.value, ...state.pages.filter(el => el.id !== action.value.id)], currentDraftPage: action.value }
     }
     case DROP_PAGE: {
+      notify(`Страница '${action.value.title}' успешно удалена!`, toast.info)
+
       return { ...state, pages: action.value };
     }
     case SET_CURRENT_DRAFT_PAGE: {

@@ -5,6 +5,8 @@ import { UPDATE_USER,
          DROP_USER,
          SET_IMPERSONATION_USER,
          UPDATE_USER_STATUS } from '../constants/users';
+import { toast } from 'react-toastify';
+import { notify } from '../../components/utils/helpful_functions';
 
 let initialState = {
   users: [],
@@ -23,6 +25,8 @@ const UserReducer = (state = initialState, action) => {
       return { ...state, users: action.value }
     }
     case SET_CURRENT_USER: {
+      notify(`Добро пожаловать, ${action.value.full_name}!`, toast.info)
+
       return { ...state, currentUser: action.value, impersonationUser: action.value }
     }
     case CREATE_USER: {

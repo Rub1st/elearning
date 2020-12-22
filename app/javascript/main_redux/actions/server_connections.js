@@ -87,8 +87,8 @@ export const postDataElementWithQuery = (obj, parrentId, path, setter) => dispat
 export const logout = () => dispatch => {
   axios.delete(`http://localhost:3000/users/sign_out`, {
     "Content-Type": "application/x-www-form-urlencoded",
-  }).then(response => window.location = "http://localhost:3000/" )
-  .catch(error => dispatch(dropError(error.response)))
+  }).then(response => location.href = '/')
+  .catch(error => location.href = '/users/sign_in')
 }
 
 //search
@@ -98,4 +98,18 @@ export const searchData = (query, path, setter) => dispatch => {
           dispatch(setter(response.data))
           dispatch(setErrors([]));
         }).catch(error => dispatch(dropError(error.response)))
+}
+
+//impersonate
+export const impersonate = (id, ord_id) => dispatch => {
+  axios.post(`http://localhost:3000/users/${id}/impersonate?org_id=${ord_id}`, ord_id,{
+    "Content-Type": "application/x-www-form-urlencoded",
+  }).then(response => location.href= '/').catch(error => dispatch(setErrors(error.response.data.errors)))
+}
+
+//stop impersonating
+export const stopImpersonating = () => dispatch => {
+  axios.post(`http://localhost:3000/users/stop_impersonating`, {},{
+    "Content-Type": "application/x-www-form-urlencoded",
+  }).then(response => location.href= '/').catch(error => dispatch(setErrors(error.response.data.errors)))
 }

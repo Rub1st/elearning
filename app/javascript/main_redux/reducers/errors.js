@@ -1,6 +1,6 @@
 import { SET_ERRORS, DROP_ERROR } from '../constants/errors'
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { notify } from '../../components/utils/helpful_functions';
 
 let initialState = {
   errors: [],
@@ -15,17 +15,7 @@ const ErrorReducer = (state = initialState, action) => {
     }
     case DROP_ERROR: {
 
-      console.log(action.value);
-
-      toast.error(`${action.value.statusText} (${action.value.status})`, {
-        position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
+        notify(`${action.value.statusText} (${action.value.status})`,  toast.error)
 
       return state;
     }

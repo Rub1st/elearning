@@ -24,7 +24,9 @@ import { getCertificates } from '../../../main_redux/actions/certificates';
 import LanguageIcon from '@material-ui/icons/Language';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
+import logo from '../../../../template_photos/logo-white.png'
 import 'react-toastify/dist/ReactToastify.css';
+import { notify } from '../helpful_functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,14 +110,17 @@ const Wrapper = (props) => {
     }
   }
 
-  const changeLang = () =>  i18n.language === 'en' ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
+  const changeLang = () => {
+    i18n.language === 'en' ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
+    notify(`Язык изменен на ${i18n.language === 'ru' ? 'русский' : 'английский'}`, toast.info)
+  }
 
   return(
     <div className={classes.root}>
     <AppBar style={{backgroundColor: 'rgb(61, 61, 202)'}} position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          E-learning
+           <img src={logo} alt={'E-learning'} style={{height: '55px'}}/>
           <IconButton onClick={changeLang}>
             <LanguageIcon/>
           </IconButton>
@@ -146,15 +151,12 @@ const Wrapper = (props) => {
               <AccountCircle />
           </div>
          <ProfileBar/>
-         {
-           props.impersonation ?
-           <UpdateImpersonationButton el={props.impersonationUser}>
+           <UpdateImpersonationButton>
               <BackspaceOutlined/>
-           </UpdateImpersonationButton> :
+           </UpdateImpersonationButton>
            <IconButton onClick={() => props.logout()}>
              <DirectionsRunOutlined/>
            </IconButton>
-         }
       </Toolbar>
     </AppBar>
     <ToastContainer

@@ -6,6 +6,8 @@ import { GET_COURSE,
          UPDATE_COURSE,
          UPDATE_COURSE_APPROVE_STATUS,
          DROP_COURSE } from "../constants/courses";
+import { toast } from 'react-toastify';
+import { notify } from "../../components/utils/helpful_functions";
 
 let initialState = {
   courses: [],
@@ -18,13 +20,14 @@ let initialState = {
 const CourseReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COURSES: {
-      console.log(action.value)
       return { ...state, courses: action.value, connect_status: true }
     }
     case DROP_COURSE: {
       return { ...state, courses: action.value }
     }
     case UPDATE_COURSE_APPROVE_STATUS: {
+      notify(`Статус курса '${action.value.label}' успешно изменен!`, toast.info)
+
       return { ...state, courses: [...state.courses.filter(el => el.id !== action.value.id), action.value] }
     }
     case GET_COURSE: {
@@ -34,14 +37,22 @@ const CourseReducer = (state = initialState, action) => {
       return { ...state, searchInput: action.value}
     }
     case UPDATE_COURSE: {
-      console.log(action.value)
+      if (action.value.course_status === 'draft') notify(`Заявка курса '${action.value.label}' успешно обновлена! пожалуйста, продолжите процесс создания курса.`, toast.info)
+      else {
+        notify(`Изменения успешно внесены в содержимое курса '${action.value.label}'!`, toast.info)
+        notify(`Ожидайте одобрения администратором!`, toast.info)
+      }
+
       return { ...state, courses: [ action.value, ...state.courses.filter(el => el.id !== action.value.id)],
               currentDraftCourse: action.value, currentCourse: action.value }
     }
     case CREATE_COURSE: {
+      notify(`Заявка на создание курса '${action.value.label}' успешно сформирована! пожалуйста, продолжите процесс создания курса.`, toast.info)
+
       return {...state, courses: [ action.value, ...state.courses], currentDraftCourse: action.value }
     }
     case SET_DRAFT_COURSE: {
+      notify(`Открыт режим управления курсом '${state.courses.find(el => el.id === action.value).label}'!`, toast.info)
       return { ...state, currentDraftCourse: state.courses.find(el => el.id === action.value) }
     }
     default:{

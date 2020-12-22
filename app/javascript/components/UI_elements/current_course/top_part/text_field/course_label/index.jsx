@@ -7,6 +7,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import { toast } from 'react-toastify'
+import { notify } from '../../../../../utils/helpful_functions'
 
 const CourseLabel = (props) => {
   let existed = props.userCourses.filter(el => el.user.id === props.currentUser.id && el.course.id === props.currentCourse.id)
@@ -15,6 +17,7 @@ const CourseLabel = (props) => {
     course_id: props.currentCourse.id,
     user_id: props.currentUser.id,
     is_favorite: true,
+    progress: 0,
   }
 
   return (
@@ -26,7 +29,9 @@ const CourseLabel = (props) => {
         <FormControlLabel style={{marginLeft: '35px'}} onClick={() => {
           !existed.length ?
           props.post(newUserCourse, 'user_courses', updateUserCourse) :
-          props.put({ id: existed[0].id, user_course: { is_favorite: true, current_page: existed[0].current_page,  } }, 'user_courses', updateUserCourse)
+          props.put({ id: existed[0].id, user_course: { is_favorite: true, current_page: existed[0].current_page, progress: existed[0].progress  } }, 'user_courses', updateUserCourse);
+
+          notify(`Курс добавлен в избранное`, toast.info)
         }}
           control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="add to favorite" />}
         />

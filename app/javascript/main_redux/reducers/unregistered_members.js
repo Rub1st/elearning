@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+import { notify } from '../../components/utils/helpful_functions';
 import { CREATE_UNREGISTERED_MEMBER,
          DROP_UNREGISTERED_MEMBER,
          GET_UNREGISTERED_MEMBERS } from '../constants/unregistered_members'
@@ -12,9 +14,12 @@ const UnregisteredMemberReducer = (state = initialState, action) => {
       return { ...state, unregistered_members: action.value }
     }
     case CREATE_UNREGISTERED_MEMBER: {
+      notify(`Незарегистрированный пользователь успешно добавлен!`, toast.info)
       return { ...state, unregistered_members: [...action.value] }
     }
     case DROP_UNREGISTERED_MEMBER: {
+      notify(`Незарегистрированный пользователь успешно удален!`, toast.info)
+
       return { ...state, unregistered_members: [...action.value] }
     }
     default:{
