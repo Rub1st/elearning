@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # authorize :user, through: :current_user, allow_nil: true
+  impersonates :user
 
   protect_from_forgery with: :exception
 

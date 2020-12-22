@@ -38,6 +38,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def impersonate
+    user = User.find(params[:id])
+    Impersonation.create(manager_id: current_user[:id],
+                         common_id: params[:id],
+                         start: Time.now,
+                         end: Time.now,
+                         organization_id: params[:org_id])
+    impersonate_user(user)
+    redirect_to root_path
+  end
+
+  def stop_impersonating
+    impersonation = Impersonation.where(common_id: current_user[:id]).last
+    impersonation.update(end: Time.now)
+    stop_impersonating_user
+    redirect_to root_path
+  end
+
   private
 
   def users
@@ -49,7 +67,8 @@ class UsersController < ApplicationController
       :certificate_template,
       :avatar,
       :full_name,
-      :login
+      :login,
+      :organization_id
     )
   end
 end
