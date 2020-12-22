@@ -12,6 +12,6 @@ class PagePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    !user.nil?
   end
 end
