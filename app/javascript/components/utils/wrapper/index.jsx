@@ -16,7 +16,7 @@ import { getData, logout, searchData } from '../../../main_redux/actions/server_
 import { setImpersonationUser } from '../../../main_redux/actions/users';
 import { BackspaceOutlined, DirectionsRunOutlined } from '@material-ui/icons';
 import UpdateImpersonationButton from './impersonation_button'
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import { withRouter } from "react-router";
 import { getUserCourses } from '../../../main_redux/actions/user_courses';
 import { getOrganizations } from '../../../main_redux/actions/organizations';
@@ -121,9 +121,11 @@ const Wrapper = (props) => {
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
            <img src={logo} alt={'E-learning'} style={{height: '55px'}}/>
-          <IconButton onClick={changeLang}>
-            <LanguageIcon/>
-          </IconButton>
+           <Tooltip title={"Сменить язык"}>
+            <IconButton onClick={changeLang}>
+              <LanguageIcon/>
+            </IconButton>
+           </Tooltip>
         </Typography>
         <LeftBar/>
         {
@@ -151,12 +153,19 @@ const Wrapper = (props) => {
               <AccountCircle />
           </div>
          <ProfileBar/>
-           <UpdateImpersonationButton>
-              <BackspaceOutlined/>
-           </UpdateImpersonationButton>
-           <IconButton onClick={() => props.logout()}>
-             <DirectionsRunOutlined/>
-           </IconButton>
+         {
+           props.true_user.id !== props.currentUser.id ?
+            <Tooltip title={"Вернуться к своему аккаунту"}>
+              <UpdateImpersonationButton>
+                <BackspaceOutlined/>
+              </UpdateImpersonationButton>
+            </Tooltip> :
+            <Tooltip title={""}>
+             <IconButton onClick={() => props.logout()}>
+               <DirectionsRunOutlined/>
+             </IconButton>
+            </Tooltip>
+         }
       </Toolbar>
     </AppBar>
     <ToastContainer

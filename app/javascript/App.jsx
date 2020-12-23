@@ -29,7 +29,7 @@ function App(props){
             {
               props.current_user.user_role === 'common' ?
               (
-                <Wrapper>
+                <Wrapper true_user={props.true_user}>
                   <Switch>
                     <Route exact path='/' component={Catalog}/>
                     <Route path='/create_course' component={CreateCourse}/>

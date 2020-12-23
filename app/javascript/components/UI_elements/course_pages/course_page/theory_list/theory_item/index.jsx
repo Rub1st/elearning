@@ -32,7 +32,9 @@ const TheoryItem = ({props}) => {
           <Typography className={classes.heading}>{title}</Typography>
         </AccordionSummary>
         <div className='theory__position'>
-        <Typography variant="body2" color="textSecondary" component="p">{content}</Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {content}
+        </Typography>
           <div className='theory__picture-position'>
             <img className='theory-picture' src={image_url} alt=''/>
           </div>

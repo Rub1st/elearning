@@ -15,11 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NoSearchResultSideBar = () => {
+const NoSearchResultSideBar = ({entity = 'курсов'}) => {
   const classes = useStyles();
   return(
     <div className='admin_empty_field'>
-      <h3 className='admin_empty_content'>Мы не нашли для вас курсов</h3>
+      <h3 className='admin_empty_content'>Мы не нашли для вас {entity}</h3>
       <SentimentDissatisfied className={classes.large}/>
     </div>
   )

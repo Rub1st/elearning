@@ -1,0 +1,5 @@
+.for_course_text_field{
+  display: flex;
+  padding: 0 40px 0 10px;
+  justify-content: space-between;
+}

@@ -103,21 +103,21 @@ const FinalPage = (props) => {
   return(
     <div className='final-window'>
       {
-        // props.currentUserCourse.correct > 90 ?
+        props.currentUserCourse.correct > 90 ?
         (<div>
           <div className='final-message'>You has successufly finished course "{props.currentUserCourse.course.label}"</div>
           <div className='final-message'>Your result: {props.currentUserCourse.correct}%</div>
           <div className='final-message'>Take our congratulations, {props.currentUserCourse.user.login}</div>
           <img className='final-certificate' src={certificate} alt={'certificate'}/>
         </div>)
-        // :
-        // (<>
-        //   <div className='final-message'>You has ruined course "{props.currentUserCourse.course.label}"</div>
-        //   <div className='final-message'>Your result: {props.currentUserCourse.correct}%</div>
-        //   <div className='final-message'>We are sorry, {props.currentUserCourse.user.login}</div>
-        //   <Link to={`/`}>Click for trying one more time</Link>
-        //   <img className='final-certificate' src={certificate} alt={'certificate'}/>
-        //   </>)
+        :
+        (<>
+          <div className='final-message'>You has ruined course "{props.currentUserCourse.course.label}"</div>
+          <div className='final-message'>Your result: {props.currentUserCourse.correct}%</div>
+          <div className='final-message'>We are sorry, {props.currentUserCourse.user.login}</div>
+          <Link to={`/`}>Click for trying one more time</Link>
+          <img className='final-certificate' src={certificate} alt={'certificate'}/>
+          </>)
       }
       <div className='final-mark-field'>
         <div className='final-mark-title'>mark please this course</div>
@@ -130,6 +130,7 @@ const FinalPage = (props) => {
                       user_course:
                       {
                         mark: el.value,
+                        progress: 100,
                         current_page: props.currentUserCourse.current_page,
                       }
                     }, 'user_courses', updateUserCourse);

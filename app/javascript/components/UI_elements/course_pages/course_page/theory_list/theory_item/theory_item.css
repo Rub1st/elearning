@@ -1,9 +1,7 @@
 .theory__position{
   display: flex;
-  justify-content: center;
-  flex-direction: column;
   width: 100%;
-  padding: 10px 40px 30px;
+  padding: 10px 20px 30px;
 }
 
 .theory__item-position{
@@ -30,7 +28,6 @@
 }
 
 .theory__picture-position{
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   width: 100%;

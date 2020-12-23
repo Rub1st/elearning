@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
   reply: {
     width: 345,
   }
@@ -37,7 +34,7 @@ const CommentContent = ({props}) => {
     <>
         <CardHeader
         avatar={
-          <Avatar aria-label="recipe" src={props.author.avatar_url} className={classes.avatar}>
+          <Avatar aria-label="recipe" src={props.author.avatar_url}>
             {
               props.author.login[0]
             }

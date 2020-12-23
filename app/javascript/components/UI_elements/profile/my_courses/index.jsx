@@ -2,18 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { choose, setDraftCourse } from '../../../../main_redux/actions/courses'
 import { setCurrentDraftPage } from '../../../../main_redux/actions/pages'
+import NoSearchResultSideBar from '../../../utils/empty_fields/no_search_result_sidebar'
 import MyCourse from './my_course'
 import './style.css'
 
 const MyCourses = (props) => {
+
+  let filtered = props.courses.filter(el => el.author.login === props.currentUser.login)
+
   return(
     <div className='profile__course-field'>
         <ul className='profile__course-list'>
           {
-            props.courses.filter(el => el.author.login === props.currentUser.login).map(el =>
+            filtered.length ? filtered.map(el =>
             <li key={el.id} className='profile__course-item'>
               <MyCourse el={el} newEl={{ id: el.id, course: { approve_status: 1}}}/>
-            </li>)
+            </li>) : <NoSearchResultSideBar/>
           }
         </ul>
     </div>

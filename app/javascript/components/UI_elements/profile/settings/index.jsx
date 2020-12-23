@@ -13,6 +13,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { useTranslation } from 'react-i18next';
 import { serialize } from 'object-to-formdata';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,9 +87,11 @@ const Settings = (props) => {
         </label>
       </div>
       <img className={classes.large} alt={props.currentUser.login} src={props.users.find(e => e.id === props.currentUser.id).certificate_template_url}/>
-      <IconButton style={{marginLeft: '40px'}} onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
-        <CheckCircleOutlineIcon className={classes.approve}/>
-      </IconButton>
+      <Link onClick={() => location.href = '/users/sign_in'}>
+        <IconButton style={{marginLeft: '40px'}} onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
+          <CheckCircleOutlineIcon className={classes.approve}/>
+        </IconButton>
+      </Link>
     </div>
   </div>
   )

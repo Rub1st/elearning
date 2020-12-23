@@ -18,6 +18,7 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import RecButtonShow from './rec_button_show';
 import { updateDataElement } from '../../../../../main_redux/actions/server_connections';
 import { DateFormat } from '../../../../utils/helpful_functions';
+import './style.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,17 +76,32 @@ const RecCourse = (props) => {
         title="Paella dish"
       />
       <CardContent>
-      <Typography variant="body2" color="textSecondary" component="p">
-          access type: {el.access_type}
+      {/* <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+          <p>access type</p> <p>{el.access_type}</p>
+        </Typography> */}
+        <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+          <p>
+            organization
+          </p>
+          <p>
+            {el.organization === null ? 'no' : el.organization.name}
+          </p>
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          organization: {el.organization === null ? 'no' : el.organization.name}
+        <Typography variant="body2" className='for_course_text_field' color="textSecondary" component="p">
+        <p>
+          usage count
+        </p>
+        <p>
+          {el.uses_count}
+        </p>
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          usage count: {el.uses_count}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          success rate: {el.success_rate}%
+        <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+        <p>
+        success rate
+        </p>
+        <p>
+          {el.success_rate}%
+        </p>
         </Typography>
       </CardContent>
         <CardActions disableSpacing>

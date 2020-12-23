@@ -20,7 +20,7 @@ class Root extends React.Component {
         <React.Fragment>
           <Provider store ={store}>
             <BrowserRouter>
-              <App current_user={this.props.currentUser}/>
+              <App current_user={this.props.currentUser} true_user={this.props.trueUser}/>
             </BrowserRouter>
           </Provider>
         </React.Fragment>
@@ -30,7 +30,8 @@ class Root extends React.Component {
 }
 
 Root.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  trueUser: PropTypes.object
 };
 
 serviceWorker.unregister();

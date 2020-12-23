@@ -1,20 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setCurrentOrganization } from '../../../../main_redux/actions/organizations';
+import NoSearchResultSideBar from '../../../utils/empty_fields/no_search_result_sidebar';
 import OrgItem from './org_item'
 
 const Organization = (props) => {
-  console.log(props.organizations)
+
+  let filtered = props.organizations.filter(el => el.registered_members.filter(el => el.user.id === props.currentUser.id).length)
 
   return(
     <div className='profile__course-field'>
         <ul className='profile__course-list'>
           {
-            props.organizations.filter(el => el.registered_members.filter(el => el.user.id === props.currentUser.id).length).map(el =>
+            filtered.length ? filtered.map(el =>
               <li key={el.id} className='profile__course-item'>
               <OrgItem el={el} newEl={{ id: el.id, organization: {approve_status: 1, name: el.name, description: el.description}}}/>
             </li>
-            )
+            ) : <NoSearchResultSideBar entity={'организаций'}/>
           }
         </ul>
     </div>
