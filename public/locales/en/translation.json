@@ -97,5 +97,36 @@
   },
   "General": {
     "1": "Good luck! And remember: teaching is light!"
+  },
+  "Tooltip": {
+    "1": "Change language",
+    "2": "More",
+    "3": "View course's page",
+    "4": "Exit",
+    "5": "Next",
+    "6": "Create",
+    "7": "Add",
+    "8": "Block",
+    "9": "Edit",
+    "10": "Remove from favorites",
+    "11": "Manage",
+    "12": "View organization's courses",
+    "13": "Generate report",
+    "14": "View created report",
+    "15": "Save changes",
+    "16": "Remove member",
+    "17": "Add member",
+    "18": "Impersonate",
+    "19": "Back to your own account",
+    "20": "Add paragraph",
+    "21": "Create practice",
+    "22": "Add variant of answer for practice",
+    "23": "Add practice",
+    "24": "Remove page",
+    "25": "Remove paragraph",
+    "26": "Remove practice",
+    "27": "Add page",
+    "28": "Complete work with course's constructor",
+    "29": "Save new title of page"
   }
 }
