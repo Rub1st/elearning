@@ -24,12 +24,7 @@ class RegisteredMembersController < ApplicationController
   end
 
   def search
-    search = params[:term] != '' ? params[:term] : nil
-    if search
-      render json: registered_members.search(search)
-    else
-      render json: registered_members
-    end
+    render_search_data registered_members
   end
 
   private

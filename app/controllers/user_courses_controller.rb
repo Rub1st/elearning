@@ -35,12 +35,7 @@ class UserCoursesController < ApplicationController
   end
 
   def search
-    search = params[:term] != '' ? params[:term] : nil
-    if search
-      render json: user_courses.search(search)
-    else
-      render json: user_courses
-    end
+    render_search_data user_courses
   end
 
   private

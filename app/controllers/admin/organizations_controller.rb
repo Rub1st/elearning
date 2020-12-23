@@ -28,12 +28,7 @@ module Admin
     end
 
     def search
-      search = params[:term] != '' ? params[:term] : nil
-      if search
-        render json: Organization.search(search)
-      else
-        render json: Organization.all
-      end
+      render_search_data Organization
     end
 
     private

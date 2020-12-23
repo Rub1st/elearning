@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :certificates, only: %i[create index] do
+    resources :certificates, only: %i[index] do
       collection do
         get :search
       end

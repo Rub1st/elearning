@@ -6,12 +6,7 @@ module Admin
     end
 
     def search
-      search = params[:term] != '' ? params[:term] : nil
-      if search
-        render json: Impersonation.search(search)
-      else
-        render json: Impersonation.all
-      end
+      render_search_data Impersonation
     end
   end
 end

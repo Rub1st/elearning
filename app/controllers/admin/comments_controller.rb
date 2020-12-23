@@ -12,12 +12,7 @@ module Admin
     end
 
     def search
-      search = params[:term] != '' ? params[:term] : nil
-      if search
-        render json: Comment.search(search)
-      else
-        render json: Comment.all
-      end
+      render_search_data Comment
     end
   end
 end

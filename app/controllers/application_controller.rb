@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_locale
 
   impersonates :user
 
@@ -9,14 +10,12 @@ class ApplicationController < ActionController::Base
     Rails.env.development? && ENV['SKIP_VERIFY_AUTHENTICITY_TOKEN']
   }
 
-  before_action :set_locale
-
   def set_locale
-    if user_signed_in?
-      I18n.locale = current_user.language
-    else
-      I18n.locale = params[:lang] || locale_from_header || I18n.default_locale
-    end
+    I18n.locale = if user_signed_in?
+                    current_user.language
+                  else
+                    params[:lang] || locale_from_header || I18n.default_locale
+                  end
   end
 
   def locale_from_header
@@ -25,6 +24,23 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionPolicy::Unauthorized do
     render plain: '401 unauthorized', status: :unauthorized
+  end
+
+  def render_data(check, data)
+    if check
+      render json: data
+    else
+      render json: { errors: check.errors }, status: :unprocessable_entity
+    end
+  end
+
+  def render_search_data(collection)
+    search = params[:term] != '' ? params[:term] : nil
+    if search
+      render json: collection.search(search)
+    else
+      render json: collection.all
+    end
   end
 
   protected

@@ -25,12 +25,7 @@ module Admin
     end
 
     def search
-      search = params[:term] != '' ? params[:term] : nil
-      if search
-        render json: Tag.search(search)
-      else
-        render json: Tag.all
-      end
+      render_search_data Tag
     end
 
     private

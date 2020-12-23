@@ -31,12 +31,7 @@ class OrganizationsController < ApplicationController
   end
 
   def search
-    search = params[:term] != '' ? params[:term] : nil
-    if search
-      render json: Organization.search(search)
-    else
-      render json: organizations
-    end
+    render_search_data Organization
   end
 
   private

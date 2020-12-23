@@ -2,26 +2,21 @@ class CoursesController < ApplicationController
   def create
     authorize!
     course = Course.new(permit_params)
+
     if permit_params[:image].present?
       course.image.attach(permit_params[:image])
     else
       course.image.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noiamge.jpg')
     end
-    if course.save
-      render json: course
-    else
-      render json: { errors: course.errors }, status: :unprocessable_entity
-    end
+
+    render_data(course.save, course)
   end
 
   def update
     authorize!
     course = Course.find(params[:id])
-    if course.update(permit_params)
-      render json: course
-    else
-      render json: { errors: course.errors }, status: :unprocessable_entity
-    end
+
+    render_data(course.update(permit_params), course)
   end
 
   def index
@@ -30,12 +25,7 @@ class CoursesController < ApplicationController
   end
 
   def search
-    search = params[:term] != '' ? params[:term] : nil
-    if search
-      render json: Course.search(search)
-    else
-      render json: courses
-    end
+    render_search_data Course
   end
 
   private

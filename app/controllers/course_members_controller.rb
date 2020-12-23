@@ -1,11 +1,8 @@
 class CourseMembersController < ApplicationController
   def create
     course_member = CourseMember.new(permit_params)
-    if course_member.save
-      render json: course_member
-    else
-      render json: { errors: course_member.errors }, status: :unprocessable_entity
-    end
+
+    render_data(course_member.save, course_member)
   end
 
   private

@@ -20,12 +20,7 @@ module Admin
     end
 
     def search
-      search = params[:term] != '' ? params[:term] : nil
-      if search
-        render json: User.search(search)
-      else
-        render json: User.all
-      end
+      render_search_data User
     end
 
     private

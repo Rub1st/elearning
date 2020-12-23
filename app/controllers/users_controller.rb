@@ -30,12 +30,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    search = params[:term] != '' ? params[:term] : nil
-    if search
-      render json: users.search(search)
-    else
-      render json: users
-    end
+    render_search_data users
   end
 
   def impersonate

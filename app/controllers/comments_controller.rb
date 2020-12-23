@@ -2,31 +2,25 @@ class CommentsController < ApplicationController
   def create
     authorize!
     comment = Comment.new(permit_params)
-    if comment.save
-      render json: comments
-    else
-      render json: { errors: comment.errors }, status: :unprocessable_entity
-    end
+
+    render_data(comment.save, comments)
   end
 
   def destroy
     authorize!
     Comment.find(params[:id]).destroy
+
     render json: comments
   end
 
   def index
     authorize!
+
     render json: comments
   end
 
   def search
-    search = params[:term] != '' ? params[:term] : nil
-    if search
-      render json: Comment.search(search)
-    else
-      render json: Comment.all
-    end
+    render_search_data Comment
   end
 
   private

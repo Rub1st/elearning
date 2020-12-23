@@ -22,12 +22,7 @@ module Admin
     end
 
     def search
-      search = params[:term] != '' ? params[:term] : nil
-      if search
-        render json: Course.search(search)
-      else
-        render json: Course.all
-      end
+      render_search_data Course
     end
 
     private
