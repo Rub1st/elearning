@@ -6,11 +6,7 @@ class UserAnswersController < ApplicationController
 
     old_answers_killer
 
-    if ua.save
-      render json: ua
-    else
-      render json: { errors: ua.errors }, status: :unprocessable_entity
-    end
+    render_created_data(ua, ua)
   end
 
   private

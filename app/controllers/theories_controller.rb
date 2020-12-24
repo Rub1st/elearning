@@ -1,7 +1,6 @@
 class TheoriesController < ApplicationController
   def create
     authorize!
-
     theory = Theory.new(permit_params)
 
     if permit_params[:image].present?
@@ -10,17 +9,13 @@ class TheoriesController < ApplicationController
       theory.image.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noiamge.jpg')
     end
 
-    if theory.save
-      render json: theory
-    else
-      render json: { errors: theory.errors }, status: :unprocessable_entity
-    end
+    render_created_data(theory, theory)
   end
 
   def destroy
     authorize!
-
     Theory.find(params[:id]).destroy
+
     render json: theories
   end
 

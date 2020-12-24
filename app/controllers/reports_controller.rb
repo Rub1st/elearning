@@ -1,14 +1,9 @@
 class ReportsController < ApplicationController
   def create
     authorize!
-
     report = Reports::Create.call(permit_params)
 
-    if report.save
-      render json: Report.all
-    else
-      render json: { errors: report.errors }, status: :unprocessable_entity
-    end
+    render_created_data(report, Report)
   end
 
   def index

@@ -1,25 +1,20 @@
 class QuestionsController < ApplicationController
   def create
     authorize!
-
     question = Question.new(permit_params)
-    if question.save
-      render json: question
-    else
-      render json: { errors: question.errors }, status: :unprocessable_entity
-    end
+
+    render_created_data(question, question)
   end
 
   def destroy
     authorize!
-
     Question.find(params[:id]).destroy
+
     render json: questions
   end
 
   def index
     authorize!
-
     render json: questions
   end
 

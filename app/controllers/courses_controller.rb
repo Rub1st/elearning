@@ -9,14 +9,14 @@ class CoursesController < ApplicationController
       course.image.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noiamge.jpg')
     end
 
-    render_data(course.save, course)
+    render_created_data(course, course)
   end
 
   def update
     authorize!
     course = Course.find(params[:id])
 
-    render_data(course.update(permit_params), course)
+    render_updated_data(course, permit_params, course)
   end
 
   def index

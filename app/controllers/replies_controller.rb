@@ -2,16 +2,14 @@ class RepliesController < ApplicationController
   def create
     authorize!
     reply = Reply.new(permit_params)
-    if reply.save
-      render json: comments
-    else
-      render json: { errors: reply.errors }, status: :unprocessable_entity
-    end
+
+    render_created_data(reply, comments)
   end
 
   def destroy
     authorize!
     Reply.find(params[:id]).destroy
+
     render json: comments
   end
 

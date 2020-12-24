@@ -7,10 +7,7 @@ class UsersController < ApplicationController
 
   def update
     authorize!
-
     user = User.find(params[:id])
-
-    p permit_params[:avatar]
 
     if permit_params[:avatar].present?
       user.avatar.purge
@@ -22,11 +19,9 @@ class UsersController < ApplicationController
       user.certificate_template.attach(permit_params[:certificate_template])
     end
 
-    if user.update(login: permit_params[:login], full_name: permit_params[:full_name])
-      render json: users
-    else
-      render json: { errors: user.errors }, status: :unprocessable_entity
-    end
+    updated = { login: permit_params[:login], full_name: permit_params[:full_name] }
+
+    render_updated_data(user, updated, users)
   end
 
   def search

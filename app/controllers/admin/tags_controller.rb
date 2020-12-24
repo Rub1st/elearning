@@ -3,21 +3,15 @@ module Admin
     def create
       authorize!
       tag = Tag.new(permit_params)
-      if tag.save
-        render json: Tag.all
-      else
-        render json: { errors: tag.errors }, status: :unprocessable_entity
-      end
+
+      render_created_data(tag, Tag)
     end
 
     def update
       authorize!
       tag = Tag.find(params[:id])
-      if tag.update(permit_params)
-        render json: Tag.all
-      else
-        render json: { errors: tag.errors }, status: :unprocessable_entity
-      end
+
+      render_updated_data(tag, permit_params, Tag)
     end
 
     def index

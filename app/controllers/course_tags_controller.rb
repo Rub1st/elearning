@@ -2,7 +2,7 @@ class CourseTagsController < ApplicationController
   def create
     course_tag = CourseTag.new(permit_params)
 
-    render_data(course_tag.save, course_tag)
+    render_created_data(course_tag, course_tag)
   end
 
   private

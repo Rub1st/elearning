@@ -26,8 +26,16 @@ class ApplicationController < ActionController::Base
     render plain: '401 unauthorized', status: :unauthorized
   end
 
-  def render_data(check, data)
-    if check
+  def render_created_data(check, data)
+    if check.save
+      render json: data
+    else
+      render json: { errors: check.errors }, status: :unprocessable_entity
+    end
+  end
+
+  def render_updated_data(check, params, data)
+    if check.update(params)
       render json: data
     else
       render json: { errors: check.errors }, status: :unprocessable_entity

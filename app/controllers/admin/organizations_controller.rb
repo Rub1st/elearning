@@ -9,11 +9,7 @@ module Admin
         organization.certificate_template.attach(permit_params[:certificate_template])
       end
 
-      if organization.update(permit_params)
-        render json: organization
-      else
-        render json: { errors: organization.errors }, status: :unprocessable_entity
-      end
+      render_updated_data(organization, permit_params, organization)
     end
 
     def destroy

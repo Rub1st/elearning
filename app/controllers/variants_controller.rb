@@ -1,13 +1,9 @@
 class VariantsController < ApplicationController
   def create
     authorize!
-
     variant = Variant.new(permit_params)
-    if variant.save
-      render json: Question.find(variant.question.id)
-    else
-      render json: { errors: variant.errors }, status: :unprocessable_entity
-    end
+
+    render_created_data(variant, Question.find(variant.question.id))
   end
 
   def destroy

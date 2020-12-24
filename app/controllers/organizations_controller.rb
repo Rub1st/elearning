@@ -7,7 +7,6 @@ class OrganizationsController < ApplicationController
 
   def update
     authorize!
-
     organization = Organization.find(params[:id])
 
     if permit_params[:certificate_template].present?
@@ -15,13 +14,11 @@ class OrganizationsController < ApplicationController
       organization.certificate_template.attach(permit_params[:certificate_template])
     end
 
-    if organization.update(name: permit_params[:name],
-                           description: permit_params[:description],
-                           approve_status: permit_params[:approve_status].to_i)
-      render json: organization
-    else
-      render json: { errors: organization.errors }, status: :unprocessable_entity
-    end
+    updated = { name: permit_params[:name],
+                description: permit_params[:description],
+                approve_status: permit_params[:approve_status].to_i }
+
+    render_updated_data(organization, updated, organization)
   end
 
   def index

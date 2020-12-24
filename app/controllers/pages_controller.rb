@@ -1,30 +1,22 @@
 class PagesController < ApplicationController
   def create
     authorize!
-
     page = Pages::Create.call(permit_params)
-    if page.save
-      render json: page
-    else
-      render json: { errors: page.errors }, status: :unprocessable_entity
-    end
+
+    render_created_data(page, page)
   end
 
   def update
     authorize!
-
     page = Page.find(params[:id])
-    if page.update(permit_params)
-      render json: page
-    else
-      render json: { errors: page.errors }, status: :unprocessable_entity
-    end
+
+    render_updated_data(page, permit_params, page)
   end
 
   def destroy
     authorize!
-
     Page.find(params[:id]).destroy
+
     render json: pages
   end
 

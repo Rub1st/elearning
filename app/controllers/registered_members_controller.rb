@@ -1,19 +1,15 @@
 class RegisteredMembersController < ApplicationController
   def create
     authorize!
-
     registered_member = RegisteredMember.new(permit_params)
-    if registered_member.save
-      render json: RegisteredMember.all
-    else
-      render json: { errors: registered_member.errors }, status: :unprocessable_entity
-    end
+
+    render_created_data(registered_member, RegisteredMember)
   end
 
   def destroy
     authorize!
-
     RegisteredMember.find(params[:id]).destroy
+
     render json: registered_members
   end
 

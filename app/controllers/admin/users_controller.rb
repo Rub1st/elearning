@@ -7,11 +7,7 @@ module Admin
     def update
       user = User.find(params[:id])
 
-      if user.update(permit_params)
-        render json: User.all
-      else
-        render json: { errors: user.errors }, status: :unprocessable_entity
-      end
+      render_updated_data(user, permit_params, User)
     end
 
     def destroy

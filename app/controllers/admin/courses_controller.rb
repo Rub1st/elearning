@@ -3,11 +3,8 @@ module Admin
     def update
       authorize!
       course = Course.find(params[:id])
-      if course.update(permit_params)
-        render json: course
-      else
-        render json: { errors: course.errors }, status: :unprocessable_entity
-      end
+
+      render_updated_data(course, permit_params, course)
     end
 
     def destroy

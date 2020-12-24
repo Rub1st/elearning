@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     authorize!
     comment = Comment.new(permit_params)
 
-    render_data(comment.save, comments)
+    render_created_data(comment, comments)
   end
 
   def destroy

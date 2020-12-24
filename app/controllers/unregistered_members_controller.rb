@@ -2,16 +2,14 @@ class UnregisteredMembersController < ApplicationController
   def create
     authorize!
     unregistered_member = UnregisteredMembers::Create.call(permit_params)
-    if unregistered_member.save
-      render json: unregistered_members
-    else
-      render json: { errors: unregistered_member.errors }, status: :unprocessable_entity
-    end
+
+    render_created_data(unregistered_member, unregistered_members)
   end
 
   def destroy
     authorize!
     UnregisteredMember.find(params[:id]).destroy
+
     render json: unregistered_members
   end
 

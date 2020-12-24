@@ -1,31 +1,18 @@
 class UserCoursesController < ApplicationController
   def create
     authorize!
-
     user_course = UserCourses::Create.call(permit_params)
 
-    if user_course.save
-      render json: user_course
-    else
-      render json: { errors: user_course.errors }, status: :unprocessable_entity
-    end
+    render_created_data(user_course, user_course)
   end
 
   def update
     authorize!
-
     user_course = UserCourse.find(params[:id])
-
     UserCourses::Update.call(user_course, permit_params)
-
     user_course = UserCourse.find(params[:id])
 
-    if user_course.update(permit_params)
-
-      render json: user_course
-    else
-      render json: { errors: user_course.errors }, status: :unprocessable_entity
-    end
+    render_updated_data(user_course, permit_params, user_course)
   end
 
   def index
