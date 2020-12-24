@@ -33,5 +33,7 @@ module ElearningBackend
     config.i18n.fallbacks = true
 
     config.middleware.use I18n::JS::Middleware
+
+    config.serve_static_assets = true
   end
 end

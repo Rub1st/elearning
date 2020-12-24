@@ -121,7 +121,7 @@ const Wrapper = (props) => {
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
            <img src={logo} alt={'E-learning'} style={{height: '55px'}}/>
-           <Tooltip title={"Сменить язык"}>
+           <Tooltip title={t("Tooltip.1")}>
             <IconButton onClick={changeLang}>
               <LanguageIcon/>
             </IconButton>

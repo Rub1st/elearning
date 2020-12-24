@@ -52,7 +52,6 @@ Rails.application.routes.draw do
 
     resources :replies, only: %i[create destroy]
     resources :course_tags, only: %i[create]
-    resources :impersonations, only: %i[create update]
     resources :pages, only: %i[create update destroy index]
     resources :questions, only: %i[create destroy index]
     resources :variants, only: %i[create destroy]
@@ -116,5 +115,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
 
-  get '*path' => 'static#index', constraints: -> (req) { !(req.fullpath =~ /^\/rails\/.*/) }
+  get '*path' => 'static#index', constraints: -> (req) { req.format == 'text/html' }
 end
+
+# /^\/rails\/.*/

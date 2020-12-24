@@ -27,7 +27,7 @@ const PageReducer = (state = initialState, action) => {
       return { ...state, pages: [action.value, ...state.pages.filter(el => el.id !== action.value.id)], currentDraftPage: action.value }
     }
     case DROP_PAGE: {
-      notify(`Страница '${action.value.title}' успешно удалена!`, toast.info)
+      notify(`Страница успешно удалена!`, toast.info)
 
       return { ...state, pages: action.value };
     }
