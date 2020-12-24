@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { dropPage, setCurrentDraftPage } from '../../../../../main_redux/actions/pages'
-import { destroyDataElement } from '../../../../../main_redux/actions/server_connections'
+import { destroyDataElement, destroyDataElementWithQuery } from '../../../../../main_redux/actions/server_connections'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,7 +34,7 @@ const CreateCourseTreeSideBar = (props) => {
             <ListItem button className={'profile__sidebar-item'} key={el.id} onClick={() => props.setCurrentDraftPage(el.id)}>
               <ListItemText primary={el.order}/>
               <ListItemText primary={el.title}/>
-              <IconButton onClick={() => props.drop(el.id, 'pages', dropPage)}>
+              <IconButton onClick={() => props.drop(el.id, props.currentDraftCourse.id, 'pages', dropPage)}>
                 <DeleteForeverOutlined/>
               </IconButton>
             </ListItem>
@@ -53,6 +53,6 @@ export default connect(
   }),
   dispatch => ({
     setCurrentDraftPage: (pageId) => dispatch(setCurrentDraftPage(pageId)),
-    drop: (id, path, setter) => dispatch(destroyDataElement(id, path, setter))
+    drop: (id, parrentId, path, setter) => dispatch(destroyDataElementWithQuery(id, parrentId, path, setter))
   })
 )(CreateCourseTreeSideBar)
