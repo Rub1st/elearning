@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { DeleteForeverOutlined } from '@material-ui/icons';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,16 +27,18 @@ const CreateCourseTreeSideBar = (props) => {
   let certainPages = props.pages.filter(el => el.course.id === props.currentDraftCourse.id).sort((a,b) => a.order - b.order);
   return(
     <div className={classes.root}>
-      <div>{t('Course.24')}</div>
-    <ul style={{listStyle: 'none'}}>
+      <div style={{marginBottom: '16px'}}>{t('Course.24')}</div>
+    <ul style={{listStyle: 'none', paddingLeft: '5px'}}>
       {
         certainPages.map(el =>
             <ListItem button className={'profile__sidebar-item'} key={el.id} onClick={() => props.setCurrentDraftPage(el.id)}>
               <ListItemText primary={el.order}/>
               <ListItemText primary={el.title}/>
-              <IconButton onClick={() => props.drop(el.id, props.currentDraftCourse.id, 'pages', dropPage)}>
-                <DeleteForeverOutlined/>
-              </IconButton>
+              <Tooltip title={t("Tooltip.24")}>
+                <IconButton onClick={() => props.drop(el.id, props.currentDraftCourse.id, 'pages', dropPage)}>
+                  <DeleteForeverOutlined/>
+                </IconButton>
+              </Tooltip>
             </ListItem>
           )
       }

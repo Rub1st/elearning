@@ -4,6 +4,7 @@ import Certificate from './certificate'
 import { getCertificates } from '../../../../main_redux/actions/certificates';
 import { getData } from '../../../../main_redux/actions/server_connections';
 import NoSearchResultSideBar from '../../../utils/empty_fields/no_search_result_sidebar';
+import { useTranslation } from 'react-i18next';
 
 const Certificates = (props) => {
 
@@ -11,7 +12,7 @@ const Certificates = (props) => {
     props.set('certificates', getCertificates);
   }, []);
 
-  console.log(props.certificates)
+  const { t, i18n } = useTranslation();
 
   let filtered = props.certificates.filter(el => el.user.id === props.currentUser.id)
 
@@ -22,7 +23,7 @@ const Certificates = (props) => {
              filtered.length ? filtered.map(el =>
               <li key={el.id} className='profile__course-item'>
                 <Certificate el={el}/>
-              </li>) : <NoSearchResultSideBar entity={'сертификатов'}/>
+              </li>) : <NoSearchResultSideBar entity={t("EmptyField.6")}/>
           }
         </ul>
     </div>

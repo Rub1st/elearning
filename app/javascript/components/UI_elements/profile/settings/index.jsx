@@ -56,7 +56,7 @@ const Settings = (props) => {
 
   return(
     <div className='home__position'>
-    <div style={{marginLeft: '-50px'}} className='home__top-line'>
+    <div style={{marginLeft: '-50px', marginTop: '30px', marginBottom: '30px'}} className='home__top-line'>
     <input className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
         <IconButton color="primary" aria-label="upload picture" component="span">
@@ -76,19 +76,23 @@ const Settings = (props) => {
                    helperText={props.errors.full_name != undefined ? props.errors.full_name[0] : null}
                    value={fullName} variant="outlined" onChange={(e) => setFullName(e.target.value)}/>
       </div>
+      <Link style={{marginTop: '30px'}} onClick={() => location.href = '/users/sign_in'}>
+        <IconButton onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
+          <CheckCircleOutlineIcon className={classes.approve}/>
+        </IconButton>
+      </Link>
     </div>
-    <div className='home__second-line'>
-      <div className='d-flex'>
-        <input className={classes.input} onChange={(e) => setCertificate(e.target.files[0])} id="icon-button-file" type="file" />
-        <label htmlFor="icon-button-file">
-          <IconButton color="primary" aria-label="upload picture" component="span">
-            <PhotoCamera/>
-          </IconButton>
-        </label>
-      </div>
-      <img className={classes.large} alt={props.currentUser.login} src={props.users.find(e => e.id === props.currentUser.id).certificate_template_url}/>
-      <Link onClick={() => location.href = '/users/sign_in'}>
-        <IconButton style={{marginLeft: '40px'}} onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
+    <hr/>
+    <div style={{marginLeft: '-50px', marginTop: '30px'}} className='home__top-line'>
+    <input className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
+      <label htmlFor="icon-button-file">
+        <IconButton color="primary" aria-label="upload picture" component="span">
+          <PhotoCamera />
+        </IconButton>
+      </label>
+      <img src={props.users.find(e => e.id === props.currentUser.id).certificate_template_url} alt={'certificate'} style={{width: '350px', height: '250px'}}/>
+      <Link style={{marginLeft: '200px', marginTop: '30px'}} onClick={() => location.href = '/users/sign_in'}>
+        <IconButton onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
           <CheckCircleOutlineIcon className={classes.approve}/>
         </IconButton>
       </Link>

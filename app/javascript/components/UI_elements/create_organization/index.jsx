@@ -8,7 +8,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import './style.css'
 import { makeStyles, fade } from '@material-ui/core/styles';
-import { IconButton, ListItem, ListItemText } from '@material-ui/core';
+import { IconButton, ListItem, ListItemText, Tooltip } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
@@ -92,8 +92,6 @@ const CreateOrganization = (props) => {
 
   const { t, i18n } = useTranslation();
 
-  console.log(props.errors)
-
   const enter_listener = event => {
     if (event.key === 'Enter') {
       props.search(filter , 'users', getUsers)
@@ -157,14 +155,16 @@ const CreateOrganization = (props) => {
               onChange={(e) => setDescription(e.target.value)}
               variant="outlined"
             />
-            <IconButton
-              style={{marginTop: '60px', marginLeft: '15px'}}
-              onClick={() => {
-              props.post(formData, 'organizations', createOrganization);
-              setApprove(!approve)
-            }}>
-              <CheckCircleOutlineIcon className={classes.approve}/>
-            </IconButton>
+            <Tooltip title={t("Tooltip.6")}>
+              <IconButton
+                style={{marginTop: '60px', marginLeft: '15px'}}
+                onClick={() => {
+                props.post(formData, 'organizations', createOrganization);
+                setApprove(!approve)
+              }}>
+                <CheckCircleOutlineIcon className={classes.approve}/>
+              </IconButton>
+            </Tooltip>
           </div>
           <hr/>
           <div className='d-flex'>
@@ -191,7 +191,7 @@ const CreateOrganization = (props) => {
           <div className='d-flex'>
           <ul className='choose-managers-list'>
           {
-            props.users.map(el =>
+            props.users.length ? props.users.map(el =>
               <ListItem key={el.id} button >
                   <Checkbox
                     color="primary"
@@ -201,12 +201,13 @@ const CreateOrganization = (props) => {
                 <ListItemText>
                   {el.login}{` (${el.full_name})`}
                 </ListItemText>
-              </ListItem>)
+              </ListItem>) : <div className='empty_field'>{t('EmptyField.9')}</div>
           }
           </ul>
           {
             name.length && description.length && approve ?
-            <Link
+            <Tooltip title={t("Tooltip.7")}>
+              <Link
               style={{marginTop: '180px', marginLeft: '15px'}}
                 to={`/user_id=${props.currentUser.id}/organizations`}
                 onClick={() => {
@@ -221,8 +222,10 @@ const CreateOrganization = (props) => {
                                         member_role: 0,
                                       }, 'registered_members', plug);
                                               }}>
-              <CheckCircleOutlineIcon className={classes.approve}/>
-            </Link> :
+                <CheckCircleOutlineIcon className={classes.approve}/>
+              </Link>
+            </Tooltip>
+             :
             <IconButton disabled={true} style={{marginTop: '180px', marginLeft: '15px'}}>
               <CheckCircleOutlineIcon className={classes.approve}/>
             </IconButton>

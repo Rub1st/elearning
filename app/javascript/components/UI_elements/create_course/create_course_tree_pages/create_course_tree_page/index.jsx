@@ -18,7 +18,7 @@ import './style.css'
 import { DeleteForeverOutlined } from '@material-ui/icons';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import Checkbox from '@material-ui/core/Checkbox';
-import { IconButton, Paper, TextField } from '@material-ui/core';
+import { IconButton, Paper, TextField, Tooltip } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { useTranslation } from 'react-i18next';
 
@@ -74,22 +74,24 @@ const CreateCourseTreePage = (props) => {
                      error={props.errors.title != undefined}
                      helperText={props.errors.title != undefined ? props.errors.title[0] : null}
                      label='title'/>
-          <IconButton onClick={() => props.put({
-            id: props.currentDraftPage.id,
-            page: {
-              title: title
-            }
-          }, 'pages', updatePage)}>
-            <CheckCircleOutlineIcon/>
-          </IconButton>
+          <Tooltip title={t("Tooltip.29")}>
+            <IconButton onClick={() => props.put({
+              id: props.currentDraftPage.id,
+              page: {
+                title: title
+              }
+            }, 'pages', updatePage)}>
+              <CheckCircleOutlineIcon/>
+            </IconButton>
+          </Tooltip>
         </div>
         <div className='create-course-created-theory'>
           <div style={{color: 'rgb(163, 157, 157)'}}>{t('Course.18')}</div>
           <div className={classes.root}>
             <ul className='create-course-created-theory-list'>
               {
-                certainTheories.map(el =>
-                <li key={el.id}>
+                certainTheories.length ? certainTheories.map(el =>
+                <li key={el.id} style={{display: 'flex', marginBottom: '2.5px'}}>
                   <Accordion className='theory__item-position'>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -98,9 +100,6 @@ const CreateCourseTreePage = (props) => {
                       className='d-flex'
                     >
                       <Typography className={classes.heading}>{el.title}</Typography>
-                      <IconButton onClick={() => props.drop(el.id, 'theories', dropTheory)}>
-                        <DeleteForeverOutlined/>
-                      </IconButton>
                     </AccordionSummary>
                     <div className='theory__position'>
                       <Typography variant="body2" color="textSecondary" component="p">{el.content}</Typography>
@@ -109,7 +108,12 @@ const CreateCourseTreePage = (props) => {
                       </div>
                     </div>
                   </Accordion>
-                </li>)
+                  <Tooltip title={t("Tooltip.25")}>
+                    <IconButton onClick={() => props.drop(el.id, 'theories', dropTheory)}>
+                      <DeleteForeverOutlined/>
+                    </IconButton>
+                  </Tooltip>
+                </li>) : <div className='empty_field'>{t("EmptyField.3")}</div>
               }
             </ul>
           </div>
@@ -118,20 +122,15 @@ const CreateCourseTreePage = (props) => {
           <div style={{color: 'rgb(163, 157, 157)'}}>{t('Course.19')}</div>
           <ul className='create-course-created-practice-list'>
             {
-              certainQuestions.map(el =>
-              <li key={el.id}>
+              certainQuestions.length ? certainQuestions.map(el =>
+              <li key={el.id} style={{display: 'flex', marginBottom: '2.5px'}}>
                   <Accordion className='question__top-part-position'>
                     <AccordionSummary
-                      expandIcon={<ExpandMoreIcon/>}
+                      expandIcon={<div className='d-flex'><Typography className={classes.heading}>{el.difficult}</Typography><ExpandMoreIcon/></div>}
                       aria-controls="panel1a-content"
                       id="panel1a-header"
-                      className='d-flex'
                     >
                       <Typography className={classes.heading}>{el.title}</Typography>
-                      <Typography className={classes.heading}>{el.difficult}</Typography>
-                      <IconButton onClick={() => props.drop(el.id, 'questions', dropQuestion)}>
-                        <DeleteForeverOutlined/>
-                      </IconButton>
                     </AccordionSummary>
                     <div className='question__position'>
                       <Typography variant="body2" color="textSecondary" paragraph className='question__description'>{el.description}</Typography>
@@ -155,35 +154,46 @@ const CreateCourseTreePage = (props) => {
                           </div>
                     </div>
                   </Accordion>
-              </li>)
+                  <Tooltip title={t("Tooltip.26")}>
+                    <IconButton onClick={() => props.drop(el.id, 'questions', dropQuestion)}>
+                      <DeleteForeverOutlined/>
+                    </IconButton>
+                  </Tooltip>
+              </li>) : <div className='empty_field'>{t("EmptyField.4")}</div>
             }
           </ul>
         </div>
       </Paper>
       <div className='create-course-last-column'>
         <div className='create-course-create-new-page'>
-          <IconButton disabled={!certainQuestions.length && !certainTheories.length} onClick={() => {
-            props.post({ course_id: props.currentDraftCourse.id,
-                        title: title,
-                        order: filtredPages.length ?
-                        filtredPages.sort((a,b) => a.order - b.order)[filtredPages.length - 1].order + 1 : 1
-                        }, 'pages', createPage);
-                        }}>
-              <ControlPointIcon className={classes.large}/>
-          </IconButton>
+          <Tooltip title={t("Tooltip.27")}>
+            <IconButton disabled={!certainQuestions.length && !certainTheories.length} onClick={() => {
+              props.post({ course_id: props.currentDraftCourse.id,
+                          title: title,
+                          order: filtredPages.length ?
+                          filtredPages.sort((a,b) => a.order - b.order)[filtredPages.length - 1].order + 1 : 1
+                          }, 'pages', createPage);
+                          }}>
+                <ControlPointIcon className={classes.large}/>
+            </IconButton>
+          </Tooltip>
         </div>
         <div className='create-course-finish-button'>
           {
             certainQuestions.length || certainTheories.length ?
-            <Link to={`/`} onClick={() => props.put(
-              { id: props.currentDraftCourse.id,
-                course: {
-                  course_status: 1,
-                  approve_status: 0,
-                }
-              }, 'courses', updateCourseStatus)}>
-                <CheckCircleOutlineIcon className={classes.greate}/>
-              </Link> :
+            <Tooltip title={t("Tooltip.28")}>
+               <IconButton>
+                <Link to={`/`} onClick={() => props.put(
+                { id: props.currentDraftCourse.id,
+                  course: {
+                    course_status: 1,
+                    approve_status: 0,
+                  }
+                }, 'courses', updateCourseStatus)}>
+                  <CheckCircleOutlineIcon className={classes.greate}/>
+                </Link>
+              </IconButton>
+            </Tooltip> :
               <IconButton disabled={!certainQuestions.length && !certainTheories.length}>
                 <CheckCircleOutlineIcon className={classes.greate}/>
               </IconButton>

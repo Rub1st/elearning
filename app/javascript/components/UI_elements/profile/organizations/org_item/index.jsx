@@ -23,10 +23,15 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import { DateFormat } from '../../../../utils/helpful_functions';
 import { Tooltip } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
+  },
+  collapse: {
+    maxHeight: 250,
+    overflowY: 'auto',
   },
   media: {
     height: 0,
@@ -59,6 +64,8 @@ const OrgItem = (props) => {
     setExpanded(!expanded);
   };
 
+  const { t, i18n } = useTranslation();
+
   let existed = el.registered_members.map(e => e.member_role === 'manager' && e.user.id === props.currentUser.id)
 
   let currentReport = props.reports.find(el => el.course.id === currentCourseId)
@@ -81,8 +88,13 @@ const OrgItem = (props) => {
                 {el.description.length > 38 ? el.description.slice(0, 48) + '...' : el.description}
               </Typography>
             </Tooltip>
-            <Typography variant="body2" color="textSecondary" component="p">
-              approve status: {el.approve_status}
+            <Typography variant="body2" color="textSecondary" className='for_course_text_field'  component="p">
+              <p>
+                approve status
+              </p>
+              <p>
+                {el.approve_status}
+              </p>
             </Typography>
           </CardContent>
         </> :
@@ -93,24 +105,49 @@ const OrgItem = (props) => {
             </Typography>
           <CardContent>
             <hr/>
-            <Typography variant="body2" color="textSecondary" component="p">
-              course: {currentReport.course.label}
+            <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+              <p>
+                course
+              </p>
+              <p>
+                {currentReport.course.label}
+              </p>
             </Typography>
             <hr/>
-            <Typography variant="body2" color="textSecondary" component="p">
-              count try: {currentReport.count_try}
+            <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+              <p>
+                count try
+              </p>
+              <p>
+                {currentReport.count_try}
+              </p>
             </Typography>
             <hr/>
-            <Typography variant="body2" color="textSecondary" component="p">
-              count failed: {currentReport.count_failed}
+            <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+              <p>
+                count failed
+              </p>
+              <p>
+                {currentReport.count_failed}
+              </p>
             </Typography>
             <hr/>
-            <Typography variant="body2" color="textSecondary" component="p">
-              count complete: {currentReport.count_complete}
+            <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+              <p>
+                count complete
+              </p>
+              <p>
+                {currentReport.count_complete}
+              </p>
             </Typography>
             <hr/>
-            <Typography variant="body2" color="textSecondary" component="p">
-              average mark: {currentReport.average_mark}
+            <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+              <p>
+                average mark
+              </p>
+              <p>
+                {currentReport.average_mark}
+              </p>
             </Typography>
           </CardContent>
           <hr/>
@@ -119,33 +156,42 @@ const OrgItem = (props) => {
         <CardActions disableSpacing>
            {
              existed.length ?
-            <IconButton onClick={() => props.put(props.newEl, 'organizations', updateOrganization)}>
-              <DeleteIcon/>
-            </IconButton> : null
+             <Tooltip title={t("Tooltip.8")}>
+                <IconButton onClick={() => props.put(props.newEl, 'organizations', updateOrganization)}>
+                  <DeleteIcon/>
+                </IconButton>
+             </Tooltip>
+             : null
             }
             {
               existed.length ?
-              <ManagingButton el={el}>
-                <IconButton>
-                  <SportsEsportsIcon/>
-                </IconButton>
-              </ManagingButton> : null
+                <ManagingButton el={el}>
+                  <Tooltip title={t("Tooltip.11")}>
+                  <IconButton>
+                    <SportsEsportsIcon/>
+                  </IconButton>
+                  </Tooltip>
+                </ManagingButton>
+              : null
             }
             {
               props.courses.filter(e => e.organization !== null).filter(e => e.organization.id === el.id && e.approve_status === 'approved').length ?
-              <IconButton
+              <Tooltip title={t("Tooltip.12")}>
+                <IconButton
                 className={clsx(classes.expand, {
                   [classes.expandOpen]: expanded,
                 })}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
                 aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </IconButton> : null
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </Tooltip>
+               : null
             }
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" className={classes.collapse} unmountOnExit>
         <CardContent>
             <ul style={{listStyle: 'none', paddingLeft: '0'}}>
               {
@@ -155,12 +201,16 @@ const OrgItem = (props) => {
                   <CourseListItem showReport={showReport} setShowReport={setShowReport} el={e}
                                   manager={existed.length} newEl={{id: e.id, course:{ approve_status: 1}}}
                                   setCurrentCourseId={setCurrentCourseId} currentCourseId={currentCourseId}>
-                    <IconButton>
-                      <SearchOutlinedIcon/>
-                    </IconButton>
+                    <Tooltip title={t("Tooltip.3")}>
+                      <IconButton>
+                        <SearchOutlinedIcon/>
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title={t("Tooltip.8")}>
                     <IconButton>
                       <CreateOutlinedIcon/>
                     </IconButton>
+                    </Tooltip>
                     </CourseListItem>
                 </li>)
               }

@@ -28,14 +28,28 @@
   padding: 15px 0;
 }
 
+.arrow-button{
+  margin-top: 60px;
+  width: 100px;
+  height: 470px;
+  background-color: white;
+  color: rgb(150, 149, 149);
+  border: none;
+}
+
+.arrow-button:hover{
+  color: rgb(83, 81, 81);
+  border: none;
+}
+
 .course_list{
   display: flex;
-
-  padding-left: 0;
+  padding-left: 2px;
+  padding-top: 50px;
   overflow-y: auto;
   list-style: none;
   flex-wrap: wrap;
-  width: 1700px;
+  width: 1472px;
   height: 700px;
 }
 

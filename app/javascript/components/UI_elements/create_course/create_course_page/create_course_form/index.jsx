@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Avatar, Checkbox, Chip, IconButton, InputBase, ListItem, ListItemText, MenuItem, Select, Switch, TextField } from '@material-ui/core'
+import { Avatar, Checkbox, Chip, IconButton, InputBase, ListItem, ListItemText, MenuItem, Select, Switch, TextField, Tooltip } from '@material-ui/core'
 import { PhotoCamera } from '@material-ui/icons'
 import { connect } from 'react-redux'
 import { makeStyles, fade } from '@material-ui/core/styles';
@@ -147,8 +147,6 @@ const CreateCourseForm = (props) => {
     }
   }
 
-  console.log(props.users)
-
   return(
     <div className='create-course-window'>
       {
@@ -187,12 +185,14 @@ const CreateCourseForm = (props) => {
             </div>
             <div className='create-course-item-bottom-row'>
               <div className='create-course-slider-info'>{slider + '/3'}</div>
+            <Tooltip title={t("Tooltip.5")}>
               <IconButton onClick={() => {
-                props.post(formData, 'courses', createCourse);
-                label.length && whyContent.length && willContent.length && setSlider(slider + 1);
-              }}>
-                <ArrowForwardIcon/>
+                  props.post(formData, 'courses', createCourse);
+                  label.length && whyContent.length && willContent.length && setSlider(slider + 1);
+                }}>
+                  <ArrowForwardIcon/>
               </IconButton>
+            </Tooltip>
             </div>
           </div>
         ) : slider === 2 ?
@@ -310,13 +310,15 @@ const CreateCourseForm = (props) => {
               </div>
                 <div className='create-course-item-bottom-row'>
                   <div>{slider + '/3'}</div>
-                  <IconButton disabled={accessType === 'individual' && !persons.length} onClick={() => {
-                        props.put(updatedCourse, 'courses', updateCourseStatus);
-                        props.post(newPage, 'pages', createPage);
-                        setSlider(slider + 1);
-                    }}>
-                    <ArrowForwardIcon/>
-                  </IconButton>
+                  <Tooltip title={t("Tooltip.5")}>
+                    <IconButton disabled={accessType === 'individual' && !persons.length} onClick={() => {
+                          props.put(updatedCourse, 'courses', updateCourseStatus);
+                          props.post(newPage, 'pages', createPage);
+                          setSlider(slider + 1);
+                      }}>
+                      <ArrowForwardIcon/>
+                    </IconButton>
+                  </Tooltip>
                 </div>
               </div> :
               <div className='create-course-item'>

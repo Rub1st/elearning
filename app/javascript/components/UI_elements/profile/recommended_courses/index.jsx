@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { choose } from '../../../../main_redux/actions/courses'
+import { choose, getCourses } from '../../../../main_redux/actions/courses'
+import { getMyCourses, getRecommendedCourses } from '../../../../main_redux/actions/server_connections'
 import NoSearchResultSideBar from '../../../utils/empty_fields/no_search_result_sidebar'
 import RecCourse from './rec_course'
 
 const RecommendedCourses = (props) => {
+
+  useEffect(() => {
+    props.set(getCourses);
+  }, []);
 
   let filtered = props.courses
                 .filter(el => el.course_status === 'ready' && el.approve_status === 'approved' && el.author.id !== props.currentUser.id &&
@@ -37,5 +42,6 @@ export default connect(
   }),
   dispatch => ({
     setCurrentCourse: (courseId) => dispatch(choose(courseId)),
+    set: (setter) => dispatch(getRecommendedCourses(setter)),
   })
 )(RecommendedCourses)

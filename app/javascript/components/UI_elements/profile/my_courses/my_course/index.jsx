@@ -23,10 +23,16 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { DateFormat } from '../../../../utils/helpful_functions';
+import { Tooltip } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
+  },
+  collapse: {
+    maxHeight: 250,
+    overflowY: 'auto',
   },
   media: {
     height: 0,
@@ -52,6 +58,8 @@ const MyCourse = (props) => {
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -80,52 +88,74 @@ const MyCourse = (props) => {
         title="Paella dish"
       />
       <CardContent>
-      <Typography variant="body2" color="textSecondary" component="p">
-          approve status: {el.approve_status}
+      <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+        <p>
+          approve status
+        </p>
+        <p>
+          {el.approve_status}
+        </p>
         </Typography>
-      <Typography variant="body2" color="textSecondary" component="p">
-          access type: {el.access_type}
+      <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+        <p>
+          access type
+        </p>
+        <p>
+          {el.access_type}
+        </p>
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          organization: {el.organization === null ? 'no' : el.organization.name}
+        <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+          <p>
+          organization
+        </p>
+        <p>
+          {el.organization === null ? 'no' : el.organization.name}
+        </p>
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          usage count: {el.uses_count}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          success rate: {el.success_rate}%
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          course status: {el.course_status}
+        <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
+          <p>
+          course status
+        </p>
+        <p>
+        {el.course_status}
+        </p>
         </Typography>
       </CardContent>
         <CardActions disableSpacing>
+          <Tooltip title={t("Tooltip.8")}>
             <IconButton onClick={() => props.put(props.newEl, 'courses', updateCourseApproveStatus)}>
               <DeleteIcon/>
             </IconButton>
+          </Tooltip>
             <MyCourseButtonShow el={el}>
+            <Tooltip title={t("Tooltip.3")}>
               <IconButton>
                 <SearchOutlinedIcon/>
               </IconButton>
+              </Tooltip>
             </MyCourseButtonShow>
             <MyCourseButtonEdit el={el}>
+            <Tooltip title={t("Tooltip.9")}>
               <IconButton>
                 <CreateOutlinedIcon/>
               </IconButton>
+              </Tooltip>
             </MyCourseButtonEdit>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+          <Tooltip title={t("Tooltip.2")}>
+            <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </Tooltip>
       </CardActions>
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" className={classes.collapse} unmountOnExit>
         <CardContent>
           <Typography paragraph>Why learn:</Typography>
           <Typography variant="body2" color="textSecondary" component="p">

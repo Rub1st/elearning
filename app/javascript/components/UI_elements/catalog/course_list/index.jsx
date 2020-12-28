@@ -1,7 +1,7 @@
 import React from 'react'
 import './sidebar.css'
 import { connect } from "react-redux";
-import { choose } from '../../../../main_redux/actions/courses';
+import { choose, getCourses } from '../../../../main_redux/actions/courses';
 import { searchFilter } from '../../../utils/helpful_functions';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,6 +10,9 @@ import SideBarEmptyField from '../../../utils/empty_fields/sidebar_empty_field';
 import NoSearchResultSideBar from '../../../utils/empty_fields/no_search_result_sidebar';
 import { Link } from 'react-router-dom'
 import RecCourse from '../../profile/recommended_courses/rec_course';
+import { getDataPagination } from '../../../../main_redux/actions/server_connections';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +28,13 @@ const CourseList = (props) => {
     <div className={classes.root}>
       {
         filtered_courses.length ?
+        <div className="d-flex">
+          <button className="arrow-button" disabled={props.currentPage <= 0} onClick={() => {
+              props.setCurrentPage(props.currentPage - 1);
+              props.setWithPagination('courses', props.currentPage - 1, 4, getCourses)
+            }}>
+              <ArrowBackIosIcon/>
+            </button>
         <ul className="course_list">
         {
            filtered_courses.map(el =>
@@ -33,7 +43,14 @@ const CourseList = (props) => {
             </li>
               )
         }
-      </ul> : <NoSearchResultSideBar/>
+      </ul>
+      <button className="arrow-button" disabled={filtered_courses.length !== 4} onClick={() => {
+              props.setCurrentPage(props.currentPage + 1);
+              props.setWithPagination('courses', props.currentPage + 1, 4, getCourses)
+            }}>
+              <ArrowForwardIosIcon/>
+            </button>
+      </div> : <NoSearchResultSideBar/>
       }
 
     </div>
@@ -47,6 +64,7 @@ export default connect(
       currentCourse: state.courses.currentCourse,
   }),
   dispatch => ({
-    changeCourse: (newID) => dispatch(choose(newID))
+    changeCourse: (newID) => dispatch(choose(newID)),
+    setWithPagination: (path, page, count_per_page, setter) => dispatch(getDataPagination(path, page, count_per_page, setter)),
   })
 )(CourseList);

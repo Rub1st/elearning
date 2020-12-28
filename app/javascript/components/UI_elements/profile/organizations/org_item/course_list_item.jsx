@@ -11,9 +11,12 @@ import './style.css'
 import { createReport } from '../../../../../main_redux/actions/reports'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { Tooltip } from '@material-ui/core'
+import { useTranslation } from 'react-i18next'
 
 const CourseListItem = (props) => {
   let {el} = props
+  const { t, i18n } = useTranslation();
   return(
     <div className='course-list-item'>
     <div style={{marginRight: '25px', marginTop: '12px'}}>
@@ -36,27 +39,35 @@ const CourseListItem = (props) => {
     </div>
       {
         props.manager ?
-        <IconButton onClick={() => props.put(props.newEl, 'courses', updateCourseApproveStatus)}>
-          <DeleteIcon/>
-        </IconButton> : null
+        <Tooltip title={t("Tooltip.8")}>
+          <IconButton onClick={() => props.put(props.newEl, 'courses', updateCourseApproveStatus)}>
+            <DeleteIcon/>
+          </IconButton>
+        </Tooltip>
+        : null
       }
       {
         props.manager ? (
           !props.showReport ?
-          <IconButton onClick={() => {
-            props.post({ course_id: el.id }, 'reports', createReport);
-            props.setCurrentCourseId(el.id);
-          }}>
-            <AssessmentIcon/>
-          </IconButton> : null
+          <Tooltip title={t("Tooltip.13")}>
+             <IconButton onClick={() => {
+              props.post({ course_id: el.id }, 'reports', createReport);
+              props.setCurrentCourseId(el.id);
+            }}>
+              <AssessmentIcon/>
+            </IconButton>
+          </Tooltip>
+          : null
         ) : null
       }
       {
         props.manager && props.reports.filter(el => el.course.id === el.id) && props.currentCourseId === el.id ? (
           !props.showReport ?
-          <IconButton onClick={() => props.setShowReport(true)}>
-            <VisibilityIcon/>
-          </IconButton> :
+          <Tooltip title={t("Tooltip.14")}>
+            <IconButton onClick={() => props.setShowReport(true)}>
+              <VisibilityIcon/>
+            </IconButton>
+          </Tooltip> :
           <IconButton onClick={() => props.setShowReport(false)}>
             <VisibilityOffIcon/>
           </IconButton>

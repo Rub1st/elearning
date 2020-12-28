@@ -19,10 +19,16 @@ import RecButtonShow from './rec_button_show';
 import { updateDataElement } from '../../../../../main_redux/actions/server_connections';
 import { DateFormat } from '../../../../utils/helpful_functions';
 import './style.css'
+import { Tooltip } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
+  },
+  collapse: {
+    maxHeight: 250,
+    overflowY: 'auto',
   },
   media: {
     height: 0,
@@ -45,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 
 const RecCourse = (props) => {
   let {el} = props
+
+  const { t, i18n } = useTranslation();
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -76,9 +84,6 @@ const RecCourse = (props) => {
         title="Paella dish"
       />
       <CardContent>
-      {/* <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
-          <p>access type</p> <p>{el.access_type}</p>
-        </Typography> */}
         <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
           <p>
             organization
@@ -105,24 +110,28 @@ const RecCourse = (props) => {
         </Typography>
       </CardContent>
         <CardActions disableSpacing>
-            <RecButtonShow el={el}>
-              <IconButton>
-                <SearchOutlinedIcon/>
-              </IconButton>
-              </RecButtonShow>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+          <RecButtonShow el={el}>
+          <Tooltip title={t("Tooltip.3")}>
+            <IconButton>
+              <SearchOutlinedIcon/>
+            </IconButton>
+            </Tooltip>
+          </RecButtonShow>
+        <Tooltip title={t("Tooltip.2")}>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </Tooltip>
       </CardActions>
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" className={classes.collapse} unmountOnExit>
         <CardContent>
           <Typography paragraph>Why learn:</Typography>
           <Typography variant="body2" color="textSecondary" component="p">

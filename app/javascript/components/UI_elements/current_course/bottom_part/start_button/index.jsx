@@ -11,9 +11,6 @@ const StartButton = (props) => {
 
   let existed = props.userCourses.filter(el => el.user.id === props.currentUser.id && el.course.id === props.currentCourse.id)
 
-  console.log(props.userCourses)
-  console.log(existed)
-
   let userCourse = {
     course: props.currentCourse,
     user: props.currentUser,

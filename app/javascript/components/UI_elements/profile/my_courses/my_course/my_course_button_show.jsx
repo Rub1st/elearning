@@ -11,7 +11,8 @@ const MyCourseButtonShow = (props) => {
   console.log(el)
   return(
     <>
-    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={`/main_page/course_id=${el.id}`} onClick={() => props.setCurrentCourse(el.id)}>
+    <Link style={{color: 'gray', marginLeft: '10px'}} className='profile__sidebar-item' to={`/main_page/course_id=${el.id}`}
+      onClick={() => props.setCurrentCourse(el.id)}>
       {props.children}
     </Link>
     </>

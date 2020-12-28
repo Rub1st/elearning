@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles, fade } from '@material-ui/core/styles';
-import { IconButton, ListItem, ListItemText, MenuItem, Paper, Select } from '@material-ui/core';
+import { IconButton, ListItem, ListItemText, MenuItem, Paper, Select, Tooltip } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Checkbox from '@material-ui/core/Checkbox';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -145,10 +145,10 @@ const OrganizationManaging = (props) => {
 
   return(
     <div className='man_org-window'>
-      <div className='man_org-label'>Управление организацией {props.currentOrganization.name}</div>
+      <div className='man_org-label'>{t("Organization.10")} {props.currentOrganization.name}</div>
       <div className='man_org-field'>
         <Paper className='man_row-item'>
-          <div className='man_row-title'>изменение информации</div>
+          <div className='man_row-title'>{t("Organization.11")}</div>
             <TextField  style={{marginTop: '20px', width: '80%'}}
                         variant="outlined" label='Название' value={name}
                         error={props.errors.name != undefined}
@@ -176,15 +176,17 @@ const OrganizationManaging = (props) => {
               value={description} onChange={(e) => setDescription(e.target.value)}
               variant="outlined"
             />
-            <IconButton
-              style={{marginTop: '20px', marginLeft: '35px'}}
-              onClick={() => props.put(formData, props.currentOrganization.id, 'organizations', updateOrganization)}
-             >
-              <CheckCircleOutlineIcon className={classes.approve}/>
-            </IconButton>
+            <Tooltip title={t("Tooltip.15")}>
+              <IconButton
+                style={{marginTop: '20px', marginLeft: '35px'}}
+                onClick={() => props.put(formData, props.currentOrganization.id, 'organizations', updateOrganization)}
+              >
+                <CheckCircleOutlineIcon className={classes.approve}/>
+              </IconButton>
+            </Tooltip>
         </Paper>
         <Paper className='man_row-item'>
-          <div className='man_row-title'>зарегистрированные пользователи</div>
+          <div className='man_row-title'>{t("Organization.13")}</div>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -203,22 +205,27 @@ const OrganizationManaging = (props) => {
             </div>
             <ul style={{width: '90%', height: '200px'}} className='choose-managers-list'>
             {
+              props.registered_members.filter(el => el.organization.id === props.currentOrganization.id && el.user.id !== props.currentUser.id).length ?
               props.registered_members.filter(el => el.organization.id === props.currentOrganization.id && el.user.id !== props.currentUser.id).map(el =>
                 <ListItem key={el.id} button >
                   <ListItemText>
                     {el.user.login}{` (${el.user.full_name})`}
                   </ListItemText>
                   <ImpersonationButton el={el}>
+                    <Tooltip title={t("Tooltip.18")}>
                       <FilterCenterFocusIcon/>
+                    </Tooltip>
                   </ImpersonationButton>
-                  <IconButton onClick={() => props.drop(el.id, props.currentOrganization.id, 'registered_members', dropRegisteredMember)}>
-                    <CancelIcon/>
-                  </IconButton>
-                </ListItem>)
+                  <Tooltip title={t("Tooltip.16")}>
+                    <IconButton onClick={() => props.drop(el.id, props.currentOrganization.id, 'registered_members', dropRegisteredMember)}>
+                      <CancelIcon/>
+                    </IconButton>
+                  </Tooltip>
+                </ListItem>)  : <div className='empty_field'>{t("EmptyField.8")}</div>
             }
             </ul>
           <div>
-            <div>добавление пользователя</div>
+            <div>{t("Organization.14")}</div>
                <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />
@@ -239,11 +246,10 @@ const OrganizationManaging = (props) => {
                     <div style={{marginRight: '30px'}}>
                       <Checkbox color='primary' onChange={() => setIsManagerRegistered(!isManagerRegistered)}/>
                       <span>
-                        менеджер
+                        {t("Organization.15")}
                       </span>
                     </div>
                     <Select
-                      variant='outlined'
                       style={{marginTop: '-10px'}}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -257,16 +263,18 @@ const OrganizationManaging = (props) => {
                           </MenuItem>)
                       }
                   </Select>
-                  <IconButton
-                    style={{marginLeft: '5px', marginTop: '-5px'}}
-                    onClick={() => props.post(newRegistered, props.currentOrganization.id, 'registered_members', createRegisteredMember)}>
-                    <ControlPointIcon className={classes.approve}/>
-                  </IconButton>
+                  <Tooltip title={t("Tooltip.17")}>
+                    <IconButton
+                      style={{marginLeft: '5px', marginTop: '-5px'}}
+                      onClick={() => props.post(newRegistered, props.currentOrganization.id, 'registered_members', createRegisteredMember)}>
+                      <ControlPointIcon className={classes.approve}/>
+                    </IconButton>
+                  </Tooltip>
                   </div>
           </div>
         </Paper>
         <Paper className='man_row-item'>
-          <div className='man_row-title'>незарегистрированные пользователи</div>
+          <div className='man_row-title'>{t("Organization.12")}</div>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -285,35 +293,40 @@ const OrganizationManaging = (props) => {
             </div>
            <ul style={{width: '90%', height: '200px'}} className='choose-managers-list'>
             {
+              props.unregistered_members.filter(el => el.organization.id === props.currentOrganization.id).length ?
               props.unregistered_members.filter(el => el.organization.id === props.currentOrganization.id).map(el =>
                 <ListItem key={el.id} button >
                   <ListItemText>
                     {el.email}
                   </ListItemText>
-                  <IconButton onClick={() => props.drop(el.id, props.currentOrganization.id, 'unregistered_members', dropUnregisteredMember)}>
-                    <CancelIcon/>
-                  </IconButton>
-                </ListItem>)
+                  <Tooltip title={t("Tooltip.16")}>
+                    <IconButton onClick={() => props.drop(el.id, props.currentOrganization.id, 'unregistered_members', dropUnregisteredMember)}>
+                      <CancelIcon/>
+                    </IconButton>
+                  </Tooltip>
+                </ListItem>) : <div className='empty_field'>{t("EmptyField.8")}</div>
             }
           </ul>
-            <div>добавление пользователя по почте</div>
+            <div>{t("Organization.14")}</div>
           <div style={{paddingTop: '20px'}}>
             <div className='d-flex'>
               <div style={{marginRight: '30px'}} className='d-flex'>
                 <Checkbox style={{marginBottom: '15px'}} color='primary' onChange={() => setIsManagerUnregistered(!isManagerUnregistered)}/>
                 <span style={{marginTop: '13px'}}>
-                  менеджер
+                  {t("Organization.15")}
                 </span>
               </div>
             <TextField label={'email'} variant='outlined'
                        error={props.errors.email != undefined}
                        helperText={props.errors.email != undefined ? props.errors.email[0] : null}
                        onChange={(e) => setEmail(e.target.value)} value={email}/>
-            <IconButton
-              style={{marginLeft: '5px'}}
-              onClick={() => props.post(newUnregistered, props.currentOrganization.id, 'unregistered_members', createUnregisteredMember)}>
-                    <ControlPointIcon className={classes.approve}/>
-            </IconButton>
+            <Tooltip title={t("Tooltip.17")}>
+              <IconButton
+                style={{marginLeft: '5px'}}
+                onClick={() => props.post(newUnregistered, props.currentOrganization.id, 'unregistered_members', createUnregisteredMember)}>
+                      <ControlPointIcon className={classes.approve}/>
+              </IconButton>
+            </Tooltip>
             </div>
           </div>
       </Paper>

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CourseList from './course_list'
-import { getData } from '../../../main_redux/actions/server_connections'
+import { getData, getDataPagination } from '../../../main_redux/actions/server_connections'
 import { getCourses } from '../../../main_redux/actions/courses'
 import { getTags } from '../../../main_redux/actions/tags'
 import './catalog.css'
@@ -14,22 +14,22 @@ import { getUserCourses } from '../../../main_redux/actions/user_courses'
 
 const Catalog = (props) => {
 
+  const [currentPage, setCurrentPage] = useState(0)
+
   useEffect(() => {
-    props.set('courses', getCourses);
+    props.setWithPagination('courses', currentPage, 4, getCourses);
     props.set('tags', getTags);
     props.set('user_courses', getUserCourses);
     props.set('users', getUsers);
     props.set('organizations', getOrganizations);
   }, []);
 
-  console.log(props.organizations)
-
   return(
     <div className='catalog__position'>
       {
         !props.connect_status ?  <CircularProgress /> :
         <div className="catalog__list">
-          <CourseList/>
+          <CourseList currentPage={currentPage} setCurrentPage={setCurrentPage}/>
         </div>
       }
     </div>
@@ -44,5 +44,6 @@ export default connect(
   }),
   dispatch => ({
     set: (path, setter) => dispatch(getData(path, setter)),
+    setWithPagination: (path, page, count_per_page, setter) => dispatch(getDataPagination(path, page, count_per_page, setter)),
   })
 )(Catalog)

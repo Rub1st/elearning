@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { choose, setDraftCourse } from '../../../../../main_redux/actions/courses'
-import { setCurrentDraftPage } from '../../../../../main_redux/actions/pages'
-import { destroyDataElement } from '../../../../../main_redux/actions/server_connections'
+import { getPages, setCurrentDraftPage } from '../../../../../main_redux/actions/pages'
+import { destroyDataElement, getData, getDataWithQuery } from '../../../../../main_redux/actions/server_connections'
 
 const MyCourseButtonEdit = (props) => {
   let {el} = props
@@ -12,6 +12,7 @@ const MyCourseButtonEdit = (props) => {
     <>
             <Link style={{color: 'gray', marginLeft: '20px'}} className='profile__sidebar-item' to={`/draft_course_id=${el.id}`}
                     onClick={() => {props.setDraftCourse(el.id);
+                                    // props.set(el.id, 'pages', getPages);
                                     props.setCurrentDraftPage(props.pages.filter(e => e.course.id === el.id)[0].id)}}>
                                       {props.children}
                                     </Link>
@@ -24,6 +25,7 @@ export default connect(
     pages: state.pages.pages,
   }),
   dispatch => ({
+    set: (id, path, setter) => dispatch(getDataWithQuery(id, path, setter)),
     drop: (id, path, setter) => dispatch(destroyDataElement(id, path, setter)),
     setCurrentCourse: (id) => dispatch(choose(id)),
     setDraftCourse: (id) => dispatch(setDraftCourse(id)),

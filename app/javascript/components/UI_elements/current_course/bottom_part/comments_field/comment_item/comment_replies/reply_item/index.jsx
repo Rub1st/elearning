@@ -1,6 +1,7 @@
-import { IconButton } from '@material-ui/core'
+import { IconButton, Tooltip } from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { dropReply } from '../../../../../../../../main_redux/actions/comments'
 import { destroyDataElementWithQuery } from '../../../../../../../../main_redux/actions/server_connections'
@@ -9,7 +10,8 @@ import './reply_item.css'
 
 const ReplyItem = (props) => {
   let {el} = props
-  console.log(props)
+  const { t, i18n } = useTranslation();
+
   return(
     <div className='comment__position'>
       <div className='d-flex comment__top-field'>
@@ -21,9 +23,12 @@ const ReplyItem = (props) => {
         </div>
         {
           props.currentUser.id === el.author.id ?
-          <IconButton onClick={() => props.drop(el.id, props.currentCourse.id, 'replies', dropReply)}>
-          <Delete/>
-        </IconButton> : null
+          <Tooltip title={t("Tooltip.32")}>
+            <IconButton onClick={() => props.drop(el.id, props.currentCourse.id, 'replies', dropReply)}>
+              <Delete/>
+            </IconButton>
+          </Tooltip>
+           : null
         }
       </div>
       <div className='comment__content'>

@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
   },
+  collapse: {
+    maxHeight: 250,
+    overflowY: 'auto',
+  },
   media: {
     height: 0,
     paddingTop: '56.25%',
@@ -121,7 +125,7 @@ const CourseItem = (props) => {
         </IconButton>
       </CardActions>
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" className={classes.collapse} unmountOnExit>
         <CardContent>
           <Typography paragraph>Why learn:</Typography>
           <Typography variant="body2" color="textSecondary" component="p">

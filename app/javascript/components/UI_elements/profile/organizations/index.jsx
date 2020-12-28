@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
 import { setCurrentOrganization } from '../../../../main_redux/actions/organizations';
 import NoSearchResultSideBar from '../../../utils/empty_fields/no_search_result_sidebar';
@@ -8,6 +9,8 @@ const Organization = (props) => {
 
   let filtered = props.organizations.filter(el => el.registered_members.filter(el => el.user.id === props.currentUser.id).length)
 
+  const { t, i18n } = useTranslation();
+
   return(
     <div className='profile__course-field'>
         <ul className='profile__course-list'>
@@ -16,7 +19,7 @@ const Organization = (props) => {
               <li key={el.id} className='profile__course-item'>
               <OrgItem el={el} newEl={{ id: el.id, organization: {approve_status: 1, name: el.name, description: el.description}}}/>
             </li>
-            ) : <NoSearchResultSideBar entity={'организаций'}/>
+            ) : <NoSearchResultSideBar entity={t("EmptyField.7")}/>
           }
         </ul>
     </div>

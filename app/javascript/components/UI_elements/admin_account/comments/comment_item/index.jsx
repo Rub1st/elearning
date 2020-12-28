@@ -40,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
   reply: {
     width: 345,
+    maxHeight: 250,
+    overflowY: 'auto',
   }
 }));
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createTheory } from '../../../../../../main_redux/actions/theories'
 import { getData, postDataElement } from '../../../../../../main_redux/actions/server_connections'
-import { IconButton, TextField } from '@material-ui/core'
+import { IconButton, TextField, Tooltip } from '@material-ui/core'
 import { ControlPoint, PhotoCamera } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles';
 import { serialize } from 'object-to-formdata';
@@ -70,14 +70,16 @@ const CreateTheoryElement = (props) => {
             <TextField style={{width: '350px', marginRight: '30px'}}
                        value={content} multiline rows={2}
                        variant='outlined' onChange={(e) => setContent(e.target.value)} placeholder={t('Course.Placeholders.5')}/>
-            <IconButton disabled={!subtitle.length && !content.length && image === null} onClick={() => {
-              props.post(formData, 'theories', createTheory);
-              setSubtitle('');
-              setContent('');
-              setImage(null);
-              }}>
-              <ControlPoint className={classes.large}/>
-            </IconButton>
+            <Tooltip title={t("Tooltip.20")}>
+              <IconButton disabled={!subtitle.length && !content.length && image === null} onClick={() => {
+                props.post(formData, 'theories', createTheory);
+                setSubtitle('');
+                setContent('');
+                setImage(null);
+                }}>
+                <ControlPoint className={classes.large}/>
+              </IconButton>
+            </Tooltip>
         </div>
       </div>
   )

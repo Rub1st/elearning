@@ -12,7 +12,7 @@ import './wrapper.css'
 import { connect } from 'react-redux';
 import { getCourses, updateInput } from '../../../main_redux/actions/courses';
 import '../style/utils.css'
-import { getData, logout, searchData } from '../../../main_redux/actions/server_connections';
+import { getData, logout, searchData, searchDataPagination } from '../../../main_redux/actions/server_connections';
 import { setImpersonationUser } from '../../../main_redux/actions/users';
 import { BackspaceOutlined, DirectionsRunOutlined } from '@material-ui/icons';
 import UpdateImpersonationButton from './impersonation_button'
@@ -90,23 +90,23 @@ const Wrapper = (props) => {
 
   let user_id = props.currentUser.id
 
-
-  let {request_path, setter} = path === '/' ||
+  let {request_path, count, setter} = path === '/' ?
+                              { request_path: 'courses', count: 4, setter: getCourses} :
                                path === `/user_id=${user_id}/my_courses` ||
                                path === `/user_id=${user_id}/recomended_courses` ?
-                               { request_path: 'courses', setter: getCourses} :
+                               { request_path: 'courses', count: 3, setter: getCourses} :
                                path ===  `/user_id=${user_id}/organizations` ?
-                               { request_path: 'organizations', setter: getOrganizations} :
+                               { request_path: 'organizations', count: null, setter: getOrganizations} :
                                path === `/user_id=${user_id}/certificates` ?
-                               { request_path: 'certificates', setter: getCertificates} :
+                               { request_path: 'certificates', count: null, setter: getCertificates} :
                                path === `/user_id=${user_id}/home` ||
                                path === `/user_id=${user_id}/settings` ?
-                               { request_path: 'none', setter: null} :
-                               { request_path: 'user_courses', setter: getUserCourses }
+                               { request_path: 'none', count: null, setter: null} :
+                               { request_path: 'user_courses', count: 3, setter: getUserCourses }
 
   const enter_listener = event => {
     if (event.key === 'Enter') {
-      props.search(search , request_path, setter)
+      props.search(search , 0, count, request_path, setter)
     }
   }
 
@@ -155,12 +155,12 @@ const Wrapper = (props) => {
          <ProfileBar/>
          {
            props.true_user.id !== props.currentUser.id ?
-            <Tooltip title={"Вернуться к своему аккаунту"}>
+            <Tooltip title={t("Tooltip.19")}>
               <UpdateImpersonationButton>
                 <BackspaceOutlined/>
               </UpdateImpersonationButton>
             </Tooltip> :
-            <Tooltip title={""}>
+            <Tooltip title={t("Tooltip.4")}>
              <IconButton onClick={() => props.logout()}>
                <DirectionsRunOutlined/>
              </IconButton>
@@ -195,6 +195,6 @@ export default connect(
     set: (path, setter) => dispatch(getData(path, setter)),
     setImpersonationUser: (user) => dispatch(setImpersonationUser(user)),
     logout: () => dispatch(logout()),
-    search: (obj, path, setter) => dispatch(searchData(obj, path, setter)),
+    search: (obj, page, count, path, setter) => dispatch(searchDataPagination(obj, page, count, path, setter)),
   })
 )(withRouter(Wrapper))

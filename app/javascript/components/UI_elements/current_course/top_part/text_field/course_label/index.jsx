@@ -9,6 +9,7 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { toast } from 'react-toastify'
 import { notify } from '../../../../../utils/helpful_functions'
+import { useTranslation } from 'react-i18next'
 
 const CourseLabel = (props) => {
   let existed = props.userCourses.filter(el => el.user.id === props.currentUser.id && el.course.id === props.currentCourse.id)
@@ -19,6 +20,8 @@ const CourseLabel = (props) => {
     is_favorite: true,
     progress: 0,
   }
+
+  const { t, i18n } = useTranslation();
 
   return (
   <div>

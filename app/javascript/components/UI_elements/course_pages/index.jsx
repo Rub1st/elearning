@@ -10,6 +10,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import './course_pages.css'
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,9 +50,9 @@ const CoursePages = (props) => {
         }
   }
 
-  console.log(updatedUserCourse)
-
   let currentPage = selectedPages.find(el => el.order === slider)
+
+  const { t, i18n } = useTranslation();
 
   return(
     <div>
@@ -69,7 +70,7 @@ const CoursePages = (props) => {
                 onClick={handleBack}
                 className={classes.backButton}
               >
-                Back
+                {t("CurrentCourse.21")}
               </Button>
               <Button variant="contained" color="primary"
               onClick={() => {
@@ -77,7 +78,7 @@ const CoursePages = (props) => {
                 props.put(updatedUserCourse, 'user_courses', updateUserCourse)
               }
             }>
-                {slider === steps.length ? 'Finish' : 'Next'}
+                {slider === steps.length ? t("CurrentCourse.22") : t("CurrentCourse.20")}
               </Button>
           </div>
           <Stepper activeStep={slider - 1} alternativeLabel className='page-stepper'>

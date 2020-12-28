@@ -1,4 +1,4 @@
-import { Checkbox, IconButton, MenuItem, Select, TextField } from '@material-ui/core'
+import { Checkbox, IconButton, MenuItem, Select, TextField, Tooltip } from '@material-ui/core'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createQuestion } from '../../../../../../main_redux/actions/questions'
@@ -98,9 +98,11 @@ const CreatePracticeElement = (props) => {
                    error={props.errors.question_text != undefined}
                    helperText={props.errors.question_text != undefined ? props.errors.question_text[0] : null}
                    label={t('Course.Placeholders.8')}/>
+        <Tooltip title={t("Tooltip.21")}>
         <IconButton disabled={!title.length || !question.length} onClick={() => props.post({ question: newQuestion }, 'questions', createQuestion)}>
             <CheckCircleOutlineIcon/>
           </IconButton>
+        </Tooltip>
       </div>
       <hr/>
       <div className='paper-item' style={{paddingRight: '20px'}}>
@@ -108,7 +110,7 @@ const CreatePracticeElement = (props) => {
           <p>{t('Course.21')}</p>
           <ol className='variants-list'>
             {
-              variants.map(el =>
+              variants.length ? variants.map(el =>
                 <li key={el.id} style={{listStyle: 'none', display: 'flex', justifyContent: 'space-between'}}>
                 <span>{el.name}</span>
                 <span>{`(${el.value ? t('Course.22') : t('Course.23')})`}</span>
@@ -116,38 +118,42 @@ const CreatePracticeElement = (props) => {
                   <Delete/>
                 </IconButton>
                 </li>
-              )
+              ) : <div className='empty_field'>{t("EmptyField.5")}</div>
             }
           </ol>
         </div>
-        <IconButton disabled={!title.length || !question.length || !variants.length} onClick={() => {
-          variants.map((el, index) => props.post({
-            question_id: props.currentQuestion.id,
-            value: el.name,
-            is_correct: el.value,
-            order: index + 1,
-          }, 'variants', createQuestion))
-          setTitle('');
-          setDifficult('easy');
-          setDescription('');
-          setQuestion('');
-          setQuestionType('opened');
-          setVariants([])}}>
-          <CheckCircleOutlineIcon className={classes.large}/>
-      </IconButton>
+        <Tooltip title={t("Tooltip.23")}>
+          <IconButton disabled={!title.length || !question.length || !variants.length} onClick={() => {
+            variants.map((el, index) => props.post({
+              question_id: props.currentQuestion.id,
+              value: el.name,
+              is_correct: el.value,
+              order: index + 1,
+            }, 'variants', createQuestion))
+            setTitle('');
+            setDifficult('easy');
+            setDescription('');
+            setQuestion('');
+            setQuestionType('opened');
+            setVariants([])}}>
+            <CheckCircleOutlineIcon className={classes.large}/>
+        </IconButton>
+      </Tooltip>
       </div>
       <div style={{marginTop: '-10px'}} className='paper-item'>
         <div>
           <Checkbox value={variantValue} onChange={(e) => setVariantValue(!variantValue)}/>
-          <TextField value={variantName} variant='outlined' onChange={(e) => setVariantName(e.target.value)} placeholder={t('Course.Placeholders.9')}/>
+          <TextField value={variantName} variant='outlined' onChange={(e) => setVariantName(e.target.value)} label={t('Course.Placeholders.9')}/>
         </div>
         <div style={{marginRight: '20px'}}>
-          <IconButton disabled={!variantName.length} onClick={() => {
-              setVariants([...variants, { id: createId(variants), name: variantName, value: variantValue}]);
-              setVariantName('');
-              }}>
-              <ControlPointIcon className={classes.large} />
-            </IconButton>
+          <Tooltip title={t("Tooltip.22")}>
+            <IconButton disabled={!variantName.length} onClick={() => {
+                setVariants([...variants, { id: createId(variants), name: variantName, value: variantValue}]);
+                setVariantName('');
+                }}>
+                <ControlPointIcon className={classes.large} />
+              </IconButton>
+          </Tooltip>
         </div>
       </div>
     </div>

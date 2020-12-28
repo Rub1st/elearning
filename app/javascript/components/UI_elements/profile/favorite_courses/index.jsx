@@ -14,7 +14,7 @@ const FavoriteCourses = (props) => {
           {
             filtered.length ? filtered.map(el =>
             <li key={el.id} className='profile__course-item'>
-              <FavoriteCourse el={el} newEl={{ id: el.id, user_course: { is_favorite: false, current_page: el.current_page }}}/>
+              <FavoriteCourse el={el} newEl={{ id: el.id, user_course: { is_favorite: false, current_page: el.current_page, progress: el.progress }}}/>
             </li>)  : <NoSearchResultSideBar/>
           }
         </ul>
