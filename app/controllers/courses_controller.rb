@@ -25,13 +25,27 @@ class CoursesController < ApplicationController
   end
 
   def search
-    render_search_data Course
+    search = params[:term] != '' ? params[:term] : nil
+    if search
+      render json: courses.search(search)
+    else
+      render json: courses.all
+    end
+  end
+
+  def my_courses
+    render json: Course.where(author_id: current_user[:id])
+  end
+
+  def recommended_courses
+    render json: Course.where('author_id <> ?', current_user[:id])
   end
 
   private
 
   def courses
-    (public_courses + private_courses + individual_courses).map { |item| Course.find(item.id)}
+    # (public_courses + private_courses + individual_courses).map { |item| Course.find(item.id)}
+    Course.all.offset(params[:current_page].to_i * params[:count_per_page].to_i).limit(params[:count_per_page].to_i)
   end
 
   def public_courses

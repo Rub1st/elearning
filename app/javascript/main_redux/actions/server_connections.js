@@ -9,17 +9,25 @@ export const getData = (path, setter) => (dispatch) => {
   }).catch(error => dispatch(dropError(error.response)))
 };
 
-//index
-export const getDataWithQuery = (id, path, setter) => (dispatch) => {
-  axios.get(`http://localhost:3000/${path}?parent_id=${id}`).then((response) => {
+//take my courses
+export const getMyCourses = (setter) => (dispatch) => {
+  axios.get(`http://localhost:3000/courses/my_courses`).then((response) => {
     dispatch(setter(response.data))
     dispatch(setErrors([]));
   }).catch(error => dispatch(dropError(error.response)))
 };
 
-//show
-export const getDataElement = (path, id, setter) => (dispatch) => {
-  axios.get(`http://localhost:3000/${path}/${id}`).then((response) => {
+//take recommended courses
+export const getRecommendedCourses = (setter) => (dispatch) => {
+  axios.get(`http://localhost:3000/courses/recommended_courses`).then((response) => {
+    dispatch(setter(response.data))
+    dispatch(setErrors([]));
+  }).catch(error => dispatch(dropError(error.response)))
+};
+
+//index
+export const getDataWithQuery = (id, path, setter) => (dispatch) => {
+  axios.get(`http://localhost:3000/${path}?parent_id=${id}`).then((response) => {
     dispatch(setter(response.data))
     dispatch(setErrors([]));
   }).catch(error => dispatch(dropError(error.response)))
@@ -100,6 +108,10 @@ export const searchData = (query, path, setter) => dispatch => {
         }).catch(error => dispatch(dropError(error.response)))
 }
 
+
+
+//for impersonation
+
 //impersonate
 export const impersonate = (id, ord_id) => dispatch => {
   axios.post(`http://localhost:3000/users/${id}/impersonate?org_id=${ord_id}`, ord_id,{
@@ -113,3 +125,32 @@ export const stopImpersonating = () => dispatch => {
     "Content-Type": "application/x-www-form-urlencoded",
   }).then(response => location.href= '/').catch(error => dispatch(setErrors(error.response.data.errors)))
 }
+
+
+
+//with pagination
+
+//search with pagination
+export const searchDataPagination = (query, page, count_per_page, path, setter) => dispatch => {
+  axios.get(`http://localhost:3000/${path}/search?term=${query}&current_page=${page}&count_per_page=${count_per_page}`)
+       .then((response) => {
+          dispatch(setter(response.data))
+          dispatch(setErrors([]));
+        }).catch(error => dispatch(dropError(error.response)))
+}
+
+//get data with pagination
+export const getDataPagination = (path, page, count_per_page, setter) => (dispatch) => {
+  axios.get(`http://localhost:3000/${path}?current_page=${page}&count_per_page=${count_per_page}`).then((response) => {
+    dispatch(setter(response.data))
+    dispatch(setErrors([]));
+  }).catch(error => dispatch(dropError(error.response)))
+};
+
+//get data with pagination and query
+export const getDataWithQueryPagination = (parrentId, page, count_per_page, path, setter) => (dispatch) => {
+  axios.get(`http://localhost:3000/${path}?current_page=${page}&count_per_page=${count_per_page}&parent_id=${parrentId}`).then((response) => {
+    dispatch(setter(response.data))
+    dispatch(setErrors([]));
+  }).catch(error => dispatch(dropError(error.response)))
+};

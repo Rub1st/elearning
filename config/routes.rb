@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :courses, only: %i[create update index] do
       collection do
         get :search
+        get :my_courses
+        get :recommended_courses
       end
     end
 
