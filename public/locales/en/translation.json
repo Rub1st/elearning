@@ -15,7 +15,20 @@
     "10": "success:",
     "11": "percents",
     "12": "usages:",
-    "13": "users"
+    "13": "users",
+    "14": "Practice",
+    "15": "Theory",
+    "16": "Progress:",
+    "17": "Correct:",
+    "18": "Course:",
+    "19": "Author:",
+    "20": "Next",
+    "21": "Back",
+    "22": "Finish",
+    "Placeholders": {
+      "1": "Write your opinion about the course...",
+      "2": "Write reply on the comment..."
+    }
   },
   "Course": {
     "1": "Create Course",
@@ -64,6 +77,12 @@
     "7": "In your profile in the 'organizations'section you will have access to all organizations that you belong to, and those that you are a Manager of have a button in the form of a joystick. Clicking on it will open an area where you can add and remove users, as well as change the name and description of the organization",
     "8": "certificate template is attached",
     "9": "Please, choose managers for your organization:",
+    "10": "Manage organization",
+    "11": "edit information",
+    "12": "unregistered members",
+    "13": "registered members",
+    "14": "add member",
+    "15": "manager",
     "Placeholders": {
       "1": "Enter the name of the organization...",
       "2": "Describe your organization..."
@@ -127,6 +146,22 @@
     "26": "Remove practice",
     "27": "Add page",
     "28": "Complete work with course's constructor",
-    "29": "Save new title of page"
+    "29": "Save new title of page",
+    "30": "Send",
+    "31": "Show replies",
+    "32": "Remove",
+    "33": "Add to favorite",
+    "34": "Write reply"
+  },
+  "EmptyField": {
+    "1": "We didn't find for you any",
+    "2": "courses",
+    "3": "There are no any paragraphs yet",
+    "4": "There are no any practices yet",
+    "5": "There are no any variants of answer for created question",
+    "6": "certificates",
+    "7": "organizations",
+    "8": "There are no any members yet",
+    "9": "We can't find anybody for you"
   }
 }
