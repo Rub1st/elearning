@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
     if permit_params[:image].present?
       course.image.attach(permit_params[:image])
     else
-      course.image.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noiamge.jpg')
+      course.image.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noimage.jpg')
     end
 
     render_created_data(course, course)
@@ -44,26 +44,7 @@ class CoursesController < ApplicationController
   private
 
   def courses
-    # (public_courses + private_courses + individual_courses).map { |item| Course.find(item.id)}
     Course.all.offset(params[:current_page].to_i * params[:count_per_page].to_i).limit(params[:count_per_page].to_i)
-  end
-
-  def public_courses
-    Course.where(access_type: 0)
-  end
-
-  def private_courses
-    Course.where(access_type: 1).select do |course|
-      RegisteredMember.where('organization_id = :organization_id and user_id = :current_user_id',
-                             organization_id: course.organization.id,
-                             current_user_id: current_user[:id]).count > 0
-    end
-  end
-
-  def individual_courses
-    CourseMember.joins(:course)
-                .where('course_members.user_id = :current_user_id', current_user_id: current_user[:id])
-                .map(&:course)
   end
 
   def permit_params
