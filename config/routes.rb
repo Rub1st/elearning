@@ -111,6 +111,7 @@ Rails.application.routes.draw do
       get :search
     end
 
+    post :connect_organizations, on: :member
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection
   end

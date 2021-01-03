@@ -82,6 +82,17 @@ export const postDataElement = (obj, path, setter) => dispatch => {
   }).catch(error => dispatch(setErrors(error.response.data.errors)))
 }
 
+//connect organizations
+export const connectOrganizations = (id, setter) => dispatch => {
+  axios.post(`http://localhost:3000/users/${id}/connect_organizations`,{
+    "Content-Type": "application/x-www-form-urlencoded",
+  }).then(response => {
+    dispatch(setter(response.data));
+    dispatch(setErrors([]));
+  }).catch(error => dispatch(setErrors(error.response.data.errors)))
+}
+
+
 export const postDataElementWithQuery = (obj, parrentId, path, setter) => dispatch => {
   axios.post(`http://localhost:3000/${path}?parent_id=${parrentId}`, obj,{
     "Content-Type": "application/x-www-form-urlencoded",

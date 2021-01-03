@@ -1,0 +1,4 @@
+activate_motivation:
+  cron: "* * * * *"
+  class: "ActivateMotivation"
+  queue: default

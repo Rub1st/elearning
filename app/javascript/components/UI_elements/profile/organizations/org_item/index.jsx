@@ -66,7 +66,9 @@ const OrgItem = (props) => {
 
   const { t, i18n } = useTranslation();
 
-  let existed = el.registered_members.map(e => e.member_role === 'manager' && e.user.id === props.currentUser.id)
+  console.log(el)
+
+  let existed = el.registered_members.filter(e => e.member_role === 'manager' && e.user.id === props.currentUser.id)
 
   let currentReport = props.reports.find(el => el.course.id === currentCourseId)
 

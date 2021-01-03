@@ -16,11 +16,17 @@ class UnregisteredMember < ApplicationRecord
 
   validates :email, :code, presence: true
 
+  after_create :welcome_send
+
   searchkick word_middle: %i[email]
 
   def search_data
     {
       email: email
     }
+  end
+
+  def welcome_send
+    WelcomeMailer.welcome_send(self).deliver
   end
 end

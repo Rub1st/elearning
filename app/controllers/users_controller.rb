@@ -43,6 +43,22 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def connect_organizations
+    email = current_user[:email]
+
+    unregistered_members = UnregisteredMember.where(email: email)
+
+    unregistered_members.each do |item|
+      RegisteredMember.create(user: current_user,
+                              organization: item.organization,
+                              member_role: item.member_role)
+    end
+
+    unregistered_members.destroy_all
+
+    render json: Organization.all
+  end
+
   private
 
   def users

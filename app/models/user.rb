@@ -35,6 +35,8 @@ class User < ApplicationRecord
 
   after_commit :reindex_courses, :reindex_comments, :reindex_impersonations
 
+  after_create :welcome_send
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2]
@@ -72,8 +74,6 @@ class User < ApplicationRecord
       full_name: full_name
     }
   end
-
-  after_create :welcome_send
 
   def welcome_send
     WelcomeMailer.welcome_send(self).deliver
