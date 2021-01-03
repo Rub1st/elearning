@@ -29,13 +29,10 @@ class UsersController < ApplicationController
   end
 
   def impersonate
-    user = User.find(params[:id])
-    Impersonation.create(manager_id: current_user[:id],
-                         common_id: params[:id],
-                         start: Time.now,
-                         end: Time.now,
-                         organization_id: params[:org_id])
+    user = Users::Impersonate.call(params, current_user)
+
     impersonate_user(user)
+
     redirect_to root_path
   end
 
