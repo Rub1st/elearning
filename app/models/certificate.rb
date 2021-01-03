@@ -11,6 +11,8 @@ class Certificate < ApplicationRecord
   belongs_to :course
   belongs_to :user
 
+  has_one_attached :certificate_pdf
+
   searchkick
 
   def search_data
@@ -20,6 +22,4 @@ class Certificate < ApplicationRecord
       course_will_content: course.will_content
     }
   end
-
-  has_one_attached :certificate_pdf
 end

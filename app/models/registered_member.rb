@@ -12,6 +12,8 @@ class RegisteredMember < ApplicationRecord
   belongs_to :organization
   belongs_to :user
 
+  enum member_role: %i[manager common]
+
   searchkick
 
   def search_data
@@ -21,6 +23,4 @@ class RegisteredMember < ApplicationRecord
       user_email: user.email
     }
   end
-
-  enum member_role: %i[manager common]
 end

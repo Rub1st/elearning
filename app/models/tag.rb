@@ -8,6 +8,8 @@
 class Tag < ApplicationRecord
   has_many :course_tags, dependent: :destroy
 
+  validates :name, presence: true
+
   searchkick word_middle: %i[name]
 
   def search_data
@@ -15,6 +17,4 @@ class Tag < ApplicationRecord
       name: name
     }
   end
-
-  validates :name, presence: true
 end

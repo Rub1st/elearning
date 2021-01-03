@@ -14,6 +14,8 @@ class UnregisteredMember < ApplicationRecord
 
   enum member_role: %i[manager common]
 
+  validates :email, :code, presence: true
+
   searchkick word_middle: %i[email]
 
   def search_data
@@ -21,6 +23,4 @@ class UnregisteredMember < ApplicationRecord
       email: email
     }
   end
-
-  validates :email, :code, presence: true
 end

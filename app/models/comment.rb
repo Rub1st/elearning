@@ -12,6 +12,8 @@ class Comment < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_many :replies, dependent: :destroy
 
+  validates :content, presence: true
+
   scope :search_import, -> { includes(:author, :course) }
 
   searchkick word_middle: %i[content]
@@ -23,6 +25,4 @@ class Comment < ApplicationRecord
       author_login: author.login
     }
   end
-
-  validates :content, presence: true
 end
