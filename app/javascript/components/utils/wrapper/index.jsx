@@ -112,7 +112,6 @@ const Wrapper = (props) => {
 
   const changeLang = () => {
     i18n.language === 'en' ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
-    notify(`Язык изменен на ${i18n.language === 'ru' ? 'русский' : 'английский'}`, toast.info)
   }
 
   return(
@@ -121,12 +120,12 @@ const Wrapper = (props) => {
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
            <img src={logo} alt={'E-learning'} style={{height: '55px'}}/>
-           <Tooltip title={t("Tooltip.1")}>
-            <IconButton onClick={changeLang}>
-              <LanguageIcon/>
-            </IconButton>
-           </Tooltip>
         </Typography>
+        <Tooltip title={t("Tooltip.1")}>
+            <button className='switch-lang-button' onClick={changeLang}>
+              ru/en
+            </button>
+        </Tooltip>
         <LeftBar/>
         {
           request_path !== 'none' ?
