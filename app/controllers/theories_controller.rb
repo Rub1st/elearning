@@ -6,7 +6,7 @@ class TheoriesController < ApplicationController
     if permit_params[:image].present?
       theory.image.attach(permit_params[:image])
     else
-      theory.image.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noiamge.jpg')
+      theory.image.attach(io: File.open('/home/akira/Desktop/elearning/app/assets/images/noimage.jpg'), filename: 'noiamge.jpg')
     end
 
     render_created_data(theory, theory)

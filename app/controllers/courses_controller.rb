@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
     if permit_params[:image].present?
       course.image.attach(permit_params[:image])
     else
-      course.image.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noimage.jpg')
+      course.image.attach(io: File.open('/home/akira/Desktop/elearning/app/assets/images/noimage.jpg'), filename: 'noimage.jpg')
     end
 
     render_created_data(course, course)
