@@ -35,11 +35,7 @@ module UserCourses
       if calculate_result > 90
         certificate = Certificate.create(course_id: @params[:course_id], user_id: @params[:user_id])
 
-        # pdftk = PdfForms.new('/usr/local/bin/pdftk')
-
-        # p pdftk.get_field_names '/home/akira/Desktop/certificate.jpg'
-
-        certificate.certificate_pdf.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: 'file.jpg')
+        certificate.certificate_pdf.attach(io: File.open("#{Rails.root}/app/assets/images/pudge.jpg"), filename: 'file.jpg')
       end
       nil
     end
