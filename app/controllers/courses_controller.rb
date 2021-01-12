@@ -34,17 +34,17 @@ class CoursesController < ApplicationController
   end
 
   def my_courses
-    render json: Course.where(author_id: current_user[:id])
+    render json: Course.where(author_id: current_user[:id]).offset(params[:current_page].to_i * 3).limit(3)
   end
 
   def recommended_courses
-    render json: Course.where('author_id <> ?', current_user[:id])
+    render json: Course.where('author_id <> ?', current_user[:id]).offset(params[:current_page].to_i * 3).limit(3)
   end
 
   private
 
   def courses
-    Course.all.offset(params[:current_page].to_i * params[:count_per_page].to_i).limit(params[:count_per_page].to_i)
+    Course.all.offset(params[:current_page].to_i * 4).limit(4)
   end
 
   def permit_params

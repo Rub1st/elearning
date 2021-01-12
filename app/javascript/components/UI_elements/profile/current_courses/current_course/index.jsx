@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CurrentCourse = (props) => {
   let {el} = props
-  let course = props.courses.find(e => e.id === el.course.id);
+  // let course = props.courses.find(e => e.id === el.course.id);
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -65,21 +65,21 @@ const CurrentCourse = (props) => {
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
             {
-              course.author.login[0]
+              el.course.author.login[0]
             }
           </Avatar>
         }
         action={
           <div>
-            {course.mark === null ? 'no' : course.mark}
+            {el.course.mark === null ? 'no' : el.course.mark}
           </div>
         }
-        title={course.label}
-        subheader={DateFormat(course.created_at)}
+        title={el.course.label}
+        subheader={DateFormat(el.course.created_at)}
       />
       <CardMedia
         className={classes.media}
-        image={course.image_url}
+        image={el.course.image_url}
         title="Paella dish"
       />
       <CardContent>
@@ -88,7 +88,7 @@ const CurrentCourse = (props) => {
           author
         </p>
         <p>
-          {course.author.login}
+          {el.course.author.login}
         </p>
         </Typography>
         <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
@@ -96,7 +96,7 @@ const CurrentCourse = (props) => {
           organization
         </p>
         <p>
-          {course.organization === null ? 'no' : course.organization.name}
+          {el.course.organization === null ? 'no' : el.course.organization.name}
         </p>
         </Typography>
         <Typography variant="body2" color="textSecondary" className='for_course_text_field' component="p">
@@ -150,11 +150,11 @@ const CurrentCourse = (props) => {
         <CardContent>
           <Typography paragraph>Why learn:</Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {course.why_content}
+          {el.course.why_content}
         </Typography>
           <Typography paragraph>Will learn:</Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {course.will_content}
+          {el.course.will_content}
         </Typography>
         </CardContent>
       </Collapse>

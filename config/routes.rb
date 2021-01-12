@@ -49,6 +49,9 @@ Rails.application.routes.draw do
     resources :user_courses, only: %i[create update index] do
       collection do
         get :search
+        get :favorite_courses
+        get :done_courses
+        get :current_courses
       end
     end
 

@@ -1,11 +1,14 @@
 import { GET_COURSE,
          UPDATE_SEARCH_INPUT,
          CREATE_COURSE,
-         GET_COURSES,
          SET_DRAFT_COURSE,
          UPDATE_COURSE,
+         GET_COURSES,
          UPDATE_COURSE_APPROVE_STATUS,
-         DROP_COURSE } from "../constants/courses";
+         DROP_COURSE,
+         GET_MY_COURSES,
+         GET_RECOMMENDED_COURSES } from '../constants/courses';
+
 import { toast } from 'react-toastify';
 import { notify } from "../../components/utils/helpful_functions";
 
@@ -15,12 +18,20 @@ let initialState = {
   currentCourse: {},
   currentDraftCourse: {},
   connect_status: false,
+  my_courses: [],
+  recommended_courses: [],
 };
 
 const CourseReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COURSES: {
       return { ...state, courses: action.value, connect_status: true }
+    }
+    case GET_MY_COURSES: {
+      return { ...state, my_courses: action.value, connect_status: true }
+    }
+    case GET_RECOMMENDED_COURSES: {
+      return { ...state, recommended_courses: action.value, connect_status: true }
     }
     case DROP_COURSE: {
       return { ...state, courses: action.value }

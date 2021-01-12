@@ -1,9 +1,17 @@
-import { ADD_USER_COURSE, UPDATE_USER_COURSE, GET_USER_COURSES } from '../constants/user_courses'
+import { ADD_USER_COURSE,
+         UPDATE_USER_COURSE,
+         GET_USER_COURSES,
+         GET_CURRENT_COURSES,
+         GET_FAVORITE_COURSES,
+         GET_DONE_COURSES } from '../constants/user_courses'
 import { toast } from 'react-toastify';
 import { notify } from '../../components/utils/helpful_functions';
 
 let initialState = {
   userCourses: [],
+  doneCourses: [],
+  currentCourses: [],
+  favoriteCourses: [],
   currentUserCourse: {},
 };
 
@@ -11,6 +19,15 @@ const UserCourseReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_COURSES: {
       return { ...state, userCourses: action.value }
+    }
+    case GET_DONE_COURSES: {
+      return { ...state, doneCourses: action.value }
+    }
+    case GET_CURRENT_COURSES: {
+      return { ...state, currentCourses: action.value }
+    }
+    case GET_FAVORITE_COURSES: {
+      return { ...state, favoriteCourses: action.value }
     }
     case ADD_USER_COURSE: {
       notify(`Вы начали прохождение курса '${action.value.course.label}'!`, toast.info)

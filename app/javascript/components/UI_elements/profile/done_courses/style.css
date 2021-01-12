@@ -1,10 +1,10 @@
 .profile__course-field{
-  margin-top: 20px;
+  margin-top: 80px;
   padding: 30px 50px;
   width: 1530px;
   border-left: 1px solid rgb(240, 240, 240);
-  height: 800px;
-  overflow-y: auto;
+  height: 720px;
+  overflow-x: hidden;
 }
 
 .profile__course-list{

@@ -11,6 +11,6 @@ class CertificateSerializer < ActiveModel::Serializer
   belongs_to :user
 
   def certificate_pdf_url
-    url_for(object.certificate_pdf)
+    url_for(object.certificate_pdf) if object.certificate_pdf.attached?
   end
 end

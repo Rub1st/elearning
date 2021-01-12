@@ -10,16 +10,17 @@ export const getData = (path, setter) => (dispatch) => {
 };
 
 //take my courses
-export const getMyCourses = (setter) => (dispatch) => {
-  axios.get(`http://localhost:3000/courses/my_courses`).then((response) => {
+export const getMyCourses = (setter, page) => (dispatch) => {
+  axios.get(`http://localhost:3000/courses/my_courses?current_page=${page}`).then((response) => {
     dispatch(setter(response.data))
+    console.log(response.data)
     dispatch(setErrors([]));
   }).catch(error => dispatch(dropError(error.response)))
 };
 
 //take recommended courses
-export const getRecommendedCourses = (setter) => (dispatch) => {
-  axios.get(`http://localhost:3000/courses/recommended_courses`).then((response) => {
+export const getRecommendedCourses = (setter, page) => (dispatch) => {
+  axios.get(`http://localhost:3000/courses/recommended_courses?current_page=${page}`).then((response) => {
     dispatch(setter(response.data))
     dispatch(setErrors([]));
   }).catch(error => dispatch(dropError(error.response)))
@@ -152,7 +153,7 @@ export const searchDataPagination = (query, page, count_per_page, path, setter) 
 
 //get data with pagination
 export const getDataPagination = (path, page, count_per_page, setter) => (dispatch) => {
-  axios.get(`http://localhost:3000/${path}?current_page=${page}&count_per_page=${count_per_page}`).then((response) => {
+  axios.get(`http://localhost:3000/${path}?current_page=${page}`).then((response) => {
     dispatch(setter(response.data))
     dispatch(setErrors([]));
   }).catch(error => dispatch(dropError(error.response)))
@@ -165,3 +166,32 @@ export const getDataWithQueryPagination = (parrentId, page, count_per_page, path
     dispatch(setErrors([]));
   }).catch(error => dispatch(dropError(error.response)))
 };
+
+
+//take done courses
+export const getDoneCourses = (setter, page) => (dispatch) => {
+  axios.get(`http://localhost:3000/user_courses/done_courses?current_page=${page}`).then((response) => {
+    dispatch(setter(response.data))
+    dispatch(setErrors([]));
+  }).catch(error => dispatch(dropError(error.response)))
+};
+
+//take current courses
+export const getCurrentCourses = (setter, page) => (dispatch) => {
+  axios.get(`http://localhost:3000/user_courses/current_courses?current_page=${page}`).then((response) => {
+    dispatch(setter(response.data))
+    dispatch(setErrors([]));
+  }).catch(error => dispatch(dropError(error.response)))
+};
+
+
+//take favorite courses
+export const getFavoriteCourses = (setter, page) => (dispatch) => {
+  axios.get(`http://localhost:3000/user_courses/favorite_courses?current_page=${page}`).then((response) => {
+    dispatch(setter(response.data))
+    dispatch(setErrors([]));
+  }).catch(error => dispatch(dropError(error.response)))
+};
+
+
+

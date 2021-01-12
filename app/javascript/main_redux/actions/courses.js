@@ -5,7 +5,9 @@ import { GET_COURSE,
          UPDATE_COURSE,
          GET_COURSES,
          UPDATE_COURSE_APPROVE_STATUS,
-         DROP_COURSE } from '../constants/courses';
+         DROP_COURSE,
+         GET_MY_COURSES,
+         GET_RECOMMENDED_COURSES } from '../constants/courses';
 
 export const getCourses = (courses) => ({
   type: GET_COURSES,
@@ -45,4 +47,14 @@ export const setDraftCourse = (courseId) => ({
 export const updateCourseStatus = (status) => ({
   type: UPDATE_COURSE,
   value: status,
+})
+
+export const getsMyCourses = (items) => ({
+  type: GET_MY_COURSES,
+  value: items,
+})
+
+export const getsRecommendedCourses = (items) => ({
+  type: GET_RECOMMENDED_COURSES,
+  value: items,
 })

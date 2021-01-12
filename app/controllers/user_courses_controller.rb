@@ -25,6 +25,21 @@ class UserCoursesController < ApplicationController
     render_search_data user_courses
   end
 
+  def done_courses
+    render json: UserCourse.where('user_id = ? and progress = 100', current_user[:id])
+                           .all.offset(params[:current_page].to_i * 3).limit(3)
+  end
+
+  def current_courses
+    render json: UserCourse.where('user_id = ? and progress <> 100', current_user[:id])
+                           .all.offset(params[:current_page].to_i * 3).limit(3)
+  end
+
+  def favorite_courses
+    render json: UserCourse.where(user_id: current_user[:id], is_favorite: true)
+                           .all.offset(params[:current_page].to_i * 3).limit(3)
+  end
+
   private
 
   def user_courses
