@@ -1,13 +1,14 @@
 .profile__course-field{
-  margin-top: 80px;
   padding: 30px 50px;
-  width: 1530px;
+  width: 1550px;
   border-left: 1px solid rgb(240, 240, 240);
   height: 720px;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .profile__course-list{
+  margin-top: 80px;
   display: flex;
   flex-wrap: wrap;
   list-style: none;
