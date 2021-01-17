@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'static#index'
 
+  default_url_options host: 'localhost:3000'
+
   devise_scope :user do
     resources :organizations, only: %i[create update index] do
       collection do
