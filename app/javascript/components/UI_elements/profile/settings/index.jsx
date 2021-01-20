@@ -38,9 +38,9 @@ const Settings = (props) => {
   const classes = useStyles();
 
   const [fullName, setFullName] = useState(props.currentUser.full_name);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('fghj');
   const [login, setLogin] = useState(props.currentUser.login);
-  const [certificate, setCertificate] = useState(null);
+  const [certificate, setCertificate] = useState('qwer');
 
   const { t, i18n } = useTranslation();
 
@@ -57,8 +57,8 @@ const Settings = (props) => {
   return(
     <div className='home__position'>
     <div style={{marginLeft: '-50px', marginTop: '30px', marginBottom: '30px'}} className='home__top-line'>
-    <input className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
-      <label htmlFor="icon-button-file">
+    <input className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-image-file" type="file" />
+      <label htmlFor="icon-image-file">
         <IconButton color="primary" aria-label="upload picture" component="span">
           <PhotoCamera />
         </IconButton>
@@ -84,13 +84,13 @@ const Settings = (props) => {
     </div>
     <hr/>
     <div style={{marginLeft: '-50px', marginTop: '30px'}} className='home__top-line'>
-    <input className={classes.input} onChange={(e) => setImage(e.target.files[0])} id="icon-button-file" type="file" />
-      <label htmlFor="icon-button-file">
+    <input className={classes.input} onChange={(e) => setCertificate(e.target.files[0])} id="icon-certificate-file" type="file" />
+      <label htmlFor="icon-certificate-file">
         <IconButton color="primary" aria-label="upload picture" component="span">
           <PhotoCamera />
         </IconButton>
       </label>
-      <img src={props.users.find(e => e.id === props.currentUser.id).certificate_template_url} alt={'certificate'} style={{width: '350px', height: '250px'}}/>
+      <embed src={props.users.find(e => e.id === props.currentUser.id).certificate_template_url} width="350" height="250"/>
       <Link style={{marginLeft: '200px', marginTop: '30px'}} onClick={() => location.href = '/users/sign_in'}>
         <IconButton onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
           <CheckCircleOutlineIcon className={classes.approve}/>

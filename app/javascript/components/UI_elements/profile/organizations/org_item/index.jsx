@@ -77,13 +77,16 @@ const OrgItem = (props) => {
       <CardHeader
         title={el.name}
         subheader={DateFormat(el.created_at)}
+        action={
+          <object src={el.certificate_template_url} type="application/x-pdf" title="SamplePdf" width="500" height="720">
+            <a href={el.certificate_template_url} style={{marginRight: '15px', marginTop: '10px'}}>{t("General.2")}</a>
+          </object>
+        }
       />
       {
         !showReport ?
         <>
-          <CardMedia className={classes.media}
-                     image={el.certificate_template_url}
-                     title="Paella dish"/>
+          <embed src={el.certificate_template_url} width="350" height="240"/>
           <CardContent>
             <Tooltip title={el.description}>
               <Typography variant="body2" color="textSecondary" component="p">

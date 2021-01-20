@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
 import { getOrganizations, setCurrentOrganization } from '../../../../main_redux/actions/organizations';
-import { connectOrganizations } from '../../../../main_redux/actions/server_connections';
+import { connectOrganizations, getData } from '../../../../main_redux/actions/server_connections';
 import NoSearchResultSideBar from '../../../utils/empty_fields/no_search_result_sidebar';
 import OrgItem from './org_item'
 
 const Organization = (props) => {
+
+  useEffect(() => {
+    props.set('organizations', getOrganizations);
+  }, []);
 
   let filtered = props.organizations.filter(el => el.registered_members.filter(el => el.user.id === props.currentUser.id).length)
 
@@ -39,6 +43,7 @@ export default connect(
   }),
   dispatch => ({
     connectOrganizations: (id, setter) => dispatch(connectOrganizations(id, setter)),
-    setCurrentOrganization: (organizationId) => dispatch(setCurrentOrganization(organizationId))
+    setCurrentOrganization: (organizationId) => dispatch(setCurrentOrganization(organizationId)),
+    set: (path, setter) => dispatch(getData(path, setter)),
   })
 )(Organization)

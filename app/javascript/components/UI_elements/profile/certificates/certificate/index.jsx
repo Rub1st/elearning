@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { updateDataElement } from '../../../../../main_redux/actions/server_connections';
 import { DateFormat } from '../../../../utils/helpful_functions';
 import { CardContent, Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,14 +37,24 @@ const useStyles = makeStyles((theme) => ({
 const Certificate = (props) => {
   let {el} = props
 
+  console.log(el)
+
+  const { t, i18n } = useTranslation();
+
   const classes = useStyles();
 
   return(
     <Card className={classes.root}>
       <CardHeader
         title={el.course.label}
+        action={
+          <object src={el.certificate_pdf_url} type="application/x-pdf" title="SamplePdf" width="500" height="720">
+            <a href={el.certificate_pdf_url} style={{marginRight: '15px', marginTop: '10px'}}>{t("General.2")}</a>
+          </object>
+        }
       />
-          <CardMedia className={classes.media} image={el.certificate_pdf_url} title="Paella dish"/>
+      <embed src={el.certificate_pdf_url} width="350" height="240"
+      type="application/pdf"/>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {DateFormat(el.created_at)}
