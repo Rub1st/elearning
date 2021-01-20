@@ -116,7 +116,8 @@
     "21": "New password"
   },
   "General": {
-    "1": "Good luck! And remember: teaching is light!"
+    "1": "Good luck! And remember: teaching is light!",
+    "2": "open"
   },
   "Tooltip": {
     "1": "Change language",
