@@ -71,7 +71,7 @@ user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg')
 user = User.create(login: 'Kioshi',
                    password: 'Kioshi1231',
                    decrypted_password: 'Kioshi1231',
-                   email: 'romanchik@gmail.com',
+                   email: 'fominvalerij674@gmail.com',
                    full_name: 'Nikita Romanchik',
                    user_status: 2,
                    user_role: 0)
@@ -89,8 +89,8 @@ organization = Organization.create(name: 'Akira&Aurumlie',
                                    description: 'Your favorite clothes shop',
                                    approve_status: 2)
 
-organization.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'),
-                                         filename: "certificate_org_#{organization.id}.jpg")
+organization.certificate_template.attach(io: File.open('/home/akira/Desktop/elearning/app/assets/images/certificate_template_1.pdf'),
+                                         filename: "certificate_org_#{organization.id}.pdf")
 
 # 10.times do
 #   RegisteredMember.create(organization: generate_id(Organization),
@@ -166,6 +166,7 @@ course = Course.create(label: 'Ruby',
                       success_rate: 87,
                       access_type: 0,
                       approve_status: 2,
+                      course_status: 1,
                       author: User.find_by(login: 'Akkkira'),
                       organization: nil)
 
