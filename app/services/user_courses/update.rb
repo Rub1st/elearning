@@ -1,6 +1,7 @@
 module UserCourses
   class Update
     include Service
+    include Rails.application.routes.url_helpers
 
     def initialize(params, permit_params)
       @params = params
@@ -21,7 +22,7 @@ module UserCourses
 
     def cerificate_generation
       drop_previous_certificate_if_exists if @permit_params[:progress] == 100
-      generate_new_certificate if @permit_params[:progress] == 100
+      generate_new_certificate if @permit_params[:progress] == 100 && calculate_result > 90
     end
 
     def drop_previous_certificate_if_exists
@@ -31,13 +32,62 @@ module UserCourses
       end
     end
 
-    def generate_new_certificate
-      if calculate_result > 90
-        certificate = Certificate.create(course_id: @params[:course_id], user_id: @params[:user_id])
+    def raw_file(item)
+      @raw_file ||= URI.parse(url_for(item.certificate_template)).open
+    end
 
-        certificate.certificate_pdf.attach(io: File.open("#{Rails.root}/app/assets/images/pudge.jpg"), filename: 'file.jpg')
+    def certificate_creating
+      Certificate.create(course_id: @params[:course_id], user_id: @params[:user_id])
+    end
+
+    def course_organization
+      org_id = Course.find(@params[:course_id]).organization_id
+      Organization.find(org_id) unless org_id.nil?
+    end
+
+    def course_author
+      User.find(Course.find(@params[:course_id]).author_id)
+    end
+
+    def pdftk
+      PdfForms.new('/usr/bin/pdftk')
+    end
+
+    def create_temp_certificate(item)
+      Tempfile.new(["certificate_template_#{item.id}", 'pdf'], Rails.root.join('tmp/'))
+    end
+
+    def write_temp_certificate(certificate, item)
+      file = create_temp_certificate(certificate)
+      file.binmode
+      file.write(raw_file(item).read)
+      file
+    end
+
+    def fill_temp_certificate(certificate, path)
+      pdftk.fill_form path,
+                      "tmp/certificate_#{certificate.id}.pdf",
+                      course_label: Course.find(@params[:course_id]).label,
+                      user_name: User.find(@params[:user_id]).full_name,
+                      finish_date: certificate.created_at
+    end
+
+    def attach_certificate_pdf(certificate)
+      certificate.certificate_pdf.attach(io: File.open("tmp/certificate_#{certificate.id}.pdf"),
+                                         filename: "certificate_#{certificate.id}.pdf")
+    end
+
+    def generate_new_certificate
+      certificate = certificate_creating
+      organization = course_organization
+      if !organization.nil?
+        fill_temp_certificate(certificate, write_temp_certificate(certificate, organization).path)
+      elsif course_author.certificate_template.attached?
+        fill_temp_certificate(certificate, write_temp_certificate(certificate, course_author).path)
+      else
+        fill_temp_certificate(certificate, 'app/assets/images/certificate_template.pdf')
       end
-      nil
+      attach_certificate_pdf(certificate)
     end
 
     def course_success_update
@@ -84,7 +134,6 @@ module UserCourses
       UserAnswer.where(user_id: @params[:user_id], question_id: question_id, is_correct: true)
     end
 
-    # ?
     def correctly_done_questions
       done_course_questions.select do |question|
         question_variants(question.id).count == question_user_answers(question.id).count
