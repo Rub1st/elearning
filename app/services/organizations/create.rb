@@ -26,7 +26,8 @@ module Organizations
       if @params[:certificate_template].present?
         @new_organization.certificate_template.attach(@params[:certificate_template])
       else
-        @new_organization.certificate_template.attach(io: File.open('/home/akira/Desktop/noimage.jpg'), filename: 'noiamge.jpg')
+        @new_organization.certificate_template.attach(io: File.open('/home/akira/Desktop/noimage.jpg'),
+                                                      filename: 'noiamge.jpg')
       end
     end
 

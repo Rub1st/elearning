@@ -10,9 +10,6 @@
 #  password               :string      not null
 #
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
   has_many :certificates, dependent: :destroy
   has_many :registered_members, dependent: :destroy
   has_many :courses, class_name: 'Course', foreign_key: :author_id, dependent: :destroy
@@ -31,11 +28,9 @@ class User < ApplicationRecord
   enum user_status: %i[pending blocked approved]
 
   validates :login, :full_name, presence: true
-  validates :email, presence: true #, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   after_commit :reindex_courses, :reindex_comments, :reindex_impersonations
-
-  # after_create :welcome_send
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
@@ -43,13 +38,13 @@ class User < ApplicationRecord
 
   searchkick word_middle: %i[login email full_name]
 
-
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
       user.full_name = provider_data.info.name
       user.login = provider_data.info.first_name
       user.email = provider_data.info.email
       user.password = Devise.friendly_token[0, 20]
+      user.confirmed_at = Time.now.utc
     end
   end
 
@@ -73,8 +68,4 @@ class User < ApplicationRecord
       full_name: full_name
     }
   end
-
-  # def welcome_send
-  #   WelcomeMailer.welcome_send(self).deliver
-  # end
 end

@@ -2,9 +2,9 @@ class UserAnswersController < ApplicationController
   def create
     authorize!
 
-    ua = UserAnswers::Create.call(permit_params)
+    user_answer = UserAnswers::Create.call(permit_params)
 
-    render_created_data(ua, ua)
+    render_created_data(user_answer, user_answer)
   end
 
   private

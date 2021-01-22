@@ -12,7 +12,7 @@ import './wrapper.css'
 import { connect } from 'react-redux';
 import { getCourses, updateInput } from '../../../main_redux/actions/courses';
 import '../style/utils.css'
-import { getData, logout, searchData, searchDataPagination } from '../../../main_redux/actions/server_connections';
+import { getData, logout, searchDataPagination } from '../../../main_redux/actions/server_connections';
 import { setImpersonationUser } from '../../../main_redux/actions/users';
 import { BackspaceOutlined, DirectionsRunOutlined } from '@material-ui/icons';
 import UpdateImpersonationButton from './impersonation_button'
@@ -21,12 +21,10 @@ import { withRouter } from "react-router";
 import { getUserCourses } from '../../../main_redux/actions/user_courses';
 import { getOrganizations } from '../../../main_redux/actions/organizations';
 import { getCertificates } from '../../../main_redux/actions/certificates';
-import LanguageIcon from '@material-ui/icons/Language';
 import { useTranslation } from 'react-i18next';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import logo from '../../../../template_photos/logo-white.png'
 import 'react-toastify/dist/ReactToastify.css';
-import { notify } from '../helpful_functions';
 
 const useStyles = makeStyles((theme) => ({
   root: {

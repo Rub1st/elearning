@@ -11,8 +11,6 @@ const UpdateImpersonationButton = (props) => {
     <>
     <IconButton style={{color: 'gray', marginLeft: '10px'}}
       onClick={() => {
-        // props.setImpersonationUser(el);
-        // props.put(updatedImpersonation, 'impersonations', updateImpersonation);
         props.stopImpersonation();
       }}>
         {props.children}

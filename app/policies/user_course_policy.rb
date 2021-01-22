@@ -1,5 +1,4 @@
 class UserCoursePolicy < ApplicationPolicy
-  # ?
   def create?
     !user.nil?
   end

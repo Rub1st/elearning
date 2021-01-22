@@ -6,6 +6,7 @@ ruby '2.7.1'
 gem 'action_policy'
 gem 'activerecord-session_store'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bullet'
 gem 'devise'
 gem 'i18n-js'
 gem 'jbuilder', '~> 2.7'
@@ -27,11 +28,11 @@ gem 'webpacker', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', ">= 3.9.0"
 end
 
 group :development do
   gem 'active_model_serializers', '~> 0.10.4'
-  gem 'bullet', group: 'development'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'listen', '~> 3.2'
   gem 'spring'

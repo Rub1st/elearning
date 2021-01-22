@@ -1,7 +1,7 @@
 import React from 'react'
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
-import './style.css'
 import { makeStyles } from '@material-ui/core';
+import './style.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {

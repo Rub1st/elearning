@@ -125,5 +125,3 @@ Rails.application.routes.draw do
 
   get '*path' => 'static#index', constraints: -> (req) { req.format == 'text/html' }
 end
-
-# /^\/rails\/.*/

@@ -13,21 +13,11 @@ class CourseSerializer < ActiveModel::Serializer
              :organization,
              :author,
              :image_url,
-             #  :certificates,
              :course_status,
              :created_at
 
-  # has_many :pages
   belongs_to :author
-  # has_many :comments
   has_many :course_tags
-  # has_many :certificates
-  # has_many :user_courses
-  # has_many :course_members
-
-  # def certificates
-  #   Certificate.with_attached_certificate_pdf.where(course_id: object.id)
-  # end
 
   def image_url
     url_for(object.image)

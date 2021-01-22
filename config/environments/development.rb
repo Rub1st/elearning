@@ -1,11 +1,4 @@
 Rails.application.configure do
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert = true
-    Bullet.bullet_logger = true
-    Bullet.console = true
-  end
-
   config.cache_classes = false
 
   config.eager_load = false

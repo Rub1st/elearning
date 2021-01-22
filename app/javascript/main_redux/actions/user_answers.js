@@ -11,8 +11,3 @@ export const getUserAnswers = (userAnswers) => ({
   type: GET_USER_ANSWERS,
   value: userAnswers,
 })
-
-// export const createUserAnswer = (userAnswers) => ({
-//   type: CREATE_USER_ANSWER,
-//   value: userAnswers,
-// })

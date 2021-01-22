@@ -11,12 +11,11 @@
 input:focus{outline:none;}
 
 ::-webkit-scrollbar {
-  width: 10px; /* ширина для вертикального скролла */
-  height: 8px; /* высота для горизонтального скролла */
+  width: 10px;
+  height: 8px;
   background-color: white;
 }
 
-/* ползунок скроллбара */
 ::-webkit-scrollbar-thumb {
   background-color: rgba(243, 236, 236, 0.445);
   border-radius: 9em;
@@ -25,8 +24,6 @@ input:focus{outline:none;}
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(184, 169, 169, 0.445);
 }
-
-/* Стрелки */
 
 ::-webkit-scrollbar-button:vertical:start:decrement {
   background: linear-gradient(120deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),

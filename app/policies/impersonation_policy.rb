@@ -3,12 +3,10 @@ class ImpersonationPolicy < ApplicationPolicy
     user.admin?
   end
 
-  # ?
   def create?
     !user.nil?
   end
 
-  # ?
   def update?
     !user.nil?
   end
