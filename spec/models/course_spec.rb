@@ -7,24 +7,24 @@ RSpec.describe Course, type: :model do
                        login: 'Akira',
                        full_name: 'Denis Rubis')
 
-    expect(Course.new(label: 'Ruby',
-                      why_content: '-',
-                      will_content: '-',
-                      author: user)).to be_valid
+    expect(described_class.new(label: 'Ruby',
+                               why_content: '-',
+                               will_content: '-',
+                               author: user)).to be_valid
   end
 
   it 'is not valid without a why_content' do
-    course = Course.new(why_content: nil)
+    course = described_class.new(why_content: nil)
     expect(course).to_not be_valid
   end
 
   it 'is not valid without a will_content' do
-    course = Course.new(will_content: nil)
+    course = described_class.new(will_content: nil)
     expect(course).to_not be_valid
   end
 
   it 'is not valid without a label' do
-    course = Course.new(label: nil)
+    course = described_class.new(label: nil)
     expect(course).to_not be_valid
   end
 end

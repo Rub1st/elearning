@@ -16,13 +16,13 @@ RSpec.describe Reply, type: :model do
                           course: course,
                           content: 'it is really good course!')
 
-    expect(Reply.new(author: user,
-                     comment: comment,
-                     content: 'yes you are right!')).to be_valid
+    expect(described_class.new(author: user,
+                               comment: comment,
+                               content: 'yes you are right!')).to be_valid
   end
 
   it 'is not valid without a content' do
-    comment = Reply.new(content: nil)
+    comment = described_class.new(content: nil)
     expect(comment).to_not be_valid
   end
 end

@@ -12,12 +12,12 @@ RSpec.describe Page, type: :model do
                            will_content: '-',
                            author: user)
 
-    expect(Page.new(course: course,
-                    title: 'So Lets Start')).to be_valid
+    expect(described_class.new(course: course,
+                               title: 'So Lets Start')).to be_valid
   end
 
   it 'is not valid without a title' do
-    page = Page.new(title: nil)
+    page = described_class.new(title: nil)
     expect(page).to_not be_valid
   end
 end

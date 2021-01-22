@@ -19,13 +19,13 @@ RSpec.describe UserAnswer, type: :model do
                                title: 'So Lets Start',
                                question_text: 'Choose right variants')
 
-    expect(UserAnswer.new(question: question,
-                          user: user,
-                          answer: 'b')).to be_valid
+    expect(described_class.new(question: question,
+                               user: user,
+                               answer: 'b')).to be_valid
   end
 
   it 'is not valid without a answer' do
-    user_answer = UserAnswer.new(answer: nil)
+    user_answer = described_class.new(answer: nil)
     expect(user_answer).to_not be_valid
   end
 end

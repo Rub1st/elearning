@@ -19,12 +19,12 @@ RSpec.describe Variant, type: :model do
                                title: 'So Lets Start',
                                question_text: 'Choose right variants')
 
-    expect(Variant.new(question: question,
+    expect(described_class.new(question: question,
                        value: 'b')).to be_valid
   end
 
   it 'is not valid without a value' do
-    variant = Variant.new(value: nil)
+    variant = described_class.new(value: nil)
     expect(variant).to_not be_valid
   end
 end
