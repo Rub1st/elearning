@@ -1,28 +1,27 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { updateDataElement } from '../../../main_redux/actions/server_connections'
-import { setImpersonationUser } from '../../../main_redux/actions/users'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { updateDataElement } from "../../../main_redux/actions/server_connections";
+import { setImpersonationUser } from "../../../main_redux/actions/users";
 
 const ExitButton = (props) => {
-
-  return(
+  return (
     <>
-    <Link style={{color: 'white'}} to='/'>
-      {props.children}
-    </Link>
+      <Link style={{ color: "white" }} to="/">
+        {props.children}
+      </Link>
     </>
-  )
-}
+  );
+};
 
 export default connect(
-  state => ({
+  (state) => ({
     currentUser: state.users.currentUser,
     pages: state.pages.pages,
     currentImpersonation: state.impersonations.currentImpersonation,
   }),
-  dispatch => ({
+  (dispatch) => ({
     setImpersonationUser: (user) => dispatch(setImpersonationUser(user)),
     put: (obj, path, setter) => dispatch(updateDataElement(obj, path, setter)),
   })
-  )(ExitButton)
+)(ExitButton);

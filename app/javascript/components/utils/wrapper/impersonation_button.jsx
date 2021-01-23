@@ -1,33 +1,38 @@
-import { IconButton } from '@material-ui/core'
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { updateImpersonation } from '../../../main_redux/actions/impersonations'
-import { stopImpersonating, updateDataElement } from '../../../main_redux/actions/server_connections'
-import { setImpersonationUser } from '../../../main_redux/actions/users'
+import { IconButton } from "@material-ui/core";
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { updateImpersonation } from "../../../main_redux/actions/impersonations";
+import {
+  stopImpersonating,
+  updateDataElement,
+} from "../../../main_redux/actions/server_connections";
+import { setImpersonationUser } from "../../../main_redux/actions/users";
 
 const UpdateImpersonationButton = (props) => {
-  return(
+  return (
     <>
-    <IconButton style={{color: 'gray', marginLeft: '10px'}}
-      onClick={() => {
-        props.stopImpersonation();
-      }}>
+      <IconButton
+        style={{ color: "gray", marginLeft: "10px" }}
+        onClick={() => {
+          props.stopImpersonation();
+        }}
+      >
         {props.children}
-    </IconButton>
+      </IconButton>
     </>
-  )
-}
+  );
+};
 
 export default connect(
-  state => ({
+  (state) => ({
     currentUser: state.users.currentUser,
     pages: state.pages.pages,
     currentImpersonation: state.impersonations.currentImpersonation,
   }),
-  dispatch => ({
+  (dispatch) => ({
     setImpersonationUser: (user) => dispatch(setImpersonationUser(user)),
     put: (obj, path, setter) => dispatch(updateDataElement(obj, path, setter)),
     stopImpersonation: () => dispatch(stopImpersonating()),
   })
-  )(UpdateImpersonationButton)
+)(UpdateImpersonationButton);

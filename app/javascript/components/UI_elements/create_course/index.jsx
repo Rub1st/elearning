@@ -1,13 +1,12 @@
-import React from 'react'
-import CreateCoursePage from './create_course_page'
-
+import React from "react";
+import CreateCoursePage from "./create_course_page";
 
 const CreateCourse = () => {
-  return(
+  return (
     <div>
-      <CreateCoursePage/>
+      <CreateCoursePage />
     </div>
-  )
-}
+  );
+};
 
 export default CreateCourse;

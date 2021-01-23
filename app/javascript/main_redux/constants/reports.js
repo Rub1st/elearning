@@ -1,1 +1,1 @@
-export const CREATE_REPORT = 'CREATE_REPORT'
+export const CREATE_REPORT = "CREATE_REPORT";

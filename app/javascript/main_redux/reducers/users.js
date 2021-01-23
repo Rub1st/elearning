@@ -1,17 +1,19 @@
-import { UPDATE_USER,
-         GET_USERS,
-         SET_CURRENT_USER,
-         CREATE_USER,
-         DROP_USER,
-         SET_IMPERSONATION_USER,
-         UPDATE_USER_STATUS } from '../constants/users';
-import { toast } from 'react-toastify';
-import { notify } from '../../components/utils/helpful_functions';
+import {
+  UPDATE_USER,
+  GET_USERS,
+  SET_CURRENT_USER,
+  CREATE_USER,
+  DROP_USER,
+  SET_IMPERSONATION_USER,
+  UPDATE_USER_STATUS,
+} from "../constants/users";
+import { toast } from "react-toastify";
+import { notify } from "../../components/utils/helpful_functions";
 
 let initialState = {
   users: [],
   common_users: [],
-  currentUser: '',
+  currentUser: "",
   impersonationUser: {},
   impersonation: false,
 };
@@ -19,31 +21,52 @@ let initialState = {
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS: {
-      return { ...state, users: action.value, common_users: action.value.filter(el => el.user_role === 'common' && el.user_status === 'approved' ) }
+      return {
+        ...state,
+        users: action.value,
+        common_users: action.value.filter(
+          (el) => el.user_role === "common" && el.user_status === "approved"
+        ),
+      };
     }
     case DROP_USER: {
-      return { ...state, users: action.value }
+      return { ...state, users: action.value };
     }
     case SET_CURRENT_USER: {
-      notify(`Добро пожаловать, ${action.value.full_name}!`, toast.info)
+      notify(`Добро пожаловать, ${action.value.full_name}!`, toast.info);
 
-      return { ...state, currentUser: action.value, impersonationUser: action.value }
+      return {
+        ...state,
+        currentUser: action.value,
+        impersonationUser: action.value,
+      };
     }
     case CREATE_USER: {
-      return { ...state, common_users: [...action.value] }
+      return { ...state, common_users: [...action.value] };
     }
     case UPDATE_USER: {
-      return { ...state, common_users: [...state.users.filter(el => el.id !== state.currentUser.id), action.value], currentUser: {...action.value} }
+      return {
+        ...state,
+        common_users: [
+          ...state.users.filter((el) => el.id !== state.currentUser.id),
+          action.value,
+        ],
+        currentUser: { ...action.value },
+      };
     }
     case UPDATE_USER_STATUS: {
-      return { ...state, users: action.value }
+      return { ...state, users: action.value };
     }
     case SET_IMPERSONATION_USER: {
-      state = { ...state, impersonation: !state.impersonation, currentUser: action.value }
+      state = {
+        ...state,
+        impersonation: !state.impersonation,
+        currentUser: action.value,
+      };
       console.log(state);
       return state;
     }
-    default:{
+    default: {
       return state;
     }
   }

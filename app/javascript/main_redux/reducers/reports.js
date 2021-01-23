@@ -1,4 +1,4 @@
-import { CREATE_REPORT } from '../constants/reports'
+import { CREATE_REPORT } from "../constants/reports";
 
 let initialState = {
   reports: [],
@@ -7,9 +7,9 @@ let initialState = {
 const ReportReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_REPORT: {
-      return { ...state, reports: action.value}
+      return { ...state, reports: action.value };
     }
-    default:{
+    default: {
       return state;
     }
   }

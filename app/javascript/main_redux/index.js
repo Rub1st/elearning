@@ -1,21 +1,22 @@
-import { combineReducers } from 'redux'
-import { CourseReducer,
-         CommentReducer,
-         PageReducer,
-         UserReducer,
-         UserCourseReducer,
-         UserAnswerReducer,
-         CertificateReducer,
-         TagReducer,
-         OrganizationReducer,
-         QuestionReducer,
-         TheoryReducer,
-         RegisteredMemberReducer,
-         UnregisteredMemberReducer,
-         ImpersonationReducer,
-         ReportReducer,
-         ErrorReducer} from './reducers'
-
+import { combineReducers } from "redux";
+import {
+  CourseReducer,
+  CommentReducer,
+  PageReducer,
+  UserReducer,
+  UserCourseReducer,
+  UserAnswerReducer,
+  CertificateReducer,
+  TagReducer,
+  OrganizationReducer,
+  QuestionReducer,
+  TheoryReducer,
+  RegisteredMemberReducer,
+  UnregisteredMemberReducer,
+  ImpersonationReducer,
+  ReportReducer,
+  ErrorReducer,
+} from "./reducers";
 
 const Reducer = combineReducers({
   courses: CourseReducer,
