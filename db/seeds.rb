@@ -45,7 +45,8 @@ user = User.create(login: 'Akkkira',
                    email: 'dionis.rubis@gmail.com',
                    decrypted_password: 'AkiraAurumlie7',
                    full_name: 'Denis Rubis',
-                   user_status: 2,
+                   user_status: 0,
+                   confirmed_at: Time.now.utc,
                    user_role: 1)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
 user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "cer_user_#{user.id}.jpg")
@@ -55,7 +56,8 @@ user = User.create(login: 'Aurumlie',
                    decrypted_password: 'AkiraAurumlie7',
                    email: 'efimka@mail.com',
                    full_name: 'Anastasia Efimovich',
-                   user_status: 2,
+                   user_status: 0,
+                   confirmed_at: Time.now.utc,
                    user_role: 1)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
 user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "cer_user_#{user.id}.jpg")
@@ -65,7 +67,8 @@ user = User.create(login: 'Kioshi',
                    decrypted_password: 'Kioshi1231',
                    email: 'fominvalerij674@gmail.com',
                    full_name: 'Nikita Romanchik',
-                   user_status: 2,
+                   user_status: 0,
+                   confirmed_at: Time.now.utc,
                    user_role: 0)
 user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
 user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "cer_user_#{user.id}.jpg")
