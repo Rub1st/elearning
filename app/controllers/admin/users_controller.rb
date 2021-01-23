@@ -7,7 +7,7 @@ module Admin
     def update
       user = User.find(params[:id])
 
-      render_updated_data(user, permit_params, User)
+      render_updated_data(user, permit_params, User.all)
     end
 
     def destroy
