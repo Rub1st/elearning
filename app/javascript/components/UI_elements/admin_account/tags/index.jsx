@@ -45,8 +45,8 @@ const Tags = (props) => {
           </li>)
         }
         </ul> : !props.tags.length ?
-        <AdminModeEmptyField label={'тегов'}/> :
-        <NoSearchResultsField label={'тегов'}/>
+        <AdminModeEmptyField label={'tags'}/> :
+        <NoSearchResultsField label={'tags'}/>
       }
     </div>
     </EntitiesList>

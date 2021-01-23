@@ -57,19 +57,18 @@ const OrganizationItem = (props) => {
     setExpanded(!expanded);
   };
 
-  console.log(props.choice)
-
   return(
     <Card className={classes.root}>
       <CardHeader
         title={el.name}
         subheader={DateFormat(el.created_at)}
+        action={
+          <object src={el.certificate_template_url} type="application/x-pdf" title="SamplePdf" width="500" height="720">
+            <a href={el.certificate_template_url} style={{marginRight: '15px', marginTop: '10px'}}>open</a>
+          </object>
+        }
       />
-      <CardMedia
-        className={classes.media}
-        image={el.certificate_template_url}
-        title="Paella dish"
-      />
+      <embed src={el.certificate_template_url} width="350" height="240"/>
         <CardActions disableSpacing>
           {
             (props.choice === 0 || props.choice === 1) &&

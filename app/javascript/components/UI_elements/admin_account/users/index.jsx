@@ -31,6 +31,8 @@ const Users = (props) => {
     props.set('admin/users', getUsers);
   }, []);
 
+  console.log(props.users)
+
   return(
     <div>
       <EntitiesList label={'Users'}
@@ -42,33 +44,14 @@ const Users = (props) => {
           <AppBar position="static" color="default">
             <Tabs value={value} indicatorColor="primary" textColor="primary"
                   variant="fullWidth" aria-label="full width tabs example">
-              <Tab label="Pending Users" className='case-tab' onClick={() => setValue(0)}/>
-              <Tab label="Approved Users" className='case-tab' onClick={() => setValue(1)}/>
-              <Tab label="Blocked Users" className='case-tab' onClick={() => setValue(2)}/>
+              <Tab label="Approved Users" className='case-tab' onClick={() => setValue(0)}/>
+              <Tab label="Blocked Users" className='case-tab' onClick={() => setValue(1)}/>
             </Tabs>
           </AppBar>
         </div>
         <div className='field'>
         {
           value === 0 ?
-          <div>
-          {
-            userFilter(props.users, 'pending').length ?
-            <ul className='admin-user-list'>
-            {
-              userFilter(props.users, 'pending').map(el =>
-              <li key={el.id} className='admin-user-list-position'>
-                <UserItem choice={value}
-                          el={el} newEl2={{ id: el.id, user: {user_status: 2 }}}
-                          newEl={{ id: el.id, user: {user_status: 1 }}}/>
-              </li>)
-            }
-            </ul> : !props.users.filter(e => e.user_status === 'pending').length ?
-            <AdminModeEmptyField label={'пользователей'}/> :
-            <NoSearchResultsField label={'пользователей'}/>
-          }
-        </div> :
-          value === 1 ?
           <div>
           {
             userFilter(props.users, 'approved').length ?
@@ -80,8 +63,8 @@ const Users = (props) => {
                 </li>)
             }
             </ul> : !props.users.filter(e => e.user_status === 'approved').length ?
-            <AdminModeEmptyField label={'пользователей'}/> :
-            <NoSearchResultsField label={'пользователей'}/>
+            <AdminModeEmptyField label={'users'}/> :
+            <NoSearchResultsField label={'users'}/>
           }
         </div> :
          <div>
@@ -91,12 +74,12 @@ const Users = (props) => {
            {
              userFilter(props.users, 'blocked').map(el =>
                <li key={el.id} className='admin-user-list-position'>
-                 <UserItem choice={value} el={el} newEl={{ id: el.id, user: {user_status: 2 }}}/>
+                 <UserItem choice={value} el={el} newEl={{ id: el.id, user: {user_status: 0 }}}/>
                </li>)
            }
            </ul> : !props.users.filter(e => e.user_status === 'blocked').length ?
-           <AdminModeEmptyField label={'пользователей'}/> :
-           <NoSearchResultsField label={'пользователей'}/>
+           <AdminModeEmptyField label={'users'}/> :
+           <NoSearchResultsField label={'users'}/>
          }
        </div>
         }

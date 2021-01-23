@@ -146,11 +146,11 @@ const EntitiesList = (props) => {
   </Tabs>
         </div>
         <div className='field-position'>
-          {/* {
+          {
               !props.connect_status ?
-              <CircularProgress/> : */}
-              {props.children}
-          {/* } */}
+              <CircularProgress/> :
+              props.children
+          }
         </div>
       </div>
     </div>

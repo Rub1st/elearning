@@ -75,8 +75,8 @@ const Courses = (props) => {
               </li>)
             }
           </ul> : !props.courses.filter(e => e.approve_status === 'pending').length ?
-          <AdminModeEmptyField label={'курсов'}/> :
-          <NoSearchResultsField label={'курсов'}/>
+          <AdminModeEmptyField label={'courses'}/> :
+          <NoSearchResultsField label={'courses'}/>
         }
     </div> :
       value === 1 ?
@@ -91,8 +91,8 @@ const Courses = (props) => {
               </li>)
             }
           </ul> : !props.courses.filter(e => e.approve_status === 'approved').length ?
-          <AdminModeEmptyField label={'курсов'}/> :
-          <NoSearchResultsField label={'курсов'}/>
+          <AdminModeEmptyField label={'courses'}/> :
+          <NoSearchResultsField label={'courses'}/>
         }
       </div> :
       <div>
@@ -106,8 +106,8 @@ const Courses = (props) => {
               </li>)
             }
           </ul> : !props.courses.filter(e => e.approve_status === 'rejected').length ?
-          <AdminModeEmptyField label={'курсов'}/> :
-          <NoSearchResultsField label={'курсов'}/>
+          <AdminModeEmptyField label={'courses'}/> :
+          <NoSearchResultsField label={'courses'}/>
         }
       </div>
   }

@@ -31,8 +31,8 @@ const Comments = (props) => {
             </li>)
           }
           </ul> : !props.comments.length ?
-          <AdminModeEmptyField label={'комментариев'}/> :
-          <NoSearchResultsField label={'комментариев'}/>
+          <AdminModeEmptyField label={'comments'}/> :
+          <NoSearchResultsField label={'comments'}/>
         }
         </EntitiesList>
     </div>

@@ -67,8 +67,8 @@ const Organizations = (props) => {
               </li>)
             }
             </ul> : !props.organizations.filter(e => e.approve_status === 'pending').length ?
-            <AdminModeEmptyField label={'организаций'}/> :
-            <NoSearchResultsField label={'организаций'}/>
+            <AdminModeEmptyField label={'organizations'}/> :
+            <NoSearchResultsField label={'organizations'}/>
           }
         </div> :
       value === 1 ?
@@ -83,8 +83,8 @@ const Organizations = (props) => {
             </li>)
           }
           </ul> : !props.organizations.filter(e => e.approve_status === 'approved').length ?
-           <AdminModeEmptyField label={'организаций'}/> :
-           <NoSearchResultsField label={'организаций'}/>
+           <AdminModeEmptyField label={'organizations'}/> :
+           <NoSearchResultsField label={'organizations'}/>
         }
       </div> :
       <div>
@@ -98,8 +98,8 @@ const Organizations = (props) => {
           </li>)
         }
         </ul> : !props.organizations.filter(e => e.approve_status === 'rejected').length ?
-         <AdminModeEmptyField label={'организаций'}/> :
-         <NoSearchResultsField label={'организаций'}/>
+         <AdminModeEmptyField label={'organizations'}/> :
+         <NoSearchResultsField label={'organizations'}/>
       }
     </div>
       }

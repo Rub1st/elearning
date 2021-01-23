@@ -32,8 +32,8 @@ const Impersonations = (props) => {
             </li>)
           }
           </ul> : !props.impersonations.length ?
-          <AdminModeEmptyField label={'имперсонаций'}/> :
-          <NoSearchResultsField label={'имперсонаций'}/>
+          <AdminModeEmptyField label={'impersonations'}/> :
+          <NoSearchResultsField label={'impersonations'}/>
         }
         </div>
       </EntitiesList>
