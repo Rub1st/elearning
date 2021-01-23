@@ -55,3 +55,13 @@ input:focus{outline:none;}
       linear-gradient(90deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
   background-color: #f6f8f4;
 }
+
+.ban{
+  display: flex;
+  flex-direction: column;
+  color: #303030;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+  font-size: 50px;
+}

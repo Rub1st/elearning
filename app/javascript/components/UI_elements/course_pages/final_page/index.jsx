@@ -6,7 +6,8 @@ import { postDataElement, updateDataElement } from '../../../../main_redux/actio
 import { updateUserCourse } from '../../../../main_redux/actions/user_courses'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import certificate from '../../../../photos/ruby.jpg'
+import win_fon from '../../../../../assets/images/win_fon.jpg'
+import lose_fon from '../../../../../assets/images/lose_fon.jpg'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 import './final_page.css'
@@ -108,7 +109,7 @@ const FinalPage = (props) => {
           <div className='final-message'>You has successufly finished course "{props.currentUserCourse.course.label}"</div>
           <div className='final-message'>Your result: {props.currentUserCourse.correct}%</div>
           <div className='final-message'>Take our congratulations, {props.currentUserCourse.user.login}</div>
-          <img className='final-certificate' src={certificate} alt={'certificate'}/>
+          <img className='final-certificate' src={win_fon} alt={'win fon'}/>
         </div>)
         :
         (<>
@@ -116,7 +117,7 @@ const FinalPage = (props) => {
           <div className='final-message'>Your result: {props.currentUserCourse.correct}%</div>
           <div className='final-message'>We are sorry, {props.currentUserCourse.user.login}</div>
           <Link to={`/`}>Click for trying one more time</Link>
-          <img className='final-certificate' src={certificate} alt={'certificate'}/>
+          <img className='final-certificate' src={lose_fon} alt={'lose fon'}/>
           </>)
       }
       <div className='final-mark-field'>
@@ -134,8 +135,6 @@ const FinalPage = (props) => {
                         current_page: props.currentUserCourse.current_page,
                       }
                     }, 'user_courses', updateUserCourse);
-                    props.post({ user_id: props.currentUser.id, course_id: props.currentUserCourse.course.id }, 'certificates', plug)
-                    //props.createCertificate(props.currentUserCourse);
                   }}
                   control={<Checkbox icon={<StarBorderIcon/>} checkedIcon={<StarIcon/>} name="add to favorite" />}
                 />

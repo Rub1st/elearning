@@ -41,13 +41,13 @@ const UserCourseReducer = (state = initialState, action) => {
         notify(`Ваши ответы верны на: ${action.value.correct}%!`, toast.info)
       }
 
-      if(action.value.progress == 100 && action.value.correct > 90){
+      if(action.value.progress == 100 && action.value.correct > 90 && action.value.mark == null){
         notify(`Примите наши поздравления! Вы успешно завершили курс '${action.value.course.label}'!`, toast.info)
         notify(`Ваш сертификат уже ждет вас в разделе 'Мои сертификаты' в профиле!`, toast.info)
         notify(`Пожалуйста, оцените этот курс! Это может работе и развитию данной платформы.`, toast.info)
       }
 
-      if(action.value.progress == 100 && action.value.correct <= 90){
+      if(action.value.progress == 100 && action.value.correct <= 90  && action.value.mark == null){
         notify(`К сожалению вам не удалось успешно завершить курс '${action.value.course.label}'!`, toast.info)
         notify(`Попробуйте снова! Нельзя сдаваться на пути к знаниям!`, toast.info)
         notify(`Пожалуйста, оцените этот курс! Это может работе и развитию данной платформы.`, toast.info)

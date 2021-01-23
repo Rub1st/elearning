@@ -17,6 +17,9 @@ import Comments from './components/UI_elements/admin_account/comments';
 import Impersonations from './components/UI_elements/admin_account/impersonations';
 import CurrentCourse from './components/UI_elements/current_course'
 import { setCurrentUser } from "./main_redux/actions/users";
+import './components/utils/style/utils.css'
+import { logout } from "./main_redux/actions/server_connections";
+import { Button } from "@material-ui/core";
 
 function App(props){
 
@@ -26,33 +29,43 @@ function App(props){
 
     return(
       <div>
-            {
-              props.current_user.user_role === 'common' ?
+        {
+          props.current_user.user_status == 'approved' ?
+          (
+            props.current_user.user_role === 'common' ?
+            (
+              <Wrapper true_user={props.true_user}>
+                <Switch>
+                  <Route exact path='/' component={Catalog}/>
+                  <Route path='/create_course' component={CreateCourse}/>
+                  <Route path='/create_organization' component={CreateOrganization}/>
+                  <Route path={`/user_id=${props.currentUser.id}`} component={Profile}/>
+                  <Route path={`/main_page/course_id=${props.currentCourse.id}`} component={CurrentCourse}/>
+                  <Route path={`/course_id=${props.currentCourse.id}`} component={CoursePages}/>
+                  <Route path={`/draft_course_id=${props.currentDraftCourse.id}`} component={CreateCourseTreePages}/>
+                </Switch>
+              </Wrapper>
+              ) :
               (
-                <Wrapper true_user={props.true_user}>
-                  <Switch>
-                    <Route exact path='/' component={Catalog}/>
-                    <Route path='/create_course' component={CreateCourse}/>
-                    <Route path='/create_organization' component={CreateOrganization}/>
-                    <Route path={`/user_id=${props.currentUser.id}`} component={Profile}/>
-                    <Route path={`/main_page/course_id=${props.currentCourse.id}`} component={CurrentCourse}/>
-                    <Route path={`/course_id=${props.currentCourse.id}`} component={CoursePages}/>
-                    <Route path={`/draft_course_id=${props.currentDraftCourse.id}`} component={CreateCourseTreePages}/>
-                  </Switch>
-                </Wrapper>
-                ) :
-                (
-                  <Switch>
-                    <Route exact path='/' component={AdminAccount}/>
-                    <Route exact path={`/catalog/courses`} component={Courses}/>
-                    <Route exact path={`/catalog/users`} component={Users}/>
-                    <Route exact path={`/catalog/organizations`} component={Organizations}/>
-                    <Route exact path={`/catalog/tags`} component={Tags}/>
-                    <Route exact path={`/catalog/comments`} component={Comments}/>
-                    <Route exact path={`/catalog/impersonations`} component={Impersonations}/>
-              </Switch>
-                )
-            }
+                <Switch>
+                  <Route exact path='/' component={AdminAccount}/>
+                  <Route exact path={`/catalog/courses`} component={Courses}/>
+                  <Route exact path={`/catalog/users`} component={Users}/>
+                  <Route exact path={`/catalog/organizations`} component={Organizations}/>
+                  <Route exact path={`/catalog/tags`} component={Tags}/>
+                  <Route exact path={`/catalog/comments`} component={Comments}/>
+                  <Route exact path={`/catalog/impersonations`} component={Impersonations}/>
+            </Switch>
+              )
+          ):
+          <div className='ban'>
+            <h1>Sorry, your account have been banned :c</h1>
+            <Button variant="outlined" color="primary" onClick={() => props.logout()}>
+              exit
+            </Button>
+          </div>
+
+        }
       </div>
     )
 }
@@ -64,6 +77,7 @@ export default connect(
     currentDraftCourse: state.courses.currentDraftCourse,
 }),
 dispatch => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user))
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  logout: () => dispatch(logout())
 })
 )(App)

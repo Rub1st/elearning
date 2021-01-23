@@ -20,7 +20,7 @@ const AdminModeEmptyField = ({label}) => {
   const classes = useStyles();
   return(
     <div className='admin_empty_field'>
-      <h3 className='admin_empty_content'>Здесь пока что нет {label}</h3>
+      <h3 className='admin_empty_content'>There are no any {label}</h3>
       <SentimentDissatisfiedIcon className={classes.large}/>
     </div>
   )

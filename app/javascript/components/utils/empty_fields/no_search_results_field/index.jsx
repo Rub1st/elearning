@@ -19,7 +19,7 @@ const NoSearchResultsField = ({label}) => {
   const classes = useStyles();
   return(
     <div className='admin_empty_field'>
-      <h3 className='admin_empty_content'>По вашему запросу {label} не найдено</h3>
+      <h3 className='admin_empty_content'>We cannot find any {label}</h3>
       <SearchOutlined className={classes.large}/>
     </div>
   )

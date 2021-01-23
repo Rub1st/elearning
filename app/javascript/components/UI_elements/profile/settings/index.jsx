@@ -14,6 +14,7 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { useTranslation } from 'react-i18next';
 import { serialize } from 'object-to-formdata';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,9 +39,9 @@ const Settings = (props) => {
   const classes = useStyles();
 
   const [fullName, setFullName] = useState(props.currentUser.full_name);
-  const [image, setImage] = useState('fghj');
+  const [image, setImage] = useState(null);
   const [login, setLogin] = useState(props.currentUser.login);
-  const [certificate, setCertificate] = useState('qwer');
+  const [certificate, setCertificate] = useState(null);
 
   const { t, i18n } = useTranslation();
 
@@ -76,14 +77,9 @@ const Settings = (props) => {
                    helperText={props.errors.full_name != undefined ? props.errors.full_name[0] : null}
                    value={fullName} variant="outlined" onChange={(e) => setFullName(e.target.value)}/>
       </div>
-      <Link style={{marginTop: '30px'}} onClick={() => location.href = '/users/sign_in'}>
-        <IconButton onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
-          <CheckCircleOutlineIcon className={classes.approve}/>
-        </IconButton>
-      </Link>
     </div>
     <hr/>
-    <div style={{marginLeft: '-50px', marginTop: '30px'}} className='home__top-line'>
+    <div style={{marginLeft: '-50px'}} className='home__top-line'>
     <input className={classes.input} onChange={(e) => setCertificate(e.target.files[0])} id="icon-certificate-file" type="file" />
       <label htmlFor="icon-certificate-file">
         <IconButton color="primary" aria-label="upload picture" component="span">
@@ -91,12 +87,17 @@ const Settings = (props) => {
         </IconButton>
       </label>
       <embed src={props.users.find(e => e.id === props.currentUser.id).certificate_template_url} width="350" height="250"/>
-      <Link style={{marginLeft: '200px', marginTop: '30px'}} onClick={() => location.href = '/users/sign_in'}>
-        <IconButton onClick={() => props.put(formData, props.currentUser.id, 'users', plug)}>
-          <CheckCircleOutlineIcon className={classes.approve}/>
-        </IconButton>
-      </Link>
     </div>
+        <Button style={{marginTop: '50px'}} variant="outlined" color="primary" onClick={() => {
+          props.put(formData, props.currentUser.id, 'users', plug);
+          if(fullName != '' && login != '')
+          {
+            location.href = '/users/sign_in'
+          }
+        }
+        }>
+          save changes
+        </Button>
   </div>
   )
 }
