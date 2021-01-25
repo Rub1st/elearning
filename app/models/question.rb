@@ -16,8 +16,8 @@ class Question < ApplicationRecord
   has_many :user_answers, dependent: :destroy
   has_many :variants, dependent: :destroy
 
-  enum question_type: %i[closed opened]
-  enum difficult: %i[easy medium hard]
+  enum question_type: { closed: 0, opened: 1 }
+  enum difficult: { easy: 0, medium: 1, hard: 2 }
 
   validates :title, :question_text, presence: true
 end

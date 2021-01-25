@@ -37,7 +37,8 @@ User.destroy_all
 #                      birthday: Date.new,
 #                      user_role: generate_digit(0, 1))
 #   user.avatar.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "avatar_#{user.id}.jpg")
-#   user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "certificate_user_#{user.id}.jpg")
+#   user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'),
+# filename: "certificate_user_#{user.id}.jpg")
 # end
 
 user = User.create(login: 'Akkkira',
@@ -77,15 +78,17 @@ user.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg')
 #   organization = Organization.create(name: Faker::Company.name,
 #                                      description: generate_pharagraph(5),
 #                                      approve_status: generate_digit(0, 2))
-#   organization.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "certificate_org_#{organization.id}.jpg")
+#   organization.certificate_template.attach(io: File.open('/home/akira/Pictures/pudge.jpg'),
+# filename: "certificate_org_#{organization.id}.jpg")
 # end
 
 organization = Organization.create(name: 'Akira&Aurumlie',
                                    description: 'Your favorite clothes shop',
                                    approve_status: 2)
 
-organization.certificate_template.attach(io: File.open('/home/akira/Desktop/elearning/app/assets/images/certificate_template_1.pdf'),
-                                         filename: "certificate_org_#{organization.id}.pdf")
+organization
+  .certificate_template.attach(io: File.open(Rails.root.join('/app/assets/images/certificate_template_1.pdf')),
+                               filename: "certificate_org_#{organization.id}.pdf")
 
 # 10.times do
 #   RegisteredMember.create(organization: generate_id(Organization),
@@ -130,8 +133,6 @@ Tag.create(name: 'Games')
 #                        common: generate_id(User))
 # end
 
-
-
 # 100.times do
 #   course = Course.create(label: Faker::Company.name,
 #                          mark: generate_digit(-10, 10),
@@ -157,13 +158,13 @@ course = Course.create(label: 'Ruby',
                                       concepts—including variables, loops, control flow, and most importantly,
                                       object-oriented programming. You’ll get a chance to test your understanding
                                       in a final project, which you’ll build locally.',
-                      uses_count: 10000,
-                      success_rate: 87,
-                      access_type: 0,
-                      approve_status: 2,
-                      course_status: 1,
-                      author: User.find_by(login: 'Akkkira'),
-                      organization: nil)
+                       uses_count: 10_000,
+                       success_rate: 87,
+                       access_type: 0,
+                       approve_status: 2,
+                       course_status: 1,
+                       author: User.find_by(login: 'Akkkira'),
+                       organization: nil)
 
 course.image.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "course_#{course.id}.jpg")
 
@@ -351,7 +352,8 @@ CourseTag.create(course: Course.find_by(label: 'Ruby'),
 # 10.times do
 #   certificate = Certificate.create(course: generate_id(Course),
 #                                    user: generate_id(User))
-#   certificate.certificate_pdf.attach(io: File.open('/home/akira/Pictures/pudge.jpg'), filename: "certificate_#{certificate.id}.jpg")
+#   certificate.certificate_pdf.attach(io: File.open('/home/akira/Pictures/pudge.jpg'),
+# filename: "certificate_#{certificate.id}.jpg")
 # end
 
 # 10.times do

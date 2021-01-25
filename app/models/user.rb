@@ -24,11 +24,11 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :certificate_template
 
-  enum user_role: %i[admin common]
-  enum user_status: %i[approved blocked]
+  enum user_role: { admin: 0, common: 1 }
+  enum user_status: { approved: 0, blocked: 1 }
 
   validates :login, :full_name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true
 
   after_commit :reindex_courses, :reindex_comments, :reindex_impersonations
 

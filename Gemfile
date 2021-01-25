@@ -19,6 +19,7 @@ gem 'puma', '~> 4.1'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 gem 'react-rails'
+gem 'rubocop-rails', require: false
 gem 'sass-rails', '>= 6'
 gem 'searchkick'
 gem 'sendinblue'
@@ -28,7 +29,7 @@ gem 'webpacker', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', ">= 3.9.0"
+  gem 'rspec-rails', '>= 3.9.0'
 end
 
 group :development do

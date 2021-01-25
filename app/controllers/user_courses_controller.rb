@@ -57,4 +57,3 @@ class UserCoursesController < ApplicationController
     )
   end
 end
-

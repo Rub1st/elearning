@@ -31,7 +31,7 @@ module Admin
 
     def permit_params
       params.require(:organization).permit(
-        :approve_status,
+        :approve_status
       )
     end
   end

@@ -18,7 +18,7 @@
 class Course < ApplicationRecord
   belongs_to :organization, optional: true
   belongs_to :author, class_name: 'User'
-  has_many :reports
+  has_many :reports, dependent: :destroy
   has_many :certificates, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :course_tags, dependent: :destroy
@@ -29,14 +29,13 @@ class Course < ApplicationRecord
 
   has_one_attached :image
 
-  enum course_status: %i[draft ready]
-  enum approve_status: %i[pending rejected approved]
-  enum access_type: %i[opened closed individual]
+  enum course_status: { draft: 0, ready: 1 }
+  enum approve_status: { pending: 0, rejected: 1, approved: 2 }
+  enum access_type: { opened: 0, closed: 1, individual: 2 }
 
   validates :label, :why_content, :will_content, presence: true
 
   searchkick word_middle: %i[label why_conent will_content]
-
 
   def search_data
     {

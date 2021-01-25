@@ -12,7 +12,7 @@
 class UnregisteredMember < ApplicationRecord
   belongs_to :organization
 
-  enum member_role: %i[manager common]
+  enum member_role: { manager: 0, common: 1 }
 
   validates :email, :code, presence: true
 

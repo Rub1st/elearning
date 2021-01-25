@@ -12,7 +12,7 @@ class RegisteredMember < ApplicationRecord
   belongs_to :organization
   belongs_to :user
 
-  enum member_role: %i[manager common]
+  enum member_role: { manager: 0, common: 1 }
 
   searchkick
 

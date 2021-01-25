@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :registered_members, only: %i[create destroy index]  do
+    resources :registered_members, only: %i[create destroy index] do
       collection do
         get :search
       end
@@ -123,5 +123,5 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
 
-  get '*path' => 'static#index', constraints: -> (req) { req.format == 'text/html' }
+  get '*path' => 'static#index', constraints: ->(req) { req.format == 'text/html' }
 end

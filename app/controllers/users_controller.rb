@@ -52,7 +52,7 @@ class UsersController < ApplicationController
       RegisteredMember.create(user: current_user,
                               organization: item.organization,
                               member_role: item.member_role)
-  end
+    end
 
     unregistered_members.destroy_all
 

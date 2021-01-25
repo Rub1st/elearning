@@ -15,7 +15,7 @@ class Organization < ApplicationRecord
 
   has_one_attached :certificate_template
 
-  enum approve_status: %i[pending rejected approved]
+  enum approve_status: { pending: 0, rejected: 1, approved: 2 }
 
   validates :name, :description, presence: true
 
