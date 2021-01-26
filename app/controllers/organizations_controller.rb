@@ -5,6 +5,7 @@ class OrganizationsController < ApplicationController
     render Organizations::Create.call(permit_params, current_user)
   end
 
+  # rubocop:disable Metrics/AbcSize
   def update
     organization = Organization.find(params[:id])
 
@@ -21,6 +22,7 @@ class OrganizationsController < ApplicationController
 
     render_updated_data(organization, updated, organization)
   end
+  # rubocop:enable Metrics/AbcSize
 
   def index
     authorize!

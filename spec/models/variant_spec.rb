@@ -20,7 +20,7 @@ RSpec.describe Variant, type: :model do
                                question_text: 'Choose right variants')
 
     expect(described_class.new(question: question,
-                       value: 'b')).to be_valid
+                               value: 'b')).to be_valid
   end
 
   it 'is not valid without a value' do

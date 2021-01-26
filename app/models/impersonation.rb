@@ -13,7 +13,7 @@ class Impersonation < ApplicationRecord
   belongs_to :common, class_name: 'User'
   belongs_to :organization
 
-  searchkick word_middle: [:start, :end]
+  searchkick word_middle: %i[start end]
 
   def search_data
     {

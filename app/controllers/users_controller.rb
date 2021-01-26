@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     render json: users
   end
 
+  # rubocop:disable Metrics/AbcSize
   def update
     user = User.find(params[:id])
 
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 
     render_updated_data(user, updated, users)
   end
+  # rubocop:enable Metrics/AbcSize
 
   def search
     render_search_data users
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
 
   def stop_impersonating
     impersonation = Impersonation.where(common_id: current_user[:id]).last
-    impersonation.update(end: Time.now)
+    impersonation.update(end: Time.now.utc)
     stop_impersonating_user
     redirect_to root_path
   end

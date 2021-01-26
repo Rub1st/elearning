@@ -17,3 +17,28 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Exclude:
     - app/services/**/*
+
+Rails/FilePath:
+  Exclude:
+    - config/**/*
+
+Layout/LineLength:
+  Exclude:
+    - config/**/*
+
+Style/BlockComments:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+
+Metrics/AbcSize:
+  Exclude:
+    - db/**/*
+
+Style/IfUnlessModifier:
+  Exclude:
+    - config/**/*
+
+Layout/ArgumentAlignment:
+  Exclude:
+    - config/**/*

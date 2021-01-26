@@ -12,13 +12,21 @@
 class User < ApplicationRecord
   has_many :certificates, dependent: :destroy
   has_many :registered_members, dependent: :destroy
-  has_many :courses, class_name: 'Course', foreign_key: :author_id, dependent: :destroy
-  has_many :comments, class_name: 'Comment', foreign_key: :author_id, dependent: :destroy
-  has_many :replies, class_name: 'Reply', foreign_key: :author_id, dependent: :destroy
+  has_many :courses, foreign_key: :author_id, inverse_of: 'author', dependent: :destroy
+  has_many :comments, foreign_key: :author_id, inverse_of: 'author', dependent: :destroy
+  has_many :replies, foreign_key: :author_id, inverse_of: 'author', dependent: :destroy
   has_many :user_courses, dependent: :destroy
   has_many :user_answers, dependent: :destroy
-  has_many :manager_impersonations, class_name: 'Impersonation', foreign_key: :manager_id, dependent: :destroy
-  has_many :common_impersonations, class_name: 'Impersonation', foreign_key: :common_id, dependent: :destroy
+  has_many :manager_impersonations,
+           class_name: 'Impersonation',
+           foreign_key: :manager_id,
+           inverse_of: 'manager',
+           dependent: :destroy
+  has_many :common_impersonations,
+           class_name: 'Impersonation',
+           foreign_key: :common_id,
+           inverse_of: 'common',
+           dependent: :destroy
   has_many :course_members, dependent: :destroy
 
   has_one_attached :avatar
@@ -38,6 +46,7 @@ class User < ApplicationRecord
 
   searchkick word_middle: %i[login email full_name]
 
+  # rubocop:disable Metrics/AbcSize
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
       user.full_name = provider_data.info.name
@@ -47,6 +56,7 @@ class User < ApplicationRecord
       user.confirmed_at = Time.now.utc
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def reindex_courses
     courses.reindex
