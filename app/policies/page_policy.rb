@@ -1,17 +1,17 @@
 class PagePolicy < ApplicationPolicy
   def index?
-    !user.nil?
+    user.present?
   end
 
   def create?
-    !user.nil?
+    user.id == record.author_id
   end
 
   def update?
-    !user.nil?
+    user.id == record.author_id
   end
 
   def destroy?
-    !user.nil?
+    user.present?
   end
 end

@@ -7,8 +7,10 @@ class UserCoursesController < ApplicationController
   end
 
   def update
-    authorize!
     user_course = UserCourse.find(params[:id])
+
+    authorize! user_course
+
     UserCourses::Update.call(user_course, permit_params)
     user_course = UserCourse.find(params[:id])
 
@@ -16,7 +18,7 @@ class UserCoursesController < ApplicationController
   end
 
   def index
-    authorize!
+    authorize! user_courses
 
     render json: user_courses
   end

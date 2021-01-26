@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize!
     user = User.find(params[:id])
+
+    authorize! user
 
     if permit_params[:avatar].present?
       user.avatar.purge

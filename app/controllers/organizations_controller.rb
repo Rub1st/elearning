@@ -6,8 +6,9 @@ class OrganizationsController < ApplicationController
   end
 
   def update
-    authorize!
     organization = Organization.find(params[:id])
+
+    authorize! organization
 
     if permit_params[:certificate_template].present?
       organization.certificate_template.purge

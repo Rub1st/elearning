@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
   def create
-    authorize!
     question = Question.new(permit_params)
+
+    authorize! question
 
     render_created_data(question, question)
   end

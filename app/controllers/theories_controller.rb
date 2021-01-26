@@ -1,12 +1,13 @@
 class TheoriesController < ApplicationController
   def create
-    authorize!
     theory = Theory.new(permit_params)
+
+    authorize! theory
 
     if permit_params[:image].present?
       theory.image.attach(permit_params[:image])
     else
-      theory.image.attach(io: File.open(Rails.root('/app/assets/images/noimage.jpg')), filename: 'noiamge.jpg')
+      theory.image.attach(io: File.open(Rails.root.join('app/assets/images/noimage.jpg')), filename: 'noiamge.jpg')
     end
 
     render_created_data(theory, theory)
@@ -21,7 +22,6 @@ class TheoriesController < ApplicationController
 
   def index
     authorize!
-
     render json: theories
   end
 

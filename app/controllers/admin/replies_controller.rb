@@ -1,8 +1,12 @@
 module Admin
   class RepliesController < ApplicationController
     def destroy
-      authorize!
-      Reply.find(params[:id]).destroy
+      reply = Reply.find(params[:id])
+
+      authorize! reply
+
+      reply.destroy
+
       render json: Comment.all
     end
   end

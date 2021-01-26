@@ -1,9 +1,5 @@
 class CertificatePolicy < ApplicationPolicy
   def index?
-    !user.nil?
-  end
-
-  def create?
-    !user.nil?
+    !user.nil? && record.all { |item| item.user_id == user.id }
   end
 end

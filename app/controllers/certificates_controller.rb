@@ -1,5 +1,7 @@
 class CertificatesController < ApplicationController
   def index
+    authorize! certificates
+
     render json: certificates
   end
 

@@ -1,5 +1,5 @@
 class UserAnswerPolicy < ApplicationPolicy
   def create?
-    user.common?
+    user.id == record.user_id && user.common?
   end
 end

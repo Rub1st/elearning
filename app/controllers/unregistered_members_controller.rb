@@ -1,7 +1,8 @@
 class UnregisteredMembersController < ApplicationController
   def create
-    authorize!
     unregistered_member = UnregisteredMembers::Create.call(permit_params)
+
+    authorize! unregistered_member.organization
 
     render_created_data(unregistered_member, unregistered_members)
   end

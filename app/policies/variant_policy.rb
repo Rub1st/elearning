@@ -1,9 +1,9 @@
 class VariantPolicy < ApplicationPolicy
   def create?
-    !user.nil?
+    user.id == record.question.page.course.author_id
   end
 
   def destroy?
-    !user.nil?
+    user.id == record.question.page.course.author_id
   end
 end

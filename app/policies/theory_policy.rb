@@ -1,13 +1,13 @@
 class TheoryPolicy < ApplicationPolicy
   def index?
-    !user.nil?
+    user.present?
   end
 
   def create?
-    !user.nil?
+    user.id == record.page.course.author_id
   end
 
   def destroy?
-    !user.nil?
+    user.present?
   end
 end

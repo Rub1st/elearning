@@ -1,9 +1,9 @@
 class ReportPolicy < ApplicationPolicy
   def create?
-    !user.nil?
+    RegisteredMember.find_by(organization_id: record.id, user_id: user.id, member_role: 0)
   end
 
   def index
-    !user.nil?
+    user.present?
   end
 end

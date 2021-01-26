@@ -1,14 +1,18 @@
 class CommentsController < ApplicationController
   def create
-    authorize!
     comment = Comment.new(permit_params)
+
+    authorize! comment
 
     render_created_data(comment, comments)
   end
 
   def destroy
-    authorize!
-    Comment.find(params[:id]).destroy
+    comment = Comment.find(params[:id])
+
+    authorize! comment
+
+    comment.destroy
 
     render json: comments
   end

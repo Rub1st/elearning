@@ -4,11 +4,11 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.nil?
+    user.present? && user.user_status == 'approved' && !user.admin?
   end
 
   def update?
-    !user.nil?
+    RegisteredMember.find_by(organization_id: record.id, user_id: user.id, member_role: 0) || user.admin?
   end
 
   def destroy?

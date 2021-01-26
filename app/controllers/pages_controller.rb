@@ -1,21 +1,26 @@
 class PagesController < ApplicationController
   def create
-    authorize!
     page = Pages::Create.call(permit_params)
+
+    authorize! Course.find(page.course_id)
 
     render_created_data(page, page)
   end
 
   def update
-    authorize!
     page = Page.find(params[:id])
+
+    authorize! Course.find(page.course_id)
 
     render_updated_data(page, permit_params, page)
   end
 
   def destroy
+    page = Page.find(params[:id])
+
     authorize!
-    Page.find(params[:id]).destroy
+
+    page.destroy
 
     render json: pages
   end

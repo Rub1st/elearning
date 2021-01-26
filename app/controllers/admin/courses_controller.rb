@@ -1,8 +1,9 @@
 module Admin
   class CoursesController < ApplicationController
     def update
-      authorize!
       course = Course.find(params[:id])
+
+      authorize! course
 
       render_updated_data(course, permit_params, course)
     end

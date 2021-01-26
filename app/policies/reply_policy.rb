@@ -1,9 +1,9 @@
 class ReplyPolicy < ApplicationPolicy
   def create?
-    !user.nil?
+    user.present? && !user.admin?
   end
 
   def destroy?
-    !user.nil?
+    user.admin? || user.id == record.author_id
   end
 end

@@ -1,13 +1,15 @@
 class RegisteredMembersController < ApplicationController
   def create
-    authorize!
     registered_member = RegisteredMember.new(permit_params)
 
-    render_created_data(registered_member, RegisteredMember)
+    authorize! registered_member.organization
+
+    render_created_data(registered_member, registered_members)
   end
 
   def destroy
     authorize!
+
     RegisteredMember.find(params[:id]).destroy
 
     render json: registered_members

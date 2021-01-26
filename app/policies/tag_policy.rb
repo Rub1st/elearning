@@ -8,6 +8,6 @@ class TagPolicy < ApplicationPolicy
   end
 
   def index
-    true
+    user.present?
   end
 end

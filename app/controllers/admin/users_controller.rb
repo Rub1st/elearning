@@ -7,6 +7,8 @@ module Admin
     def update
       user = User.find(params[:id])
 
+      authorize! user
+
       render_updated_data(user, permit_params, User.all)
     end
 

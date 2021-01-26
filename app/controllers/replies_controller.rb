@@ -1,14 +1,18 @@
 class RepliesController < ApplicationController
   def create
-    authorize!
     reply = Reply.new(permit_params)
+
+    authorize! reply
 
     render_created_data(reply, comments)
   end
 
   def destroy
-    authorize!
-    Reply.find(params[:id]).destroy
+    reply = Reply.find(params[:id])
+
+    authorize! reply
+
+    reply.destroy
 
     render json: comments
   end

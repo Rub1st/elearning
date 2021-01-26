@@ -1,13 +1,13 @@
 class UserCoursePolicy < ApplicationPolicy
   def create?
-    !user.nil?
+    user.present?
   end
 
   def update?
-    user&.common?
+    user.id == record.user_id
   end
 
   def index?
-    !user.nil?
+    record.all { |item| item.user_id == user.id }
   end
 end
