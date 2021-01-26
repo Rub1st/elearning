@@ -30,6 +30,4 @@ What could I do if I had more time?
 Firstly I would add more tools in admin mode and implement mobile version of site.
 Also I think I would optimize backend logic to speed up the project.
 
-x-special/nautilus-clipboard
-copy
-file:///home/akira/Desktop/elearning/app/assets/images/logo-blue.png
+![](app/assets/images/logo-blue.png)
