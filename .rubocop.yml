@@ -1,5 +1,8 @@
 require: rubocop-rails
 
+AllCops:
+    NewCops: enable
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
@@ -41,4 +44,16 @@ Style/IfUnlessModifier:
 
 Layout/ArgumentAlignment:
   Exclude:
+    - config/**/*
+
+Style/RedundantRegexpEscape:
+    Exclude:
+    - config.ru
+
+Style/RedundantFetchBlock:
+    Exclude:
+    - config/**/*
+
+Style/GlobalStdStream:
+    Exclude:
     - config/**/*
