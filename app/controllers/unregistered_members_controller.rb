@@ -26,7 +26,7 @@ class UnregisteredMembersController < ApplicationController
   private
 
   def unregistered_members
-    UnregisteredMember.where(organization_id: params[:parent_id])
+    @unregistered_members ||= UnregisteredMember.where(organization_id: params[:parent_id])
   end
 
   def permit_params

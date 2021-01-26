@@ -28,7 +28,7 @@ class RegisteredMembersController < ApplicationController
   private
 
   def registered_members
-    RegisteredMember.where(organization_id: params[:parent_id])
+    @registered_members ||= RegisteredMember.where(organization_id: params[:parent_id])
   end
 
   def permit_params

@@ -20,7 +20,7 @@ class RepliesController < ApplicationController
   private
 
   def comments
-    Comment.where(course_id: params[:parent_id])
+    @comments ||= Comment.where(course_id: params[:parent_id])
   end
 
   def permit_params

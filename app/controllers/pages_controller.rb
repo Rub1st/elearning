@@ -34,7 +34,7 @@ class PagesController < ApplicationController
   private
 
   def pages
-    Page.where(course_id: params[:parent_id])
+    @pages ||= Page.where(course_id: params[:parent_id])
   end
 
   def permit_params

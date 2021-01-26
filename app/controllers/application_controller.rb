@@ -4,12 +4,6 @@ class ApplicationController < ActionController::Base
 
   impersonates :user
 
-  protect_from_forgery with: :exception
-
-  skip_before_action :verify_authenticity_token, if: lambda {
-    Rails.env.development? && ENV['SKIP_VERIFY_AUTHENTICITY_TOKEN']
-  }
-
   def set_locale
     I18n.locale = if user_signed_in?
                     current_user.language

@@ -28,7 +28,7 @@ class TheoriesController < ApplicationController
   private
 
   def theories
-    Theory.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
+    @theories ||= Theory.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
   end
 
   def permit_params

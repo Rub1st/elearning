@@ -12,7 +12,7 @@ class CertificatesController < ApplicationController
   private
 
   def certificates
-    Certificate.where(user_id: current_user[:id]).order(created_at: :asc, course_id: :asc)
+    @certificates ||= Certificate.where(user_id: current_user[:id]).order(created_at: :asc, course_id: :asc)
   end
 
   def permit_params

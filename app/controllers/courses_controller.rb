@@ -45,7 +45,7 @@ class CoursesController < ApplicationController
   private
 
   def courses
-    Course.all.offset(params[:current_page].to_i * 4).limit(4)
+    @courses ||= Course.all.offset(params[:current_page].to_i * 4).limit(4)
   end
 
   def permit_params

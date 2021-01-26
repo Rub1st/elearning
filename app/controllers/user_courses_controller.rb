@@ -45,7 +45,7 @@ class UserCoursesController < ApplicationController
   private
 
   def user_courses
-    UserCourse.where(user_id: current_user[:id])
+    @user_courses ||= UserCourse.where(user_id: current_user[:id])
   end
 
   def permit_params

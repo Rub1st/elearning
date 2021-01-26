@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   private
 
   def users
-    User.where(user_role: 1)
+    @users ||= User.where(user_role: 1)
   end
 
   def permit_params

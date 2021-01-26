@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   private
 
   def questions
-    Question.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
+    @questions ||= Question.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
   end
 
   def permit_params
