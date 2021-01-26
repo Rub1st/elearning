@@ -9,7 +9,6 @@ module UserCourses
     end
 
     def call
-      p @permit_params
       course_mark_update unless @permit_params[:mark].nil?
 
       cerificate_generation
@@ -27,9 +26,7 @@ module UserCourses
 
     def drop_previous_certificate_if_exists
       certificate = Certificate.find_by(course_id: @params[:course_id], user_id: @params[:user_id])
-      if certificate
-        certificate.destroy
-      end
+      certificate&.destroy
     end
 
     def raw_file(item)

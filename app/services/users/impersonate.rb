@@ -21,8 +21,8 @@ module Users
     def create_impersonation_in_db
       Impersonation.create(manager_id: @current_user[:id],
                            common_id: @params[:id],
-                           start: Time.now,
-                           end: Time.now,
+                           start: Time.now.utc,
+                           end: Time.now.utc,
                            organization_id: @params[:org_id])
     end
   end

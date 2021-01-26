@@ -12,6 +12,7 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   Exclude:
     - config/**/*
+    - spec/**/*
 
 Metrics/ClassLength:
   Exclude:

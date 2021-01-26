@@ -26,9 +26,15 @@ module Organizations
       if @params[:certificate_template].present?
         @new_organization.certificate_template.attach(@params[:certificate_template])
       else
-        @new_organization.certificate_template.attach(io: File.open('/home/akira/Desktop/noimage.jpg'),
-                                                      filename: 'noiamge.jpg')
+        @new_organization.certificate_template.attach(
+          io: File.open(Rails.root.join('app/assets/images/certificate_template_1.pdf')),
+          filename: 'certificate.pdf'
+        )
       end
+    end
+
+    def choose_appove_status
+      @params[:approve_status].nil? ? 0 : @params[:approve_status]
     end
 
     def create_main_manager
@@ -38,7 +44,8 @@ module Organizations
     def create_new_organization
       Organization.new(
         name: @params[:name],
-        description: @params[:description]
+        description: @params[:description],
+        approve_status: choose_appove_status
       )
     end
   end

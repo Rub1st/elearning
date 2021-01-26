@@ -16,10 +16,14 @@ module UnregisteredMembers
       rand(10_000_000..99_999_999)
     end
 
+    def choice_member_role
+      @params[:member_role].nil? ? 1 : @params[:member_role]
+    end
+
     def create_new_member
       UnregisteredMember.new(
         organization_id: @params[:organization_id],
-        member_role: @params[:member_role],
+        member_role: choice_member_role,
         email: @params[:email],
         code: generate_code
       )
