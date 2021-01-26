@@ -9,6 +9,7 @@ import {
 import { dropQuestion } from "../../../../../main_redux/actions/questions";
 import {
   destroyDataElement,
+  destroyDataElementWithQuery,
   postDataElement,
   updateDataElement,
 } from "../../../../../main_redux/actions/server_connections";
@@ -154,7 +155,7 @@ const CreateCourseTreePage = (props) => {
                     <Tooltip title={t("Tooltip.25")}>
                       <IconButton
                         onClick={() =>
-                          props.drop(el.id, "theories", dropTheory)
+                          props.drop(el.id, props.currentDraftCourse.id, "theories", dropTheory)
                         }
                       >
                         <DeleteForeverOutlined />
@@ -241,7 +242,7 @@ const CreateCourseTreePage = (props) => {
                   <Tooltip title={t("Tooltip.26")}>
                     <IconButton
                       onClick={() =>
-                        props.drop(el.id, "questions", dropQuestion)
+                        props.drop(el.id, props.currentDraftCourse.id, "questions", dropQuestion)
                       }
                     >
                       <DeleteForeverOutlined />
@@ -329,6 +330,6 @@ export default connect(
   (dispatch) => ({
     post: (obj, path, setter) => dispatch(postDataElement(obj, path, setter)),
     put: (obj, path, setter) => dispatch(updateDataElement(obj, path, setter)),
-    drop: (id, path, setter) => dispatch(destroyDataElement(id, path, setter)),
+    drop: (id, parrentId, path, setter) => dispatch(destroyDataElementWithQuery(id, parrentId, path, setter)),
   })
 )(CreateCourseTreePage);

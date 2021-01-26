@@ -7,6 +7,22 @@
   overflow-y: hidden;
 }
 
+.profile__organization-field{
+  padding: 30px 50px;
+  width: 1550px;
+  border-left: 1px solid rgb(240, 240, 240);
+  height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.profile__organization-list{
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
 .profile__course-list{
   margin-top: 80px;
   display: flex;

@@ -11,7 +11,7 @@ const FavoriteButtonShow = (props) => {
       <Link
         style={{ color: "gray", marginLeft: "10px" }}
         className="profile__sidebar-item"
-        to={`/main_page/course_id=${el.id}`}
+        to={`/main_page/course_id=${el.course.id}`}
         onClick={() => props.setCurrentCourse(el.course.id)}
       >
         {props.children}

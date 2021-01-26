@@ -26,7 +26,7 @@ const Organization = (props) => {
   const { t, i18n } = useTranslation();
 
   return (
-    <div className="profile__course-field">
+    <div className="profile__organization-field">
       <button
         style={{
           backgroundColor: "transparent",
@@ -40,7 +40,7 @@ const Organization = (props) => {
       >
         {t("Organization.16")}
       </button>
-      <ul className="profile__course-list">
+      <ul className="profile__organization-list">
         {filtered.length ? (
           filtered.map((el) => (
             <li key={el.id} className="profile__course-item">

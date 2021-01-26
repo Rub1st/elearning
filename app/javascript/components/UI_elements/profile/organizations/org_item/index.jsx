@@ -92,6 +92,7 @@ const OrgItem = (props) => {
             <a
               href={el.certificate_template_url}
               style={{ marginRight: "15px", marginTop: "10px" }}
+              target={"_blank"}
             >
               {t("General.2")}
             </a>

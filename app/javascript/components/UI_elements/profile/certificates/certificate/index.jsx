@@ -56,6 +56,7 @@ const Certificate = (props) => {
             <a
               href={el.certificate_pdf_url}
               style={{ marginRight: "15px", marginTop: "10px" }}
+              target={"_blank"}
             >
               {t("General.2")}
             </a>
