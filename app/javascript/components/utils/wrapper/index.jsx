@@ -94,18 +94,12 @@ const Wrapper = (props) => {
 
   let { request_path, count, setter } =
     path === "/"
-      ? { request_path: "courses", count: 4, setter: getCourses }
-      : path === `/user_id=${user_id}/my_courses` ||
-        path === `/user_id=${user_id}/recomended_courses`
       ? { request_path: "courses", count: 3, setter: getCourses }
       : path === `/user_id=${user_id}/organizations`
       ? { request_path: "organizations", count: null, setter: getOrganizations }
       : path === `/user_id=${user_id}/certificates`
       ? { request_path: "certificates", count: null, setter: getCertificates }
-      : path === `/user_id=${user_id}/home` ||
-        path === `/user_id=${user_id}/settings`
-      ? { request_path: "none", count: null, setter: null }
-      : { request_path: "user_courses", count: 3, setter: getUserCourses };
+      : { request_path: "none", count: null, setter: null }
 
   const enter_listener = (event) => {
     if (event.key === "Enter") {
