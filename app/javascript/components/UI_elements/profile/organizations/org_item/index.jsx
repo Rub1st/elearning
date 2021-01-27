@@ -125,7 +125,9 @@ const OrgItem = (props) => {
         <>
           <hr />
           <Typography variant="body2" color="textSecondary" component="p">
-            {DateFormat(currentReport.created_at)}
+            <p style={{marginLeft: '15px'}}>
+              {DateFormat(currentReport.created_at)}
+            </p>
           </Typography>
           <CardContent>
             <hr />
