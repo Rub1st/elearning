@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
 
 const CourseList = (props) => {
   const classes = useStyles();
+
+  console.log(props.courses)
+
   let filtered_courses = props.courses.filter(
     (el) => el.course_status === "ready" && el.approve_status === "approved"
   );

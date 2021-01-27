@@ -11,7 +11,6 @@ import { destroyDataElement } from "../../../../../main_redux/actions/server_con
 const MyCourseButtonShow = (props) => {
   let { el } = props;
 
-  console.log(el);
   return (
     <>
       <Link

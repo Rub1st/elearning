@@ -57,9 +57,11 @@ const CourseReducer = (state = initialState, action) => {
       };
     }
     case GET_COURSE: {
+      console.log(state.courses)
+      console.log(action.value)
       return {
         ...state,
-        currentCourse: state.courses.find((el) => el.id === action.value),
+        currentCourse: state.courses.find((el) => el.id == action.value),
       };
     }
     case UPDATE_SEARCH_INPUT: {
