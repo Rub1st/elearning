@@ -4,14 +4,14 @@ module Admin
       authorize!
       tag = Tag.new(permit_params)
 
-      render_created_data(tag, Tag)
+      render_created_data(tag, Tag.all)
     end
 
     def update
       authorize!
       tag = Tag.find(params[:id])
 
-      render_updated_data(tag, permit_params, Tag)
+      render_updated_data(tag, permit_params, Tag.all)
     end
 
     def index
