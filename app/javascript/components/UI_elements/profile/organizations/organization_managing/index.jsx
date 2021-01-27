@@ -450,13 +450,15 @@ const OrganizationManaging = (props) => {
               <Tooltip title={t("Tooltip.17")}>
                 <IconButton
                   style={{ marginLeft: "5px" }}
-                  onClick={() =>
-                    props.post(
+                  onClick={() => {
+                      props.post(
                       newUnregistered,
                       props.currentOrganization.id,
                       "unregistered_members",
                       createUnregisteredMember
                     )
+                    setEmail('');
+                  }
                   }
                 >
                   <ControlPointIcon className={classes.approve} />

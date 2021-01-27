@@ -8,8 +8,25 @@ import { getComments } from "../../../../../main_redux/actions/comments";
 import { getDataWithQuery } from "../../../../../main_redux/actions/server_connections";
 import { useTranslation } from "react-i18next";
 import { getPages } from "../../../../../main_redux/actions/pages";
+import { makeStyles } from "@material-ui/core";
+import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  large: {
+    width: theme.spacing(8),
+    height: theme.spacing(8),
+    borderRadius: "30px",
+  },
+}));
 
 const CommentsField = (props) => {
+  const classes = useStyles();
+
   useEffect(() => {
     props.set(props.currentCourse.id, "comments", getComments);
     props.set(props.currentCourse.id, "pages", getPages);
@@ -33,7 +50,12 @@ const CommentsField = (props) => {
         </ul>
       ) : (
         <div className="course__comment-list">
-          <UserModeEmptyField label={"комментариев"} />
+          <div className="comment_empty_field">
+            <div>
+              <h5>Здесь пока что нет комментариев</h5>
+            </div>
+            <SentimentDissatisfiedIcon className={classes.large} />
+          </div>
         </div>
       )}
       <CommentInput />

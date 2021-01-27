@@ -21,6 +21,7 @@ import {
 import { FavoriteBorderOutlined } from "@material-ui/icons";
 import BlockIcon from "@material-ui/icons/Block";
 import { DateFormat } from "../../../../utils/helpful_functions";
+import image from '../../../../../../assets/images/noimage.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,9 @@ const UserItem = (props) => {
 
   const classes = useStyles();
 
+  console.log(el)
+  console.log(image)
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -60,7 +64,7 @@ const UserItem = (props) => {
         }
         action={
           <object
-            src={el.certificate_template_url}
+            src={el.certificate_template_url != null ? el.certificate_template_url : image}
             type="application/x-pdf"
             title="SamplePdf"
             width="500"
@@ -77,7 +81,7 @@ const UserItem = (props) => {
         title={el.login}
         subheader={el.full_name}
       />
-      <embed src={el.certificate_template_url} width="350" height="240" />
+      <embed src={el.certificate_template_url != null ? el.certificate_template_url : image} width="350" height="240" />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           email: {el.email}

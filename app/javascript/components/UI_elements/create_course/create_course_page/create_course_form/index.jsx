@@ -378,7 +378,7 @@ const CreateCourseForm = (props) => {
                           <SearchIcon />
                         </div>
                         <InputBase
-                          placeholder="Search… 1"
+                          placeholder={t("Search.1")}
                           classes={{
                             root: classes.inputRoot,
                             input: classes.inputInput,
@@ -411,9 +411,9 @@ const CreateCourseForm = (props) => {
                       ))}
                     </ul>
                   </>
-                ) : (
-                  <div>{t("Course.11")}</div>
-                )}
+                ) :
+                  null
+                }
               </>
             }
           </div>
