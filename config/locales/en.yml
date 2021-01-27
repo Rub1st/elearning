@@ -41,3 +41,4 @@ en:
   password_confirmation: 'password_confirmation'
   characters minimum: 'characters minimum'
   login: 'login'
+  confirm_instructions: "Didn't receive confirmation instructions?"

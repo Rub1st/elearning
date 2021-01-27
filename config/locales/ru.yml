@@ -10,3 +10,4 @@ ru:
   password_confirmation: 'Подтверждение пароля'
   characters minimum: 'символов минимум'
   login: 'Логин'
+  confirm_instructions: 'Не получили инструкций подтверждения?'
