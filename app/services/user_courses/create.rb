@@ -2,6 +2,8 @@ module UserCourses
   class Create
     include Service
 
+    attr_accessor :params
+
     def initialize(params)
       @params = params
     end
@@ -14,12 +16,12 @@ module UserCourses
     private
 
     def course_usage_increment
-      course_id = @params[:course_id]
+      course_id = params[:course_id]
       Course.find(course_id).update(uses_count: UserCourse.where(course_id: course_id).count + 1)
     end
 
     def create_new_user_course
-      UserCourse.new(@params)
+      UserCourse.new(params)
     end
   end
 end

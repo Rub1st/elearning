@@ -2,6 +2,8 @@ module Pages
   class Create
     include Service
 
+    attr_accessor :params
+
     def initialize(params)
       @params = params
     end
@@ -13,7 +15,7 @@ module Pages
     private
 
     def course_pages
-      Page.where(course_id: @params[:course_id])
+      Page.where(course_id: params[:course_id])
     end
 
     def calculate_order
@@ -22,8 +24,8 @@ module Pages
 
     def create_new_page
       Page.new(
-        course_id: @params[:course_id],
-        title: @params[:title],
+        course_id: params[:course_id],
+        title: params[:title],
         order: calculate_order
       )
     end

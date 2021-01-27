@@ -2,6 +2,8 @@ module UserAnswers
   class Create
     include Service
 
+    attr_accessor :params
+
     def initialize(params)
       @params = params
     end
@@ -14,11 +16,11 @@ module UserAnswers
     private
 
     def destroy_old_answers
-      UserAnswer.where(user_id: @params[:user_id], question_id: @params[:question_id]).destroy_all
+      UserAnswer.where(user_id: params[:user_id], question_id: params[:question_id]).destroy_all
     end
 
     def create_new_user_answer
-      UserAnswer.new(@params)
+      UserAnswer.new(params)
     end
   end
 end

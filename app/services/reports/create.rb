@@ -2,6 +2,8 @@ module Reports
   class Create
     include Service
 
+    attr_accessor :params
+
     def initialize(params)
       @params = params
     end
@@ -14,11 +16,11 @@ module Reports
     private
 
     def destroy_old_reports
-      Report.where(course_id: @params[:course_id]).destroy_all
+      Report.where(course_id: params[:course_id]).destroy_all
     end
 
     def user_courses
-      @user_courses ||= UserCourse.where(course_id: @params[:course_id])
+      @user_courses ||= UserCourse.where(course_id: params[:course_id])
     end
 
     def finished_user_courses
@@ -43,7 +45,7 @@ module Reports
 
     def build_new_report
       Report.new(
-        course_id: @params[:course_id],
+        course_id: params[:course_id],
         count_try: user_courses.count,
         count_failed: count_failed,
         count_complete: count_complete,

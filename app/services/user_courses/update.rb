@@ -3,13 +3,15 @@ module UserCourses
     include Service
     include Rails.application.routes.url_helpers
 
+    attr_accessor :params, :permit_params
+
     def initialize(params, permit_params)
       @params = params
       @permit_params = permit_params
     end
 
     def call
-      course_mark_update unless @permit_params[:mark].nil?
+      course_mark_update unless permit_params[:mark].nil?
 
       cerificate_generation
 
@@ -20,12 +22,12 @@ module UserCourses
     private
 
     def cerificate_generation
-      drop_previous_certificate_if_exists if @permit_params[:progress] == 100
-      generate_new_certificate if @permit_params[:progress] == 100 && calculate_result > 90
+      drop_previous_certificate_if_exists if permit_params[:progress] == 100
+      generate_new_certificate if permit_params[:progress] == 100 && calculate_result > 90
     end
 
     def drop_previous_certificate_if_exists
-      certificate = Certificate.find_by(course_id: @params[:course_id], user_id: @params[:user_id])
+      certificate = Certificate.find_by(course_id: params[:course_id], user_id: params[:user_id])
       certificate&.destroy
     end
 
@@ -34,16 +36,16 @@ module UserCourses
     end
 
     def certificate_creating
-      Certificate.create(course_id: @params[:course_id], user_id: @params[:user_id])
+      Certificate.create(course_id: params[:course_id], user_id: params[:user_id])
     end
 
     def course_organization
-      org_id = Course.find(@params[:course_id]).organization_id
+      org_id = Course.find(params[:course_id]).organization_id
       Organization.find(org_id) unless org_id.nil?
     end
 
     def course_author
-      User.find(Course.find(@params[:course_id]).author_id)
+      User.find(Course.find(params[:course_id]).author_id)
     end
 
     def pdftk
@@ -64,8 +66,8 @@ module UserCourses
     def fill_temp_certificate(certificate, path)
       pdftk.fill_form path,
                       "tmp/certificate_#{certificate.id}.pdf",
-                      course_label: Course.find(@params[:course_id]).label,
-                      user_name: User.find(@params[:user_id]).full_name,
+                      course_label: Course.find(params[:course_id]).label,
+                      user_name: User.find(params[:user_id]).full_name,
                       finish_date: certificate.created_at
     end
 
@@ -88,7 +90,7 @@ module UserCourses
     end
 
     def course_success_update
-      Course.find(@params[:course_id]).update(
+      Course.find(params[:course_id]).update(
         success_rate: (success_count / same_user_courses.count) * 100
       )
     end
@@ -98,11 +100,11 @@ module UserCourses
     end
 
     def current_user_course
-      UserCourse.find(@params[:id])
+      UserCourse.find(params[:id])
     end
 
     def same_user_courses
-      @same_user_courses ||= UserCourse.where(course_id: @params[:course_id])
+      @same_user_courses ||= UserCourse.where(course_id: params[:course_id])
     end
 
     def same_user_courses_with_mark
@@ -110,7 +112,7 @@ module UserCourses
     end
 
     def course_mark_update
-      Course.find(@params[:course_id]).update(
+      Course.find(params[:course_id]).update(
         mark: same_user_courses_with_mark.sum(:mark).to_f / same_user_courses_with_mark.count
       )
     end
@@ -118,8 +120,8 @@ module UserCourses
     def done_course_questions
       @done_course_questions ||= Question.joins(:page).where(
         'pages.order < :current_page and pages.course_id = :course_id',
-        current_page: @permit_params[:current_page],
-        course_id: @params[:course_id]
+        current_page: permit_params[:current_page],
+        course_id: params[:course_id]
       )
     end
 
@@ -128,7 +130,7 @@ module UserCourses
     end
 
     def question_user_answers(question_id)
-      UserAnswer.where(user_id: @params[:user_id], question_id: question_id, is_correct: true)
+      UserAnswer.where(user_id: params[:user_id], question_id: question_id, is_correct: true)
     end
 
     def correctly_done_questions
@@ -143,10 +145,10 @@ module UserCourses
 
     def update_user_course
       current_user_course.update(
-        current_page: @permit_params[:current_page],
-        mark: @permit_params[:mark],
-        is_favorite: @params[:is_favorite],
-        progress: @permit_params[:progress],
+        current_page: permit_params[:current_page],
+        mark: permit_params[:mark],
+        is_favorite: params[:is_favorite],
+        progress: permit_params[:progress],
         correct: calculate_result
       )
     end

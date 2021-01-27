@@ -2,6 +2,8 @@ module UnregisteredMembers
   class Create
     include Service
 
+    attr_accessor :params
+
     def initialize(params)
       @params = params
     end
@@ -17,14 +19,14 @@ module UnregisteredMembers
     end
 
     def choice_member_role
-      @params[:member_role].nil? ? 1 : @params[:member_role]
+      params[:member_role].nil? ? 1 : params[:member_role]
     end
 
     def create_new_member
       UnregisteredMember.new(
-        organization_id: @params[:organization_id],
+        organization_id: params[:organization_id],
         member_role: choice_member_role,
-        email: @params[:email],
+        email: params[:email],
         code: generate_code
       )
     end

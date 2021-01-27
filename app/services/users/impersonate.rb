@@ -2,6 +2,8 @@ module Users
   class Impersonate
     include Service
 
+    attr_accessor :params, :current_user
+
     def initialize(params, current_user)
       @params = params
       @current_user = current_user
@@ -15,15 +17,15 @@ module Users
     private
 
     def impersonation_user
-      @user = User.find(@params[:id])
+      @impersonation_user ||= User.find(params[:id])
     end
 
     def create_impersonation_in_db
-      Impersonation.create(manager_id: @current_user[:id],
-                           common_id: @params[:id],
+      Impersonation.create(manager_id: current_user[:id],
+                           common_id: params[:id],
                            start: Time.now.utc,
                            end: Time.now.utc,
-                           organization_id: @params[:org_id])
+                           organization_id: params[:org_id])
     end
   end
 end
