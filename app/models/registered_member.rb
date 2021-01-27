@@ -2,11 +2,12 @@
 #
 # Table name: registered_members
 #
-#  id                    :bigint      not null, primary key
-#  user_id               :bigint      not null, foreign key
-#  member_role           :integer     not null
-#  organization_id       :bigint      not null, foreign key
-#  author_id_and_label   :index
+#  id              :bigint           not null, primary key
+#  member_role     :integer          default("common"), not null
+#  organization_id :bigint           not null
+#  user_id         :bigint           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class RegisteredMember < ApplicationRecord
   belongs_to :organization

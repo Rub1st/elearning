@@ -2,14 +2,15 @@
 #
 # Table name: questions
 #
-#  id                    :bigint      not null, primary key
-#  page_id               :bigint      not null, foreign key
-#  question_type         :integer     not null
-#  question_text         :string      not null
-#  difficult             :integer     not null
-#  description           :string      not null
-#  title                 :string      not null
-#  page_id_and_title     :index
+#  id            :bigint           not null, primary key
+#  page_id       :bigint           not null
+#  question_type :integer          default("closed"), not null
+#  title         :string           default(""), not null
+#  description   :string           default("")
+#  question_text :string           default(""), not null
+#  difficult     :integer          default("easy"), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 class Question < ApplicationRecord
   belongs_to :page

@@ -2,18 +2,20 @@
 #
 # Table name: courses
 #
-#  id                    :bigint      not null, primary key
-#  label                 :string      not null
-#  author_id             :bigint      not null, foreign key
-#  mark                  :float
-#  why_content           :string      not null
-#  will_content          :string      not null
-#  uses_count            :integer     not null
-#  success_rate          :integer     not null
-#  access_type           :integer     not null
-#  approve_status        :integer     not null
-#  organization_id       :bigint      not null, foreign key
-#  author_id_and_label   :index
+#  id              :bigint           not null, primary key
+#  label           :string           default(""), not null
+#  mark            :float
+#  why_content     :string           default(""), not null
+#  will_content    :string           default(""), not null
+#  uses_count      :integer          default(0), not null
+#  success_rate    :float            default(0.0), not null
+#  access_type     :integer          default("opened"), not null
+#  approve_status  :integer          default("pending"), not null
+#  organization_id :bigint
+#  course_status   :integer          default("draft"), not null
+#  author_id       :bigint
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class Course < ApplicationRecord
   belongs_to :organization, optional: true

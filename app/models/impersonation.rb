@@ -2,11 +2,14 @@
 #
 # Table name: impersonations
 #
-#  id                    :bigint      not null, primary key
-#  start                 :datetime    not null
-#  end                   :datetime    not null
-#  manager_id            :bigint      not null, foreign key
-#  common_id             :bigint      not null, foreign key
+#  id              :bigint           not null, primary key
+#  start           :datetime         not null
+#  end             :datetime         not null
+#  organization_id :bigint           not null
+#  manager_id      :bigint
+#  common_id       :bigint
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class Impersonation < ApplicationRecord
   belongs_to :manager, class_name: 'User'

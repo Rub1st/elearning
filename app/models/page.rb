@@ -2,11 +2,12 @@
 #
 # Table name: pages
 #
-#  id                    :bigint      not null, primary key
-#  course_id             :bigint      not null, foreign key
-#  order                 :integer     not null
-#  title                 :string      not null
-#  course_id_and_order   :index
+#  id         :bigint           not null, primary key
+#  course_id  :bigint           not null
+#  order      :integer          default(1), not null
+#  title      :string           default(""), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 class Page < ApplicationRecord
   belongs_to :course

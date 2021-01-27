@@ -2,12 +2,25 @@
 #
 # Table name: users
 #
-#  id                     :bigint      not null, primary key
-#  login                  :string      not null
-#  email                  :string      not null
-#  full_name              :string      not null
-#  user_role              :integer     not null
-#  password               :string      not null
+#  id                     :bigint           not null, primary key
+#  login                  :string           default(""), not null
+#  email                  :string           default(""), not null
+#  full_name              :string           default(""), not null
+#  user_role              :integer          default("common"), not null
+#  encrypted_password     :string           default(""), not null
+#  user_status            :integer          default("approved"), not null
+#  provider               :string(50)       default(""), not null
+#  uid                    :string(500)      default(""), not null
+#  language               :string           default("en")
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #
 class User < ApplicationRecord
   has_many :certificates, dependent: :destroy

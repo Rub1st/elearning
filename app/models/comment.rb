@@ -2,10 +2,12 @@
 #
 # Table name: comments
 #
-#  id                    :bigint      not null, primary key
-#  course_id             :bigint      not null, foreign key
-#  author_id             :bigint      not null, foreign key
-#  content               :string      not null
+#  id         :bigint           not null, primary key
+#  course_id  :bigint           not null
+#  content    :string           default(""), not null
+#  author_id  :bigint
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 class Comment < ApplicationRecord
   belongs_to :course

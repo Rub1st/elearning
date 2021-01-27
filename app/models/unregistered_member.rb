@@ -2,12 +2,13 @@
 #
 # Table name: unregistered_members
 #
-#  id                         :bigint      not null, primary key
-#  email                      :string      not null
-#  code                       :string      not null
-#  member_role                :integer     not null
-#  organization_id            :bigint      not null, foreign key
-#  organization_id_and_email  :index
+#  id              :bigint           not null, primary key
+#  member_role     :integer          default("common"), not null
+#  organization_id :bigint           not null
+#  code            :string           default(""), not null
+#  email           :string           default(""), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class UnregisteredMember < ApplicationRecord
   belongs_to :organization

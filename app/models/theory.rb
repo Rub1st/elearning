@@ -2,11 +2,12 @@
 #
 # Table name: theories
 #
-#  id                    :bigint      not null, primary key
-#  page_id               :bigint      not null, foreign key
-#  content               :string      not null
-#  title                 :string      not null
-#  page_id_and_title     :index
+#  id         :bigint           not null, primary key
+#  title      :string           default("")
+#  content    :text             default("")
+#  page_id    :bigint           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 class Theory < ApplicationRecord
   belongs_to :page
