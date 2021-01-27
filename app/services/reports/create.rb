@@ -18,11 +18,11 @@ module Reports
     end
 
     def user_courses
-      UserCourse.where(course_id: @params[:course_id])
+      @user_courses ||= UserCourse.where(course_id: @params[:course_id])
     end
 
     def finished_user_courses
-      user_courses.where(progress: 100)
+      @finished_user_courses ||= user_courses.where(progress: 100)
     end
 
     def count_failed
@@ -34,7 +34,7 @@ module Reports
     end
 
     def user_courses_with_mark
-      finished_user_courses.where.not(mark: nil)
+      @user_courses_with_mark ||= finished_user_courses.where.not(mark: nil)
     end
 
     def average_mark

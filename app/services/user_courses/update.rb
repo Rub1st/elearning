@@ -102,11 +102,11 @@ module UserCourses
     end
 
     def same_user_courses
-      UserCourse.where(course_id: @params[:course_id])
+      @same_user_courses ||= UserCourse.where(course_id: @params[:course_id])
     end
 
     def same_user_courses_with_mark
-      same_user_courses.where.not(mark: nil)
+      @same_user_courses_with_mark ||= same_user_courses.where.not(mark: nil)
     end
 
     def course_mark_update
@@ -116,7 +116,7 @@ module UserCourses
     end
 
     def done_course_questions
-      Question.joins(:page).where(
+      @done_course_questions ||= Question.joins(:page).where(
         'pages.order < :current_page and pages.course_id = :course_id',
         current_page: @permit_params[:current_page],
         course_id: @params[:course_id]
