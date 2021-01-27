@@ -9,7 +9,6 @@ class UserSerializer < ActiveModel::Serializer
              :avatar_url,
              :certificate_template_url,
              :encrypted_password,
-             :decrypted_password,
              :created_at,
              :user_status
 
