@@ -1,21 +1,21 @@
 class TheoriesController < ApplicationController
   def create
-    theory = Theory.new(theory_params)
+    new_theory = Theory.new(theory_params)
 
-    authorize! theory
+    authorize! new_theory
 
     if theory_params[:image].present?
-      theory.image.attach(theory_params[:image])
+      new_theory.image.attach(theory_params[:image])
     else
-      theory.image.attach(io: File.open(Rails.root.join('app/assets/images/noimage.jpg')), filename: 'noiamge.jpg')
+      new_theory.image.attach(io: File.open(Rails.root.join('app/assets/images/noimage.jpg')), filename: 'noiamge.jpg')
     end
 
-    render_created_data(theory, theory)
+    render_created_data(new_theory, new_theory)
   end
 
   def destroy
     authorize!
-    Theory.find(params[:id]).destroy
+    theory.destroy
 
     render json: theories
   end
@@ -26,6 +26,10 @@ class TheoriesController < ApplicationController
   end
 
   private
+
+  def theory
+    @theory ||= Theory.find(params[:id])
+  end
 
   def theories
     @theories ||= Theory.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])

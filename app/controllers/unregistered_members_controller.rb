@@ -1,15 +1,15 @@
 class UnregisteredMembersController < ApplicationController
   def create
-    unregistered_member = UnregisteredMembers::Create.call(unregistered_member_params)
+    new_unregistered_member = UnregisteredMembers::Create.call(unregistered_member_params)
 
-    authorize! unregistered_member.organization
+    authorize! new_unregistered_member.organization
 
-    render_created_data(unregistered_member, unregistered_members)
+    render_created_data(new_unregistered_member, unregistered_members)
   end
 
   def destroy
     authorize!
-    UnregisteredMember.find(params[:id]).destroy
+    unregistered_member.destroy
 
     render json: unregistered_members
   end
@@ -24,6 +24,10 @@ class UnregisteredMembersController < ApplicationController
   end
 
   private
+
+  def unregistered_member
+    @unregistered_member ||= UnregisteredMember.find(params[:id])
+  end
 
   def unregistered_members
     @unregistered_members ||= UnregisteredMember.where(organization_id: params[:parent_id])

@@ -7,8 +7,6 @@ class UsersController < ApplicationController
 
   # rubocop:disable Metrics/AbcSize
   def update
-    user = User.find(params[:id])
-
     authorize! user
 
     if user_params[:avatar].present?
@@ -63,6 +61,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user
+    @user ||= User.find(params[:id])
+  end
 
   def users
     @users ||= User.where(user_role: 1)

@@ -1,16 +1,16 @@
 class RegisteredMembersController < ApplicationController
   def create
-    registered_member = RegisteredMember.new(registered_member_params)
+    new_registered_member = RegisteredMember.new(registered_member_params)
 
-    authorize! registered_member.organization
+    authorize! new_registered_member.organization
 
-    render_created_data(registered_member, registered_members)
+    render_created_data(new_registered_member, registered_members)
   end
 
   def destroy
     authorize!
 
-    RegisteredMember.find(params[:id]).destroy
+    registered_member.destroy
 
     render json: registered_members
   end
@@ -26,6 +26,10 @@ class RegisteredMembersController < ApplicationController
   end
 
   private
+
+  def registered_member
+    @registered_member ||= RegisteredMember.find(params[:id])
+  end
 
   def registered_members
     @registered_members ||= RegisteredMember.where(organization_id: params[:parent_id])

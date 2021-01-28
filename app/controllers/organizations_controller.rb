@@ -7,8 +7,6 @@ class OrganizationsController < ApplicationController
 
   # rubocop:disable Metrics/AbcSize
   def update
-    organization = Organization.find(params[:id])
-
     authorize! organization
 
     if organization_params[:certificate_template].present?
@@ -35,6 +33,10 @@ class OrganizationsController < ApplicationController
   end
 
   private
+
+  def organization
+    @organization ||= Organization.find(params[:id])
+  end
 
   def organizations
     RegisteredMember.where('registered_members.user_id = :current_user_id', current_user_id: current_user[:id])

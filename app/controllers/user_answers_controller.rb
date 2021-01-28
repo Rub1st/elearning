@@ -1,10 +1,10 @@
 class UserAnswersController < ApplicationController
   def create
-    user_answer = UserAnswers::Create.call(user_answer_params)
+    new_user_answer = UserAnswers::Create.call(user_answer_params)
 
-    authorize! user_answer
+    authorize! new_user_answer
 
-    render_created_data(user_answer, user_answer)
+    render_created_data(new_user_answer, new_user_answer)
   end
 
   private

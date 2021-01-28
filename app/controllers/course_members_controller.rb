@@ -1,8 +1,8 @@
 class CourseMembersController < ApplicationController
   def create
-    course_member = CourseMember.new(course_member_params)
+    new_course_member = CourseMember.new(course_member_params)
 
-    render_created_data(course_member, course_member)
+    render_created_data(new_course_member, new_course_member)
   end
 
   private

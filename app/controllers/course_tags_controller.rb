@@ -1,8 +1,8 @@
 class CourseTagsController < ApplicationController
   def create
-    course_tag = CourseTag.new(course_tag_params)
+    new_course_tag = CourseTag.new(course_tag_params)
 
-    render_created_data(course_tag, course_tag)
+    render_created_data(new_course_tag, new_course_tag)
   end
 
   private

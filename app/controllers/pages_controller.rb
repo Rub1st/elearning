@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
   def create
-    @page = Pages::Create.call(page_params)
+    new_page = Pages::Create.call(page_params)
 
-    authorize! Course.find(page.course_id)
+    authorize! Course.find(new_page.course_id)
 
-    render_created_data(page, page)
+    render_created_data(new_page, new_page)
   end
 
   def update

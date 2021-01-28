@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
   def create
-    @comment = Comment.new(comment_params)
+    new_comment = Comment.new(comment_params)
 
-    authorize! comment
+    authorize! new_comment
 
-    render_created_data(comment, comments)
+    render_created_data(new_comment, comments)
   end
 
   def destroy

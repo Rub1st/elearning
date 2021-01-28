@@ -1,21 +1,23 @@
 class VariantsController < ApplicationController
   def create
-    variant = Variant.new(variant_params)
+    new_variant = Variant.new(variant_params)
 
-    authorize! variant
+    authorize! new_variant
 
-    render_created_data(variant, Question.find(variant.question.id))
+    render_created_data(new_variant, Question.find(new_variant.question.id))
   end
 
   def destroy
-    variant = Variant.find(params[:id])
-
     authorize! variant
 
     variant.destroy
   end
 
   private
+
+  def variant
+    @variant ||= Variant.find(params[:id])
+  end
 
   def variant_params
     params.require(:variant).permit(

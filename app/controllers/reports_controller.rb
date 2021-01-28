@@ -1,10 +1,10 @@
 class ReportsController < ApplicationController
   def create
-    report = Reports::Create.call(report_params)
+    new_report = Reports::Create.call(report_params)
 
-    authorize! report.course.organization
+    authorize! new_report.course.organization
 
-    render_created_data(report, Report.all)
+    render_created_data(new_report, Report.all)
   end
 
   def index

@@ -1,15 +1,13 @@
 class RepliesController < ApplicationController
   def create
-    reply = Reply.new(reply_params)
+    new_reply = Reply.new(reply_params)
 
-    authorize! reply
+    authorize! new_reply
 
-    render_created_data(reply, comments)
+    render_created_data(new_reply, comments)
   end
 
   def destroy
-    reply = Reply.find(params[:id])
-
     authorize! reply
 
     reply.destroy
@@ -18,6 +16,10 @@ class RepliesController < ApplicationController
   end
 
   private
+
+  def reply
+    @reply ||= Reply.find(params[:id])
+  end
 
   def comments
     @comments ||= Comment.where(course_id: params[:parent_id])

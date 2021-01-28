@@ -1,9 +1,9 @@
 class UserCoursesController < ApplicationController
   def create
     authorize!
-    user_course = UserCourses::Create.call(user_course_params)
+    new_user_course = UserCourses::Create.call(user_course_params)
 
-    render_created_data(user_course, user_course)
+    render_created_data(new_user_course, new_user_course)
   end
 
   def update

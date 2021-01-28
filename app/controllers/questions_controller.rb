@@ -1,15 +1,15 @@
 class QuestionsController < ApplicationController
   def create
-    question = Question.new(question_params)
+    new_question = Question.new(question_params)
 
-    authorize! question
+    authorize! new_question
 
-    render_created_data(question, question)
+    render_created_data(new_question, new_question)
   end
 
   def destroy
     authorize!
-    Question.find(params[:id]).destroy
+    question.destroy
 
     render json: questions
   end
@@ -20,6 +20,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def question
+    @question ||= Question.find(params[:id])
+  end
 
   def questions
     @questions ||= Question.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
