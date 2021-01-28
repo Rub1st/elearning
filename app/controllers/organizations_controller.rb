@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
   def create
     authorize!
 
-    render Organizations::Create.call(permit_params, current_user)
+    render Organizations::Create.call(organization_params, current_user)
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -11,14 +11,14 @@ class OrganizationsController < ApplicationController
 
     authorize! organization
 
-    if permit_params[:certificate_template].present?
+    if organization_params[:certificate_template].present?
       organization.certificate_template.purge
-      organization.certificate_template.attach(permit_params[:certificate_template])
+      organization.certificate_template.attach(organization_params[:certificate_template])
     end
 
-    updated = { name: permit_params[:name],
-                description: permit_params[:description],
-                approve_status: permit_params[:approve_status].to_i }
+    updated = { name: organization_params[:name],
+                description: organization_params[:description],
+                approve_status: organization_params[:approve_status].to_i }
 
     render_updated_data(organization, updated, organization)
   end
@@ -41,7 +41,7 @@ class OrganizationsController < ApplicationController
                     .all.map(&:organization)
   end
 
-  def permit_params
+  def organization_params
     params.require(:organization).permit(
       :name,
       :description,

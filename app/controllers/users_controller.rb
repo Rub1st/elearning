@@ -11,17 +11,17 @@ class UsersController < ApplicationController
 
     authorize! user
 
-    if permit_params[:avatar].present?
+    if user_params[:avatar].present?
       user.avatar.purge
-      user.avatar.attach(permit_params[:avatar])
+      user.avatar.attach(user_params[:avatar])
     end
 
-    if permit_params[:certificate_template].present?
+    if user_params[:certificate_template].present?
       user.certificate_template.purge
-      user.certificate_template.attach(permit_params[:certificate_template])
+      user.certificate_template.attach(user_params[:certificate_template])
     end
 
-    updated = { login: permit_params[:login], full_name: permit_params[:full_name] }
+    updated = { login: user_params[:login], full_name: user_params[:full_name] }
 
     render_updated_data(user, updated, users)
   end
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     @users ||= User.where(user_role: 1)
   end
 
-  def permit_params
+  def user_params
     params.require(:user).permit(
       :certificate_template,
       :avatar,

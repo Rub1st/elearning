@@ -1,10 +1,10 @@
 class CoursesController < ApplicationController
   def create
     authorize!
-    course = Course.new(permit_params)
+    course = Course.new(course_params)
 
-    if permit_params[:image].present?
-      course.image.attach(permit_params[:image])
+    if course_params[:image].present?
+      course.image.attach(course_params[:image])
     else
       course.image.attach(io: File.open(Rails.root.join('app/assets/images/noimage.jpg')), filename: 'noimage.jpg')
     end
@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
 
     authorize! course
 
-    render_updated_data(course, permit_params, course)
+    render_updated_data(course, course_params, course)
   end
 
   def index
@@ -48,7 +48,7 @@ class CoursesController < ApplicationController
     @courses ||= Course.where(access_type: 0).offset(params[:current_page].to_i * 4).limit(4)
   end
 
-  def permit_params
+  def course_params
     params.require(:course).permit(
       :label,
       :mark,

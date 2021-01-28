@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   def create
-    report = Reports::Create.call(permit_params)
+    report = Reports::Create.call(report_params)
 
     authorize! report.course.organization
 
@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
 
   private
 
-  def permit_params
+  def report_params
     params.require(:report).permit(
       :course_id
     )

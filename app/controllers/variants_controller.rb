@@ -1,6 +1,6 @@
 class VariantsController < ApplicationController
   def create
-    variant = Variant.new(permit_params)
+    variant = Variant.new(variant_params)
 
     authorize! variant
 
@@ -17,7 +17,7 @@ class VariantsController < ApplicationController
 
   private
 
-  def permit_params
+  def variant_params
     params.require(:variant).permit(
       :order,
       :question_id,

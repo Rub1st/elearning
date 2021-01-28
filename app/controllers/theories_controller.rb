@@ -1,11 +1,11 @@
 class TheoriesController < ApplicationController
   def create
-    theory = Theory.new(permit_params)
+    theory = Theory.new(theory_params)
 
     authorize! theory
 
-    if permit_params[:image].present?
-      theory.image.attach(permit_params[:image])
+    if theory_params[:image].present?
+      theory.image.attach(theory_params[:image])
     else
       theory.image.attach(io: File.open(Rails.root.join('app/assets/images/noimage.jpg')), filename: 'noiamge.jpg')
     end
@@ -31,7 +31,7 @@ class TheoriesController < ApplicationController
     @theories ||= Theory.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
   end
 
-  def permit_params
+  def theory_params
     params.require(:theory).permit(
       :title,
       :content,

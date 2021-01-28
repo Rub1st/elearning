@@ -1,6 +1,6 @@
 class UserAnswersController < ApplicationController
   def create
-    user_answer = UserAnswers::Create.call(permit_params)
+    user_answer = UserAnswers::Create.call(user_answer_params)
 
     authorize! user_answer
 
@@ -9,7 +9,7 @@ class UserAnswersController < ApplicationController
 
   private
 
-  def permit_params
+  def user_answer_params
     params.require(:user_answer).permit(
       :question_id,
       :answer,

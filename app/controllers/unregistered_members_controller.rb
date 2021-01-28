@@ -1,6 +1,6 @@
 class UnregisteredMembersController < ApplicationController
   def create
-    unregistered_member = UnregisteredMembers::Create.call(permit_params)
+    unregistered_member = UnregisteredMembers::Create.call(unregistered_member_params)
 
     authorize! unregistered_member.organization
 
@@ -29,7 +29,7 @@ class UnregisteredMembersController < ApplicationController
     @unregistered_members ||= UnregisteredMember.where(organization_id: params[:parent_id])
   end
 
-  def permit_params
+  def unregistered_member_params
     params.require(:unregistered_member).permit(
       :member_role,
       :organization_id,

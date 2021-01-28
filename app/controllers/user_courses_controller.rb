@@ -1,7 +1,7 @@
 class UserCoursesController < ApplicationController
   def create
     authorize!
-    user_course = UserCourses::Create.call(permit_params)
+    user_course = UserCourses::Create.call(user_course_params)
 
     render_created_data(user_course, user_course)
   end
@@ -11,10 +11,10 @@ class UserCoursesController < ApplicationController
 
     authorize! user_course
 
-    UserCourses::Update.call(user_course, permit_params)
+    UserCourses::Update.call(user_course, user_course_params)
     user_course = UserCourse.find(params[:id])
 
-    render_updated_data(user_course, permit_params, user_course)
+    render_updated_data(user_course, user_course_params, user_course)
   end
 
   def index
@@ -48,7 +48,7 @@ class UserCoursesController < ApplicationController
     @user_courses ||= UserCourse.where(user_id: current_user[:id])
   end
 
-  def permit_params
+  def user_course_params
     params.require(:user_course).permit(
       :user_id,
       :course_id,

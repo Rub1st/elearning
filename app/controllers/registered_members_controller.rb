@@ -1,6 +1,6 @@
 class RegisteredMembersController < ApplicationController
   def create
-    registered_member = RegisteredMember.new(permit_params)
+    registered_member = RegisteredMember.new(registered_member_params)
 
     authorize! registered_member.organization
 
@@ -31,7 +31,7 @@ class RegisteredMembersController < ApplicationController
     @registered_members ||= RegisteredMember.where(organization_id: params[:parent_id])
   end
 
-  def permit_params
+  def registered_member_params
     params.require(:registered_member).permit(
       :member_role,
       :organization_id,

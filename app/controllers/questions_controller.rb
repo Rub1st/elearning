@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   def create
-    question = Question.new(permit_params)
+    question = Question.new(question_params)
 
     authorize! question
 
@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
     @questions ||= Question.joins(:page).where('pages.course_id = :course_id', course_id: params[:parent_id])
   end
 
-  def permit_params
+  def question_params
     params.require(:question).permit(
       :page_id,
       :question_type,

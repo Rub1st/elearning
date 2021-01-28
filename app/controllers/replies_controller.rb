@@ -1,6 +1,6 @@
 class RepliesController < ApplicationController
   def create
-    reply = Reply.new(permit_params)
+    reply = Reply.new(reply_params)
 
     authorize! reply
 
@@ -23,7 +23,7 @@ class RepliesController < ApplicationController
     @comments ||= Comment.where(course_id: params[:parent_id])
   end
 
-  def permit_params
+  def reply_params
     params.require(:reply).permit(
       :comment_id,
       :content,
